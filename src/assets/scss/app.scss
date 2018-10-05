@@ -1,0 +1,34 @@
+body{
+  margin:0;
+}
+html {
+  font-size: 10px;
+  line-height: 1;
+}
+
+body {
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'Muli';
+  src: url('./assets/fonts/OpenSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Muli Light';
+  src: url('./assets/fonts/OpenSans-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Muli SemiBold';
+  src: url('./assets/fonts/OpenSans-SemiBold.ttf');
+}
+@font-face {
+  font-family: 'Muli ExtraBold';
+  src: url('./assets/fonts/OpenSans-ExtraBold.ttf');
+}
+@font-face {
+  font-family: 'Muli Bold';
+  src: url('./assets/fonts/OpenSans-Bold.ttf');
+}

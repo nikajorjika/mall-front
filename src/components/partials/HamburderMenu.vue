@@ -1,10 +1,10 @@
 <template>
   <div id="hamburger-menu">
     <div class="hamburger-container">
-      <font-awesome-icon icon="bars" class="open" @click="toggleHamburgerMenu"/>
+      <default-icon class="nav-hamburger" :icon="`bars`" @click="toggleHamburgerMenu"/>
       <div class="content-container" v-if="showMenu">
         <div class="search-wrapper">
-          <font-awesome-icon icon="times" class="close" @click="toggleHamburgerMenu"/>
+          <default-icon :icon="`close`" @click="toggleHamburgerMenu"/>
         </div>
         <div class="list-container" v-for="data in this.hamburgerData" v-bind:key="data.id">
           <h3 class="block-title">{{data.name}}</h3>
@@ -24,6 +24,7 @@
 <script>
 
 import store from '../../store'
+import DefaultIcon from './DefaultIcons'
 
 export default {
   name: 'hamburger-menu',
@@ -37,6 +38,9 @@ export default {
     toggleHamburgerMenu: function () {
       this.showMenu = !this.showMenu
     }
+  },
+  components: {
+    DefaultIcon
   }
 }
 </script>
@@ -44,6 +48,9 @@ export default {
 <style lang="scss" scoped>
 #hamburger-menu{
   .hamburger-container{
+    .nav-hamburger{
+      padding: 0 2.9rem;
+    }
     .content-container{
       position: fixed;
       top: 0;
@@ -52,7 +59,7 @@ export default {
       bottom:0;
       background: #ffff;
       z-index: 3;
-      padding: 3.5rem;
+      padding: 2.21rem 3.52rem;
       .close{
         font-size:1.4rem;
       }
@@ -81,6 +88,8 @@ export default {
           color: #848484;
           text-transform: capitalize;
         }
+      }
+      .search-wrapper{
       }
     }
   }

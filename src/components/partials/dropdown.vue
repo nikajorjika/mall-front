@@ -1,14 +1,14 @@
 <template>
-  <div id="nav-drop">
-    <router-link :to="this.item.url">{{this.item.name}}</router-link>
-    <i v-if="this.item.children !== undefined" class="fa fa-arrow-down"></i>
-    <div v-if="this.item.children !== undefined" class="drop">
-      <ul>
-        <li v-for="child in this.item.children" v-bind:key="child.url">
-          <router-link :to="item.url">{{child.name}}</router-link>
-        </li>
-      </ul>
-    </div>
+  <div class="nav-drop">
+    <router-link :to="this.item.url" :class="this.item.children !== undefined ? 'has-child' : ''">{{this.item.name}}</router-link>
+    <font-awesome-icon icon="caret-down" class="open" v-if="this.item.children !== undefined"/>
+    <!--<div v-if="this.item.children !== undefined" class="drop">-->
+      <!--<ul>-->
+        <!--<li v-for="child in this.item.children" v-bind:key="child.url">-->
+          <!--<router-link :to="item.url">{{child.name}}</router-link>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
   </div>
 </template>
 
@@ -25,7 +25,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  #nav-drop {
+  .nav-drop {
+    .has-child{
+      margin-right: 0.46rem;
+      display: inline-block;
+    }
     .drop{
       position: absolute;
       ul {
