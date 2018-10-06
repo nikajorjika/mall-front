@@ -5,12 +5,11 @@ import store from './store'
 import './registerServiceWorker'
 import Nav from './components/main/Header'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faBars, faTimes, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faBars)
-library.add(faTimes)
 library.add(faCaretDown)
+library.add(faSearch)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

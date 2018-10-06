@@ -5,7 +5,19 @@
         <hamburger-menu/>
         <ul class="navigation-menu">
           <li v-for="item in this.navigation" v-bind:key="item.url">
-            <nav-drop :item="item"/>
+            <div class="nav-drop">
+              <router-link :to="item.url" :class="item.children !== undefined ? 'has-child' : ''">
+                <span>{{item.name}}</span>
+                <font-awesome-icon icon="caret-down" class="open" v-if="item.children !== undefined"/>
+              </router-link>
+              <!--<div v-if="this.item.children !== undefined" class="drop">-->
+              <!--<ul>-->
+              <!--<li v-for="child in this.item.children" v-bind:key="child.url">-->
+              <!--<router-link :to="item.url">{{child.name}}</router-link>-->
+              <!--</li>-->
+              <!--</ul>-->
+              <!--</div>-->
+            </div>
           </li>
         </ul>
       </div>
@@ -15,7 +27,12 @@
         </div>
       </div>
       <div class="header-right">
-        ul.
+        <ul>
+          <li><router-link to="#">CONTACT</router-link></li>
+          <li><router-link to="#">MY MALL</router-link></li>
+          <li><router-link to="#"><font-awesome-icon icon="search" /> </router-link></li>
+          <li><router-link to="#">CONTACT</router-link></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -53,6 +70,22 @@ export default {
       display: flex;
       flex-wrap: wrap;
       flex:8;
+      .nav-drop {
+        .has-child{
+          span{
+            margin-right: 0.46rem;
+            display: inline-block;
+          }
+        }
+        .drop{
+          position: absolute;
+          ul {
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
     }
     .header-center {
       margin: auto 0;
@@ -69,6 +102,27 @@ export default {
     }
     .header-right{
       flex:8;
+      align-self: flex-end;
+      ul{
+        display: flex;
+        flex-wrap: wrap;
+        li{
+          border-left: solid 1px #f1f1f1;
+          a{
+            padding: 3.55rem 1.8rem;
+            width: 115px;
+            box-sizing: border-box;
+            display: inline-block;
+            text-align: center;
+            &:hover{
+              background: #f1f1f1;
+            }
+          }
+          &:first-child{
+            margin-left: auto;
+          }
+        }
+      }
     }
   }
   #hamburger-menu {
@@ -78,12 +132,22 @@ export default {
     border-left: solid 1px #f1f1f1;
     border-right: solid 1px #f1f1f1;
     > li {
-      padding: 3.55rem 1.8rem;
+      a{
+        padding: 3.55rem 1.8rem;
+        display: inline-block;
+        &:hover{
+          background: #f1f1f1;
+        }
+      }
       &:first-child {
-        padding-left: 2.65rem;
+        a{
+          padding-left: 2.65rem;
+        }
       }
       &:last-child {
-        padding-right: 2.6rem;
+        a{
+          padding-right: 2.6rem;
+        }
       }
     }
   }
