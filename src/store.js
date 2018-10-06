@@ -88,7 +88,7 @@ export default new Vuex.Store({
       },
       {
         id: 2,
-        name: 'MAIN',
+        name: 'INFORMATION',
         children: [
           {
             id: 25,
@@ -119,7 +119,7 @@ export default new Vuex.Store({
       },
       {
         id: 3,
-        name: 'MAIN',
+        name: 'MY MALL',
         children: [
           {
             id: 31,

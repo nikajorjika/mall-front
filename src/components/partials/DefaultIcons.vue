@@ -1,12 +1,14 @@
 <template>
   <div class="icon-container">
-      <span v-if="this.icon === 'bars'" class="icon-bars" @click="emitClick">
-        <span></span>
-        <span></span>
-        <span></span>
+    <span v-if="this.icon === 'bars'" class="icon-bars" @click="emitClick">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+    <span class="icon-close-container" v-if="this.icon === 'close'" @click="emitClick" >
+      <span class="icon-close">
       </span>
-      <span v-if="this.icon === 'close'" class="icon-close" @click="emitClick">
-      </span>
+    </span>
   </div>
 </template>
 
@@ -29,36 +31,42 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icon-container{
-  .icon-bars{
+.icon-container {
+  .icon-bars {
     display: flex;
     flex-direction: column;
-    span{
+    span {
       width: 2.58rem;
       height: 0.2rem;
       background-color: #000000;
       margin: 0.24rem 0;
     }
   }
-  .icon-close{
-    position: absolute;
-    width: 1.43rem;
+  .icon-close-container{
+    width:1.43rem;
     height: 1.43rem;
     display: inline-block;
-    &:after,
-    &:before{
-      content: ' ';
+    .icon-close {
       position: absolute;
-      left: 0.6rem;
-      height: 1.8rem;
-      width: 0.2rem;
-      background-color: #000;
-    }
-    &:after{
-      transform: rotate(45deg);
-    }
-    &:before{
-      transform: rotate(-45deg);
+      width: 1.43rem;
+      height: 1.43rem;
+      display: inline-block;
+      cursor: pointer;
+      &:after,
+      &:before {
+        content: ' ';
+        position: absolute;
+        left: 0.6rem;
+        height: 1.8rem;
+        width: 0.2rem;
+        background-color: #000;
+      }
+      &:after {
+        transform: rotate(45deg);
+      }
+      &:before {
+        transform: rotate(-45deg);
+      }
     }
   }
 }
