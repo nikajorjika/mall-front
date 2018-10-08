@@ -30,23 +30,113 @@ export default new Vuex.Store({
       },
       {
         url: '/whats-new',
-        name: 'what\'s new'
+        name: 'what\'s new',
+        children: [
+          {
+            url: '/contact',
+            name: 'contact'
+          },
+          {
+            url: '/test1',
+            name: 'test1'
+          },
+          {
+            url: '/test2',
+            name: 'test2'
+          },
+          {
+            url: '/test3',
+            name: 'test3'
+          }
+        ]
       },
       {
         url: '/stores',
-        name: 'stores'
+        name: 'stores',
+        children: [
+          {
+            url: '/contact',
+            name: 'contact'
+          },
+          {
+            url: '/test1',
+            name: 'test1'
+          },
+          {
+            url: '/test2',
+            name: 'test2'
+          },
+          {
+            url: '/test3',
+            name: 'test3'
+          }
+        ]
       },
       {
         url: '/entertainment',
-        name: 'entertainment'
+        name: 'entertainment',
+        children: [
+          {
+            url: '/contact',
+            name: 'contact'
+          },
+          {
+            url: '/test1',
+            name: 'test1'
+          },
+          {
+            url: '/test2',
+            name: 'test2'
+          },
+          {
+            url: '/test3',
+            name: 'test3'
+          }
+        ]
       },
       {
         url: '/services',
-        name: 'services'
+        name: 'services',
+        children: [
+          {
+            url: '/contact',
+            name: 'contact'
+          },
+          {
+            url: '/test1',
+            name: 'test1'
+          },
+          {
+            url: '/test2',
+            name: 'test2'
+          },
+          {
+            url: '/test3',
+            name: 'test3'
+          }
+        ]
       },
       {
         url: '/for-kids',
-        name: 'for kids'
+        name: 'for kids',
+        children: [
+          {
+            url: '/contact',
+            name: 'contact'
+          },
+          {
+            url: '/test1',
+            name: 'test1'
+          },
+          {
+            url: '/test2',
+            name: 'test2'
+          },
+          {
+            url: '/test3',
+            name: 'test3'
+          }
+        ]
       }
     ],
     hamburgerData: [

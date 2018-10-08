@@ -23,15 +23,27 @@
       </div>
       <div class="header-center">
         <div class="mall-logo">
-          <h2 class="logo">TBILISI MALL</h2>
+          <router-link to="/">
+            <h2 class="logo">TBILISI MALL</h2>
+          </router-link>
         </div>
       </div>
       <div class="header-right">
         <ul>
-          <li><router-link to="#">CONTACT</router-link></li>
-          <li><router-link to="#">MY MALL</router-link></li>
-          <li><router-link to="#"><font-awesome-icon icon="search" /> </router-link></li>
-          <li><router-link to="#">CONTACT</router-link></li>
+          <li>
+            <router-link to="#">CONTACT</router-link>
+          </li>
+          <li>
+            <router-link to="#">MY MALL</router-link>
+          </li>
+          <li>
+            <router-link to="#">
+              <font-awesome-icon icon="search"/>
+            </router-link>
+          </li>
+          <li>
+            <router-link to="#">ENG</router-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -69,15 +81,15 @@ export default {
     .header-left {
       display: flex;
       flex-wrap: wrap;
-      flex:8;
+      flex: 8;
       .nav-drop {
-        .has-child{
-          span{
+        .has-child {
+          span {
             margin-right: 0.46rem;
             display: inline-block;
           }
         }
-        .drop{
+        .drop {
           position: absolute;
           ul {
             list-style-type: none;
@@ -89,36 +101,37 @@ export default {
     }
     .header-center {
       margin: auto 0;
-      flex:1;
-
+      flex: 1;
+      min-width: 18rem;
       .mall-logo {
         font-family: 'Muli Bold', 'sans-serif';
         .logo {
-          font-size: 1.7rem;
-          margin:0;
+          font-size: 2.3rem;
+          letter-spacing:0.1rem;
+          margin: 0;
           text-align: center;
         }
       }
     }
-    .header-right{
-      flex:8;
+    .header-right {
+      flex: 8;
       align-self: flex-end;
-      ul{
+      ul {
         display: flex;
         flex-wrap: wrap;
-        li{
+        li {
           border-left: solid 1px #f1f1f1;
-          a{
-            padding: 3.55rem 1.8rem;
-            width: 115px;
+          a {
+            padding: 3.55rem 2.9rem;
+            min-width: 8.5rem;
             box-sizing: border-box;
             display: inline-block;
             text-align: center;
-            &:hover{
+            &:hover {
               background: #f1f1f1;
             }
           }
-          &:first-child{
+          &:first-child {
             margin-left: auto;
           }
         }
@@ -132,20 +145,20 @@ export default {
     border-left: solid 1px #f1f1f1;
     border-right: solid 1px #f1f1f1;
     > li {
-      a{
+      a {
         padding: 3.55rem 1.8rem;
         display: inline-block;
-        &:hover{
+        &:hover {
           background: #f1f1f1;
         }
       }
       &:first-child {
-        a{
+        a {
           padding-left: 2.65rem;
         }
       }
       &:last-child {
-        a{
+        a {
           padding-right: 2.6rem;
         }
       }
@@ -158,7 +171,8 @@ export default {
     li {
       position: relative;
       text-transform: uppercase;
-      font-size: 1.6rem;
+      font-size: 1.3rem;
+      font-family: 'Muli SemiBold', 'sans-serif';
     }
   }
 }
