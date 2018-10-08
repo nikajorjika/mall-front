@@ -36,29 +36,29 @@ export default {
     display: flex;
     flex-direction: column;
     span {
-      width: 2.58rem;
-      height: 0.2rem;
+      width: 25.8px;
+      height: 2px;
       background-color: #000000;
-      margin: 0.24rem 0;
+      margin: 2.4px 0;
     }
   }
   .icon-close-container{
-    width:1.43rem;
-    height: 1.43rem;
+    width:14.3px;
+    height: 14.3px;
     display: inline-block;
     .icon-close {
       position: absolute;
-      width: 1.43rem;
-      height: 1.43rem;
+      width: 14.3px;
+      height: 14.3px;
       display: inline-block;
       cursor: pointer;
       &:after,
       &:before {
         content: ' ';
         position: absolute;
-        left: 0.6rem;
-        height: 1.8rem;
-        width: 0.2rem;
+        left: 6px;
+        height: 18px;
+        width: 2px;
         background-color: #000;
       }
       &:after {

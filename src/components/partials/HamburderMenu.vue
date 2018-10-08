@@ -27,7 +27,6 @@
 
 <script>
 
-import store from '../../store'
 import DefaultIcon from './DefaultIcons'
 import SearchContainer from './SearchField'
 
@@ -35,13 +34,15 @@ export default {
   name: 'hamburger-menu',
   data: function () {
     return {
-      hamburgerData: store.state.hamburgerData,
+      hamburgerData: this.$store.state.hamburgerData,
       showMenu: false
     }
   },
   methods: {
     toggleHamburgerMenu: function () {
       this.showMenu = !this.showMenu
+      let noScroll = this.$store.getters.noScroll
+      this.$store.commit('SET_NO_SCROLL', !noScroll)
     }
   },
   components: {
@@ -62,7 +63,7 @@ export default {
       background: #f1f1f1;
     }
     .nav-hamburger {
-      padding: 0 2.9rem;
+      padding: 0 29px;
       margin: auto 0;
     }
   }
@@ -74,21 +75,21 @@ export default {
     bottom: 0;
     background: #ffff;
     z-index: 3;
-    padding: 2.05rem 0;
+    padding: 20.5px 0;
     overflow-y: auto;
     .hamburger-close-button{
       margin: auto 0;
     }
     .hamburger-search {
       width: 90%;
-      max-width: 165.5rem;
+      max-width: 1655px;
       margin: 0 auto;
     }
     .close {
-      font-size: 1.4rem;
+      font-size: 14px;
     }
     .list-wrapper{
-      margin-top: 11.7rem;
+      margin-top: 117px;
     }
     .block-title {
       text-align: center;
@@ -100,14 +101,14 @@ export default {
       letter-spacing: normal;
       color: #000000;
       margin: 30px 0 0;
-      padding-bottom: .95rem;
+      padding-bottom: 9.5px;
       border-bottom: solid 1px #eeeeee;
     }
     ul {
       li {
         font-family: Muli, sans-serif;
         font-size: 1.6rem;
-        margin: 1.68rem 0;
+        margin: 16.8px 0;
         font-weight: 300;
         font-style: normal;
         font-stretch: normal;
@@ -120,7 +121,7 @@ export default {
     }
     .search-wrapper {
       display: flex;
-      margin: 0 3.52rem;
+      margin: 0 35.2px;
     }
   }
 }

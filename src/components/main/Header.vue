@@ -52,15 +52,14 @@
 
 <script>
 
-import store from '../../store'
-import drop from '../partials/dropdown'
+import drop from '../partials/DropDown'
 import HamburgerMenu from '../partials/HamburderMenu'
 
 export default {
   name: 'nav-bar',
   data: function () {
     return {
-      navigation: store.state.navigation
+      navigation: this.$store.getters.navigation
     }
   },
   components: {
@@ -122,8 +121,8 @@ export default {
         li {
           border-left: solid 1px #f1f1f1;
           a {
-            padding: 3.55rem 2.9rem;
-            min-width: 8.5rem;
+            padding: 35.5px 29px;
+            min-width: 85px;
             box-sizing: border-box;
             display: inline-block;
             text-align: center;
@@ -146,7 +145,7 @@ export default {
     border-right: solid 1px #f1f1f1;
     > li {
       a {
-        padding: 3.55rem 1.8rem;
+        padding: 35.5px 18px;
         display: inline-block;
         &:hover {
           background: #f1f1f1;
@@ -154,12 +153,12 @@ export default {
       }
       &:first-child {
         a {
-          padding-left: 2.65rem;
+          padding-left: 26.5px;
         }
       }
       &:last-child {
         a {
-          padding-right: 2.6rem;
+          padding-right: 26px;
         }
       }
     }

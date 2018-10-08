@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    noScroll: false,
     navigation: [
       {
         url: '/about-us',
@@ -223,8 +224,44 @@ export default new Vuex.Store({
           }
         ]
       }
+    ],
+    events: [
+      {
+        id: 1,
+        image: 'https://placehold.it/579x649',
+        title: 'CLARKS – offers you a limited time',
+        description: 'Hot deal buy 2 get 1 FREE! Offer is valid on full collection. Visit the store at Tbilisi Mall, on the first floor'
+      },
+      {
+        id: 2,
+        image: 'https://placehold.it/579x649',
+        title: 'Due to St. Mariam’s day',
+        description: 'On the 25th, 26th,27th and 28th of August, Super store offers you 30% discount on the whole collection. Visit store at Tbilisi Mall, on the Third floor'
+      },
+      {
+        id: 3,
+        image: 'https://placehold.it/579x649',
+        title: 'Boom Boom Birthday',
+        description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
+      }
     ]
   },
-  mutations: {},
-  actions: {}
+  mutations: {
+    SET_NO_SCROLL: (state, newValue) => {
+      state.noScroll = newValue
+    }
+  },
+  getters: {
+    noScroll: (state) => {
+      return state.noScroll
+    },
+    navigation: (state) => {
+      return state.navigation
+    },
+    events: (state) => {
+      return state.events
+    }
+  },
+  actions: {
+  }
 })

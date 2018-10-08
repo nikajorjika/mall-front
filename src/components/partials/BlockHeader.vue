@@ -1,0 +1,32 @@
+<template>
+  <div class="block-header-standard">
+    <h2>{{this.title}}</h2>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'block-header-standard',
+  props: {
+    title: {
+      type: String,
+      default: ''
+    }
+  }
+}
+</script>
+<style lang="scss" scoped>
+.block-header-standard{
+  h2{
+    margin:72px 0;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: normal;
+    color: #000000;
+  }
+}
+</style>

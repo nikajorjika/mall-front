@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
   .nav-drop {
     .has-child{
-      margin-right: 0.46rem;
+      margin-right: 4.6px;
       display: inline-block;
     }
     .drop{

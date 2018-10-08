@@ -44,7 +44,7 @@ export default {
       input{
         border: none;
         width: 100%;
-        padding:.6rem 2.04rem;
+        padding:6px 20.4px;
         font-size: 1.4rem;
         font-family: 'Muli', 'sans-serif';
         &:focus{
@@ -55,7 +55,7 @@ export default {
     .instruction-block{
       font-size: 1.156rem;
       font-weight: 300;
-      margin-top: .9rem;
+      margin-top: 9px;
       font-style: normal;
       font-stretch: normal;
       line-height: 1.27;
