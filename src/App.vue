@@ -5,6 +5,35 @@
   </div>
 </template>
 
+<script>
+export default {
+  beforeMount: function () {
+    const sessionToken = sessionStorage.getItem('websiteAuthToken')
+    const _this = this
+    if (sessionToken === null || sessionToken === '' || sessionToken === undefined || sessionToken === 'undefined') {
+      this.$http.post(this.$store.state.apiUrls.websiteAuthURL, {
+        username: this.$store.state.apiCredentials.username,
+        password: this.$store.state.apiCredentials.password
+      }).then(function (response) {
+        sessionStorage.setItem('websiteAuthToken', response.data.token)
+        _this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
+      }).catch(function (error) {
+        console.log(error)
+      })
+    } else {
+      _this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + sessionToken
+      // _this.$http.get('https://smartfinders.herokuapp.com/api/v1/website/entities')
+      //   .then(function (response) {
+      //     console.log(response)
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error)
+      //   })
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 @import "./assets/scss/app.scss";
 

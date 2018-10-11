@@ -244,7 +244,59 @@ export default new Vuex.Store({
         title: 'Boom Boom Birthday',
         description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
       }
-    ]
+    ],
+    stores: [
+      {
+        id: 1,
+        image: 'https://placehold.it/579x649',
+        title: 'CLARKS – offers you a limited time',
+        description: 'Hot deal buy 2 get 1 FREE! Offer is valid on full collection. Visit the store at Tbilisi Mall, on the first floor'
+      },
+      {
+        id: 2,
+        image: 'https://placehold.it/579x649',
+        title: 'Due to St. Mariam’s day',
+        description: 'On the 25th, 26th,27th and 28th of August, Super store offers you 30% discount on the whole collection. Visit store at Tbilisi Mall, on the Third floor'
+      },
+      {
+        id: 3,
+        image: 'https://placehold.it/579x649',
+        title: 'Boom Boom Birthday',
+        description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
+      },
+      {
+        id: 4,
+        image: 'https://placehold.it/579x649',
+        title: 'Due to St. Mariam’s day',
+        description: 'On the 25th, 26th,27th and 28th of August, Super store offers you 30% discount on the whole collection. Visit store at Tbilisi Mall, on the Third floor'
+      },
+      {
+        id: 5,
+        image: 'https://placehold.it/579x649',
+        title: 'Boom Boom Birthday',
+        description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
+      },
+      {
+        id: 6,
+        image: 'https://placehold.it/579x649',
+        title: 'Due to St. Mariam’s day',
+        description: 'On the 25th, 26th,27th and 28th of August, Super store offers you 30% discount on the whole collection. Visit store at Tbilisi Mall, on the Third floor'
+      },
+      {
+        id: 7,
+        image: 'https://placehold.it/579x649',
+        title: 'Boom Boom Birthday',
+        description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
+      }
+    ],
+    apiUrls: {
+      apiURL: 'https://smartfinders.herokuapp.com/api/v1',
+      websiteAuthURL: 'https://smartfinders.herokuapp.com/api/v1/website/auth'
+    },
+    apiCredentials: {
+      username: 'website',
+      password: '7G4QaUa25!oF'
+    }
   },
   mutations: {
     SET_NO_SCROLL: (state, newValue) => {
@@ -260,6 +312,9 @@ export default new Vuex.Store({
     },
     events: (state) => {
       return state.events
+    },
+    stores: (state) => {
+      return state.stores
     }
   },
   actions: {

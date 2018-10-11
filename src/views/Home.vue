@@ -14,15 +14,17 @@
       </div>
     </section>
     <section class="promotions">
-      <block-header-standard :title="'PROMOTIONS'"/>
-      <div class="flex-col-3">
-        <div class="event-item-outer" v-for="event in this.events" v-bind:key="event.id">
-          <event-item :event="event"/>
-        </div>
-      </div>
+      <three-event-greed :title="'PROMOTIONS'" :events="this.events" @loadMore="this.loadMoreButton"/>
     </section>
-    <block-header-standard :title="'PROMOTIONS'"/>
-
+    <section class="events">
+      <three-event-greed :title="'EVENTS'" :events="this.events" @loadMore="this.loadMoreButton"/>
+    </section>
+    <section class="news">
+      <three-event-greed :title="'NEWS'" :events="this.events" @loadMore="this.loadMoreButton"/>
+    </section>
+    <section class="stores">
+      <standard-carousel :items="this.stores" :perPage="4" :title="'STORES'"/>
+    </section>
   </div>
 </template>
 
@@ -32,18 +34,28 @@
 import EventHome from '../components/partials/EventHome'
 import BlockHeaderStandard from '../components/partials/BlockHeader'
 import EventItem from '../components/partials/EventView'
+import ThreeEventGreed from '../components/partials/ThreeEventGreed'
+import StandardCarousel from '../components/partials/StandardCarousel'
 
 export default {
   name: 'home',
   data: function () {
     return {
-      events: this.$store.getters.events
+      events: this.$store.getters.events,
+      stores: this.$store.getters.stores,
     }
   },
   components: {
+    StandardCarousel,
+    ThreeEventGreed,
     EventItem,
     BlockHeaderStandard,
     EventHome
+  },
+  methods: {
+    loadMoreButton: function () {
+      console.log('load more')
+    }
   }
 }
 </script>
@@ -56,24 +68,6 @@ export default {
       margin-top: 16px;
       .col-2 {
         width: calc(50% - 8px);
-      }
-    }
-  }
-  .flex-col-3 {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 30px;
-    .event-item-outer{
-      width: 33.33%;
-      box-sizing: border-box;
-      border-right: solid 1px #dcdcdc;
-      border-bottom: solid 1px #dcdcdc;
-      &:nth-child(3n + 3){
-        border-right: none;
-        margin-right: 0;
-      }
-      &:nth-child(3n + 1){
-        margin-left: 0;
       }
     }
   }
