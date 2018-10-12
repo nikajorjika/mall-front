@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+// import Axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -247,46 +248,90 @@ export default new Vuex.Store({
     ],
     stores: [
       {
-        id: 1,
-        image: 'https://placehold.it/579x649',
-        title: 'CLARKS – offers you a limited time',
-        description: 'Hot deal buy 2 get 1 FREE! Offer is valid on full collection. Visit the store at Tbilisi Mall, on the first floor'
-      },
-      {
-        id: 2,
-        image: 'https://placehold.it/579x649',
-        title: 'Due to St. Mariam’s day',
-        description: 'On the 25th, 26th,27th and 28th of August, Super store offers you 30% discount on the whole collection. Visit store at Tbilisi Mall, on the Third floor'
-      },
-      {
-        id: 3,
-        image: 'https://placehold.it/579x649',
-        title: 'Boom Boom Birthday',
-        description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
-      },
-      {
-        id: 4,
-        image: 'https://placehold.it/579x649',
-        title: 'Due to St. Mariam’s day',
-        description: 'On the 25th, 26th,27th and 28th of August, Super store offers you 30% discount on the whole collection. Visit store at Tbilisi Mall, on the Third floor'
-      },
-      {
-        id: 5,
-        image: 'https://placehold.it/579x649',
-        title: 'Boom Boom Birthday',
-        description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
-      },
-      {
-        id: 6,
-        image: 'https://placehold.it/579x649',
-        title: 'Due to St. Mariam’s day',
-        description: 'On the 25th, 26th,27th and 28th of August, Super store offers you 30% discount on the whole collection. Visit store at Tbilisi Mall, on the Third floor'
-      },
-      {
-        id: 7,
-        image: 'https://placehold.it/579x649',
-        title: 'Boom Boom Birthday',
-        description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
+        'name': {
+          'ka': 'თიბისი',
+          'en': 'tbc',
+          'ru': 'tbc'
+        },
+        'description': {
+          'ka': 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. \nჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.\nსაუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.',
+          'en': 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. \nჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.\nსაუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.',
+          'ru': 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. \nჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.\nსაუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.'
+        },
+        'filters': ['Discount Card', 'Amex'],
+        '_id': '5b9d4045d5c08e1752f7da05',
+        'logoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/5ea8fdfb-eb15-40ae-a1eb-b949fccea814.jpeg',
+        'photoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/c0bc8943-4918-49f5-b228-9641b63e2ebc.jpeg',
+        'categoryId': '5b9d3c8c62973c001fd2c69b',
+        'subcategoryId': '5b9d3fa4d5c08e1752f7da03'
+      }, {
+        'name': {
+          'ka': 'დეფაქტო',
+          'en': 'deacto',
+          'ru': 'defacto'
+        },
+        'description': {
+          'ka': 'ქალის სამოსი და აქსესუარები, მამაკაცის სამოსი და აქსესუარები, ბავშვისა და ორსულის სამოსი, ფეხსაცმელი',
+          'en': 'ქალის სამოსი და აქსესუარები, მამაკაცის სამოსი და აქსესუარები, ბავშვისა და ორსულის სამოსი, ფეხსაცმელი',
+          'ru': 'ქალის სამოსი და აქსესუარები, მამაკაცის სამოსი და აქსესუარები, ბავშვისა და ორსულის სამოსი, ფეხსაცმელი'
+        },
+        'filters': ['Tax free', 'Gift Card'],
+        '_id': '5b9d40a8d5c08e1752f7da06',
+        'logoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/3e2930c2-ca60-463d-81a9-136b4fed87a3.jpeg',
+        'photoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/90b28b9f-c9fb-4779-afef-d48b51cb2a3c.jpeg',
+        'categoryId': '5b9d3c1f62973c001fd2c698',
+        'subcategoryId': '5b9d3f02d5c08e1752f7d9ff'
+      }, {
+        'name': {
+          'ka': 'საქართველოს ბანკი',
+          'en': 'bank of georgia',
+          'ru': 'gruzinski bank'
+        },
+        'description': {
+          'ka': 'საქართველოს ბანკი ქვეყნის წამყვანი ბანკია, რომელსაც ბაზრის ერთ მესამედზე  მეტი უკავია მთლიანი აქტივების მიხედვით და ემსახურება 1 მილიონზე მეტ კლიენტთა ანგარიშს. საქართველოს ბანკი მის მომხმარებელს სთავაზობს კორპორატიული და საცალო საბანკო, დაგროვილი ქონების მართვის, საბროკერო და სადაზღვევო მომსახურების ფართო სპექტრს. საქართველოს ბანკის ბრიტანული ჰოლდინგური კომპანია Bank of Georgia Holdings plc–ის აქციები განთავსებულია ლონდონის საფონდო ბირჟის პრემიუმ სეგმენტში.',
+          'en': 'საქართველოს ბანკი ქვეყნის წამყვანი ბანკია, რომელსაც ბაზრის ერთ მესამედზე  მეტი უკავია მთლიანი აქტივების მიხედვით და ემსახურება 1 მილიონზე მეტ კლიენტთა ანგარიშს. საქართველოს ბანკი მის მომხმარებელს სთავაზობს კორპორატიული და საცალო საბანკო, დაგროვილი ქონების მართვის, საბროკერო და სადაზღვევო მომსახურების ფართო სპექტრს. საქართველოს ბანკის ბრიტანული ჰოლდინგური კომპანია Bank of Georgia Holdings plc–ის აქციები განთავსებულია ლონდონის საფონდო ბირჟის პრემიუმ სეგმენტში.',
+          'ru': 'საქართველოს ბანკი ქვეყნის წამყვანი ბანკია, რომელსაც ბაზრის ერთ მესამედზე  მეტი უკავია მთლიანი აქტივების მიხედვით და ემსახურება 1 მილიონზე მეტ კლიენტთა ანგარიშს. საქართველოს ბანკი მის მომხმარებელს სთავაზობს კორპორატიული და საცალო საბანკო, დაგროვილი ქონების მართვის, საბროკერო და სადაზღვევო მომსახურების ფართო სპექტრს. საქართველოს ბანკის ბრიტანული ჰოლდინგური კომპანია Bank of Georgia Holdings plc–ის აქციები განთავსებულია ლონდონის საფონდო ბირჟის პრემიუმ სეგმენტში.'
+        },
+        'filters': ['Amex', 'Gift Card'],
+        '_id': '5b9d3ff8d5c08e1752f7da04',
+        'logoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/269ac897-9bf1-4902-9ed8-7b92355f71d8.jpeg',
+        'photoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/4a84a9a8-352d-4bbd-aa7d-6a75d668d4ac.jpeg',
+        'categoryId': '5b9d3c8c62973c001fd2c69b',
+        'subcategoryId': '5b9d3fa4d5c08e1752f7da03'
+      }, {
+        'name': {
+          'ka': 'ბურგერ კინგი',
+          'en': 'burger kingi',
+          'ru': 'burger kingi'
+        },
+        'description': {
+          'ka': 'ბურგერ კინგი“ მთელს მსოფლიოში განთქმული სწრაფი კვების რესტორანია. იგი გამოირჩევა სწრაფი და ხარისხიანი მომსახურეობით',
+          'en': 'ბურგერ კინგი“ მთელს მსოფლიოში განთქმული სწრაფი კვების რესტორანია. იგი გამოირჩევა სწრაფი და ხარისხიანი მომსახურეობით',
+          'ru': 'ბურგერ კინგი“ მთელს მსოფლიოში განთქმული სწრაფი კვების რესტორანია. იგი გამოირჩევა სწრაფი და ხარისხიანი მომსახურეობით'
+        },
+        'filters': ['Discount Card', 'Amex'],
+        '_id': '5b9d4145d5c08e1752f7da07',
+        'logoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/03d1e62e-8ca9-4de5-91da-e96c73d9393e.jpeg',
+        'photoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/22fede1c-fd0e-43cb-9de4-1e9c6195a57c.jpeg',
+        'categoryId': '5b9d3c6062973c001fd2c699',
+        'subcategoryId': '5b9d3f4bd5c08e1752f7da01'
+      }, {
+        'name': {
+          'ka': 'ზოოტოპია',
+          'en': 'zootopia',
+          'ru': 'zootopia'
+        },
+        'description': {
+          'ka': 'ყველაზე ლამაზი და მრავალფეროვანი კონტაქტური ზოოპარკი საქართელოში!',
+          'en': 'ყველაზე ლამაზი და მრავალფეროვანი კონტაქტური ზოოპარკი საქართელოში!',
+          'ru': 'ყველაზე ლამაზი და მრავალფეროვანი კონტაქტური ზოოპარკი საქართელოში!'
+        },
+        'filters': ['Discount Card', 'Gift Card'],
+        '_id': '5b9d41a0d5c08e1752f7da08',
+        'logoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/b4191d04-f0f0-45ad-8b54-dcb64e648257.jpeg',
+        'photoUrl': 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/803d4356-8eab-4825-a8fb-03478a1094d7.jpeg',
+        'categoryId': '5b9d3c7762973c001fd2c69a',
+        'subcategoryId': '5b9d3e6dd5c08e1752f7d9fd'
       }
     ],
     apiUrls: {
@@ -296,11 +341,247 @@ export default new Vuex.Store({
     apiCredentials: {
       username: 'website',
       password: '7G4QaUa25!oF'
+    },
+    googleMap: {
+      mapStyle: [
+        {
+          'elementType': 'geometry',
+          'stylers': [
+            {
+              'color': '#f5f5f5'
+            }
+          ]
+        },
+        {
+          'elementType': 'labels.icon',
+          'stylers': [
+            {
+              'visibility': 'off'
+            }
+          ]
+        },
+        {
+          'elementType': 'labels.text.fill',
+          'stylers': [
+            {
+              'color': '#616161'
+            }
+          ]
+        },
+        {
+          'elementType': 'labels.text.stroke',
+          'stylers': [
+            {
+              'color': '#f5f5f5'
+            }
+          ]
+        },
+        {
+          'featureType': 'administrative',
+          'elementType': 'geometry',
+          'stylers': [
+            {
+              'visibility': 'off'
+            }
+          ]
+        },
+        {
+          'featureType': 'administrative.land_parcel',
+          'elementType': 'labels',
+          'stylers': [
+            {
+              'visibility': 'off'
+            }
+          ]
+        },
+        {
+          'featureType': 'administrative.land_parcel',
+          'elementType': 'labels.text.fill',
+          'stylers': [
+            {
+              'color': '#bdbdbd'
+            }
+          ]
+        },
+        {
+          'featureType': 'poi',
+          'stylers': [
+            {
+              'visibility': 'off'
+            }
+          ]
+        },
+        {
+          'featureType': 'poi',
+          'elementType': 'geometry',
+          'stylers': [
+            {
+              'color': '#eeeeee'
+            }
+          ]
+        },
+        {
+          'featureType': 'poi',
+          'elementType': 'labels.text',
+          'stylers': [
+            {
+              'visibility': 'off'
+            }
+          ]
+        },
+        {
+          'featureType': 'poi',
+          'elementType': 'labels.text.fill',
+          'stylers': [
+            {
+              'color': '#757575'
+            }
+          ]
+        },
+        {
+          'featureType': 'poi.park',
+          'elementType': 'geometry',
+          'stylers': [
+            {
+              'color': '#e5e5e5'
+            }
+          ]
+        },
+        {
+          'featureType': 'poi.park',
+          'elementType': 'labels.text.fill',
+          'stylers': [
+            {
+              'color': '#9e9e9e'
+            }
+          ]
+        },
+        {
+          'featureType': 'road',
+          'elementType': 'geometry',
+          'stylers': [
+            {
+              'color': '#ffffff'
+            }
+          ]
+        },
+        {
+          'featureType': 'road',
+          'elementType': 'labels.icon',
+          'stylers': [
+            {
+              'visibility': 'off'
+            }
+          ]
+        },
+        {
+          'featureType': 'road.arterial',
+          'elementType': 'labels.text.fill',
+          'stylers': [
+            {
+              'color': '#757575'
+            }
+          ]
+        },
+        {
+          'featureType': 'road.highway',
+          'elementType': 'geometry',
+          'stylers': [
+            {
+              'color': '#dadada'
+            }
+          ]
+        },
+        {
+          'featureType': 'road.highway',
+          'elementType': 'labels.text.fill',
+          'stylers': [
+            {
+              'color': '#616161'
+            }
+          ]
+        },
+        {
+          'featureType': 'road.local',
+          'elementType': 'labels',
+          'stylers': [
+            {
+              'visibility': 'off'
+            }
+          ]
+        },
+        {
+          'featureType': 'road.local',
+          'elementType': 'labels.text.fill',
+          'stylers': [
+            {
+              'color': '#9e9e9e'
+            }
+          ]
+        },
+        {
+          'featureType': 'transit',
+          'stylers': [
+            {
+              'visibility': 'off'
+            }
+          ]
+        },
+        {
+          'featureType': 'transit.line',
+          'elementType': 'geometry',
+          'stylers': [
+            {
+              'color': '#e5e5e5'
+            }
+          ]
+        },
+        {
+          'featureType': 'transit.station',
+          'elementType': 'geometry',
+          'stylers': [
+            {
+              'color': '#eeeeee'
+            }
+          ]
+        },
+        {
+          'featureType': 'water',
+          'elementType': 'geometry',
+          'stylers': [
+            {
+              'color': '#c9c9c9'
+            }
+          ]
+        },
+        {
+          'featureType': 'water',
+          'elementType': 'labels.text.fill',
+          'stylers': [
+            {
+              'color': '#9e9e9e'
+            }
+          ]
+        }
+      ]
     }
   },
   mutations: {
     SET_NO_SCROLL: (state, newValue) => {
       state.noScroll = newValue
+    },
+    SET_STORES: (state, pageValue) => {
+      pageValue = pageValue === undefined ? 1 : pageValue
+      // Axios.get('https://smartfinders.herokuapp.com/api/v1/website/entities', {
+      //   page: pageValue
+      // })
+      //   .then(function (response) {
+      //     console.log(response.data.data)
+      //     state.stores = response.data.data
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error)
+      //   })
     }
   },
   getters: {
@@ -317,6 +598,5 @@ export default new Vuex.Store({
       return state.stores
     }
   },
-  actions: {
-  }
+  actions: {}
 })

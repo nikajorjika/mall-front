@@ -22,13 +22,7 @@ export default {
       })
     } else {
       _this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + sessionToken
-      // _this.$http.get('https://smartfinders.herokuapp.com/api/v1/website/entities')
-      //   .then(function (response) {
-      //     console.log(response)
-      //   })
-      //   .catch(function (error) {
-      //     console.log(error)
-      //   })
+      _this.$store.commit('SET_STORES', 1)
     }
   }
 }

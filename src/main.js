@@ -8,6 +8,14 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCaretDown, faSearch, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Axios from 'axios'
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyABserBqL7VFOHlWx4wrtgHKtTGzD0k90A',
+    libraries: 'places'
+  }
+})
 
 library.add(faCaretDown)
 library.add(faSearch)

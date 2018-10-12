@@ -25,6 +25,9 @@
     <section class="stores">
       <standard-carousel :items="this.stores" :perPage="4" :title="'STORES'"/>
     </section>
+    <section class="how-to-get">
+      <how-to-get/>
+    </section>
   </div>
 </template>
 
@@ -36,16 +39,18 @@ import BlockHeaderStandard from '../components/partials/BlockHeader'
 import EventItem from '../components/partials/EventView'
 import ThreeEventGreed from '../components/partials/ThreeEventGreed'
 import StandardCarousel from '../components/partials/StandardCarousel'
+import HowToGet from '../components/partials/HowToGet'
 
 export default {
   name: 'home',
   data: function () {
     return {
       events: this.$store.getters.events,
-      stores: this.$store.getters.stores,
+      stores: this.$store.getters.stores
     }
   },
   components: {
+    HowToGet,
     StandardCarousel,
     ThreeEventGreed,
     EventItem,
@@ -70,6 +75,12 @@ export default {
         width: calc(50% - 8px);
       }
     }
+  }
+  .stores{
+    max-width: 1640px;
+    margin: 0 auto;
+    padding-bottom: 130px;
+    border-bottom: solid 1px #dcdcdc;
   }
 }
 </style>
