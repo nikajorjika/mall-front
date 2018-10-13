@@ -24,7 +24,6 @@ export default {
 <style scoped lang="scss">
 .newsletter-subscribe {
   border-top: 1px solid #dcdcdc;
-  border-bottom: 1px solid #dcdcdc;
   .subscribe-container {
     display: flex;
     width: 85%;

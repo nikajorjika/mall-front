@@ -2,11 +2,18 @@
   <div id="app" :class="this.$store.getters.noScroll? 'open': ''">
     <nav-bar/>
     <router-view/>
+    <footer-component/>
   </div>
 </template>
 
 <script>
+import FooterComponent from './components/main/Footer'
+import NavBar from './components/main/Header'
 export default {
+  components: {
+    FooterComponent,
+    NavBar
+  },
   beforeMount: function () {
     const sessionToken = sessionStorage.getItem('websiteAuthToken')
     const _this = this
