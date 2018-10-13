@@ -1,0 +1,70 @@
+<template>
+  <div class="newsletter-subscribe">
+    <div class="subscribe-container">
+      <div class="logo-part">
+        <img src="https://placehold.it/52x52" alt="st">
+      </div>
+      <div class="text-part">
+        <p>Sign up for our newsletter to receive special offers, event invitations, and more.</p>
+      </div>
+      <div class="btn-part">
+        <button>
+          JOIN NOW
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: 'newsletter-subscribe'
+}
+</script>
+
+<style scoped lang="scss">
+.newsletter-subscribe {
+  border-top: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+  .subscribe-container {
+    display: flex;
+    width: 85%;
+    margin: 0 auto;
+    .logo-part {
+      padding: 16px 26px;
+      border-right: 1px solid #dcdcdc;
+      border-left: 1px solid #dcdcdc;
+    }
+    .text-part {
+      margin: auto auto auto 32px;
+      p {
+        font-family: "Muli Light", "sans-serif";
+        font-size: 1.6rem;
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.25;
+        letter-spacing: normal;
+        text-align: left;
+        color: #848484;
+      }
+    }
+    .btn-part{
+      button{
+        height: 100%;
+        padding: 0 36px;
+        border:none;
+        border-left: 1px solid #dcdcdc;
+        border-right: 1px solid #dcdcdc;
+        background: #fff;
+        cursor: pointer;
+        outline: none;
+        font-family: 'Muli', 'sans-serif';
+        font-size: 1.6rem;
+        &:hover{
+          background: #eaeaea;
+        }
+      }
+    }
+  }
+}
+</style>

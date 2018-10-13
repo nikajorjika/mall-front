@@ -15,7 +15,7 @@
           <!--:zoom="7"-->
           <!--map-type-id="terrain"-->
           <!--style="width: 100%; height: 807px"-->
-          <!--v-bind:options="{ styles: this.mapStyle }"-->
+          <!--v-bind:options="{ styles: this.googleMap.mapStyle }"-->
         <!--&gt;-->
         <!--</GmapMap>-->
       </div>
@@ -32,7 +32,7 @@ export default {
   },
   data: function () {
     return {
-      mapStyle: this.$store.state.googleMap.mapStyle
+      googleMap: this.$store.getters.googleMap
     }
   }
 }

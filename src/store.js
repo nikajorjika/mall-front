@@ -564,7 +564,29 @@ export default new Vuex.Store({
           ]
         }
       ]
-    }
+    },
+    socials: [
+      {
+        icon: 'facebook-f',
+        name: 'facebook',
+        url: 'https://facebook.com'
+      },
+      {
+        icon: 'twitter',
+        name: 'twitter',
+        url: 'https://facebook.com'
+      },
+      {
+        icon: 'youtube',
+        name: 'youtube',
+        url: 'https://facebook.com'
+      },
+      {
+        icon: 'pinterest',
+        name: 'pinterest',
+        url: 'https://facebook.com'
+      }
+    ]
   },
   mutations: {
     SET_NO_SCROLL: (state, newValue) => {
@@ -596,6 +618,12 @@ export default new Vuex.Store({
     },
     stores: (state) => {
       return state.stores
+    },
+    googleMap: (state) => {
+      return state.googleMap
+    },
+    socials: (state) => {
+      return state.socials
     }
   },
   actions: {}

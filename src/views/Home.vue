@@ -28,6 +28,12 @@
     <section class="how-to-get">
       <how-to-get/>
     </section>
+    <section class="socials">
+      <social-list-big/>
+    </section>
+    <section class="subscribe">
+      <newsletter-subscribe/>
+    </section>
   </div>
 </template>
 
@@ -40,6 +46,8 @@ import EventItem from '../components/partials/EventView'
 import ThreeEventGreed from '../components/partials/ThreeEventGreed'
 import StandardCarousel from '../components/partials/StandardCarousel'
 import HowToGet from '../components/partials/HowToGet'
+import SocialListBig from '../components/partials/SocialsListBig'
+import NewsletterSubscribe from '../components/partials/NewsLetters'
 
 export default {
   name: 'home',
@@ -50,6 +58,8 @@ export default {
     }
   },
   components: {
+    NewsletterSubscribe,
+    SocialListBig,
     HowToGet,
     StandardCarousel,
     ThreeEventGreed,
