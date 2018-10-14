@@ -14,13 +14,13 @@
       </div>
     </section>
     <section class="promotions">
-      <three-event-greed :title="'PROMOTIONS'" :events="this.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed title="PROMOTIONS" :events="this.events" @loadMore="this.loadMoreButton"/>
     </section>
     <section class="events">
-      <three-event-greed :title="'EVENTS'" :events="this.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed title="EVENTS" setter="SET_EVENTS" :events="this.events" @loadMore="this.loadMoreButton"/>
     </section>
     <section class="news">
-      <three-event-greed :title="'NEWS'" :events="this.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed title="NEWS" setter="SET_EVENTS" :events="this.events" @loadMore="this.loadMoreButton"/>
     </section>
     <section class="stores">
       <standard-carousel :items="this.stores" :perPage="4" :title="'STORES'"/>
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 
 import EventHome from '../components/partials/EventHome'
 import BlockHeaderStandard from '../components/partials/BlockHeader'
@@ -47,6 +46,10 @@ import SocialListBig from '../components/partials/SocialsListBig'
 
 export default {
   name: 'home',
+  beforeMount: function () {
+    this.$store.commit('SET_STORES', 1)
+    this.$store.commit('SET_EVENTS', 1)
+  },
   data: function () {
     return {
       events: this.$store.getters.events,

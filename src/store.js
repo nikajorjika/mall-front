@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Axios from "axios/index";
 // import Axios from 'axios'
 
 Vue.use(Vuex)
@@ -663,18 +664,51 @@ export default new Vuex.Store({
     SET_NO_SCROLL: (state, newValue) => {
       state.noScroll = newValue
     },
-    SET_STORES: (state, pageValue) => {
-      pageValue = pageValue === undefined ? 1 : pageValue
-      // Axios.get('https://smartfinders.herokuapp.com/api/v1/website/entities', {
-      //   page: pageValue
-      // })
+    SET_STORES: (state, payload) => {
+      // const page = payload.page === undefined ? 1 : payload.page
+      // const offset = payload.offset === undefined ? 3 : payload.offset
+      // Axios.get(`https://smartfinders.herokuapp.com/api/v1/website/stores/${page}/${offset}`)
       //   .then(function (response) {
-      //     console.log(response.data.data)
-      //     state.stores = response.data.data
+      //     state.events = response.data.data
       //   })
       //   .catch(function (error) {
       //     console.log(error)
       //   })
+    },
+    SET_EVENTS: (state, payload) => {
+      // const page = page === undefined ? 1 : page
+      // const offset = offset === undefined ? 3 : offset
+      // Axios.get(`https://smartfinders.herokuapp.com/api/v1/website/stores/${page}/${offset}`)
+      //   .then(function (response) {
+      //     state.events = response.data.data
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error)
+      //   })
+      if (payload.type === 'append') {
+        const append = [
+          {
+            id: 5,
+            image: 'https://placehold.it/579x649',
+            title: 'Boom Boom Birthday',
+            description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
+          },
+          {
+            id: 6,
+            image: 'https://placehold.it/579x649',
+            title: 'Boom Boom Birthday',
+            description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
+          },
+          {
+            id: 7,
+            image: 'https://placehold.it/579x649',
+            title: 'Boom Boom Birthday',
+            description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
+          }]
+        for (let i in append) {
+          state.events.push(append[i])
+        }
+      }
     }
   },
   getters: {

@@ -29,7 +29,6 @@ export default {
       })
     } else {
       _this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + sessionToken
-      _this.$store.commit('SET_STORES', 1)
     }
   }
 }
