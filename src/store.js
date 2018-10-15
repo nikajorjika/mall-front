@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Axios from "axios/index";
-// import Axios from 'axios'
+// import Axios from 'axios/index'
 
 Vue.use(Vuex)
 

@@ -37,6 +37,22 @@ export default {
 </script>
 <style lang="scss">
   .footer-menu-item{
+    &.mini{
+      .title-container{
+        .title{
+          margin:21px 0 7px;
+        }
+      }
+      .content-container{
+        .content-ul{
+          .content-li{
+            .item-wrapper{
+              margin: 7px 0;
+            }
+          }
+        }
+      }
+    }
     .title-container{
       .title{
         font-family: 'Muli SemiBold','sans-serif';
