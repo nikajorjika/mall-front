@@ -2,7 +2,7 @@
   <div class="search-container">
     <form action="">
       <div class="field-set">
-        <label class="search-icon-container"><font-awesome-icon icon="search"/></label>
+        <label class="search-icon-container"><img src="../../assets/images/icons/search.svg" height="14.1px" width="13.6px"></label>
         <input type="text" class="search-field" placeholder='"Type here"'>
       </div>
       <div class="instruction-block">

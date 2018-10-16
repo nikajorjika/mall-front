@@ -5,7 +5,7 @@
       <span></span>
       <span></span>
     </span>
-    <span class="icon-close-container" v-if="this.icon === 'close'" @click="emitClick" >
+    <span class="icon-close-container" v-else-if="this.icon === 'close'" @click="emitClick" >
       <span class="icon-close">
       </span>
     </span>
@@ -20,6 +20,11 @@ export default {
     icon: {
       type: String,
       default: ''
+    }
+  },
+  data: () => {
+    return {
+      iconPath: process.env.BASE_URL
     }
   },
   methods: {
@@ -67,6 +72,11 @@ export default {
       &:before {
         transform: rotate(-45deg);
       }
+    }
+  }
+  .standard-icon{
+    .icon-inner{
+      height: auto;
     }
   }
 }

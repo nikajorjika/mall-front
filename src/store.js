@@ -677,7 +677,7 @@ export default new Vuex.Store({
     SET_EVENTS: (state, payload) => {
       // const page = page === undefined ? 1 : page
       // const offset = offset === undefined ? 3 : offset
-      // Axios.get(`https://smartfinders.herokuapp.com/api/v1/website/stores/${page}/${offset}`)
+      // Axios.get(`https://smartfinders.herokuapp.com/api/v1/website/events/${page}/${offset}`)
       //   .then(function (response) {
       //     state.events = response.data.data
       //   })

@@ -44,12 +44,20 @@ export default {
       default: 4
     }
   },
+  computed: {
+    leftArrow () {
+      return require('../../assets/images/icons/arrow-left-2.svg')
+    },
+    rightArrow () {
+      return require('../../assets/images/icons/arrow-right-2.svg')
+    }
+  },
   methods: {
     printPrevIcon: function () {
-      return '<span class="arrow arrow-left"></span>'
+      return `<span class="arrow arrow-left"><img src="${this.leftArrow}"></span>`
     },
     printNextIcon: function () {
-      return '<span class="arrow arrow-right"></span>'
+      return `<span class="arrow arrow-right"><img src="${this.rightArrow}"></span>`
     }
   }
 }
@@ -81,32 +89,6 @@ export default {
     width: 33px;
     height: 81.3px;
     display: block;
-    &:after,
-    &:before {
-      content: '';
-      height: 48px;
-      width: 2px;
-      background: #dcdcdc;
-      position: absolute;
-    }
-    &.arrow-left{
-      &:after{
-        transform: rotate(45deg);
-      }
-      &:before{
-        transform: rotate(-45deg);
-        bottom:0;
-      }
-    }
-    &.arrow-right{
-      &:after{
-        transform: rotate(-45deg);
-      }
-      &:before{
-        transform: rotate(45deg);
-        bottom:0;
-      }
-    }
   }
 }
 </style>
