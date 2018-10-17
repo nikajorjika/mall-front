@@ -46,13 +46,6 @@ export default {
     overflow-y: hidden;
     height: 100vh;
   }
-  a {
-    color: inherit;
-    text-decoration: none;
-    &:hover {
-      text-decoration: none;
-    }
-  }
 }
 
 ul {

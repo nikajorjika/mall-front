@@ -2,7 +2,7 @@
   <div class="newsletter-subscribe">
     <div class="subscribe-container">
       <div class="logo-part">
-        <img src="https://placehold.it/52x52" alt="st">
+        <img src="../../assets/images/icons/tb_mall_logo_black.svg" alt="st">
       </div>
       <div class="text-part">
         <p>Sign up for our newsletter to receive special offers, event invitations, and more.</p>
@@ -30,6 +30,8 @@ export default {
     margin: 0 auto;
     .logo-part {
       padding: 16px 26px;
+      height: 52px;
+      width: 52px;
       border-right: 1px solid #dcdcdc;
       border-left: 1px solid #dcdcdc;
     }
