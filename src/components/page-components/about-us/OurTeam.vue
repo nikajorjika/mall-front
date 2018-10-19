@@ -51,10 +51,10 @@ export default {
   },
   computed: {
     leftArrow: function () {
-      return require('../../assets/images/icons/arrow-left-2.svg')
+      return require('../../../assets/images/icons/arrow-left-2.svg')
     },
     rightArrow: function () {
-      return require('../../assets/images/icons/arrow-right-2.svg')
+      return require('../../../assets/images/icons/arrow-right-2.svg')
     }
   },
   methods: {

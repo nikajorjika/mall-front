@@ -1,11 +1,7 @@
 <template>
   <div class="page-block">
-    <div class="title-container">
-      <h1 class="title"> {{this.title}}</h1>
-    </div>
-    <div class="content-container">
-      <p v-html="this.content"></p>
-    </div>
+    <about-title :title="this.title"/>
+    <about-content :content="this.content"/>
     <div class="additional-info">
       <div class="additional-info-item" v-for="additional in this.additionals" :key="additional.title">
         <h4>{{additional.title}}</h4>
@@ -15,8 +11,15 @@
   </div>
 </template>
 <script>
+import AboutContent from './AboutPageContent'
+import AboutTitle from './AboutPageTitle'
+
 export default {
   name: 'page-block',
+  components: {
+    AboutContent,
+    AboutTitle
+  },
   props: {
     title: {
       type: String,
@@ -37,22 +40,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page-block {
-  .title-container {
-    .title {
-      font-family: 'Muli', 'sans-serif';
-      font-size: 4rem;
-      line-height: 1.25;
-      color: #000;
-    }
-  }
-  .content-container {
-    p {
-      font-family: 'Muli', 'sans-serif';
-      font-size: 1.6rem;
-      line-height: 1.25;
-      color: #000;
-    }
-  }
   .additional-info {
     margin-top: 85px;
     margin-bottom: 74.5px;

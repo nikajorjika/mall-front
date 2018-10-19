@@ -48,6 +48,12 @@ export default {
   components: {
     SearchContainer,
     DefaultIcon
+  },
+  watch: {
+    $route (to, from) {
+      this.showMenu = false
+      this.$store.commit('SET_NO_SCROLL', false)
+    }
   }
 }
 </script>
@@ -77,7 +83,7 @@ export default {
     z-index: 3;
     padding: 20.5px 0;
     overflow-y: auto;
-    .hamburger-close-button{
+    .hamburger-close-button {
       margin: auto 0;
     }
     .hamburger-search {
@@ -88,7 +94,7 @@ export default {
     .close {
       font-size: 14px;
     }
-    .list-wrapper{
+    .list-wrapper {
       margin-top: 117px;
     }
     .block-title {

@@ -1,6 +1,5 @@
 <template>
   <div class="about-page container">
-    <h1> {{this.page}}</h1>
     <section class="about-us about-outer-container" v-if="this.page === ''">
       <div class="page-block-container">
         <page-block :title="this.aboutTitle" :content="this.aboutContent" :additionals="this.aboutAdditional"/>
@@ -13,7 +12,15 @@
         <staff-carousel :staff="this.staff"/>
       </div>
     </section>
-    <section class="about-us" v-if="this.page === 'guest-service'">
+    <section class="about-us  about-outer-container" v-if="this.page === 'guest-service'">
+      <div class="page-block-container">
+        <page-our-service title="GUEST SERVICE" content="At Tbilisi Mall we offer a provision of full services in line with our main priorities to create a comfortable, pleasant environment and ensure that every visitor’s experience is exceptional. <br><br> Tbilisi Mall has the following services at your disposal:"/>
+      </div>
+      <div class="menu-container">
+        <about-us-menu :items="this.aboutMenu" active=''/>
+      </div>
+    </section>
+    <section class="about-us  about-outer-container" v-if="this.page === 'mall-map'">
       <div class="page-block-container">
       </div>
       <div class="menu-container">
@@ -23,13 +30,17 @@
   </div>
 </template>
 <script>
-import PageBlock from '../components/page-components/PageBlock'
-import AboutUsMenu from '../components/page-components/AboutPageMenu'
-import StaffCarousel from '../components/page-components/OurTeam'
+import PageBlock from '../components/page-components/about-us/PageBlock'
+import AboutUsMenu from '../components/page-components/about-us/AboutPageMenu'
+import StaffCarousel from '../components/page-components/about-us/OurTeam'
+import AboutTitle from '../components/page-components/about-us/AboutPageTitle'
+import PageOurService from '../components/page-components/guest-service/GuestSevicePage'
 
 export default {
   name: 'about-us',
   components: {
+    PageOurService,
+    AboutTitle,
     StaffCarousel,
     AboutUsMenu,
     PageBlock
@@ -53,10 +64,11 @@ export default {
 </script>
 <style lang="scss">
   .about-page{
+
     .about-outer-container{
       display: flex;
       flex-wrap: wrap;
-      margin: 182.5px 0 57.5px;
+      margin: 97px 0 57.5px;
       .page-block-container{
         width: calc(100% - 260px);
         padding-right: 138px;

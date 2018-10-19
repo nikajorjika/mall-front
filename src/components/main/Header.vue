@@ -54,7 +54,7 @@
 <script>
 
 import drop from '../partials/DropDown'
-import HamburgerMenu from '../partials/HamburderMenu'
+import HamburgerMenu from '../partials/HamburgerMenu'
 
 export default {
   name: 'nav-bar',
