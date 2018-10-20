@@ -1,146 +1,293 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-// import Axios from 'axios/index'
+import Axios from 'axios/index'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     noScroll: false,
-    navigation: [
+    languages: [
       {
-        url: '/about-us',
-        name: 'about us',
-        children: [
-          {
-            url: '/contact',
-            name: 'contact'
-          },
-          {
-            url: '/test1',
-            name: 'test1'
-          },
-          {
-            url: '/test2',
-            name: 'test2'
-          },
-          {
-            url: '/test3',
-            name: 'test3'
-          }
-        ]
+        name: 'ENG',
+        locale: 'en'
       },
       {
-        url: '/whats-new',
-        name: 'what\'s new',
-        children: [
-          {
-            url: '/contact',
-            name: 'contact'
-          },
-          {
-            url: '/test1',
-            name: 'test1'
-          },
-          {
-            url: '/test2',
-            name: 'test2'
-          },
-          {
-            url: '/test3',
-            name: 'test3'
-          }
-        ]
-      },
-      {
-        url: '/stores',
-        name: 'stores',
-        children: [
-          {
-            url: '/contact',
-            name: 'contact'
-          },
-          {
-            url: '/test1',
-            name: 'test1'
-          },
-          {
-            url: '/test2',
-            name: 'test2'
-          },
-          {
-            url: '/test3',
-            name: 'test3'
-          }
-        ]
-      },
-      {
-        url: '/entertainment',
-        name: 'entertainment',
-        children: [
-          {
-            url: '/contact',
-            name: 'contact'
-          },
-          {
-            url: '/test1',
-            name: 'test1'
-          },
-          {
-            url: '/test2',
-            name: 'test2'
-          },
-          {
-            url: '/test3',
-            name: 'test3'
-          }
-        ]
-      },
-      {
-        url: '/services',
-        name: 'services',
-        children: [
-          {
-            url: '/contact',
-            name: 'contact'
-          },
-          {
-            url: '/test1',
-            name: 'test1'
-          },
-          {
-            url: '/test2',
-            name: 'test2'
-          },
-          {
-            url: '/test3',
-            name: 'test3'
-          }
-        ]
-      },
-      {
-        url: '/for-kids',
-        name: 'for kids',
-        children: [
-          {
-            url: '/contact',
-            name: 'contact'
-          },
-          {
-            url: '/test1',
-            name: 'test1'
-          },
-          {
-            url: '/test2',
-            name: 'test2'
-          },
-          {
-            url: '/test3',
-            name: 'test3'
-          }
-        ]
+        name: 'ქარ',
+        locale: 'ge'
       }
     ],
+    locale: localStorage.getItem('locale') ? localStorage.getItem('locale') : 'en',
+    navigation: {
+      en: [
+        {
+          url: '/about-us',
+          name: 'about us',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        },
+        {
+          url: '/whats-new',
+          name: 'what\'s new',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        },
+        {
+          url: '/stores',
+          name: 'stores',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        },
+        {
+          url: '/entertainment',
+          name: 'entertainment',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        },
+        {
+          url: '/services',
+          name: 'services',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        },
+        {
+          url: '/for-kids',
+          name: 'for kids',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        }
+      ],
+      ge: [
+        {
+          url: '/about-us',
+          name: 'ჩვენს შესახებ',
+          children: [
+            {
+              url: '/contact',
+              name: 'კოტაქტი'
+            },
+            {
+              url: '/test1',
+              name: 'სერვისები'
+            },
+            {
+              url: '/test2',
+              name: 'მოლის რუკა'
+            },
+            {
+              url: '/test3',
+              name: 'ჟურნალი'
+            }
+          ]
+        },
+        {
+          url: '/whats-new',
+          name: 'სიახლეები',
+          children: [
+            {
+              url: '/contact',
+              name: 'კონტაქტი'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        },
+        {
+          url: '/stores',
+          name: 'მაღაზიები',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        },
+        {
+          url: '/entertainment',
+          name: 'გართობა',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        },
+        {
+          url: '/services',
+          name: 'სერვისები',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        },
+        {
+          url: '/for-kids',
+          name: 'ბავშვებისთვის',
+          children: [
+            {
+              url: '/contact',
+              name: 'contact'
+            },
+            {
+              url: '/test1',
+              name: 'test1'
+            },
+            {
+              url: '/test2',
+              name: 'test2'
+            },
+            {
+              url: '/test3',
+              name: 'test3'
+            }
+          ]
+        }
+      ]
+    },
     hamburgerData: [
       {
         id: 1,
@@ -336,7 +483,9 @@ export default new Vuex.Store({
     ],
     apiUrls: {
       apiURL: 'https://smartfinders.herokuapp.com/api/v1',
-      websiteAuthURL: 'https://smartfinders.herokuapp.com/api/v1/website/auth'
+      websiteAuthURL: 'https://smartfinders.herokuapp.com/api/v1/website/auth',
+      storesAPI: 'https://smartfinders.herokuapp.com/api/v1/website/stores',
+      eventsAPI: 'https://smartfinders.herokuapp.com/api/v1/website/events'
     },
     apiCredentials: {
       username: 'website',
@@ -753,7 +902,14 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    SET_LOCALE: (state, locale) => {
+      state.locale = locale
+      localStorage.setItem('locale', locale)
+    },
     SET_NO_SCROLL: (state, newValue) => {
+      state.noScroll = newValue
+    },
+    SET_NAVIGATION: (state, newValue) => {
       state.noScroll = newValue
     },
     SET_STORES: (state, payload) => {
@@ -767,6 +923,21 @@ export default new Vuex.Store({
       //     console.log(error)
       //   })
     },
+    LOAD_MORE: (state, payload) => {
+      const model = payload.model
+      const page = payload.page === undefined ? 0 : payload.page - 1
+      const offset = payload.offset === undefined ? 1 : payload.offset
+      Axios.get(`${state.apiUrls[model + 'API']}/${page}/${offset}`)
+        .then(function (response) {
+          const data = response.data.data
+          data.forEach(function (element) {
+            state[model].push(element)
+          })
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+    },
     SET_EVENTS: (state, payload) => {
       // const page = page === undefined ? 1 : page
       // const offset = offset === undefined ? 3 : offset
@@ -777,30 +948,6 @@ export default new Vuex.Store({
       //   .catch(function (error) {
       //     console.log(error)
       //   })
-      if (payload.type === 'append') {
-        const append = [
-          {
-            id: 5,
-            image: 'https://placehold.it/579x649',
-            title: 'Boom Boom Birthday',
-            description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
-          },
-          {
-            id: 6,
-            image: 'https://placehold.it/579x649',
-            title: 'Boom Boom Birthday',
-            description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
-          },
-          {
-            id: 7,
-            image: 'https://placehold.it/579x649',
-            title: 'Boom Boom Birthday',
-            description: 'On July 19th, Boom Boom is turning 4! Come, bring your kids and take part in this huge celebration!'
-          }]
-        for (let i in append) {
-          state.events.push(append[i])
-        }
-      }
     }
   },
   getters: {
@@ -821,6 +968,12 @@ export default new Vuex.Store({
     },
     socials: (state) => {
       return state.socials
+    },
+    locale: (state) => {
+      return state.languages.find(e => e.locale === state.locale)
+    },
+    languages: (state) => {
+      return state.languages
     },
     footerMenus: (state) => {
       return state.footer.footerMenus

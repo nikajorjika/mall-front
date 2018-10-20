@@ -4,11 +4,10 @@
       <div class="header-left">
         <hamburger-menu/>
         <ul class="navigation-menu">
-          <li v-for="item in this.navigation" v-bind:key="item.url">
+          <li v-for="item in $store.getters.navigation[this.$store.getters.locale.locale]" v-bind:key="item.url">
             <div class="nav-drop">
               <router-link :to="item.url" :class="item.children !== undefined ? 'has-child' : ''">
                 <span>{{item.name}}</span>
-                <!--<font-awesome-icon icon="caret-down" class="open" v-if="item.children !== undefined"/>-->
                 <span class="caret-down-icon"><img src="../../assets/images/icons/carret-down.svg"></span>
               </router-link>
               <!--<div v-if="this.item.children !== undefined" class="drop">-->
@@ -43,7 +42,7 @@
             </router-link>
           </li>
           <li>
-            <router-link to="#">ENG</router-link>
+            <language-switcher/>
           </li>
         </ul>
       </div>
@@ -55,23 +54,24 @@
 
 import drop from '../partials/DropDown'
 import HamburgerMenu from '../partials/HamburgerMenu'
+import LanguageSwitcher from '../parts/LanguageSwitcher'
 
 export default {
   name: 'nav-bar',
   data: function () {
-    return {
-      navigation: this.$store.getters.navigation
-    }
+    return {}
   },
   components: {
+    LanguageSwitcher,
     HamburgerMenu,
     'nav-drop': drop,
     'hamburger-menu': HamburgerMenu
-  }
+  },
+  methods: {}
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 #nav {
   background-color: #ffffff;
   border: solid 1px #f1f1f1;
@@ -166,6 +166,9 @@ export default {
   .navigation-menu {
     border-left: solid 1px #f1f1f1;
     border-right: solid 1px #f1f1f1;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
     > li {
       a {
         padding: 35.5px 18px;
@@ -186,16 +189,11 @@ export default {
       }
     }
   }
-  ul {
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    li {
-      position: relative;
-      text-transform: uppercase;
-      font-size: 1.3rem;
-      font-family: 'Muli SemiBold', 'sans-serif';
-    }
+  li {
+    position: relative;
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-family: 'Muli SemiBold', 'sans-serif';
   }
 }
 </style>

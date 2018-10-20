@@ -1,14 +1,18 @@
 <template>
   <div class="custom-select">
     <div class="selected-item" @click="toggleBody">
-      <span class="selected" v-if="this.selectedItem">{{this.selectedItem.name}} <font-awesome-icon icon="caret-down"/></span>
-      <span class="placeholder" v-if="!this.selectedItem">{{this.placeholder}} <font-awesome-icon icon="caret-down"/></span>
-
+      <span class="selected" v-if="this.selectedItem">{{this.selectedItem.name[$store.getters.locale.locale]}} <font-awesome-icon
+        icon="caret-down"/></span>
+      <span class="placeholder" v-if="!this.selectedItem">{{this.placeholder[$store.getters.locale.locale]}} <font-awesome-icon
+        icon="caret-down"/></span>
     </div>
     <div class="selectable-items" v-if="this.open">
       <ul>
+        <li class="placeholder">
+          <div class="item" @click="fireSelect(null)">{{this.placeholder[$store.getters.locale.locale]}}</div>
+        </li>
         <li v-for="item in this.items" v-bind:key="item.id">
-          <div class="item" @click="fireSelect(item)">{{item.name}}</div>
+          <div class="item" @click="fireSelect(item)">{{item.name[$store.getters.locale.locale]}}</div>
         </li>
       </ul>
     </div>
@@ -25,8 +29,13 @@ export default {
       }
     },
     placeholder: {
-      type: String,
-      default: 'Choose item to select'
+      type: Object,
+      default: function () {
+        return {
+          ge: 'აირჩიეთ',
+          en: 'Choose'
+        }
+      }
     }
   },
   data: function () {
@@ -49,55 +58,59 @@ export default {
 </script>
 
 <style lang="scss">
-  .custom-select{
-    position: relative;
-    .selected-item{
-      padding: 16px 13px;
-      border: solid 0.5px #dcdcdc;
-      background-color: #ffffff;
-      cursor: pointer;
-      span{
-        font-size: 13px;
-        font-family: "Muli SemiBold", 'sans-serif';
-        font-weight: 600;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.23;
-        letter-spacing: normal;
-        text-align: left;
-        color: #000;
-        display: flex;
-        justify-content: space-between;
-        &.placeholder{
+.custom-select {
+  position: relative;
+  .selected-item {
+    padding: 16.5px 13px;
+    border: solid 0.5px #dcdcdc;
+    background-color: #ffffff;
+    cursor: pointer;
+    span {
+      font-size: 13px;
+      font-family: "Muli SemiBold", 'sans-serif';
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.23;
+      letter-spacing: normal;
+      text-align: left;
+      color: #000;
+      display: flex;
+      justify-content: space-between;
+      &.placeholder {
+        color: #00000085;
+      }
+    }
+  }
+  .selectable-items {
+    border: solid 0.5px #dcdcdc;
+    background-color: #ffffff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    ul {
+      li {
+        .item {
+          cursor: pointer;
+          padding: 16px 13px;
+          font-size: 13px;
+          font-family: "Muli SemiBold", 'sans-serif';
+          font-weight: 600;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.23;
+          letter-spacing: normal;
+          &:hover {
+            background: #dcdcdc;
+          }
+        }
+        &.placeholder {
           color: #00000085;
         }
       }
     }
-    .selectable-items{
-      border: solid 0.5px #dcdcdc;
-      background-color: #ffffff;
-      position: absolute;
-      top:100%;
-      left: 0;
-      width:100%;
-      ul{
-        li{
-          .item{
-            cursor: pointer;
-            padding: 16px 13px;
-            font-size: 13px;
-            font-family: "Muli SemiBold", 'sans-serif';
-            font-weight: 600;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: 1.23;
-            letter-spacing: normal;
-            &:hover{
-              background: #dcdcdc;
-            }
-          }
-        }
-      }
-    }
   }
+}
 </style>

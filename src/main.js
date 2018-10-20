@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCaretDown, faSearch, faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faSearch, faAngleLeft, faAngleRight, faThLarge, faList } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookF, faTwitter, faYoutube, faPinterest } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Axios from 'axios'
@@ -25,6 +25,8 @@ library.add(faFacebookF)
 library.add(faTwitter)
 library.add(faYoutube)
 library.add(faPinterest)
+library.add(faThLarge)
+library.add(faList)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.prototype.$http = Axios
