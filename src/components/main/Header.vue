@@ -10,13 +10,13 @@
                 <span>{{item.name}}</span>
                 <span class="caret-down-icon"><img src="../../assets/images/icons/carret-down.svg"></span>
               </router-link>
-              <!--<div v-if="this.item.children !== undefined" class="drop">-->
-              <!--<ul>-->
-              <!--<li v-for="child in this.item.children" v-bind:key="child.url">-->
-              <!--<router-link :to="item.url">{{child.name}}</router-link>-->
-              <!--</li>-->
-              <!--</ul>-->
-              <!--</div>-->
+              <div v-if="item.children !== undefined" class="drop">
+                <ul>
+                  <li v-for="child in item.children" v-bind:key="child.url">
+                    <router-link :to="item.url">{{child.name}}</router-link>
+                  </li>
+                </ul>
+              </div>
             </div>
           </li>
         </ul>
@@ -31,10 +31,10 @@
       <div class="header-right">
         <ul>
           <li>
-            <router-link to="#">CONTACT</router-link>
+            <router-link to="#">{{t('contact')}}</router-link>
           </li>
           <li>
-            <router-link to="#">MY MALL</router-link>
+            <router-link to="#">{{t('my_mall')}}</router-link>
           </li>
           <li>
             <router-link to="#" class="text-center">
@@ -104,10 +104,22 @@ export default {
         }
         .drop {
           position: absolute;
+          background: #fff;
+          border: 1px solid #dcdcdc;
+          border-top: none;
+          z-index: 999;
+          width: auto;
+          overflow: hidden;
+          height: 0;
           ul {
             list-style-type: none;
             display: flex;
             flex-direction: column;
+          }
+        }
+        &:hover {
+          .drop {
+            height: auto;
           }
         }
       }

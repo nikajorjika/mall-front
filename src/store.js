@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios/index'
+import messages from './lang/lang'
 
 Vue.use(Vuex)
 
@@ -17,6 +18,10 @@ export default new Vuex.Store({
         locale: 'ge'
       }
     ],
+    loading: {
+      stores: false,
+      events: false
+    },
     locale: localStorage.getItem('locale') ? localStorage.getItem('locale') : 'en',
     navigation: {
       en: [
@@ -26,7 +31,7 @@ export default new Vuex.Store({
           children: [
             {
               url: '/contact',
-              name: 'contact'
+              name: 'contact our best site'
             },
             {
               url: '/test1',
@@ -481,6 +486,7 @@ export default new Vuex.Store({
         'subcategoryId': '5b9d3e6dd5c08e1752f7d9fd'
       }
     ],
+    messages: messages,
     apiUrls: {
       apiURL: 'https://smartfinders.herokuapp.com/api/v1',
       websiteAuthURL: 'https://smartfinders.herokuapp.com/api/v1/website/auth',
@@ -925,18 +931,9 @@ export default new Vuex.Store({
     },
     LOAD_MORE: (state, payload) => {
       const model = payload.model
-      const page = payload.page === undefined ? 0 : payload.page - 1
-      const offset = payload.offset === undefined ? 1 : payload.offset
-      Axios.get(`${state.apiUrls[model + 'API']}/${page}/${offset}`)
-        .then(function (response) {
-          const data = response.data.data
-          data.forEach(function (element) {
-            state[model].push(element)
-          })
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
+      payload.data.forEach(function (element) {
+        state[model].push(element)
+      })
     },
     SET_EVENTS: (state, payload) => {
       // const page = page === undefined ? 1 : page
@@ -948,6 +945,9 @@ export default new Vuex.Store({
       //   .catch(function (error) {
       //     console.log(error)
       //   })
+    },
+    SET_LOADING_STATE: (state, payload) => {
+      state.loading[payload.model] = payload.value
     }
   },
   getters: {
@@ -977,7 +977,37 @@ export default new Vuex.Store({
     },
     footerMenus: (state) => {
       return state.footer.footerMenus
+    },
+    message: (state, index) => {
+      return state.messages[index]
     }
   },
-  actions: {}
+  actions: {
+    loadMoreItems: function (context, request) {
+      return new Promise((resolve, reject) => {
+        const url = request.url
+        const model = request.model
+        const page = request.page === undefined ? 0 : request.page
+        const offset = request.offset === undefined ? 1 : request.offset
+        context.commit('SET_LOADING_STATE', { model: model, value: true })
+        Axios.get(`${url}/${page}/${offset}`)
+          .then(function (response) {
+            context.commit('LOAD_MORE', { model: model, data: response.data.data })
+            context.commit('SET_LOADING_STATE', { model: model, value: false })
+            if (response.data.data.length < offset) {
+              resolve('NOT_ENOUGH_RECORDS')
+            } else {
+              resolve(response.data.data)
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+            reject(error)
+            context.commit('SET_LOADING_STATE', { model: model, value: false })
+          })
+      })
+    },
+    t: function (context, index) {
+    }
+  }
 })

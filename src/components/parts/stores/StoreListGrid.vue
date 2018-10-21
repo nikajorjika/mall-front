@@ -2,7 +2,7 @@
   <div class="store-list-grid">
     <div class="store-filters-outer">
       <div class="container">
-        <store-filters />
+        <store-filters/>
       </div>
     </div>
     <div class="container">
@@ -15,8 +15,11 @@
           </div>
         </div>
       </div>
-      <div class="greed-footer-container">
-        <button @click="this.loadMore">MORE</button>
+      <div class="greed-footer-container" v-if="this.hasMoreRecords">
+        <button v-if="$store.state.loading.stores" class="loading">{{t('loading')}}</button>
+        <button v-else @click="this.loadMore">{{t('load_more')}}</button>
+      </div>
+      <div class="loading-placeholder" v-else>
       </div>
     </div>
   </div>
@@ -28,17 +31,40 @@ import StoreFilters from './StoreFilters'
 export default {
   name: 'store-list-grid',
   beforeMount: function () {
-    this.$store.commit('SET_STORES', 1)
+    this.initialLoad()
   },
   components: {
     StoreFilters,
     StoreItem
   },
+  data: () => {
+    return {
+      loading: false,
+      hasMoreRecords: true,
+      page: 0,
+      offset: 1
+    }
+  },
   methods: {
-    loadMore: function () {
-      this.$store.commit('LOAD_MORE', {
-        model: 'stores', page: 1, offset: 12
-      })
+    loadMore: function (request) {
+      this.loadItems(request)
+    },
+    initialLoad: function (request) {
+      this.loadItems(request)
+    },
+    loadItems: function (customRequest) {
+      this.loading = true
+      const Request = Object.assign({
+        url: this.$store.state.apiUrls.storesAPI, model: 'stores', page: this.page, offset: this.offset
+      }, customRequest)
+      console.log(Request)
+      // this.$store.dispatch('loadMoreItems', Request).then((result) => {
+      //   this.loading = false
+      //   this.page++
+      //   if (result === 'NOT_ENOUGH_RECORDS') {
+      //     this.hasMoreRecords = false
+      //   }
+      // })
     }
   }
 }
@@ -64,12 +90,18 @@ export default {
     }
   }
 }
-.store-filters-outer{
+
+.loading {
+  opacity: .5;
+}
+
+.store-filters-outer {
   background: #f9f9f9;
   padding: 22.5px;
   border-top: solid 1px #dcdcdc;
   border-bottom: solid 1px #dcdcdc;
 }
+
 .greed-footer-container {
   text-align: center;
   border-top: solid 1px #dcdcdc;
@@ -83,6 +115,10 @@ export default {
     padding: 30px 30px;
     cursor: pointer;
     outline: none;
+    text-transform: uppercase;
   }
+}
+.loading-placeholder{
+  margin-top: 80px;
 }
 </style>

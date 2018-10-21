@@ -9,6 +9,7 @@ import { faFacebookF, faTwitter, faYoutube, faPinterest } from '@fortawesome/fre
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Axios from 'axios'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import './mixin/mixin'
 
 Vue.use(VueGoogleMaps, {
   load: {
