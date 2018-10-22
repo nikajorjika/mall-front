@@ -1,6 +1,6 @@
 <template>
   <div class="store-list-grid">
-    <div class="store-filters-outer">
+    <div class="filters-outer">
       <div class="container">
         <store-filters/>
       </div>
@@ -15,7 +15,7 @@
           </div>
         </div>
       </div>
-      <div class="greed-footer-container" v-if="this.hasMoreRecords">
+      <div class="grid-footer-container" v-if="this.hasMoreRecords">
         <button v-if="$store.state.loading.stores" class="loading">{{t('loading')}}</button>
         <button v-else @click="this.loadMore">{{t('load_more')}}</button>
       </div>
@@ -95,14 +95,7 @@ export default {
   opacity: .5;
 }
 
-.store-filters-outer {
-  background: #f9f9f9;
-  padding: 22.5px;
-  border-top: solid 1px #dcdcdc;
-  border-bottom: solid 1px #dcdcdc;
-}
-
-.greed-footer-container {
+.grid-footer-container {
   text-align: center;
   border-top: solid 1px #dcdcdc;
   button {

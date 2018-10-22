@@ -27,7 +27,7 @@
   </div>
 </template>
 <script>
-import CustomSelect from '../Select'
+import CustomSelect from '../../parts/Select'
 
 export default {
   name: 'store-filters',

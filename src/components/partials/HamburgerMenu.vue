@@ -69,7 +69,7 @@ export default {
       background: #f1f1f1;
     }
     .nav-hamburger {
-      padding: 0 29px;
+      padding: 0 25px;
       margin: auto 0;
     }
   }

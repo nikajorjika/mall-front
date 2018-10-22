@@ -24,6 +24,12 @@ export default new Router({
       name: 'stores',
       props: true,
       component: () => import('./views/Stores.vue')
+    },
+    {
+      path: '/whats-new',
+      name: 'whats-new',
+      props: true,
+      component: () => import('./views/News.vue')
     }
   ]
 })

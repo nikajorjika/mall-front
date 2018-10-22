@@ -1,26 +1,26 @@
 <template>
   <div id="page-stores">
     <block-header-standard :title="this.title[$store.getters.locale.locale]"/>
-    <store-list-grid/>
+    <news-list/>
   </div>
 </template>
 
 <script>
 import BlockHeaderStandard from '../components/partials/BlockHeader'
-import StoreListGrid from '../components/page-components/stores/StoreListGrid'
+import NewsList from '../components/page-components/news/NewsList'
 
 export default {
   name: 'page-stores',
   data: function () {
     return {
       title: {
-        en: 'STORES',
-        ge: 'მაღაზიები'
+        en: 'What\'s New',
+        ge: 'სიახლეები'
       }
     }
   },
   components: {
-    StoreListGrid,
+    NewsList,
     BlockHeaderStandard
   },
   methods: {

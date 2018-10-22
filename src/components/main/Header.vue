@@ -98,15 +98,13 @@ export default {
             }
           }
           span {
-            margin-right: 0.46rem;
+            margin-right: 4.6px;
             display: inline-block;
           }
         }
         .drop {
           position: absolute;
           background: #fff;
-          border: 1px solid #dcdcdc;
-          border-top: none;
           z-index: 999;
           width: auto;
           overflow: hidden;
@@ -120,6 +118,7 @@ export default {
         &:hover {
           .drop {
             height: auto;
+            border: 1px solid #dcdcdc;
           }
         }
       }
