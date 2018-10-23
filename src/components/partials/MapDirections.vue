@@ -3,10 +3,10 @@
     <div class="map-container">
       <div class="select-outer">
         <div class="selects-container">
-          <custom-select :placeholder="'PUBLIC TRANSPORT ROUTES'" :items="[{name:'select 1', value: '1'},{name:'select 2', value: '2'},{name:'select 3', value: '3'},{name:'select 4', value: '4'}]"/>
+          <custom-select :placeholder="categoriesPlaceholder" :items="categories"/>
         </div>
         <div class="selects-container">
-          <custom-select :placeholder="'PUBLIC TRANSPORT ROUTES'" :items="[{name:'select 1', value: '1'},{name:'select 2', value: '2'},{name:'select 3', value: '3'},{name:'select 4', value: '4'}]"/>
+          <custom-select :placeholder="categoriesPlaceholder" :items="categories"/>
         </div>
       </div>
       <div class="map-wrapper">
@@ -32,7 +32,27 @@ export default {
   },
   data: function () {
     return {
-      googleMap: this.$store.getters.googleMap
+      googleMap: this.$store.getters.googleMap,
+      categoriesPlaceholder: {
+        ge: 'კატეგორიები',
+        en: 'CATEGORY'
+      },
+      categories: [
+        {
+          name: {
+            en: 'category 1',
+            ge: 'კატეგორია 1'
+          },
+          value: 'cat-1'
+        },
+        {
+          name: {
+            en: 'category 1',
+            ge: 'კატეგორია 1'
+          },
+          value: 'cat-1'
+        }
+      ]
     }
   }
 }

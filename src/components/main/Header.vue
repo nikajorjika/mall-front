@@ -74,10 +74,12 @@ export default {
 <style lang="scss">
 #nav {
   background-color: #ffffff;
-  border: solid 1px #f1f1f1;
+  border-top: solid 1px #f1f1f1;
+  border-bottom: solid 1px #f1f1f1;
   .header-wrapper {
     display: flex;
     flex-wrap: wrap;
+    position: relative;
     .header-left {
       display: flex;
       flex-wrap: wrap;
@@ -112,13 +114,41 @@ export default {
           ul {
             list-style-type: none;
             display: flex;
-            flex-direction: column;
+            background: #000;
+            li{
+              width:100%;
+              position: relative;
+              border-left: solid 1px #3a3838;
+              &:first-child{
+                border-left: none;
+              }
+              a{
+                width:100%;
+                padding: 22px 0;
+                display: block;
+                box-sizing: border-box;
+                font-size: 12px;
+                font-weight: 300;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.25;
+                letter-spacing: normal;
+                text-align: center;
+                color: #848484;
+                &:hover{
+                  background: #ffffff;
+                  color: #000;
+                }
+              }
+            }
           }
         }
         &:hover {
           .drop {
             height: auto;
-            border: 1px solid #dcdcdc;
+            width: 100%;
+            left: 0;
+            box-sizing: border-box;
           }
         }
       }
@@ -201,7 +231,6 @@ export default {
     }
   }
   li {
-    position: relative;
     text-transform: uppercase;
     font-size: 1.3rem;
     font-family: 'Muli SemiBold', 'sans-serif';

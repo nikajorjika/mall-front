@@ -295,87 +295,90 @@ export default new Vuex.Store({
     },
     hamburgerData: [
       {
-        id: 1,
-        name: 'MAIN',
+        id: 16,
+        url: '/about-us',
+        name: {
+          en: 'about us',
+          ge: 'ჩვენს შესახებ'
+        },
         children: [
           {
-            id: 16,
-            url: '/about-us',
-            name: 'about us'
-          },
-          {
-            id: 15,
-            url: '/whats-new',
-            name: 'what\'s new'
-          },
-          {
-            id: 14,
-            url: '/stores',
-            name: 'stores'
+            id: 12,
+            url: '/contact',
+            name: 'contact'
           },
           {
             id: 13,
-            url: '/entertainment',
-            name: 'entertainment'
+            url: '/test1',
+            name: 'test1'
           },
           {
-            id: 12,
-            url: '/services',
-            name: 'services'
+            id: 14,
+            url: '/test2',
+            name: 'test2'
           },
           {
-            id: 11,
-            url: '/for-kids',
-            name: 'for kids'
+            id: 15,
+            url: '/test3',
+            name: 'test3'
           }
         ]
       },
       {
-        id: 2,
-        name: 'INFORMATION',
-        children: [
-          {
-            id: 25,
-            url: '/about-us',
-            name: 'about us'
-          },
-          {
-            id: 24,
-            url: '/whats-new',
-            name: 'what\'s new'
-          },
-          {
-            id: 23,
-            url: '/stores',
-            name: 'stores'
-          },
-          {
-            id: 22,
-            url: '/entertainment',
-            name: 'entertainment'
-          },
-          {
-            id: 21,
-            url: '/services',
-            name: 'services'
-          }
-        ]
+        id: 15,
+        url: '/whats-new',
+        name: {
+          en: 'what\'s new',
+          ge: 'სიახლეები'
+        }
       },
       {
-        id: 3,
-        name: 'MY MALL',
-        children: [
-          {
-            id: 31,
-            url: '/about-us',
-            name: 'about us'
-          },
-          {
-            id: 32,
-            url: '/whats-new',
-            name: 'what\'s new'
-          }
-        ]
+        id: 14,
+        url: '/stores',
+        name: {
+          en: 'Stores',
+          ge: 'მაღაზიები'
+        }
+      },
+      {
+        id: 13,
+        url: '/entertainment',
+        name: {
+          en: 'entertainment',
+          ge: 'გართობა'
+        }
+      },
+      {
+        id: 12,
+        url: '/services',
+        name: {
+          en: 'services',
+          ge: 'სერვისები'
+        }
+      },
+      {
+        id: 11,
+        url: '/for-kids',
+        name: {
+          en: 'for kids',
+          ge: 'ბავშვებისთვის'
+        }
+      },
+      {
+        id: 10,
+        url: '/information',
+        name: {
+          en: 'information',
+          ge: 'ინფორმაცია'
+        }
+      },
+      {
+        id: 9,
+        url: '/my-mall',
+        name: {
+          en: 'my mall',
+          ge: 'ჩემი მოლი'
+        }
       }
     ],
     events: [
@@ -989,11 +992,11 @@ export default new Vuex.Store({
         const model = request.model
         const page = request.page === undefined ? 0 : request.page
         const offset = request.offset === undefined ? 1 : request.offset
-        context.commit('SET_LOADING_STATE', { model: model, value: true })
+        context.commit('SET_LOADING_STATE', {model: model, value: true})
         Axios.get(`${url}/${page}/${offset}`)
           .then(function (response) {
-            context.commit('LOAD_MORE', { model: model, data: response.data.data })
-            context.commit('SET_LOADING_STATE', { model: model, value: false })
+            context.commit('LOAD_MORE', {model: model, data: response.data.data})
+            context.commit('SET_LOADING_STATE', {model: model, value: false})
             if (response.data.data.length < offset) {
               resolve('NOT_ENOUGH_RECORDS')
             } else {
@@ -1003,7 +1006,7 @@ export default new Vuex.Store({
           .catch(function (error) {
             console.log(error)
             reject(error)
-            context.commit('SET_LOADING_STATE', { model: model, value: false })
+            context.commit('SET_LOADING_STATE', {model: model, value: false})
           })
       })
     },
