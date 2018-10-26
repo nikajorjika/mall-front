@@ -26,7 +26,7 @@ export default new Router({
       component: () => import('./views/Stores.vue')
     },
     {
-      path: '/whats-new',
+      path: '/whats-new/:id?',
       name: 'whats-new',
       props: true,
       component: () => import('./views/News.vue')

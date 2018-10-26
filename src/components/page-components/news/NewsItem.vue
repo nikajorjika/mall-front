@@ -1,8 +1,7 @@
 <template>
   <div class="news-item">
     <div class="news-wrapper">
-      <img src="https://placehold.it/579x649" :alt="this.item.name">
-      <!--<img :src="this.item.logoUrl" :alt="this.item.name">-->
+      <img :src="item.photoUrl" :alt="item.name">
     </div>
   </div>
 </template>

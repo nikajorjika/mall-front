@@ -30,7 +30,7 @@ import StoreFilters from './StoreFilters'
 
 export default {
   name: 'store-list-grid',
-  beforeMount: function () {
+  mounted: function () {
     this.initialLoad()
   },
   components: {
@@ -58,7 +58,7 @@ export default {
         url: this.$store.state.apiUrls.storesAPI, model: 'stores', page: this.page, offset: this.offset
       }, customRequest)
       console.log(Request)
-      // this.$store.dispatch('loadMoreItems', Request).then((result) => {
+      // this.$store.dispatch('loadItems', Request).then((result) => {
       //   this.loading = false
       //   this.page++
       //   if (result === 'NOT_ENOUGH_RECORDS') {
@@ -111,7 +111,8 @@ export default {
     text-transform: uppercase;
   }
 }
-.loading-placeholder{
+
+.loading-placeholder {
   margin-top: 80px;
 }
 </style>

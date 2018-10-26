@@ -29,7 +29,6 @@ export default {
   methods: {
     toggleShow: function () {
       this.show = !this.show
-      console.log(this.show)
     },
     changeLanguage: function (locale) {
       this.$store.commit('SET_LOCALE', locale)

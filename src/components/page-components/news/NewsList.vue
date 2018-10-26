@@ -5,20 +5,23 @@
         <news-filters/>
       </div>
     </div>
-    <div class="news-list">
-      <div class="news-list-item" v-for="item in $store.getters.stores" :key="item.id">
-        <div class="news-inner">
-          <router-link to="#">
-            <news-item :item="item"/>
-          </router-link>
+    <div class="new-list-outer">
+      <div class="single-news-container" v-if="openItem">
+        <news-single :item="openItem"/>
+      </div>
+      <div class="news-list">
+        <div class="news-list-item" v-for="item in $store.getters.events" :key="item._id">
+          <div class="news-inner">
+            <router-link :to="generateUrl(item._id)">
+              <news-item :item="item"/>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
     <div class="grid-footer-container" v-if="this.hasMoreRecords">
-      <button v-if="$store.state.loading.stores" class="loading">{{t('loading')}}</button>
-      <button v-else @click="this.loadMore">{{t('load_more')}}</button>
-    </div>
-    <div class="loading-placeholder" v-else>
+      <button v-if="$store.state.loading.events" class="loading">{{t('loading')}}</button>
+      <button v-else @click="loadMore">{{t('load_more')}}</button>
     </div>
   </div>
 </template>
@@ -26,22 +29,35 @@
 
 import NewsFilters from './NewsFilters'
 import NewsItem from './NewsItem'
+import NewsSingle from './NewsSingle'
 
 export default {
   name: 'news-list',
-  beforeMount: function () {
-    this.initialLoad()
+  mounted: function () {
+    // this.initialLoad()
+  },
+  watch: {
+    '$route.params.id': function (id) {
+      if (id) {
+        this.loadItem(id)
+      }
+    }
   },
   components: {
+    NewsSingle,
     NewsItem,
     NewsFilters
   },
-  data: () => {
+  data: function () {
     return {
       loading: false,
       hasMoreRecords: true,
-      page: 0,
-      offset: 1
+      page: 1,
+      offset: 3,
+      url: this.$store.state.apiUrls.eventsAPI,
+      singleUrl: this.$store.state.apiUrls.singleItemUrl,
+      model: 'events',
+      openItem: null
     }
   },
   methods: {
@@ -54,16 +70,29 @@ export default {
     loadItems: function (customRequest) {
       this.loading = true
       const Request = Object.assign({
-        url: this.$store.state.apiUrls.storesAPI, model: 'news', page: this.page, offset: this.offset
+        url: this.url, model: 'events', page: this.page, offset: this.offset
       }, customRequest)
-      console.log(Request)
-      // this.$store.dispatch('loadMoreItems', Request).then((result) => {
-      //   this.loading = false
-      //   this.page++
-      //   if (result === 'NOT_ENOUGH_RECORDS') {
-      //     this.hasMoreRecords = false
-      //   }
-      // })
+      this.$store.dispatch('loadItems', Request).then((result) => {
+        this.loading = false
+        this.page++
+        if (result === 'NOT_ENOUGH_RECORDS') {
+          this.hasMoreRecords = false
+        }
+      })
+    },
+    generateUrl: function (id) {
+      return `/whats-new/${id}`
+    },
+    loadItem: function (id) {
+      const Request = {
+        url: this.singleUrl, model: 'events', id: id
+      }
+      this.$store.dispatch('loadSingle', Request).then((result) => {
+        console.log(result)
+        if (result !== 'RECORD_NOT_FOUND') {
+          this.openItem = result
+        }
+      })
     }
   }
 }
@@ -72,6 +101,9 @@ export default {
 .news-list {
   display: flex;
   flex-wrap: wrap;
+  .news-inner {
+    height: 100%;
+  }
   .news-list-item {
     width: 33.33%;
     padding: 32px 30px;

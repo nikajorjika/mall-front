@@ -1,5 +1,5 @@
 <template>
-  <div class="custom-select">
+  <div class="custom-select" ref="dropdownMenu">
     <div class="selected-item" @click="toggleBody">
       <span class="selected" v-if="this.selectedItem">{{this.selectedItem.name[$store.getters.locale.locale]}} <font-awesome-icon
         icon="caret-down"/></span>
@@ -38,6 +38,13 @@ export default {
       }
     }
   },
+  created: function () {
+    document.addEventListener('click', this.documentClick)
+  },
+  destroyed: function () {
+    // important to clean up!!
+    document.removeEventListener('click', this.documentClick)
+  },
   data: function () {
     return {
       selectedItem: null,
@@ -52,6 +59,13 @@ export default {
     },
     toggleBody: function () {
       this.open = !this.open
+    },
+    documentClick: function (e) {
+      let el = this.$refs.dropdownMenu
+      let target = e.target
+      if (!el.contains(target)) {
+        this.open = false
+      }
     }
   }
 }

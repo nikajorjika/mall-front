@@ -1,8 +1,10 @@
 <template>
   <div id="app" :class="this.$store.getters.noScroll? 'open': ''">
-    <nav-bar/>
-    <router-view/>
-    <footer-component/>
+    <div class="app-wrapper" ref="app">
+      <nav-bar/>
+      <router-view/>
+      <footer-component/>
+    </div>
   </div>
 </template>
 
