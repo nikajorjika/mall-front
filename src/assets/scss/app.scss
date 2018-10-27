@@ -80,3 +80,11 @@ a {
   border-top: solid 1px #dcdcdc;
   border-bottom: solid 1px #dcdcdc;
 }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -5,7 +5,9 @@ const messages = {
       load_more: 'more',
       loading: 'loading...',
       contact: 'contact',
-      my_mall: 'my mall'
+      my_mall: 'my mall',
+      share: 'share',
+      promotion: 'promotion'
     }
   },
   ge: {
@@ -13,7 +15,9 @@ const messages = {
       load_more: 'მეტის ჩვენება',
       loading: 'იტვირთება...',
       contact: 'კონტაქტი',
-      my_mall: 'ჩემი მოლი'
+      my_mall: 'ჩემი მოლი',
+      share: 'გააზიარე',
+      promotion: 'პრომოუშენი'
     }
   }
 }

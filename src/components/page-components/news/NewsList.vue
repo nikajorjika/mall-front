@@ -7,7 +7,7 @@
     </div>
     <div class="new-list-outer">
       <div class="single-news-container" v-if="openItem">
-        <news-single :item="openItem"/>
+        <news-single :item="openItem" @close="closeEvent"/>
       </div>
       <div class="news-list">
         <div class="news-list-item" v-for="item in $store.getters.events" :key="item._id">
@@ -34,7 +34,10 @@ import NewsSingle from './NewsSingle'
 export default {
   name: 'news-list',
   mounted: function () {
-    // this.initialLoad()
+    this.initialLoad()
+    if (this.$route.params.id) {
+      this.loadItem(this.$route.params.id)
+    }
   },
   watch: {
     '$route.params.id': function (id) {
@@ -93,6 +96,9 @@ export default {
           this.openItem = result
         }
       })
+    },
+    closeEvent: function () {
+      this.openItem = null
     }
   }
 }
@@ -141,5 +147,10 @@ export default {
 
 .loading-placeholder {
   margin-top: 80px;
+}
+
+.single-news-container {
+  padding: 22px 0 32px 0;
+  border-bottom: solid 1px #dcdcdc;
 }
 </style>

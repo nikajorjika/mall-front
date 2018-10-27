@@ -34,6 +34,7 @@ export default {
       width: 52px;
       border-right: 1px solid #dcdcdc;
       border-left: 1px solid #dcdcdc;
+      box-sizing: content-box;
     }
     .text-part {
       margin: auto auto auto 32px;

@@ -4,12 +4,15 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCaretDown, faSearch, faAngleLeft, faAngleRight, faThLarge, faList } from '@fortawesome/free-solid-svg-icons'
-import { faFacebookF, faTwitter, faYoutube, faPinterest } from '@fortawesome/free-brands-svg-icons'
+import { faCaretDown, faSearch, faAngleLeft, faAngleRight, faThLarge, faList, faBookmark } from '@fortawesome/free-solid-svg-icons'
+import { faFacebookF, faTwitter, faYoutube, faPinterest, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Axios from 'axios'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import './mixin/mixin'
+
+const SocialSharing = require('vue-social-sharing')
+Vue.use(SocialSharing)
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -20,7 +23,9 @@ Vue.use(VueGoogleMaps, {
 
 library.add(faCaretDown)
 library.add(faSearch)
+library.add(faLinkedinIn)
 library.add(faAngleLeft)
+library.add(faBookmark)
 library.add(faAngleRight)
 library.add(faFacebookF)
 library.add(faTwitter)
