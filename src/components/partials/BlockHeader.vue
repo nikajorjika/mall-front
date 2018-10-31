@@ -24,6 +24,7 @@ export default {
     font-weight: 300;
     font-style: normal;
     font-stretch: normal;
+    text-transform: uppercase;
     line-height: 1.25;
     letter-spacing: normal;
     color: #000000;

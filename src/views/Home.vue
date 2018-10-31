@@ -14,16 +14,16 @@
       </div>
     </section>
     <section class="promotions">
-      <three-event-greed title="PROMOTIONS" :events="this.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed :title="t('promotions')" setter="SET_EVENTS" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
     </section>
     <section class="events">
-      <three-event-greed title="EVENTS" setter="SET_EVENTS" :events="this.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed :title="t('events')" setter="SET_EVENTS" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
     </section>
     <section class="news">
-      <three-event-greed title="NEWS" setter="SET_EVENTS" :events="this.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed :title="t('news')" setter="SET_EVENTS" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
     </section>
     <section class="stores">
-      <standard-carousel :items="this.stores" :perPage="4" :title="'STORES'"/>
+      <standard-carousel :items="$store.getters.stores" :perPage="4" :title="'STORES'"/>
     </section>
     <section class="how-to-get">
       <how-to-get/>
@@ -52,8 +52,6 @@ export default {
   },
   data: function () {
     return {
-      events: this.$store.getters.events,
-      stores: this.$store.getters.stores
     }
   },
   components: {

@@ -6,8 +6,13 @@ const messages = {
       loading: 'loading...',
       contact: 'contact',
       my_mall: 'my mall',
+      more: 'more',
       share: 'share',
-      promotion: 'promotion'
+      stores: 'store',
+      events: 'events',
+      promotion: 'promotion',
+      promotions: 'promotions',
+      news: 'news'
     }
   },
   ge: {
@@ -17,7 +22,12 @@ const messages = {
       contact: 'კონტაქტი',
       my_mall: 'ჩემი მოლი',
       share: 'გააზიარე',
-      promotion: 'პრომოუშენი'
+      stores: 'მაღაზიები',
+      events: 'ივენთები',
+      more: 'მეტი',
+      news: 'სიახლეები',
+      promotion: 'პრომოუშენი',
+      promotions: 'პრომოუშენები'
     }
   }
 }

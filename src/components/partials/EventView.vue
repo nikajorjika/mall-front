@@ -2,14 +2,14 @@
   <div class="event-item">
     <div class="wrapper">
       <div class="img-wrapper">
-        <img :src="this.event.image" :alt="this.event.title">
+        <img :src="event.photoUrl" :alt="event.name[$store.getters.locale.locale]">
       </div>
       <div class="content-container">
         <div class="title">
-          <h3>{{this.event.title}}</h3>
+          <h3>{{event.name[$store.getters.locale.locale]}}</h3>
         </div>
         <div class="description">
-          <p>{{this.event.description}}</p>
+          <p>{{event.description[$store.getters.locale.locale]}}</p>
         </div>
       </div>
     </div>
@@ -23,11 +23,7 @@ export default {
     event: {
       type: Object,
       default: () => {
-        return {
-          image: '',
-          title: '',
-          description: ''
-        }
+        return {}
       }
     }
   }
@@ -62,9 +58,9 @@ export default {
           line-height: 1.24;
           text-align: center;
           color: #000000;
-          margin: 0;
+          margin: 0 0 15px 0;
           height: 66px;
-          padding-bottom: 15px;
+          overflow: hidden;
         }
       }
     }

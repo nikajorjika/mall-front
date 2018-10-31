@@ -2,12 +2,12 @@
   <div class="three-event-greed">
     <block-header-standard :title="this.title"/>
     <div class="flex-col-3">
-      <div class="event-item-outer" v-for="event in this.events" v-bind:key="event.id">
+      <div class="event-item-outer" v-for="event in this.events" v-bind:key="event._id">
         <event-item :event="event"/>
       </div>
     </div>
     <div v-if="setter.length" class="greed-footer-container">
-      <button @click="this.loadMore">MORE</button>
+      <button @click="this.loadMore">{{t('more')}}</button>
     </div>
   </div>
 </template>
@@ -81,6 +81,7 @@ export default {
     border-bottom: solid 1px #dcdcdc;
     button{
       background: transparent;
+      text-transform: uppercase;
       border:none;
       font-size: 2.4rem;
       font-weight: 300;
