@@ -38,7 +38,7 @@ export default {
       margin: auto 0 auto 73px;
       .menu-item{
         a{
-          font-family: 'Muli', 'sans-serif';
+          font-family: 'Muli','BPG Arial', 'sans-serif';
           font-size: 1.6rem;
           padding: 12px 0;
           display: block;

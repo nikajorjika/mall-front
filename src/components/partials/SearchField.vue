@@ -46,7 +46,7 @@ export default {
         width: 100%;
         padding:6px 20.4px;
         font-size: 1.4rem;
-        font-family: 'Muli', 'sans-serif';
+        font-family: 'Muli','BPG Arial', 'sans-serif';
         &:focus{
           outline: none;
         }

@@ -4,16 +4,16 @@
       <div class="header-left">
         <hamburger-menu/>
         <ul class="navigation-menu">
-          <li v-for="item in $store.getters.navigation[this.$store.getters.locale.locale]" v-bind:key="item.url">
+          <li v-for="(item, index) in $store.getters.navigation" v-bind:key="index">
             <div class="nav-drop">
               <router-link :to="item.url" :class="item.children !== undefined ? 'has-child' : ''">
-                <span>{{item.name}}</span>
-                <span class="caret-down-icon"><img src="../../assets/images/icons/carret-down.svg"></span>
+                <span>{{item.name[$store.getters.locale.locale]}}</span>
+                <span class="caret-down-icon" v-if="item.children !== undefined"><img src="../../assets/images/icons/carret-down.svg"></span>
               </router-link>
               <div v-if="item.children !== undefined" class="drop">
-                <ul>
-                  <li v-for="child in item.children" v-bind:key="child.url">
-                    <router-link :to="item.url">{{child.name}}</router-link>
+                  <ul>
+                  <li v-for="(child, i) in item.children" v-bind:key="i">
+                    <router-link :to="item.url + child.url">{{child.name[$store.getters.locale.locale]}}</router-link>
                   </li>
                 </ul>
               </div>
@@ -158,7 +158,7 @@ export default {
       flex: 1;
       min-width: 18rem;
       .mall-logo {
-        font-family: 'Muli Bold', 'sans-serif';
+        font-family: 'Muli Bold','BPG Nino Mtavruli', 'sans-serif';
         .logo {
           font-size: 2.3rem;
           letter-spacing: 0.1rem;
@@ -233,7 +233,7 @@ export default {
   li {
     text-transform: uppercase;
     font-size: 1.3rem;
-    font-family: 'Muli SemiBold', 'sans-serif';
+    font-family: 'Muli SemiBold','BPG Nino Mtavruli', 'sans-serif';
   }
 }
 </style>

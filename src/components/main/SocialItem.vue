@@ -56,7 +56,7 @@ export default {
       }
     }
     .social-text-container {
-      font-family: "Muli SemiBold", 'sans-serif';
+      font-family: "Muli SemiBold",'BPG Nino Mtavruli', 'sans-serif';
       font-size: 1.7rem;
       font-weight: 600;
       line-height: 1.24;

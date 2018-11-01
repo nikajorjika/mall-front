@@ -20,13 +20,13 @@ export default new Router({
       component: () => import('./views/About.vue')
     },
     {
-      path: '/stores',
+      path: '/stores/:cat?',
       name: 'stores',
       props: true,
       component: () => import('./views/Stores.vue')
     },
     {
-      path: '/whats-new/:id?',
+      path: '/whats-new/:cat?/:id?',
       name: 'whats-new',
       props: true,
       component: () => import('./views/News.vue')

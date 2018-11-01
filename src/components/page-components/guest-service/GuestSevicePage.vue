@@ -91,7 +91,7 @@ export default {
       }
       .name-wrapper {
         opacity: 0.6;
-        font-family: 'Muli', 'sans-serif';
+        font-family: 'Muli','BPG Arial', 'sans-serif';
         font-size: 16px;
         line-height: 1.25;
       }

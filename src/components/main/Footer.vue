@@ -80,7 +80,7 @@ export default {
     .copyright-content {
       padding: 10.5px;
       text-align: center;
-      font-family: 'Muli Light', 'sans-serif';
+      font-family: 'Muli Light','BPG Arial', 'sans-serif';
       font-size: 1.1rem;
       line-height: 1.27;
       color: #848484;

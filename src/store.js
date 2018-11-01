@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios/index'
 import messages from './lang/lang'
+import navigation from './store/navigation'
 
 Vue.use(Vuex)
 
@@ -23,276 +24,7 @@ export default new Vuex.Store({
       events: false
     },
     locale: localStorage.getItem('locale') ? localStorage.getItem('locale') : 'en',
-    navigation: {
-      en: [
-        {
-          url: '/about-us',
-          name: 'about us',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact our best site'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        },
-        {
-          url: '/whats-new',
-          name: 'what\'s new',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        },
-        {
-          url: '/stores',
-          name: 'stores',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        },
-        {
-          url: '/entertainment',
-          name: 'entertainment',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        },
-        {
-          url: '/services',
-          name: 'services',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        },
-        {
-          url: '/for-kids',
-          name: 'for kids',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        }
-      ],
-      ge: [
-        {
-          url: '/about-us',
-          name: 'ჩვენს შესახებ',
-          children: [
-            {
-              url: '/contact',
-              name: 'კოტაქტი'
-            },
-            {
-              url: '/test1',
-              name: 'სერვისები'
-            },
-            {
-              url: '/test2',
-              name: 'მოლის რუკა'
-            },
-            {
-              url: '/test3',
-              name: 'ჟურნალი'
-            }
-          ]
-        },
-        {
-          url: '/whats-new',
-          name: 'სიახლეები',
-          children: [
-            {
-              url: '/contact',
-              name: 'კონტაქტი'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        },
-        {
-          url: '/stores',
-          name: 'მაღაზიები',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        },
-        {
-          url: '/entertainment',
-          name: 'გართობა',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        },
-        {
-          url: '/services',
-          name: 'სერვისები',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        },
-        {
-          url: '/for-kids',
-          name: 'ბავშვებისთვის',
-          children: [
-            {
-              url: '/contact',
-              name: 'contact'
-            },
-            {
-              url: '/test1',
-              name: 'test1'
-            },
-            {
-              url: '/test2',
-              name: 'test2'
-            },
-            {
-              url: '/test3',
-              name: 'test3'
-            }
-          ]
-        }
-      ]
-    },
+    navigation: navigation,
     hamburgerData: [
       {
         id: 16,
@@ -942,6 +674,131 @@ export default new Vuex.Store({
           content: ''
         }
       ]
+    },
+    newsFilters: {
+      categories: {
+        placeholder: {
+          en: 'categories',
+          ge: 'კატეგორიები'
+        },
+        data: [
+          {
+            name: {
+              en: 'sales',
+              ge: 'სეილები'
+            },
+            value: 'sales'
+          },
+          {
+            name: {
+              en: 'offers',
+              ge: 'შეთავაზებები'
+            },
+            value: 'offers'
+          },
+          {
+            name: {
+              en: 'new collections',
+              ge: 'ახალი კოლექციები'
+            },
+            value: 'new_collections'
+          },
+          {
+            name: {
+              en: 'events',
+              ge: 'ივენთები'
+            },
+            value: 'events'
+          }
+        ]
+      },
+      brands: {
+        placeholder: {
+          en: 'brands',
+          ge: 'ბრენდები'
+        },
+        data: [
+          {
+            name: {
+              en: 'zara',
+              ge: 'ზარა'
+            },
+            value: 'zara'
+          },
+          {
+            name: {
+              en: 'zara2',
+              ge: 'ზარა2'
+            },
+            value: 'zara2'
+          },
+          {
+            name: {
+              en: 'zara3',
+              ge: 'ზარა3'
+            },
+            value: 'zara3'
+          }
+        ]
+      },
+      floors: {
+        placeholder: {
+          en: 'floors',
+          ge: 'სართული'
+        },
+        data: [
+          {
+            name: {
+              ge: '1 სართული',
+              en: '1st floor'
+            },
+            value: '1st-floor'
+          },
+          {
+            name: {
+              ge: '2 სართული',
+              en: '2nd floor'
+            },
+            value: '2nd-floor'
+          },
+          {
+            name: {
+              ge: '3 სართული',
+              en: '3rd floor'
+            },
+            value: '3rd-floor'
+          }
+        ]
+      },
+      sort: {
+        placeholder: {
+          en: 'floors',
+          ge: 'სართული'
+        },
+        data: [
+          {
+            name: {
+              ge: '1 სართული',
+              en: '1st floor'
+            },
+            value: '1st-floor'
+          },
+          {
+            name: {
+              ge: '2 სართული',
+              en: '2nd floor'
+            },
+            value: '2nd-floor'
+          },
+          {
+            name: {
+              ge: '3 სართული',
+              en: '3rd floor'
+            },
+            value: '3rd-floor'
+          }
+        ]
+      }
     }
   },
   mutations: {

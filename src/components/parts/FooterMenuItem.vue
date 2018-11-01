@@ -55,7 +55,7 @@ export default {
     }
     .title-container{
       .title{
-        font-family: 'Muli SemiBold','sans-serif';
+        font-family: 'Muli SemiBold','BPG Nino Mtavruli','sans-serif';
         font-size: 2.4rem;
         font-weight: 600;
         line-height: 1.25;
@@ -68,7 +68,7 @@ export default {
       .content-ul{
         .content-li{
           .item-wrapper{
-            font-family: 'Muli Light', 'sans-serif';
+            font-family: 'Muli Light','BPG Arial', 'sans-serif';
             font-size: 1.4rem;
             font-weight: 300;
             line-height: 1.29;

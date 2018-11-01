@@ -21,6 +21,20 @@
 <script>
 export default {
   name: 'custom-select',
+  watch: {
+    value: function (value) {
+      console.log(value)
+      if (value === '') {
+        this.fireSelect(null)
+      } else {
+        for (let i = 0; i < this.items.length; i++) {
+          if (this.items[ i ].value === this.value) {
+            this.fireSelect(this.items[ i ])
+          }
+        }
+      }
+    }
+  },
   props: {
     items: {
       type: Array,
@@ -36,6 +50,10 @@ export default {
           en: 'Choose'
         }
       }
+    },
+    value: {
+      type: String,
+      default: ''
     }
   },
   created: function () {
@@ -54,7 +72,7 @@ export default {
   methods: {
     fireSelect: function (selected) {
       this.selectedItem = selected
-      this.open = !this.open
+      this.open = false
       this.$emit('change', selected)
     },
     toggleBody: function () {
@@ -81,12 +99,13 @@ export default {
     cursor: pointer;
     span {
       font-size: 13px;
-      font-family: "Muli SemiBold", 'sans-serif';
+      font-family: "Muli SemiBold", 'BPG Nino Mtavruli', 'sans-serif';
       font-weight: 600;
       font-style: normal;
       font-stretch: normal;
       line-height: 1.23;
       letter-spacing: normal;
+      text-transform: uppercase;
       text-align: left;
       color: #000;
       display: flex;
@@ -97,7 +116,7 @@ export default {
     }
   }
   .selectable-items {
-    border: solid 0.5px #dcdcdc;
+    border: solid 1px #dcdcdc;
     background-color: #ffffff;
     position: absolute;
     top: 100%;
@@ -109,15 +128,19 @@ export default {
         .item {
           cursor: pointer;
           padding: 16px 13px;
-          font-size: 13px;
-          font-family: "Muli SemiBold", 'sans-serif';
-          font-weight: 600;
+          font-size: 1.2rem;
+          font-family: "Muli", 'BPG Nino Mtavruli', 'sans-serif';
+          font-weight: 300;
+          text-transform: uppercase;
           font-style: normal;
           font-stretch: normal;
           line-height: 1.23;
           letter-spacing: normal;
+          color: #dcdcdc;
+          transition: all .1s;
           &:hover {
-            background: #dcdcdc;
+            background: #f9f9f9;
+            color: #000;
           }
         }
         &.placeholder {

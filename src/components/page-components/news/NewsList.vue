@@ -84,7 +84,8 @@ export default {
       })
     },
     generateUrl: function (id) {
-      return `/whats-new/${id}`
+      const cat = this.$route.params.cat ? this.$route.params.cat : 'single'
+      return `/whats-new/${cat}/${id}`
     },
     loadItem: function (id) {
       const Request = {

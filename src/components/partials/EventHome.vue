@@ -38,7 +38,6 @@ export default {
 <style lang="scss" scoped>
   .event-home{
     width:100%;
-    font-family: 'Muli', 'sans-serif';
     &.mini{
       img{
         height: 676px;

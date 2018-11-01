@@ -95,7 +95,6 @@ export default {
         text-align: center;
       }
       p{
-        font-family: 'Muli Light', 'sans-serif';
         margin: 8px 0;
         font-size: 1.4rem;
         font-weight: 300;

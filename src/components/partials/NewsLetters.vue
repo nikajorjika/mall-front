@@ -39,7 +39,7 @@ export default {
     .text-part {
       margin: auto auto auto 32px;
       p {
-        font-family: "Muli Light", "sans-serif";
+        font-family: "Muli Light",'BPG Arial', "sans-serif";
         font-size: 1.6rem;
         font-weight: 300;
         font-style: normal;

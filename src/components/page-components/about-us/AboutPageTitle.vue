@@ -18,7 +18,6 @@ export default {
 <style lang="scss">
 .about-title-container {
   .title {
-    font-family: 'Muli', 'sans-serif';
     font-size: 4rem;
     line-height: 1.25;
     color: #000;

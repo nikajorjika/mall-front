@@ -119,7 +119,7 @@ export default {
           .list-container {
             .parent-title {
               font-size: 1.8rem;
-              font-family: 'Muli SemiBold', 'sans-serif';
+              font-family: 'Muli SemiBold','BPG Nino Mtavruli', 'sans-serif';
               font-weight: 600;
               font-style: normal;
               font-stretch: normal;
@@ -139,7 +139,7 @@ export default {
             }
             ul {
               li {
-                font-family: Muli, sans-serif;
+                font-family: Muli,'BPG Nino Mtavruli', sans-serif;
                 font-size: 1.6rem;
                 margin: 16.8px 0;
                 font-weight: 300;
@@ -149,7 +149,7 @@ export default {
                 letter-spacing: normal;
                 text-align: center;
                 color: #848484;
-                text-transform: capitalize;
+                text-transform: uppercase;
               }
             }
           }

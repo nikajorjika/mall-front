@@ -8,7 +8,7 @@
       </div>
       <div class="half-col single-right">
         <div class="close-button">
-          <router-link to="/whats-new" class="close-button-a">
+          <router-link :to="closeUrl()" class="close-button-a">
             <default-icon class="hamburger-close-button" :icon="`close`" @click="closeEvent"/>
           </router-link>
         </div>
@@ -36,7 +36,7 @@
               <network network="facebook">
                 <div class="social-item">
                   <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/></span>
-                  <span class="label">{{t('share')}}</span>
+                  <span class="label">share</span>
                 </div>
               </network>
               <network network="twitter">
@@ -48,7 +48,7 @@
               <network network="linkedin">
                 <div class="social-item">
                   <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/></span>
-                  <span class="label">{{t('share')}}</span>
+                  <span class="label">share</span>
                 </div>
               </network>
             </div>
@@ -76,6 +76,10 @@ export default {
   methods: {
     closeEvent: function () {
       this.$emit('close')
+    },
+    closeUrl: function () {
+      const subCat = this.$route.params.cat !== 'single' ? this.$route.params.cat : ''
+      return `/whats-new/${subCat}`
     }
   }
 }
@@ -129,13 +133,11 @@ export default {
         }
         .title-container {
           .title {
-            font-family: 'Muli', 'sans-serif';
             font-size: 2.4rem;
             line-height: 1.25;
             margin: 0;
           }
           .sub-title {
-            font-family: 'Muli', 'sans-serif';
             font-size: 1.2rem;
             line-height: 1.25;
             color: #dcdcdc;
@@ -147,7 +149,7 @@ export default {
           p {
             margin: 0;
             color: #848484;
-            font-family: 'Muli Light', 'sans-serif';
+            font-family: 'Muli Light','BPG Arial', 'sans-serif';
           }
         }
       }
@@ -172,7 +174,7 @@ export default {
           cursor: pointer;
           .promotion-button {
             margin: auto;
-            font-family: 'Muli Light', 'sans-serif';
+            font-family: 'Muli Light','BPG Nino Mtavruli', 'sans-serif';
             text-transform: uppercase;
           }
         }
