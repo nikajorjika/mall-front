@@ -25,11 +25,11 @@
   </div>
 </template>
 <script>
-import StoreItem from './StoreItem'
-import StoreFilters from './StoreFilters'
+import StoreItem from '../stores/StoreItem'
+import StoreFilters from '../stores/StoreFilters'
 
 export default {
-  name: 'store-list-grid',
+  name: 'entertainment-list-grid',
   mounted: function () {
     this.initialLoad()
   },

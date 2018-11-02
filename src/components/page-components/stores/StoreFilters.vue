@@ -1,16 +1,16 @@
 <template>
   <div class="store-filters">
     <div class="filter-item">
-      <custom-select :items="this.categories" :placeholder="this.categoriesPlaceholder"/>
+      <custom-select :items="$store.state.storeFilters.categories.data" :placeholder="$store.state.storeFilters.categories.categoriesPlaceholder"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="this.categories" :placeholder="this.categoriesPlaceholder"/>
+      <filter-search />
     </div>
     <div class="filter-item">
-      <custom-select :items="this.categories" :placeholder="this.categoriesPlaceholder"/>
+      <custom-select :items="$store.state.storeFilters.floors.data" :placeholder="$store.state.storeFilters.floors.categoriesPlaceholder"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="this.categories" :placeholder="this.categoriesPlaceholder"/>
+      <custom-select :items="$store.state.storeFilters.sort.data" :placeholder="$store.state.storeFilters.sort.categoriesPlaceholder"/>
     </div>
     <div class="grid-toggle">
       <div class="show-grid toggle-item active">
@@ -28,10 +28,12 @@
 </template>
 <script>
 import CustomSelect from '../../parts/Select'
+import FilterSearch from '../../parts/FilterSearch'
 
 export default {
   name: 'store-filters',
   components: {
+    FilterSearch,
     CustomSelect
   },
   data: function () {

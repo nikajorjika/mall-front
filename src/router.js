@@ -30,6 +30,12 @@ export default new Router({
       name: 'whats-new',
       props: true,
       component: () => import('./views/News.vue')
+    },
+    {
+      path: '/entertainment',
+      name: 'entertainment',
+      props: true,
+      component: () => import('./views/Entertainment.vue')
     }
   ]
 })

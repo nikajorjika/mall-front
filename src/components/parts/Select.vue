@@ -1,9 +1,9 @@
 <template>
   <div class="custom-select" ref="dropdownMenu">
     <div class="selected-item" @click="toggleBody">
-      <span class="selected" v-if="this.selectedItem">{{this.selectedItem.name[$store.getters.locale.locale]}} <font-awesome-icon
+      <span class="selected" v-if="this.selectedItem"><span class="non-breakable">{{this.selectedItem.name[$store.getters.locale.locale]}}</span> <font-awesome-icon
         icon="caret-down"/></span>
-      <span class="placeholder" v-if="!this.selectedItem">{{this.placeholder[$store.getters.locale.locale]}} <font-awesome-icon
+      <span class="placeholder" v-if="!this.selectedItem"><span class="non-breakable">{{this.placeholder[$store.getters.locale.locale]}}</span> <font-awesome-icon
         icon="caret-down"/></span>
     </div>
     <div class="selectable-items" v-if="this.open">
@@ -110,8 +110,17 @@ export default {
       color: #000;
       display: flex;
       justify-content: space-between;
+      .non-breakable{
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
       &.placeholder {
         color: #00000085;
+        span{
+          color: inherit;
+        }
       }
     }
   }
