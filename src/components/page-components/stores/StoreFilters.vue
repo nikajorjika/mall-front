@@ -1,24 +1,27 @@
 <template>
   <div class="store-filters">
     <div class="filter-item">
-      <custom-select :items="$store.state.storeFilters.categories.data" :placeholder="$store.state.storeFilters.categories.categoriesPlaceholder"/>
+      <custom-select :items="$store.state.storeFilters.categories.data"
+                     :placeholder="$store.state.storeFilters.categories.categoriesPlaceholder"/>
     </div>
     <div class="filter-item">
-      <filter-search />
+      <filter-search/>
     </div>
     <div class="filter-item">
-      <custom-select :items="$store.state.storeFilters.floors.data" :placeholder="$store.state.storeFilters.floors.categoriesPlaceholder"/>
+      <custom-select :items="$store.state.storeFilters.floors.data"
+                     :placeholder="$store.state.storeFilters.floors.categoriesPlaceholder"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="$store.state.storeFilters.sort.data" :placeholder="$store.state.storeFilters.sort.categoriesPlaceholder"/>
+      <custom-select :items="$store.state.storeFilters.sort.data"
+                     :placeholder="$store.state.storeFilters.sort.categoriesPlaceholder"/>
     </div>
     <div class="grid-toggle">
-      <div class="show-grid toggle-item active">
+      <div class="show-grid toggle-item" :class="grid ? 'active' : ''" @click="toggleView(true)">
         <div class="icon-wrapper">
           <font-awesome-icon icon="th-large"/>
         </div>
       </div>
-      <div class="show-list  toggle-item">
+      <div class="show-list toggle-item" :class="!grid ? 'active' : ''" @click="toggleView(false)">
         <div class="icon-wrapper">
           <font-awesome-icon icon="list"/>
         </div>
@@ -57,7 +60,14 @@ export default {
           },
           value: 'cat-1'
         }
-      ]
+      ],
+      grid: true
+    }
+  },
+  methods: {
+    toggleView: function (view) {
+      this.grid = view
+      this.$emit('changeView', view)
     }
   }
 }
@@ -68,7 +78,7 @@ export default {
   .filter-item {
     width: 260px;
     margin-right: 15.8px;
-    &:first-child{
+    &:first-child {
       margin-left: auto;
     }
   }
@@ -84,6 +94,7 @@ export default {
       border: solid 0.5px #dcdcdc;
       box-sizing: border-box;
       opacity: 0.3;
+      cursor: pointer;
       &.active {
         opacity: 1;
       }

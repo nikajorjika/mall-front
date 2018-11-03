@@ -2,10 +2,10 @@
   <div class="store-list-grid">
     <div class="filters-outer">
       <div class="container">
-        <store-filters/>
+        <store-filters @changeView="changeView"/>
       </div>
     </div>
-    <div class="container">
+    <div class="container" v-if="viewGrid">
       <div class="store-list">
         <div class="store-list-item" v-for="item in $store.getters.stores" :key="item.id">
           <div class="store-inner">
@@ -20,6 +20,11 @@
         <button v-else @click="this.loadMore">{{t('load_more')}}</button>
       </div>
       <div class="loading-placeholder" v-else>
+      </div>
+    </div>
+    <div class="store-list-view" v-else>
+      <div class="loading-container">
+        <div class="loading-big"></div>
       </div>
     </div>
   </div>
@@ -37,12 +42,20 @@ export default {
     StoreFilters,
     StoreItem
   },
+  watch: {
+    viewGrid: function (value) {
+      if (!value) {
+        console.log('showList')
+      }
+    }
+  },
   data: () => {
     return {
       loading: false,
       hasMoreRecords: true,
       page: 0,
-      offset: 1
+      offset: 1,
+      viewGrid: true
     }
   },
   methods: {
@@ -64,6 +77,22 @@ export default {
       //     this.hasMoreRecords = false
       //   }
       // })
+    },
+    loadListItems: function (customRequest) {
+      this.loading = true
+      const Request = Object.assign({
+        url: this.$store.state.apiUrls.storesAPI, model: 'storesList', page: this.page, offset: this.offset
+      }, customRequest)
+      // this.$store.dispatch('loadItems', Request).then((result) => {
+      //   this.loading = false
+      //   this.page++
+      //   if (result === 'NOT_ENOUGH_RECORDS') {
+      //     this.hasMoreRecords = false
+      //   }
+      // })
+    },
+    changeView: function (view) {
+      this.viewGrid = view
     }
   }
 }
@@ -93,7 +122,13 @@ export default {
 .loading {
   opacity: .5;
 }
-
+.loading-container{
+  display: flex;
+  padding: 30px;
+  .loading-big{
+    margin:auto;
+  }
+}
 .grid-footer-container {
   text-align: center;
   border-top: solid 1px #dcdcdc;
