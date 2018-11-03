@@ -146,6 +146,30 @@ export default new Vuex.Store({
           })
       })
     },
+    loadStoreList: function (context, request) {
+      return new Promise((resolve, reject) => {
+        const url = request.url
+        const model = request.model
+        const page = request.page === undefined ? 0 : request.page
+        const offset = request.offset === undefined ? 1 : request.offset
+        context.commit('SET_LOADING_STATE', { model: model, value: true })
+        Axios.get(`${url}/${page}/${offset}`)
+          .then(function (response) {
+            context.commit('LOAD_MORE', { model: model, data: response.data.data })
+            context.commit('SET_LOADING_STATE', { model: model, value: false })
+            if (response.data.data.length < offset) {
+              resolve('NOT_ENOUGH_RECORDS')
+            } else {
+              resolve(response.data.data)
+            }
+          })
+          .catch(function (error) {
+            console.log(error)
+            reject(error)
+            context.commit('SET_LOADING_STATE', { model: model, value: false })
+          })
+      })
+    },
     loadSingle: function (context, request) {
       return new Promise((resolve, reject) => {
         const url = request.url

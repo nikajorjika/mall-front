@@ -81,9 +81,9 @@ export default {
     loadListItems: function (customRequest) {
       this.loading = true
       const Request = Object.assign({
-        url: this.$store.state.apiUrls.storesAPI, model: 'storesList', page: this.page, offset: this.offset
+        url: this.$store.state.apiUrls.storesAPI, model: 'storesList', page: -1, offset: -1
       }, customRequest)
-      // this.$store.dispatch('loadItems', Request).then((result) => {
+      // this.$store.dispatch('loadStoreList', Request).then((result) => {
       //   this.loading = false
       //   this.page++
       //   if (result === 'NOT_ENOUGH_RECORDS') {
