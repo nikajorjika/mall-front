@@ -11,6 +11,8 @@ import pageData from './store/modules/pageData'
 import footerData from './store/modules/footerData'
 import newsFilters from './store/modules/newsFilters'
 import storeFilters from './store/modules/storeFilters'
+import storesList from './store/modules/storesList'
+import alphabet from './store/modules/alphabet'
 import { apiUrls, apiCredentials } from './store/modules/apiData'
 
 Vue.use(Vuex)
@@ -25,7 +27,7 @@ export default new Vuex.Store({
       },
       {
         name: 'ქარ',
-        locale: 'ge'
+        locale: 'ka'
       }
     ],
     loading: {
@@ -37,10 +39,12 @@ export default new Vuex.Store({
     hamburgerData: hamburgerData,
     events: events,
     stores: stores,
+    storesList: storesList,
     messages: messages,
     apiUrls: apiUrls,
     apiCredentials: apiCredentials,
     googleMap: googleMap,
+    alphabet: alphabet,
     socials: [
       {
         icon: 'facebook-f',
@@ -92,6 +96,12 @@ export default new Vuex.Store({
   getters: {
     noScroll: (state) => {
       return state.noScroll
+    },
+    storesList: (state) => {
+      return state.storesList
+    },
+    alphabet: (state) => {
+      return state.alphabet
     },
     navigation: (state) => {
       return state.navigation

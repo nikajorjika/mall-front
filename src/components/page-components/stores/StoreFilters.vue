@@ -42,21 +42,21 @@ export default {
   data: function () {
     return {
       categoriesPlaceholder: {
-        ge: 'კატეგორიები',
+        ka: 'კატეგორიები',
         en: 'CATEGORY'
       },
       categories: [
         {
           name: {
             en: 'category 1',
-            ge: 'კატეგორია 1'
+            ka: 'კატეგორია 1'
           },
           value: 'cat-1'
         },
         {
           name: {
             en: 'category 1',
-            ge: 'კატეგორია 1'
+            ka: 'კატეგორია 1'
           },
           value: 'cat-1'
         }

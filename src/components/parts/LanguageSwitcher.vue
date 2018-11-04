@@ -2,12 +2,12 @@
   <div class="language-switcher">
     <div class="lang-wrapper" @click="this.toggleShow">
       <router-link to="#" class="text-center">
-        {{this.currentLanguage.name}}
+        {{currentLanguage.name}}
       </router-link>
     </div>
-    <div class="locale-changer" v-if="this.show">
+    <div class="locale-changer" v-if="show">
       <ul>
-        <li v-for="{name, locale} in this.languages" :key="`Lang-${locale}`">
+        <li v-for="{name, locale} in languages" :key="`Lang-${locale}`">
           <div class="lang-wrapper" @click="changeLanguage(locale)">
             {{name}}
           </div>

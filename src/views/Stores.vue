@@ -15,7 +15,7 @@ export default {
     return {
       title: {
         en: 'STORES',
-        ge: 'მაღაზიები'
+        ka: 'მაღაზიები'
       }
     }
   },

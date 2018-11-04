@@ -4,7 +4,7 @@ const hamburgerData = [
     url: '/about-us',
     name: {
       en: 'about us',
-      ge: 'ჩვენს შესახებ'
+      ka: 'ჩვენს შესახებ'
     },
     children: [
       {
@@ -34,7 +34,7 @@ const hamburgerData = [
     url: '/whats-new',
     name: {
       en: 'what\'s new',
-      ge: 'სიახლეები'
+      ka: 'სიახლეები'
     }
   },
   {
@@ -42,7 +42,7 @@ const hamburgerData = [
     url: '/stores',
     name: {
       en: 'Stores',
-      ge: 'მაღაზიები'
+      ka: 'მაღაზიები'
     }
   },
   {
@@ -50,7 +50,7 @@ const hamburgerData = [
     url: '/entertainment',
     name: {
       en: 'entertainment',
-      ge: 'გართობა'
+      ka: 'გართობა'
     }
   },
   {
@@ -58,7 +58,7 @@ const hamburgerData = [
     url: '/services',
     name: {
       en: 'services',
-      ge: 'სერვისები'
+      ka: 'სერვისები'
     }
   },
   {
@@ -66,7 +66,7 @@ const hamburgerData = [
     url: '/for-kids',
     name: {
       en: 'for kids',
-      ge: 'ბავშვებისთვის'
+      ka: 'ბავშვებისთვის'
     }
   },
   {
@@ -74,7 +74,7 @@ const hamburgerData = [
     url: '/information',
     name: {
       en: 'information',
-      ge: 'ინფორმაცია'
+      ka: 'ინფორმაცია'
     }
   },
   {
@@ -82,7 +82,7 @@ const hamburgerData = [
     url: '/my-mall',
     name: {
       en: 'my mall',
-      ge: 'ჩემი მოლი'
+      ka: 'ჩემი მოლი'
     }
   }
 ]

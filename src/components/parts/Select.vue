@@ -46,7 +46,7 @@ export default {
       type: Object,
       default: function () {
         return {
-          ge: 'აირჩიეთ',
+          ka: 'აირჩიეთ',
           en: 'Choose'
         }
       }

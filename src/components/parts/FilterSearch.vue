@@ -17,7 +17,7 @@ export default {
       default: () => {
         return {
           en: 'SEARCH',
-          ge: 'ძებნა'
+          ka: 'ძებნა'
         }
       }
     }

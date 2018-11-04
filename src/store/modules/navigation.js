@@ -4,56 +4,56 @@ const navigation =
       url: '/about-us',
       name: {
         en: 'about us',
-        ge: 'ჩვენს შესახებ'
+        ka: 'ჩვენს შესახებ'
       },
       children: [
         {
           url: '/about-us/guest-service',
           name: {
             en: 'GUEST SERVICES',
-            ge: 'მომსახურება'
+            ka: 'მომსახურება'
           }
         },
         {
           url: '/about-us/mall-map',
           name: {
             en: 'mall map',
-            ge: 'მოლის რუქა'
+            ka: 'მოლის რუქა'
           }
         },
         {
           url: '/about-us/mall-taxi',
           name: {
             en: 'tbilisi mall taxi',
-            ge: 'თბილისი მოლის ტაქსი'
+            ka: 'თბილისი მოლის ტაქსი'
           }
         },
         {
           url: '/about-us/gift-card',
           name: {
             en: 'gift card',
-            ge: 'მომსახურება'
+            ka: 'მომსახურება'
           }
         },
         {
           url: '/about-us/marketing',
           name: {
             en: 'marketing',
-            ge: 'მარკეტინგი'
+            ka: 'მარკეტინგი'
           }
         },
         {
           url: '/about-us/leasing',
           name: {
             en: 'leasing',
-            ge: 'ლიზინგი'
+            ka: 'ლიზინგი'
           }
         },
         {
           url: '/about-us/magazine',
           name: {
             en: 'magazine',
-            ge: 'ჟურნალი'
+            ka: 'ჟურნალი'
           }
         }
       ]
@@ -62,34 +62,34 @@ const navigation =
       url: '/whats-new',
       name: {
         en: 'what\'s new',
-        ge: 'სიახლეები'
+        ka: 'სიახლეები'
       },
       children: [
         {
           url: '/promotions',
           name: {
-            ge: 'პრომოუშენები',
+            ka: 'პრომოუშენები',
             en: 'promotions'
           }
         },
         {
           url: '/new-collections',
           name: {
-            ge: 'ახალი კოლექციები',
+            ka: 'ახალი კოლექციები',
             en: 'new collections'
           }
         },
         {
           url: '/events',
           name: {
-            ge: 'ივენთები',
+            ka: 'ივენთები',
             en: 'events'
           }
         },
         {
           url: '/news',
           name: {
-            ge: 'სიახლეები',
+            ka: 'სიახლეები',
             en: 'news'
           }
         }
@@ -99,97 +99,97 @@ const navigation =
       url: '/stores',
       name: {
         en: 'stores',
-        ge: 'მაღაზიები'
+        ka: 'მაღაზიები'
       },
       children: [
         {
           url: '/fashion',
           name: {
-            ge: 'მოდა',
+            ka: 'მოდა',
             en: 'fashion'
           }
         },
         {
           url: '/books-and-stationary',
           name: {
-            ge: 'წიგნები',
+            ka: 'წიგნები',
             en: 'BOOKS AND STATIONARY'
           }
         },
         {
           url: '/shoes',
           name: {
-            ge: 'ფექსაცმელები',
+            ka: 'ფექსაცმელები',
             en: 'SHOES'
           }
         },
         {
           url: '/tech',
           name: {
-            ge: 'ტექნიკა',
+            ka: 'ტექნიკა',
             en: 'Technic'
           }
         },
         {
           url: '/kids',
           name: {
-            ge: 'ბავშვები',
+            ka: 'ბავშვები',
             en: 'kids'
           }
         },
         {
           url: '/plants',
           name: {
-            ge: 'მცენარეები',
+            ka: 'მცენარეები',
             en: 'plants'
           }
         },
         {
           url: '/accessories',
           name: {
-            ge: 'სამკაულები',
+            ka: 'სამკაულები',
             en: 'ACCESSORIES'
           }
         },
         {
           url: '/health-beauty',
           name: {
-            ge: 'სილამაზე და ჯანრმრთელობა',
+            ka: 'სილამაზე და ჯანრმრთელობა',
             en: 'health and beauty'
           }
         },
         {
           url: '/household',
           name: {
-            ge: 'სახლისთვის',
+            ka: 'სახლისთვის',
             en: 'household'
           }
         },
         {
           url: '/news',
           name: {
-            ge: 'სიახლეები',
+            ka: 'სიახლეები',
             en: 'news'
           }
         },
         {
           url: '/hypermarkets',
           name: {
-            ge: 'ჰიპერმარკეტები',
+            ka: 'ჰიპერმარკეტები',
             en: 'hypermarkets'
           }
         },
         {
           url: '/souvenirs',
           name: {
-            ge: 'სუვენირები',
+            ka: 'სუვენირები',
             en: 'souvenirs'
           }
         },
         {
           url: '/specialty-stores',
           name: {
-            ge: 'სპეციფიური მაღაზიები',
+            ka: 'სპეციფიური მაღაზიები',
             en: 'SPECIALTY STORES'
           }
         }
@@ -199,21 +199,21 @@ const navigation =
       url: '/entertainment',
       name: {
         en: 'entertainment',
-        ge: 'გართობა'
+        ka: 'გართობა'
       }
     },
     {
       url: '/services',
       name: {
         en: 'services',
-        ge: 'სერვისები'
+        ka: 'სერვისები'
       }
     },
     {
       url: '/for-kids',
       name: {
         en: 'for kids',
-        ge: 'ბავშვებისთვის'
+        ka: 'ბავშვებისთვის'
       }
     }
   ]

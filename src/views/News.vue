@@ -15,7 +15,7 @@ export default {
     return {
       title: {
         en: 'What\'s New',
-        ge: 'სიახლეები'
+        ka: 'სიახლეები'
       }
     }
   },

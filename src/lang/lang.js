@@ -11,11 +11,15 @@ const messages = {
       stores: 'store',
       events: 'events',
       promotion: 'promotion',
+      brand: 'brand',
+      tags: 'tags',
+      additionalServices: 'additional services',
+      activities: 'activities',
       promotions: 'promotions',
       news: 'news'
     }
   },
-  ge: {
+  ka: {
     statics: {
       load_more: 'მეტის ჩვენება',
       loading: 'იტვირთება...',
@@ -26,6 +30,10 @@ const messages = {
       events: 'ივენთები',
       more: 'მეტი',
       news: 'სიახლეები',
+      brand: 'ბრენდი',
+      tags: 'თეგები',
+      additionalServices: 'დამატებითი სერვისები',
+      activities: 'აქტივობები',
       promotion: 'პრომოუშენი',
       promotions: 'პრომოუშენები'
     }

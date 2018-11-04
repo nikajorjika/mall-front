@@ -2,34 +2,34 @@ const newsFilters = {
   categories: {
     placeholder: {
       en: 'categories',
-      ge: 'კატეგორიები'
+      ka: 'კატეგორიები'
     },
     data: [
       {
         name: {
           en: 'sales',
-          ge: 'სეილები'
+          ka: 'სეილები'
         },
         value: 'sales'
       },
       {
         name: {
           en: 'offers',
-          ge: 'შეთავაზებები'
+          ka: 'შეთავაზებები'
         },
         value: 'offers'
       },
       {
         name: {
           en: 'new collections',
-          ge: 'ახალი კოლექციები'
+          ka: 'ახალი კოლექციები'
         },
         value: 'new_collections'
       },
       {
         name: {
           en: 'events',
-          ge: 'ივენთები'
+          ka: 'ივენთები'
         },
         value: 'events'
       }
@@ -38,27 +38,27 @@ const newsFilters = {
   brands: {
     placeholder: {
       en: 'brands',
-      ge: 'ბრენდები'
+      ka: 'ბრენდები'
     },
     data: [
       {
         name: {
           en: 'zara',
-          ge: 'ზარა'
+          ka: 'ზარა'
         },
         value: 'zara'
       },
       {
         name: {
           en: 'zara2',
-          ge: 'ზარა2'
+          ka: 'ზარა2'
         },
         value: 'zara2'
       },
       {
         name: {
           en: 'zara3',
-          ge: 'ზარა3'
+          ka: 'ზარა3'
         },
         value: 'zara3'
       }
@@ -67,26 +67,26 @@ const newsFilters = {
   floors: {
     placeholder: {
       en: 'floors',
-      ge: 'სართული'
+      ka: 'სართული'
     },
     data: [
       {
         name: {
-          ge: '1 სართული',
+          ka: '1 სართული',
           en: '1st floor'
         },
         value: '1st-floor'
       },
       {
         name: {
-          ge: '2 სართული',
+          ka: '2 სართული',
           en: '2nd floor'
         },
         value: '2nd-floor'
       },
       {
         name: {
-          ge: '3 სართული',
+          ka: '3 სართული',
           en: '3rd floor'
         },
         value: '3rd-floor'
@@ -96,26 +96,26 @@ const newsFilters = {
   sort: {
     placeholder: {
       en: 'floors',
-      ge: 'სართული'
+      ka: 'სართული'
     },
     data: [
       {
         name: {
-          ge: '1 სართული',
+          ka: '1 სართული',
           en: '1st floor'
         },
         value: '1st-floor'
       },
       {
         name: {
-          ge: '2 სართული',
+          ka: '2 სართული',
           en: '2nd floor'
         },
         value: '2nd-floor'
       },
       {
         name: {
-          ge: '3 სართული',
+          ka: '3 სართული',
           en: '3rd floor'
         },
         value: '3rd-floor'
