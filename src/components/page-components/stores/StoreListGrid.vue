@@ -201,16 +201,13 @@ export default {
   methods: {
     changeView: function (view) {
       this.viewGrid = view
-    }
-    ,
+    },
     filterList: function (value) {
       this.currentLetter = value
-    }
-    ,
+    },
     loadMore: function () {
     }
-  }
-  ,
+  },
   computed: {
     currentAlphabetFilter: function () {
       const alph = this.$store.getters.alphabet[ this.$store.getters.locale.locale ]
