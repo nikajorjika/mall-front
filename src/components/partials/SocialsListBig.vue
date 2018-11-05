@@ -1,9 +1,11 @@
 <template>
   <div class="socials-container-big">
     <block-header-standard :title="this.title"/>
-    <div class="socials-container">
-      <div class="social-item-outer" v-for="item in this.socialsList" v-bind:key="item.name">
-        <social-item :item="item"/>
+    <div class="socials-container-outer">
+      <div class="socials-container">
+        <div class="social" v-for="item in this.socialsList" v-bind:key="item.name">
+          <social-item :item="item"/>
+        </div>
       </div>
     </div>
   </div>
@@ -12,6 +14,7 @@
 
 import SocialItem from '../main/SocialItem'
 import BlockHeaderStandard from '../partials/BlockHeader'
+
 export default {
   name: 'social-list-big',
   components: {
@@ -27,18 +30,29 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
-.socials-container-big{
-  .socials-container{
+.socials-container-big {
+  .socials-container-outer{
+    border-top: solid 1px #dcdcdc;
+  }
+  .socials-container {
     display: flex;
     width: 85%;
     margin: 0 auto;
-    padding: 70px 0 92px;
-    border-top: solid 1px #dcdcdc;
-    .social-item-outer{
+    padding: 56px 0 64px;
+    @media screen and (max-width: 1650px) {
+      width: 100%;
+      max-width:1087px;
+      margin-right: auto;
+    }
+    .social {
       margin-right: 16px;
-      width: 25%;
+      width: 398px;
+      @media screen and (max-width: 1650px) {
+        width: 264px;
+        margin-right: auto;
+      }
     }
   }
 }

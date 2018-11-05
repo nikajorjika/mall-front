@@ -108,8 +108,8 @@ const storeFilters = {
   },
   sort: {
     placeholder: {
-      en: 'floors',
-      ka: 'სართული'
+      en: 'default',
+      ka: 'სტანდარტული'
     },
     data: [
       {

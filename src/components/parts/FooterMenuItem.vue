@@ -62,6 +62,10 @@ export default {
         color: #000;
         text-transform: uppercase;
         margin:0 0 29px;
+        @media screen and (max-width: 1650px) {
+          font-size: 1.7rem;
+          margin:0 0 18px;
+        }
       }
     }
     .content-container{
@@ -74,6 +78,10 @@ export default {
             line-height: 1.29;
             color: #3a3838;
             margin: 28px 0;
+            @media screen and (max-width: 1650px) {
+              font-size: 1.2rem;
+              margin: 17px 0;
+            }
           }
         }
       }

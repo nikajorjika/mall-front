@@ -2,19 +2,23 @@
   <div class="news-list-container">
     <div class="filters-outer">
       <div class="container">
-        <news-filters/>
+        <news-filters :categories="categories"/>
       </div>
     </div>
     <div class="new-list-outer">
-      <div class="single-news-container" v-if="openItem">
-        <news-single :item="openItem" @close="closeEvent"/>
-      </div>
+      <!--<div class="single-news-container" v-if="openItem">-->
+      <!--<news-single :item="openItem" @close="closeEvent"/>-->
+      <!--</div>-->
       <div class="news-list">
-        <div class="news-list-item" v-for="item in $store.getters.events" :key="item._id">
-          <div class="news-inner">
+        <div class="news-list-item" v-for="item in $store.getters.events" :key="item._id"
+             :class="{open: openItem === item}">
+          <div class="news-inner" @click="open(item)">
             <router-link :to="generateUrl(item._id)">
               <news-item :item="item"/>
             </router-link>
+          </div>
+          <div class="single-news-container" v-if="openItem === item">
+            <news-single :item="item" @close="close"/>
           </div>
         </div>
       </div>
@@ -36,13 +40,18 @@ export default {
   mounted: function () {
     this.initialLoad()
     if (this.$route.params.id) {
-      this.loadItem(this.$route.params.id)
+      // this.loadItem(this.$route.params.id)
+    }
+  },
+  props: {
+    categories: {
+      type: Object
     }
   },
   watch: {
     '$route.params.id': function (id) {
       if (id) {
-        this.loadItem(id)
+        // this.loadItem(id)
       }
     }
   },
@@ -87,18 +96,21 @@ export default {
       const cat = this.$route.params.cat ? this.$route.params.cat : 'single'
       return `/whats-new/${cat}/${id}`
     },
-    loadItem: function (id) {
-      const Request = {
-        url: this.singleUrl, model: 'events', id: id
-      }
-      this.$store.dispatch('loadSingle', Request).then((result) => {
-        console.log(result)
-        if (result !== 'RECORD_NOT_FOUND') {
-          this.openItem = result
-        }
-      })
+    // loadItem: function (id) {
+    //   const Request = {
+    //     url: this.singleUrl, model: 'events', id: id
+    //   }
+    //   this.$store.dispatch('loadSingle', Request).then((result) => {
+    //     console.log(result)
+    //     if (result !== 'RECORD_NOT_FOUND') {
+    //       this.openItem = result
+    //     }
+    //   })
+    // },
+    open: function (item) {
+      this.openItem = item
     },
-    closeEvent: function () {
+    close: function () {
       this.openItem = null
     }
   }
@@ -117,6 +129,7 @@ export default {
     box-sizing: border-box;
     border-right: 1px solid #dcdcdc;
     border-top: 1px solid #dcdcdc;
+    position: relative;
     &:nth-child(1),
     &:nth-child(2),
     &:nth-child(3) {
@@ -125,6 +138,33 @@ export default {
     }
     &:nth-child(3n + 3) {
       border-right: none;
+    }
+    &:nth-child(3n + 1).open {
+      width: 100%;
+      .news-inner {
+        display: none;
+      }
+    }
+    &:nth-child(3n + 2).open {
+      width: 100%;
+      position: absolute;
+      z-index: 9;
+      background: #ffffff;
+      .news-inner {
+        display: none;
+      }
+    }
+    &:nth-child(3n + 3).open {
+      width: 100%;
+      position: absolute;
+      z-index: 9;
+      background: #ffffff;
+      .news-inner {
+        display: none;
+      }
+    }
+    &.open {
+      padding: 22px 0;
     }
   }
 }
@@ -151,7 +191,6 @@ export default {
 }
 
 .single-news-container {
-  padding: 22px 0 32px 0;
   border-bottom: solid 1px #dcdcdc;
 }
 </style>

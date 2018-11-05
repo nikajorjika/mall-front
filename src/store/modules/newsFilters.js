@@ -7,24 +7,24 @@ const newsFilters = {
     data: [
       {
         name: {
-          en: 'sales',
+          en: 'promotions',
           ka: 'სეილები'
         },
-        value: 'sales'
-      },
-      {
-        name: {
-          en: 'offers',
-          ka: 'შეთავაზებები'
-        },
-        value: 'offers'
+        value: 'promotions'
       },
       {
         name: {
           en: 'new collections',
+          ka: 'შეთავაზებები'
+        },
+        value: 'new-collections'
+      },
+      {
+        name: {
+          en: 'news',
           ka: 'ახალი კოლექციები'
         },
-        value: 'new_collections'
+        value: 'news'
       },
       {
         name: {

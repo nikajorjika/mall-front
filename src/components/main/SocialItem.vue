@@ -47,10 +47,13 @@ export default {
       background-color: #eaeaea;
     }
     .social-logo-container {
-      font-size: 20px;
+      font-size: 2rem;
       border-right: solid 1px #dcdcdc;
       display: flex;
       width: 62px;
+      @media screen and (max-width: 1650px){
+        font-size: 1.3rem;
+      }
       .icon-wrapper{
         margin: auto;
       }
@@ -65,6 +68,10 @@ export default {
       padding: 20px 0;
       width: 100%;
       text-align: center;
+      @media screen and (max-width: 1650px){
+        font-size: .8rem;
+        padding: 15px 0;
+      }
     }
   }
 }

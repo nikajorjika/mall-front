@@ -34,9 +34,15 @@ export default {
   .event-item{
     width: 100%;
     .img-wrapper{
+      width:100%;
+      padding-top: 112%;
+      position: relative;
       img{
         width:100%;
-        height: 649px;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
         object-fit: cover;
       }
     }
@@ -48,6 +54,10 @@ export default {
           text-align: center;
           color: #000000;
           margin: 32px 0 19px;
+          @media screen and (max-width: 1650px) {
+            font-size: 1.6rem;
+            margin: 24px 0 13px;
+          }
         }
       }
       .description{

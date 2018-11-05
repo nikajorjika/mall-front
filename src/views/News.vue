@@ -1,7 +1,7 @@
 <template>
   <div id="page-stores">
     <block-header-standard :title="this.title[$store.getters.locale.locale]"/>
-    <news-list/>
+    <news-list :categories="$store.state.newsFilters"/>
   </div>
 </template>
 

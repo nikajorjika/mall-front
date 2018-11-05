@@ -90,6 +90,7 @@ export default {
     animation: fadeIn 1s;
     overflow: hidden;
     display: flex;
+    padding-bottom: 32px;
     .half-col {
       width: calc(50% - 52px);
       &.single-left {
@@ -154,11 +155,15 @@ export default {
         }
       }
       .image-container {
-        height: 100%;
+        position: relative;
         width: 100%;
+        padding-top: 72.2%;
         img {
           height: 100%;
           width: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
           object-fit: cover;
         }
       }

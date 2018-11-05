@@ -5,15 +5,6 @@
         {{currentLanguage.name}}
       </router-link>
     </div>
-    <div class="locale-changer" v-if="show">
-      <ul>
-        <li v-for="{name, locale} in languages" :key="`Lang-${locale}`">
-          <div class="lang-wrapper" @click="changeLanguage(locale)">
-            {{name}}
-          </div>
-        </li>
-      </ul>
-    </div>
   </div>
 </template>
 <script>
@@ -22,18 +13,17 @@ export default {
   data: function () {
     return {
       show: false,
-      languages: this.$store.state.languages,
+      languages: {
+        en: 'ka',
+        ka: 'en'
+      },
       currentLanguage: this.$store.getters.locale
     }
   },
   methods: {
     toggleShow: function () {
-      this.show = !this.show
-    },
-    changeLanguage: function (locale) {
-      this.$store.commit('SET_LOCALE', locale)
+      this.$store.commit('SET_LOCALE', this.languages[this.currentLanguage.locale])
       this.currentLanguage = this.$store.getters.locale
-      this.show = false
     }
   },
   mounted: function () {

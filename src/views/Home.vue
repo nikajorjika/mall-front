@@ -46,10 +46,6 @@ import SocialListBig from '../components/partials/SocialsListBig'
 
 export default {
   name: 'home',
-  beforeMount: function () {
-    this.$store.commit('SET_STORES', 1)
-    this.$store.commit('SET_EVENTS', 1)
-  },
   data: function () {
     return {
     }

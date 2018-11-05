@@ -1,16 +1,20 @@
 <template>
   <div class="news-filters">
     <div class="filter-item">
-      <custom-select :items="$store.state.newsFilters.categories.data" :placeholder="$store.state.newsFilters.categories.placeholder" :value="$route.params.cat"/>
+      <custom-select :items="categories.categories.data" :placeholder="categories.categories.placeholder"
+                     name="category" :value="$route.params.cat" @change="updateElement"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="$store.state.newsFilters.brands.data" :placeholder="$store.state.newsFilters.brands.placeholder"/>
+      <custom-select :items="categories.brands.data" name="brand" :placeholder="categories.brands.placeholder"
+                     @change="updateElement"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="$store.state.newsFilters.floors.data" :placeholder="$store.state.newsFilters.floors.placeholder"/>
+      <custom-select :items="categories.floors.data" name="floor" :placeholder="categories.floors.placeholder"
+                     @change="updateElement"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="$store.state.newsFilters.sort.data" :placeholder="$store.state.newsFilters.sort.placeholder"/>
+      <custom-select :items="categories.sort.data" name="sort" :placeholder="categories.sort.placeholder"
+                     @change="updateElement"/>
     </div>
   </div>
 </template>
@@ -21,6 +25,27 @@ export default {
   name: 'news-filters',
   components: {
     CustomSelect
+  },
+  props: {
+    categories: {
+      type: Object
+    }
+  },
+  data: () => {
+    return {
+      filters: {
+        brand: null,
+        sort: null,
+        floor: null,
+        category: null
+      }
+    }
+  },
+  methods: {
+    updateElement: function (selected) {
+      this.filters[ selected.name ] = selected.selected.value
+      console.log(this.filters)
+    }
   }
 }
 </script>

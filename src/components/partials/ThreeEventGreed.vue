@@ -6,7 +6,7 @@
         <event-item :event="event"/>
       </div>
     </div>
-    <div v-if="setter.length" class="greed-footer-container">
+    <div class="greed-footer-container">
       <button @click="this.loadMore">{{t('more')}}</button>
     </div>
   </div>
@@ -32,19 +32,10 @@ export default {
       default: function () {
         return []
       }
-    },
-    setter: {
-      type: String,
-      default: ''
     }
   },
   methods: {
     loadMore: function () {
-      this.$store.commit(`${this.setter}`, {
-        page: 2,
-        offset: 3,
-        type: 'append'
-      })
       this.$emit('loadMore')
     }
   }
@@ -90,6 +81,10 @@ export default {
       padding: 30px 30px;
       cursor: pointer;
       outline: none;
+      @media screen and (max-width: 1650px) {
+        font-size: 1.6rem;
+        padding: 20px 30px;
+      }
     }
   }
 }

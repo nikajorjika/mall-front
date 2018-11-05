@@ -73,9 +73,15 @@ export default {
       display: flex;
       height: 94px;
       justify-content: center;
+      @media screen and (max-width: 1650px){
+        height: 66px;
+      }
       .selects-container{
         width: 281.2px;
         margin: auto 25px;
+        @media screen and (max-width: 1650px){
+          width: 200px;
+        }
       }
     }
   }

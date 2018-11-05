@@ -10,7 +10,7 @@
         </div>
         <div class="menu-item">
           <footer-menu-item :title="this.hours.title" :items="hours"/>
-          <footer-menu-item v-for="item in this.contactInfo" :title="item.title" :items="item" class="mini"/>
+          <footer-menu-item v-for="(item, index) in this.contactInfo" :key="index" :title="item.title" :items="item" class="mini"/>
         </div>
       </div>
     </div>

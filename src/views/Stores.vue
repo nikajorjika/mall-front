@@ -1,7 +1,7 @@
 <template>
   <div id="page-stores">
     <block-header-standard :title="this.title[$store.getters.locale.locale]"/>
-    <store-list-grid/>
+    <store-list-grid :grouped="grouped" :stores="$store.getters.stores" :storesList="$store.getters.storesList" :categories="$store.getters.storeFilters"/>
   </div>
 </template>
 
@@ -26,6 +26,11 @@ export default {
   methods: {
     loadMoreButton: function () {
       console.log('load more')
+    }
+  },
+  computed: {
+    grouped: function () {
+      return this.groupByAlphabet(this.$store.getters.storesList)
     }
   }
 }

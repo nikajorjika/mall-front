@@ -36,66 +36,94 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .event-home{
-    width:100%;
-    &.mini{
-      img{
-        height: 676px;
-      }
-    }
-    .image-background{
-      width:100%;
+.event-home {
+  width: 100%;
+  &.mini {
+    .image-background {
+      width: 100%;
       position: relative;
-      img{
-        width:100%;
-        max-height: 859px;
+      padding-top: 71.7%;
+      img {
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
         object-fit: cover;
       }
-      .event-item-content{
-        position: absolute;
-        bottom:77px;
-        left: 90px;
-        width: 698px;
-        .event-type{
-          font-size: 1.8rem;
+    }
+  }
+  .image-background {
+    width: 100%;
+    position: relative;
+    padding-top: 45.14%;
+    img {
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      position: absolute;
+      object-fit: cover;
+    }
+    .event-item-content {
+      position: absolute;
+      bottom: 77px;
+      left: 90px;
+      max-width: 698px;
+      width: 100%;
+      @media screen and (max-width: 1650px) {
+        left: 63px;
+        width: calc(100% - 63px);
+      }
+      .event-type {
+        font-size: 1.8rem;
+        font-weight: 300;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #ffffff;
+        line-height: 1.28;
+        @media screen and (max-width: 1650px) {
+          font-size: 1.2rem;
+        }
+      }
+      .event-name {
+        h3 {
+          font-size: 3.8rem;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          text-align: left;
+          padding: 13px 0 14.5px;
+          margin: 0;
+          line-height: 1.26;
+          letter-spacing: 1px;
+          display: inline-block;
+          border-bottom: solid 1px #ffffff;
+          color: #ffffff;
+          @media screen and (max-width: 1650px) {
+            font-size: 2.6rem;
+          }
+        }
+      }
+      .event-description {
+        p {
+          font-size: 2.4rem;
           font-weight: 300;
           font-style: normal;
           font-stretch: normal;
           letter-spacing: normal;
           text-align: left;
           color: #ffffff;
-          line-height: 1.28;
-        }
-        .event-name{
-          h3{
-            font-size: 3.8rem;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            text-align: left;
-            padding: 13px 0 14.5px;
-            margin:0;
-            line-height: 1.26;
-            letter-spacing: 1px;
-            display: inline-block;
-            border-bottom: solid 1px #ffffff;
-            color: #ffffff;
-          }
-        }
-        .event-description{
-          p{
-            font-size: 2.4rem;
-            font-weight: 300;
-            font-style: normal;
-            font-stretch: normal;
-            letter-spacing: normal;
-            text-align: left;
-            color: #ffffff;
-            line-height: 1.25;
-            margin: 14px 0 0;
+          line-height: 1.25;
+          margin: 14px 0 0;
+          @media screen and (max-width: 1650px) {
+            font-size: 1.7rem;
           }
         }
       }
     }
   }
+}
 </style>

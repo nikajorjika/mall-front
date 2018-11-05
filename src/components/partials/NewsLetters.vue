@@ -35,6 +35,11 @@ export default {
       border-right: 1px solid #dcdcdc;
       border-left: 1px solid #dcdcdc;
       box-sizing: content-box;
+      @media screen and (max-width: 1650px) {
+        height: 37px;
+        width: 37px;
+        padding: 11px 20px;
+      }
     }
     .text-part {
       margin: auto auto auto 32px;
@@ -48,6 +53,9 @@ export default {
         letter-spacing: normal;
         text-align: left;
         color: #848484;
+        @media screen and (max-width: 1650px) {
+          font-size: 1.1rem;
+        }
       }
     }
     .btn-part{
@@ -62,6 +70,10 @@ export default {
         outline: none;
         font-family: 'Muli', 'sans-serif';
         font-size: 1.6rem;
+        @media screen and (max-width: 1650px) {
+          font-size: 1.1rem;
+          padding: 0 24px;
+        }
         &:hover{
           background: #eaeaea;
         }

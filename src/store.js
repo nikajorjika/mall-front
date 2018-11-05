@@ -14,6 +14,8 @@ import storeFilters from './store/modules/storeFilters'
 import storesList from './store/modules/storesList'
 import alphabet from './store/modules/alphabet'
 import { apiUrls, apiCredentials } from './store/modules/apiData'
+import entertainment from './store/modules/entertainments'
+import entertainmentList from './store/modules/entertainmentList'
 
 Vue.use(Vuex)
 
@@ -40,6 +42,8 @@ export default new Vuex.Store({
     events: events,
     stores: stores,
     storesList: storesList,
+    entertainment: entertainment,
+    entertainmentList: entertainmentList,
     messages: messages,
     apiUrls: apiUrls,
     apiCredentials: apiCredentials,
@@ -97,9 +101,6 @@ export default new Vuex.Store({
     noScroll: (state) => {
       return state.noScroll
     },
-    storesList: (state) => {
-      return state.storesList
-    },
     alphabet: (state) => {
       return state.alphabet
     },
@@ -111,6 +112,15 @@ export default new Vuex.Store({
     },
     stores: (state) => {
       return state.stores
+    },
+    storesList: (state) => {
+      return state.storesList
+    },
+    entertainment: (state) => {
+      return state.entertainment
+    },
+    entertainmentList: (state) => {
+      return state.entertainmentList
     },
     googleMap: (state) => {
       return state.googleMap
@@ -129,6 +139,9 @@ export default new Vuex.Store({
     },
     message: (state, index) => {
       return state.messages[ index ]
+    },
+    storeFilters: (state) => {
+      return state.storeFilters
     }
   },
   actions: {

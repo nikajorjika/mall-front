@@ -28,6 +28,10 @@ export default {
     line-height: 1.25;
     letter-spacing: normal;
     color: #000000;
+    @media screen and (max-width: 1650px) {
+      font-size: 2.8rem;
+      margin:51px 0;
+    }
   }
 }
 </style>

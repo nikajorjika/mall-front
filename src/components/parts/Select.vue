@@ -23,7 +23,6 @@ export default {
   name: 'custom-select',
   watch: {
     value: function (value) {
-      console.log(value)
       if (value === '') {
         this.fireSelect(null)
       } else {
@@ -51,6 +50,10 @@ export default {
         }
       }
     },
+    name: {
+      type: String,
+      default: 'select'
+    },
     value: {
       type: String,
       default: ''
@@ -60,7 +63,6 @@ export default {
     document.addEventListener('click', this.documentClick)
   },
   destroyed: function () {
-    // important to clean up!!
     document.removeEventListener('click', this.documentClick)
   },
   data: function () {
@@ -73,7 +75,7 @@ export default {
     fireSelect: function (selected) {
       this.selectedItem = selected
       this.open = false
-      this.$emit('change', selected)
+      this.$emit('change', { selected: selected, name: this.name })
     },
     toggleBody: function () {
       this.open = !this.open
@@ -97,8 +99,11 @@ export default {
     border: solid 0.5px #dcdcdc;
     background-color: #ffffff;
     cursor: pointer;
+    @media screen and (max-width: 1650px) {
+      padding: 12px 9px;
+    }
     span {
-      font-size: 13px;
+      font-size: 1.3rem;
       font-family: "Muli SemiBold", 'BPG Nino Mtavruli', 'sans-serif';
       font-weight: 600;
       font-style: normal;
@@ -110,7 +115,10 @@ export default {
       color: #000;
       display: flex;
       justify-content: space-between;
-      .non-breakable{
+      @media screen and (max-width: 1650px) {
+        font-size: 0.9rem;
+      }
+      .non-breakable {
         display: block;
         overflow: hidden;
         white-space: nowrap;
@@ -118,7 +126,7 @@ export default {
       }
       &.placeholder {
         color: #00000085;
-        span{
+        span {
           color: inherit;
         }
       }

@@ -1,19 +1,19 @@
 <template>
   <div class="store-filters">
     <div class="filter-item">
-      <custom-select :items="$store.state.storeFilters.categories.data"
-                     :placeholder="$store.state.storeFilters.categories.categoriesPlaceholder"/>
+      <custom-select :items="categories.categories.data"
+                     :placeholder="categories.categories.placeholder"/>
     </div>
     <div class="filter-item">
       <filter-search/>
     </div>
     <div class="filter-item">
-      <custom-select :items="$store.state.storeFilters.floors.data"
-                     :placeholder="$store.state.storeFilters.floors.categoriesPlaceholder"/>
+      <custom-select :items="categories.floors.data"
+                     :placeholder="categories.floors.placeholder"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="$store.state.storeFilters.sort.data"
-                     :placeholder="$store.state.storeFilters.sort.categoriesPlaceholder"/>
+      <custom-select :items="categories.sort.data"
+                     :placeholder="categories.sort.placeholder"/>
     </div>
     <div class="grid-toggle">
       <div class="show-grid toggle-item" :class="grid ? 'active' : ''" @click="toggleView(true)">
@@ -39,28 +39,17 @@ export default {
     FilterSearch,
     CustomSelect
   },
+  props: {
+    categories: {
+      type: Object
+    }
+  },
   data: function () {
     return {
       categoriesPlaceholder: {
         ka: 'კატეგორიები',
         en: 'CATEGORY'
       },
-      categories: [
-        {
-          name: {
-            en: 'category 1',
-            ka: 'კატეგორია 1'
-          },
-          value: 'cat-1'
-        },
-        {
-          name: {
-            en: 'category 1',
-            ka: 'კატეგორია 1'
-          },
-          value: 'cat-1'
-        }
-      ],
       grid: true
     }
   },

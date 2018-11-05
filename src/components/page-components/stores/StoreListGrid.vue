@@ -2,12 +2,12 @@
   <div class="store-list-grid">
     <div class="filters-outer">
       <div class="container">
-        <store-filters @changeView="changeView"/>
+        <store-filters :categories="categories" @changeView="changeView"/>
       </div>
     </div>
     <div class="container" v-if="viewGrid">
       <div class="store-list">
-        <div class="store-list-item" v-for="(item, index) in $store.getters.stores" :key="index">
+        <div class="store-list-item" v-for="(item, index) in stores" :key="index">
           <div class="store-inner">
             <router-link to="#">
               <store-item :item="item"/>
@@ -91,9 +91,6 @@ import StoreFilters from './StoreFilters'
 
 export default {
   name: 'store-list-grid',
-  mounted: function () {
-    this.initialLoad()
-  },
   components: {
     StoreFilters,
     StoreItem
@@ -105,6 +102,91 @@ export default {
       }
     }
   },
+  props: {
+    categories: {
+      type: Object
+    },
+    grouped: {
+      type: Object
+    },
+    stores: {
+      type: Array
+    },
+    services: {
+      type: Array,
+      default: () => {
+        return [
+          {
+            name: {
+              en: 'Tax free',
+              ka: 'Tax Free'
+            },
+            value: 'Tax Free'
+          },
+          {
+            name: {
+              en: 'Discount Card',
+              ka: 'Discount Card'
+            },
+            value: 'Discount Card'
+          },
+          {
+            name: {
+              en: 'Gift Card',
+              ka: 'Gift Card'
+            },
+            value: 'Gift Card'
+          },
+          {
+            name: {
+              en: 'Amex',
+              ka: 'Amex'
+            },
+            value: 'Amex'
+          }
+        ]
+      }
+    },
+    activities: {
+      type: Array,
+      default:
+        () => {
+          return [
+            {
+              name: {
+                en: 'Sales',
+                ka: 'sales'
+              },
+              value: 'Sales'
+            }, {
+              name: {
+                en: 'Offers',
+                ka: 'Offers'
+              },
+              value: 'Offers'
+            }, {
+              name: {
+                en: 'New collections',
+                ka: 'New collections'
+              },
+              value: 'New collections'
+            }, {
+              name: {
+                en: 'Events',
+                ka: 'Events'
+              },
+              value: 'Events'
+            }, {
+              name: {
+                en: 'News',
+                ka: 'News'
+              },
+              value: 'News'
+            }
+          ]
+        }
+    }
+  },
   data: function () {
     return {
       loading: false,
@@ -113,118 +195,23 @@ export default {
       offset: 1,
       viewGrid: true,
       listStoresShowing: this.grouped,
-      currentLetter: null,
-      services: [
-        {
-          name: {
-            en: 'Tax free',
-            ka: 'Tax Free'
-          },
-          value: 'Tax Free'
-        },
-        {
-          name: {
-            en: 'Discount Card',
-            ka: 'Discount Card'
-          },
-          value: 'Discount Card'
-        },
-        {
-          name: {
-            en: 'Gift Card',
-            ka: 'Gift Card'
-          },
-          value: 'Gift Card'
-        },
-        {
-          name: {
-            en: 'Amex',
-            ka: 'Amex'
-          },
-          value: 'Amex'
-        }
-      ],
-      activities: [
-        {
-          name: {
-            en: 'Sales',
-            ka: 'sales'
-          },
-          value: 'Sales'
-        }, {
-          name: {
-            en: 'Offers',
-            ka: 'Offers'
-          },
-          value: 'Offers'
-        }, {
-          name: {
-            en: 'New collections',
-            ka: 'New collections'
-          },
-          value: 'New collections'
-        }, {
-          name: {
-            en: 'Events',
-            ka: 'Events'
-          },
-          value: 'Events'
-        }, {
-          name: {
-            en: 'News',
-            ka: 'News'
-          },
-          value: 'News'
-        }
-      ]
+      currentLetter: null
     }
   },
   methods: {
-    loadMore: function (request) {
-      this.loadItems(request)
-    },
-    initialLoad: function (request) {
-      this.loadItems(request)
-    },
-    loadItems: function (customRequest) {
-      this.loading = true
-      // const Request = Object.assign({
-      //   url: this.$store.state.apiUrls.storesAPI, model: 'stores', page: this.page, offset: this.offset
-      // }, customRequest)
-      // this.$store.dispatch('loadItems', Request).then((result) => {
-      //   this.loading = false
-      //   this.page++
-      //   if (result === 'NOT_ENOUGH_RECORDS') {
-      //     this.hasMoreRecords = false
-      //   }
-      // })
-    },
-    loadListItems: function (customRequest) {
-      this.loading = true
-      if (!this.$store.state.storesList.length) {
-        // const Request = Object.assign({
-        //   url: this.$store.state.apiUrls.storesAPI, model: 'storesList', page: -1, offset: -1
-        // }, customRequest)
-        // this.$store.dispatch('loadStoreList', Request).then((result) => {
-        //   this.loading = false
-        //   this.page++
-        //   if (result === 'NOT_ENOUGH_RECORDS') {
-        //     this.hasMoreRecords = false
-        //   }
-        // })
-      }
-    },
     changeView: function (view) {
       this.viewGrid = view
-    },
+    }
+    ,
     filterList: function (value) {
       this.currentLetter = value
     }
-  },
+    ,
+    loadMore: function () {
+    }
+  }
+  ,
   computed: {
-    grouped: function () {
-      return this.groupByAlphabet(this.$store.getters.storesList)
-    },
     currentAlphabetFilter: function () {
       const alph = this.$store.getters.alphabet[ this.$store.getters.locale.locale ]
       if (this.currentLetter === null) {
@@ -295,16 +282,22 @@ export default {
     width: 100%;
     li {
       padding: 7px 0;
-      &.brand{
-        width: 32.7%;
+      &.brand {
+        width: 33%;
+        text-align: right;
+        span {
+          display: block;
+          margin-right: 95px;
+        }
       }
-      &.tags{
+      &.tags {
         width: 18%;
+        text-align: center;
       }
-      &.additional-services{
+      &.additional-services {
         width: 25%;
       }
-      &.activities{
+      &.activities {
         width: 21%;
       }
       span {
@@ -336,10 +329,10 @@ export default {
       .items-container {
         width: 83%;
         position: relative;
-        &:after{
+        &:after {
           content: '';
           position: absolute;
-          width:1px;
+          width: 1px;
           background-color: #848484;
           opacity: 0.5;
           left: 19%;
@@ -361,7 +354,7 @@ export default {
               line-height: 1.2;
               display: flex;
               width: 19.1%;
-              .name-inner{
+              .name-inner {
               }
             }
             .tags {
