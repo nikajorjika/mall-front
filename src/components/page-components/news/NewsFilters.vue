@@ -43,8 +43,9 @@ export default {
   },
   methods: {
     updateElement: function (selected) {
-      this.filters[ selected.name ] = selected.selected.value
-      console.log(this.filters)
+      if (selected.selected !== null) {
+        this.filters[ selected.name ] = selected.selected.value
+      }
     }
   }
 }

@@ -23,7 +23,7 @@ export default {
   name: 'custom-select',
   watch: {
     value: function (value) {
-      if (value === '') {
+      if (value === '' || value === null) {
         this.fireSelect(null)
       } else {
         for (let i = 0; i < this.items.length; i++) {

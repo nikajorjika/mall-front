@@ -4,7 +4,16 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCaretDown, faSearch, faAngleLeft, faAngleRight, faThLarge, faList, faBookmark } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCaretDown,
+  faCaretRight,
+  faSearch,
+  faAngleLeft,
+  faAngleRight,
+  faThLarge,
+  faList,
+  faBookmark
+} from '@fortawesome/free-solid-svg-icons'
 import { faFacebookF, faTwitter, faYoutube, faPinterest, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Axios from 'axios'
@@ -22,6 +31,7 @@ Vue.use(VueGoogleMaps, {
 })
 
 library.add(faCaretDown)
+library.add(faCaretRight)
 library.add(faSearch)
 library.add(faLinkedinIn)
 library.add(faAngleLeft)

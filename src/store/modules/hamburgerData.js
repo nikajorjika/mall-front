@@ -1,6 +1,5 @@
 const hamburgerData = [
   {
-    id: 16,
     url: '/about-us',
     name: {
       en: 'about us',
@@ -8,45 +7,194 @@ const hamburgerData = [
     },
     children: [
       {
-        id: 12,
-        url: '/contact',
-        name: 'contact'
+        url: '/guest-service',
+        name: {
+          en: 'GUEST SERVICES',
+          ka: 'მომსახურება'
+        }
       },
       {
-        id: 13,
-        url: '/test1',
-        name: 'test1'
+        url: '/mall-map',
+        name: {
+          en: 'mall map',
+          ka: 'მოლის რუქა'
+        }
       },
       {
-        id: 14,
-        url: '/test2',
-        name: 'test2'
+        url: '/mall-taxi',
+        name: {
+          en: 'tbilisi mall taxi',
+          ka: 'თბილისი მოლის ტაქსი'
+        }
       },
       {
-        id: 15,
-        url: '/test3',
-        name: 'test3'
+        url: '/gift-card',
+        name: {
+          en: 'gift card',
+          ka: 'მომსახურება'
+        }
+      },
+      {
+        url: '/marketing',
+        name: {
+          en: 'marketing',
+          ka: 'მარკეტინგი'
+        }
+      },
+      {
+        url: '/leasing',
+        name: {
+          en: 'leasing',
+          ka: 'ლიზინგი'
+        }
+      },
+      {
+        url: '/magazine',
+        name: {
+          en: 'magazine',
+          ka: 'ჟურნალი'
+        }
       }
     ]
   },
   {
-    id: 15,
     url: '/whats-new',
     name: {
       en: 'what\'s new',
       ka: 'სიახლეები'
-    }
+    },
+    children: [
+      {
+        url: '/promotions',
+        name: {
+          ka: 'პრომოუშენები',
+          en: 'promotions'
+        }
+      },
+      {
+        url: '/new-collections',
+        name: {
+          ka: 'ახალი კოლექციები',
+          en: 'new collections'
+        }
+      },
+      {
+        url: '/events',
+        name: {
+          ka: 'ივენთები',
+          en: 'events'
+        }
+      },
+      {
+        url: '/news',
+        name: {
+          ka: 'სიახლეები',
+          en: 'news'
+        }
+      }
+    ]
   },
   {
-    id: 14,
     url: '/stores',
     name: {
-      en: 'Stores',
+      en: 'stores',
       ka: 'მაღაზიები'
-    }
+    },
+    children: [
+      {
+        url: '/fashion',
+        name: {
+          ka: 'მოდა',
+          en: 'fashion'
+        }
+      },
+      {
+        url: '/books-and-stationary',
+        name: {
+          ka: 'წიგნები',
+          en: 'BOOKS AND STATIONARY'
+        }
+      },
+      {
+        url: '/shoes',
+        name: {
+          ka: 'ფექსაცმელები',
+          en: 'SHOES'
+        }
+      },
+      {
+        url: '/tech',
+        name: {
+          ka: 'ტექნიკა',
+          en: 'Technic'
+        }
+      },
+      {
+        url: '/kids',
+        name: {
+          ka: 'ბავშვები',
+          en: 'kids'
+        }
+      },
+      {
+        url: '/plants',
+        name: {
+          ka: 'მცენარეები',
+          en: 'plants'
+        }
+      },
+      {
+        url: '/accessories',
+        name: {
+          ka: 'სამკაულები',
+          en: 'ACCESSORIES'
+        }
+      },
+      {
+        url: '/health-beauty',
+        name: {
+          ka: 'სილამაზე და ჯანრმრთელობა',
+          en: 'health and beauty'
+        }
+      },
+      {
+        url: '/household',
+        name: {
+          ka: 'სახლისთვის',
+          en: 'household'
+        }
+      },
+      {
+        url: '/news',
+        name: {
+          ka: 'სიახლეები',
+          en: 'news'
+        }
+      },
+      {
+        url: '/hypermarkets',
+        name: {
+          ka: 'ჰიპერმარკეტები',
+          en: 'hypermarkets'
+        }
+      },
+      {
+        url: '/souvenirs',
+        name: {
+          ka: 'სუვენირები',
+          en: 'souvenirs'
+        }
+      },
+      {
+        url: '/specialty-stores',
+        name: {
+          ka: 'სპეციფიური მაღაზიები',
+          en: 'SPECIALTY STORES'
+        }
+      }
+    ]
   },
   {
-    id: 13,
     url: '/entertainment',
     name: {
       en: 'entertainment',
@@ -54,7 +202,6 @@ const hamburgerData = [
     }
   },
   {
-    id: 12,
     url: '/services',
     name: {
       en: 'services',
@@ -62,27 +209,10 @@ const hamburgerData = [
     }
   },
   {
-    id: 11,
     url: '/for-kids',
     name: {
       en: 'for kids',
       ka: 'ბავშვებისთვის'
-    }
-  },
-  {
-    id: 10,
-    url: '/information',
-    name: {
-      en: 'information',
-      ka: 'ინფორმაცია'
-    }
-  },
-  {
-    id: 9,
-    url: '/my-mall',
-    name: {
-      en: 'my mall',
-      ka: 'ჩემი მოლი'
     }
   }
 ]
