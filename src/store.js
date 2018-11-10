@@ -210,6 +210,28 @@ export default new Vuex.Store({
             reject(error)
           })
       })
+    },
+    findStore: function (context, request) {
+      return new Promise((resolve, reject) => {
+        if (request) {
+          let store = context.getters.stores.filter(function (item) {
+            return item._id === request
+          })
+          if (store.length) {
+            resolve(store)
+          } else {
+            context.dispatch('loadSingle', {
+              url: `${context.state.apiUrls.singleItemUrl}`,
+              id: request,
+              model: 'store'
+            }).then(function (response) {
+              console.log(response)
+            }).catch(function (error) {
+              console.log(error)
+            })
+          }
+        }
+      })
     }
   }
 })

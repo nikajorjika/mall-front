@@ -78,6 +78,7 @@ export default {
       this.showMenu = !this.showMenu
       let noScroll = this.$store.getters.noScroll
       this.$store.commit('SET_NO_SCROLL', !noScroll)
+      this.currentItem = null
     },
     openChildren: function (data) {
       this.currentItem = data

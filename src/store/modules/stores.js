@@ -6,9 +6,15 @@ const stores = [
       'ru': 'tbc'
     },
     'description': {
-      'ka': 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. \nჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.\nსაუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.',
-      'en': 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. \nჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.\nსაუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.',
-      'ru': 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. \nჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.\nსაუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.'
+      'ka': 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. <br>ჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.<br>საუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.',
+      'en': 'Zara opened its first store in the coastal town of A Coruña in the northwest of Spain in 1975.<br>' +
+      '<br>' +
+      'Zara has over 1,900 stores strategically located in leading cities across 87 countries. Zara&apos;s designers and customers are inextricably linked. Specialist teams receive constant feedback on the decisions its customers are making at every Zara store. This feedback inspires Zara&apos;s creative team which is made up of over 200 professionals.<br>' +
+      '<br>' +
+      'Zara is always striving to meet the needs of its customers at the same time as helping to inform their ideas, trends and tastes.<br>' +
+      '<br>' +
+      'The idea is to share responsible passion for fashion across a broad spectrum of people, cultures and ages.',
+      'ru': 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. <br>ჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.<br>საუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.'
     },
     'filters': [ 'Discount Card', 'Amex' ],
     '_id': '5b9d4045d5c08e1752f7da05',

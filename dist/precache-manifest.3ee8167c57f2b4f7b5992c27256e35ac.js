@@ -1,43 +1,43 @@
 self.__precacheManifest = [
   {
-    "revision": "26ec7406f51c5efb79ecc2885a5b887c",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
+    "revision": "a8b935b9fab81016cc4b241faf9a2260",
+    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/robots.txt"
   },
   {
-    "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
+    "revision": "e1412bac33d65a665ecb4a78c4588cbd",
+    "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
   },
   {
     "revision": "4ee3bc5dac2d1ea1539a",
     "url": "/css/chunk-1919613f.ac101f58.css"
   },
   {
-    "revision": "79c4e98266e095464197",
-    "url": "/css/chunk-19d1c1ea.8021b657.css"
+    "revision": "6d6edf47809aca911197",
+    "url": "/css/chunk-1b869a89.2250fdbd.css"
   },
   {
-    "revision": "79c4e98266e095464197",
-    "url": "/js/chunk-19d1c1ea.76e863e8.js"
+    "revision": "6d6edf47809aca911197",
+    "url": "/js/chunk-1b869a89.05343a86.js"
   },
   {
-    "revision": "0b52d2fd5ac3b1e7c948",
-    "url": "/css/chunk-34e9d746.b7a51d4f.css"
+    "revision": "1d38a91f7df250d764e7",
+    "url": "/css/chunk-210fb873.2f0d979f.css"
   },
   {
-    "revision": "0b52d2fd5ac3b1e7c948",
-    "url": "/js/chunk-34e9d746.ee93352e.js"
+    "revision": "1d38a91f7df250d764e7",
+    "url": "/js/chunk-210fb873.9febc0f1.js"
   },
   {
-    "revision": "029e7490caabef69d63a",
-    "url": "/css/chunk-789d4f82.36fb29fb.css"
+    "revision": "2ea19ca65db9aac528c3",
+    "url": "/css/chunk-6f61a67f.ac1c514f.css"
   },
   {
-    "revision": "029e7490caabef69d63a",
-    "url": "/js/chunk-789d4f82.909a8ac9.js"
+    "revision": "2ea19ca65db9aac528c3",
+    "url": "/js/chunk-6f61a67f.e82e3bf9.js"
   },
   {
     "revision": "4f96cbc8d97db251689b",
@@ -46,6 +46,14 @@ self.__precacheManifest = [
   {
     "revision": "4f96cbc8d97db251689b",
     "url": "/js/chunk-7a9941aa.d19a99f9.js"
+  },
+  {
+    "revision": "5fde921248fa83c3d49f",
+    "url": "/css/chunk-7b427851.9f038f82.css"
+  },
+  {
+    "revision": "5fde921248fa83c3d49f",
+    "url": "/js/chunk-7b427851.8c3da140.js"
   },
   {
     "revision": "cc277983d77bd3d3b989",
@@ -76,12 +84,32 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
   },
   {
-    "revision": "5c04c3e3366be05915fe",
-    "url": "/js/app.d0641f71.js"
+    "revision": "6e5b1494e933ba58cdb6e80876634552",
+    "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
+  },
+  {
+    "revision": "c4e12ff8b337c320f59c",
+    "url": "/js/app.8a749d96.js"
   },
   {
     "revision": "4ee3bc5dac2d1ea1539a",
     "url": "/js/chunk-1919613f.47e5ba2c.js"
+  },
+  {
+    "revision": "6530709ce0aadf3283db6512a8fcabec",
+    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
+  },
+  {
+    "revision": "88a37bc21733e2fef7deba65d7271bed",
+    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
+  },
+  {
+    "revision": "26ec7406f51c5efb79ecc2885a5b887c",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
+  },
+  {
+    "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
   },
   {
     "revision": "9c57740b6f314b7db24f8cddde741770",
@@ -96,28 +124,24 @@ self.__precacheManifest = [
     "url": "/img/bpg-nino-mtavruli-webfont.97a80250.svg"
   },
   {
-    "revision": "6e5b1494e933ba58cdb6e80876634552",
-    "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
+    "revision": "877c40403eb04862f727a57c090855f5",
+    "url": "/img/youtube.877c4040.svg"
   },
   {
-    "revision": "e1412bac33d65a665ecb4a78c4588cbd",
-    "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
+    "revision": "cf5d2bd997faa249bd7605fce51f232c",
+    "url": "/img/pinterest.cf5d2bd9.svg"
   },
   {
-    "revision": "a8b935b9fab81016cc4b241faf9a2260",
-    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
-  },
-  {
-    "revision": "6530709ce0aadf3283db6512a8fcabec",
-    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
-  },
-  {
-    "revision": "88a37bc21733e2fef7deba65d7271bed",
-    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
+    "revision": "8aca5902f38e7183fdbbab686a391786",
+    "url": "/img/facebook.8aca5902.svg"
   },
   {
     "revision": "5b2501b16a00b646b815d66c5db0e81f",
     "url": "/img/arrow-left-2.5b2501b1.svg"
+  },
+  {
+    "revision": "c716539f72517987354d428a99c7cec1",
+    "url": "/img/twitter.c716539f.svg"
   },
   {
     "revision": "60c4abc1c30a5ad01448dba22276f44f",
@@ -144,11 +168,11 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "a225d4a5586acfc080a5ac2de9f9d1c0",
+    "revision": "c84940315ff8d6cca342bd98ffa5d19c",
     "url": "/index.html"
   },
   {
-    "revision": "5c04c3e3366be05915fe",
-    "url": "/css/app.7ccfafa6.css"
+    "revision": "c4e12ff8b337c320f59c",
+    "url": "/css/app.015e563c.css"
   }
 ];

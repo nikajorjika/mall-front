@@ -26,6 +26,12 @@ export default new Router({
       component: () => import('./views/Stores.vue')
     },
     {
+      path: '/store/details/:store?',
+      name: 'singleStore',
+      props: true,
+      component: () => import('./views/SingleStore.vue')
+    },
+    {
       path: '/whats-new/:cat?/:id?',
       name: 'whats-new',
       props: true,

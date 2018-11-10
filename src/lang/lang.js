@@ -3,6 +3,7 @@ const messages = {
   en: {
     statics: {
       load_more: 'more',
+      home: 'home',
       loading: 'loading...',
       contact: 'contact',
       my_mall: 'my mall',
@@ -13,6 +14,8 @@ const messages = {
       promotion: 'promotion',
       brand: 'brand',
       tags: 'tags',
+      socials: 'socials',
+      subscribe: 'subscribe',
       additionalServices: 'additional services',
       activities: 'activities',
       promotions: 'promotions',
@@ -23,6 +26,7 @@ const messages = {
     statics: {
       load_more: 'მეტის ჩვენება',
       loading: 'იტვირთება...',
+      home: 'მთავარი',
       contact: 'კონტაქტი',
       my_mall: 'ჩემი მოლი',
       share: 'გააზიარე',
@@ -32,6 +36,8 @@ const messages = {
       news: 'სიახლეები',
       brand: 'ბრენდი',
       tags: 'თეგები',
+      socials: 'სოც. ქსელი',
+      subscribe: 'გამოწერა',
       additionalServices: 'დამატებითი სერვისები',
       activities: 'აქტივობები',
       promotion: 'პრომოუშენი',
