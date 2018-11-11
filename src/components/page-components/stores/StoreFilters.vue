@@ -30,8 +30,8 @@
   </div>
 </template>
 <script>
-import CustomSelect from '../../parts/Select'
-import FilterSearch from '../../parts/FilterSearch'
+import CustomSelect from '../../partials/Select'
+import FilterSearch from '../../partials/FilterSearch'
 
 export default {
   name: 'store-filters',

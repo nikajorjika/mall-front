@@ -34,7 +34,7 @@
             <router-link to="#">{{t('contact')}}</router-link>
           </li>
           <li>
-            <router-link to="#">{{t('my_mall')}}</router-link>
+            <router-link :to="{name: 'login'}">{{t('my_mall')}}</router-link>
           </li>
           <li>
             <router-link to="#" class="text-center">
@@ -54,7 +54,7 @@
 
 import drop from '../partials/DropDown'
 import HamburgerMenu from '../partials/HamburgerMenu'
-import LanguageSwitcher from '../parts/LanguageSwitcher'
+import LanguageSwitcher from '../partials/LanguageSwitcher'
 
 export default {
   name: 'nav-bar',

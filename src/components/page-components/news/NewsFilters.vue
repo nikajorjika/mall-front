@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import CustomSelect from '../../parts/Select'
+import CustomSelect from '../../partials/Select'
 
 export default {
   name: 'news-filters',

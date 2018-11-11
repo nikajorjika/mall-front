@@ -22,7 +22,7 @@
 
 <script>
 import NewsletterSubscribe from '../partials/NewsLetters'
-import FooterMenuItem from '../parts/FooterMenuItem'
+import FooterMenuItem from '../partials/FooterMenuItem'
 
 export default {
   name: 'footer-component',

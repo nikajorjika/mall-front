@@ -24,7 +24,7 @@
 </template>
 <script>
 
-import CustomSelect from '../parts/Select'
+import CustomSelect from './Select'
 export default {
   name: 'map-with-directions',
   components: {
