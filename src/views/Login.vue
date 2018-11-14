@@ -9,7 +9,9 @@
         <block-header-standard :title="t('not_registered_q')"/>
         <div class="register-buttons-container">
           <div class="register-button">
-            <button-standard :text="t('register')"/>
+            <router-link :to="{name: 'registration'}">
+              <button-standard :text="t('register')"/>
+            </router-link>
           </div>
           <div class="register-button">
             <button-standard :text="t('sign_up')" :icon="`<img src='${getFacebookIcon()}' height='14'/>`"/>

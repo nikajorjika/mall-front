@@ -76,8 +76,7 @@ export default {
   methods: {
     toggleHamburgerMenu: function () {
       this.showMenu = !this.showMenu
-      let noScroll = this.$store.getters.noScroll
-      this.$store.commit('SET_NO_SCROLL', !noScroll)
+      this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
       this.currentItem = null
     },
     openChildren: function (data) {
@@ -89,6 +88,7 @@ export default {
     close: function () {
       this.showMenu = false
       this.currentItem = null
+      this.$store.commit('SET_NO_SCROLL', false)
     }
   },
   watch: {

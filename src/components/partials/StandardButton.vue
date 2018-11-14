@@ -14,7 +14,7 @@ export default {
     },
     text: {
       type: String,
-      default: ''
+      default: 'Button'
     }
   },
   methods: {

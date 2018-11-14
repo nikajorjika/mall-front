@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import VeeValidate from 'vee-validate'
 import {
   faCaretDown,
   faCaretRight,
@@ -22,6 +23,8 @@ import './mixin/mixin'
 
 const SocialSharing = require('vue-social-sharing')
 Vue.use(SocialSharing)
+
+Vue.use(VeeValidate)
 
 Vue.use(VueGoogleMaps, {
   load: {

@@ -16,6 +16,7 @@ import alphabet from './store/modules/alphabet'
 import { apiUrls, apiCredentials } from './store/modules/apiData'
 import entertainment from './store/modules/entertainments'
 import entertainmentList from './store/modules/entertainmentList'
+import dateOptions from './store/modules/dateOptions'
 
 Vue.use(Vuex)
 
@@ -49,6 +50,7 @@ export default new Vuex.Store({
     apiCredentials: apiCredentials,
     googleMap: googleMap,
     alphabet: alphabet,
+    dateOptions: dateOptions,
     socials: [
       {
         icon: 'facebook-f',

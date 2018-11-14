@@ -48,6 +48,12 @@ export default new Router({
       name: 'login',
       props: true,
       component: () => import('./views/Login.vue')
+    },
+    {
+      path: '/register',
+      name: 'registration',
+      props: true,
+      component: () => import('./views/Registration.vue')
     }
   ]
 })

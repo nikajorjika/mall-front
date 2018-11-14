@@ -11,7 +11,7 @@
         <li class="placeholder">
           <div class="item" @click="fireSelect(null)">{{this.placeholder[$store.getters.locale.locale]}}</div>
         </li>
-        <li v-for="item in this.items" v-bind:key="item.id">
+        <li v-for="(item, index) in this.items" v-bind:key="index">
           <div class="item" @click="fireSelect(item)">{{item.name[$store.getters.locale.locale]}}</div>
         </li>
       </ul>
@@ -57,10 +57,12 @@ export default {
     value: {
       type: String,
       default: ''
-    }
+    },
+    selectedDefault: null
   },
   created: function () {
     document.addEventListener('click', this.documentClick)
+    this.selectedItem = this.selectedDefault
   },
   destroyed: function () {
     document.removeEventListener('click', this.documentClick)
@@ -140,11 +142,16 @@ export default {
     left: 0;
     width: 100%;
     z-index: 999;
+    max-height: 186px;
+    overflow: hidden;
     ul {
+      max-height: 186px;
+      overflow-y: auto;
+      width: calc(100% + 12px);
       li {
         .item {
           cursor: pointer;
-          padding: 16px 13px;
+          padding: 16px 16px 16px 13px;
           font-size: 1.2rem;
           font-family: "Muli", 'BPG Nino Mtavruli', 'sans-serif';
           font-weight: 300;
