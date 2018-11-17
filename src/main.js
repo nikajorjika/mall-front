@@ -5,6 +5,7 @@ import store from './store'
 import './registerServiceWorker'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import VeeValidate from 'vee-validate'
+import dictionary from './lang/messages/ka'
 import {
   faCaretDown,
   faCaretRight,
@@ -24,7 +25,12 @@ import './mixin/mixin'
 const SocialSharing = require('vue-social-sharing')
 Vue.use(SocialSharing)
 
-Vue.use(VeeValidate)
+Vue.use(VeeValidate, {
+  locale: store.getters.locale.locale,
+  dictionary: {
+    ka: { attributes: dictionary.attributes, messages: dictionary.messages }
+  }
+})
 
 Vue.use(VueGoogleMaps, {
   load: {

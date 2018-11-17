@@ -2,7 +2,6 @@
   <div id="registration">
     <div class="registration-page-container">
       <block-header-standard :title="t('registration')"/>
-
       <div class="registration-form-container">
         <registration-form/>
       </div>

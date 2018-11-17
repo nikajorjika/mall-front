@@ -23,6 +23,7 @@ export default {
   methods: {
     toggleShow: function () {
       this.$store.commit('SET_LOCALE', this.languages[this.currentLanguage.locale])
+      this.$validator.localize(this.languages[this.currentLanguage.locale])
       this.currentLanguage = this.$store.getters.locale
     }
   },

@@ -1,87 +1,143 @@
 <template>
   <div id="registration-form">
-    <form action="">
+    <white-spinner v-if="loading"/>
+    <form action="" ref="RegistrationForm">
+      <div v-if="returnedError.length" class="registration-error">
+        <div class="error"><span>{{returnedError}}</span></div>
+      </div>
       <div class="field-container">
         <div class="field-wrapper">
-          <label for="registration-name">{{t('first_name_placeholder')}}</label>
-          <input type="text" id="registration-name" placeholder="" v-model="user.name.val">
+          <label for="registration-name">{{t('first_name_placeholder')}}*</label>
+          <input type="text" id="registration-name" v-validate="'required'" name="name" placeholder=""
+                 v-model="user.name">
+          <span v-show="errors.first('name')" class="error">{{ errors.first('name') }}</span>
         </div>
         <div class="field-wrapper">
-          <label for="registration-last-name">{{t('last_name_placeholder')}}</label>
-          <input type="text" id="registration-last-name" placeholder="" v-model="user.lastName.val">
+          <label for="registration-last-name">{{t('last_name_placeholder')}}*</label>
+          <input type="text" id="registration-last-name" v-validate="'required'" name="lastName" placeholder=""
+                 v-model="user.lastName">
+          <span v-show="errors.first('lastName')" class="error">{{ errors.first('lastName') }}</span>
         </div>
       </div>
       <div class="field-container">
         <div class="field-wrapper">
-          <label for="registration-email">{{t('email_placeholder')}}</label>
-          <input type="text" id="registration-email" placeholder="" v-model="user.email.val">
+          <label for="registration-email">{{t('email_placeholder')}}*</label>
+          <input type="text" v-validate="'required|email'" name="email" id="registration-email" placeholder=""
+                 v-model="user.email">
+          <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
         </div>
       </div>
       <div class="field-container">
         <div class="field-wrapper">
-          <label for="registration-phone">{{t('mobile_placeholder')}}</label>
+          <label for="registration-phone">{{t('mobile_placeholder')}}*</label>
           <div class="combo-fields">
+            <input type="hidden" name="mobileIndex" v-validate="'required'" v-model="user.mobileIndex.val">
             <custom-select class="mobile-index-field"
                            :items="user.mobileIndex.options"
                            :placeholder="user.mobileIndex.placeholder"
-                           :selectedDefault="user.mobileIndex.options[0]" @onChange="onSelectAction"/>
-            <input type="text" id="registration-phone" placeholder="" v-model="user.mobile.val">
+                           :selectedDefault="user.mobileIndex.options[0]"
+                           name="mobileIndex" @change="onSelectAction"/>
+            <input type="text" id="registration-phone" v-validate="'required|numeric'" name="phone" placeholder=""
+                   v-model="user.mobile">
+          </div>
+          <div v-if="errors.first('mobileIndex')">
+            <div v-show="errors.first('mobileIndex')" class="error">{{ errors.first('mobileIndex') }}</div>
+          </div>
+          <div v-else-if="errors.first('phone')">
+            <div v-show="errors.first('phone')" class="error">{{ errors.first('phone') }}</div>
           </div>
         </div>
       </div>
       <div class="field-container">
         <div class="field-wrapper">
-          <label>{{t('birth_date_placeholder')}}</label>
+          <label>{{t('birth_date_placeholder')}}*</label>
           <div class="combo-fields">
-            <custom-select class="b-date-field" :items="user.birthDate.day.options"
-                           :placeholder="user.birthDate.day.placeholder"
-                           :selectedDefault="user.birthDate.day.options[0]" @onChange="onSelectAction"/>
-            <custom-select class="b-date-field" :items="user.birthDate.month.options"
-                           :placeholder="user.birthDate.month.placeholder"
-                           :selectedDefault="user.birthDate.month.options[0]" @onChange="onSelectAction"/>
-            <custom-select class="b-date-field" :items="user.birthDate.year.options"
-                           :placeholder="user.birthDate.year.placeholder"
-                           :selectedDefault="user.birthDate.year.options[0]" @onChange="onSelectAction"/>
+            <input type="hidden" name="day" v-validate="'required'" v-model="user.day.val">
+            <custom-select class="b-date-field" :items="user.day.options"
+                           :selectedDefault="user.day.options[0]"
+                           :placeholder="user.day.placeholder"
+                           name="day"
+                           @change="onSelectAction"/>
+            <input type="hidden" name="month" v-validate="'required'" v-model="user.month.val">
+            <custom-select class="b-date-field" :items="user.month.options"
+                           :selectedDefault="user.month.options[0]"
+                           :placeholder="user.month.placeholder"
+                           name="month"
+                           @change="onSelectAction"/>
+            <input type="hidden" name="year" v-validate="'required'" v-model="user.year.val">
+            <custom-select class="b-date-field" :items="user.year.options"
+                           :selectedDefault="user.year.options[0]"
+                           :placeholder="user.year.placeholder"
+                           name="year"
+                           @change="onSelectAction"/>
+          </div>
+          <div v-if="errors.first('day')">
+            <div v-show="errors.first('day')" class="error">{{ errors.first('day') }}</div>
+          </div>
+          <div v-else-if="errors.first('month')">
+            <div v-show="errors.first('month')" class="error">{{ errors.first('month') }}</div>
+          </div>
+          <div v-else-if="errors.first('year')">
+            <div v-show="errors.first('year')" class="error">{{ errors.first('year') }}</div>
           </div>
         </div>
         <div class="field-wrapper">
-          <label>{{t('gender_placeholder')}}</label>
-          <div class="combo-fields">
-            <custom-select class="gender-field" :items="user.gender.options"
-                           :placeholder="user.gender.placeholder" @onChange="onSelectAction"/>
+          <label>{{t('gender_placeholder')}}*</label>
+          <div class="combo-fields columns">
+            <input type="hidden" name="gender" v-validate="'required'" v-model="user.gender.val">
+            <custom-select class="gender-field" :items="user.gender.options" name="gender"
+                           :selectedDefault="user.gender.options[0]"
+                           :placeholder="user.gender.placeholder" @change="onSelectAction"/>
+            <div v-show="errors.first('gender')" class="error">{{ errors.first('gender') }}</div>
           </div>
         </div>
       </div>
       <div class="field-container">
         <div class="field-wrapper">
-          <label>{{t('country_placeholder')}}</label>
-          <div class="combo-fields">
-            <custom-select class="country-field" :items="user.country.options"
-                           :placeholder="user.country.placeholder" @onChange="onSelectAction"/>
+          <label>{{t('country_placeholder')}}*</label>
+          <div class="combo-fields columns">
+            <input type="hidden" name="country" v-validate="'required'" v-model="user.country.val">
+            <custom-select class="country-field" name="country" :items="user.country.options"
+                           :selectedDefault="user.country.options[0]"
+                           :placeholder="user.country.placeholder" @change="onSelectAction"/>
+            <div v-show="errors.first('country')" class="error">{{ errors.first('country') }}</div>
           </div>
         </div>
         <div class="field-wrapper">
-          <label>{{t('city_placeholder')}}</label>
-          <div class="combo-fields">
-            <custom-select class="city-field" :items="user.city.options"
-                           :placeholder="user.city.placeholder" @onChange="onSelectAction"/>
+          <label>{{t('city_placeholder')}}*</label>
+          <div class="combo-fields columns">
+            <input type="hidden" name="city" v-validate="'required'" v-model="user.city.val">
+            <custom-select class="city-field" name="city" :items="user.city.options"
+                           :selectedDefault="user.city.options[0]"
+                           :placeholder="user.city.placeholder" @change="onSelectAction"/>
+            <div v-show="errors.first('city')" class="error">{{ errors.first('city') }}</div>
           </div>
         </div>
       </div>
       <div class="field-container">
         <div class="field-wrapper">
-          <label for="registration-password">{{t('reg_password_placeholder')}}</label>
-          <input type="text" id="registration-password" placeholder="" v-model="user.password.val">
+          <label for="registration-password">{{t('reg_password_placeholder')}}*</label>
+          <input type="password" id="registration-password" v-validate="'required'" name="password"
+                 ref="password"
+                 v-model="user.password">
+          <span v-show="errors.first('password')" class="error">{{ errors.first('password') }}</span>
         </div>
         <div class="field-wrapper">
-          <label for="registration-repeat-password">{{t('repeat_password_placeholder')}}</label>
-          <input type="text" id="registration-repeat-password" placeholder="" v-model="user.repeatPassword.val">
+          <label for="registration-repeat-password">{{t('repeat_password_placeholder')}}*</label>
+          <input v-validate="'confirmed:password'" name="password_confirmation" type="password"
+                 id="registration-repeat-password" v-model="user.repeatPassword">
+          <span v-show="errors.first('password_confirmation')"
+                class="error">{{ errors.first('password_confirmation') }}</span>
         </div>
       </div>
-      <div class="field-container">
+
+      <div class="field-container columns">
         <div class="terms-set">
-          <input type="checkbox" id="terms-and-conditions" v-model="user.terms">
+          <input type="checkbox" v-validate="'required'" name="terms" id="terms-and-conditions" v-model="user.terms">
           <label for="terms-and-conditions">Accept <a href="">terms and conditions</a></label>
+        </div>
+        <div v-show="errors.first('terms')"
+             class="error">{{ errors.first('terms') }}
         </div>
       </div>
       <div class="field-container centered-content">
@@ -95,28 +151,19 @@
 <script>
 import CustomSelect from '../../partials/Select'
 import ButtonStandard from '../../partials/StandardButton'
+import WhiteSpinner from '../../partials/LoadingSpinner'
 
 export default {
   name: 'registration-form',
-  components: { ButtonStandard, CustomSelect },
+  components: { WhiteSpinner, ButtonStandard, CustomSelect },
   data: function () {
     return {
       user: {
-        name: {
-          val: '',
-          errors: []
-        },
-        lastName: {
-          val: '',
-          errors: []
-        },
-        email: {
-          val: '',
-          errors: []
-        },
+        name: 'Nika',
+        lastName: 'Jorjoliani',
+        email: 'nikajorjika1993@gmail.com',
         mobileIndex: {
-          val: '',
-          errors: [],
+          val: '+995',
           options: [
             {
               name: {
@@ -137,12 +184,9 @@ export default {
             ka: 'ინდექსი'
           }
         },
-        mobile: {
-          val: '',
-          errors: []
-        },
+        mobile: '123123123',
         city: {
-          val: '',
+          val: 'tbilisi',
           errors: [],
           options: [
             {
@@ -165,7 +209,7 @@ export default {
           }
         },
         country: {
-          val: '',
+          val: 'georgia',
           errors: [],
           options: [
             {
@@ -187,37 +231,35 @@ export default {
             ka: 'ქვეყანა'
           }
         },
-        birthDate: {
-          day: {
-            val: '',
-            errors: [],
-            options: this.$store.state.dateOptions.day.options,
-            placeholder: {
-              en: 'Day',
-              ka: 'დღე'
-            }
-          },
-          month: {
-            val: '',
-            errors: [],
-            options: this.$store.state.dateOptions.month.options,
-            placeholder: {
-              en: 'Month',
-              ka: 'თვე'
-            }
-          },
-          year: {
-            val: '',
-            errors: [],
-            options: this.$store.state.dateOptions.year.options,
-            placeholder: {
-              en: 'Year',
-              ka: 'წელი'
-            }
+        day: {
+          val: '1',
+          errors: [],
+          options: this.$store.state.dateOptions.day.options,
+          placeholder: {
+            en: 'Day',
+            ka: 'დღე'
+          }
+        },
+        month: {
+          val: '1',
+          errors: [],
+          options: this.$store.state.dateOptions.month.options,
+          placeholder: {
+            en: 'Month',
+            ka: 'თვე'
+          }
+        },
+        year: {
+          val: '122',
+          errors: [],
+          options: this.$store.state.dateOptions.year.options,
+          placeholder: {
+            en: 'Year',
+            ka: 'წელი'
           }
         },
         gender: {
-          val: '',
+          val: 'male',
           errors: [],
           options: [
             {
@@ -239,28 +281,50 @@ export default {
             ka: 'სქესი'
           }
         },
-        password: {
-          val: '',
-          errors: []
-        },
-        repeatPassword: {
-          val: '',
-          errors: []
-        },
-        terms: false
-      }
+        password: '123123',
+        repeatPassword: '123123',
+        terms: true
+      },
+      loading: false,
+      returnedError: ''
     }
   },
   methods: {
     register: function () {
-      console.log(this.validateForm())
+      if (this.validateForm()) {
+        const _this = this
+        this.$validator.validateAll().then((result) => {
+          if (result) {
+            // here we submit form
+            _this.loading = true
+            _this.$store.dispatch('register', _this.user).then(function () {
+              _this.loading = false
+            }).catch((error) => {
+              if (error.response.data) {
+                _this.returnedError = error.response.data.status
+              }
+              _this.loading = false
+            })
+          }
+        }).catch((error) => {
+          console.log(error)
+        })
+      }
+      // this.$refs.RegistrationForm.submit()
     },
     validateForm: function () {
-      let rt = this.user.name && this.user.lastName
-      return rt
+      return true
     },
     onSelectAction: function (value, index) {
-      console.log(value, index)
+      if (value.selected) {
+        if (this.user.hasOwnProperty(value.name) && this.user[ value.name ].hasOwnProperty('val')) {
+          this.user[ value.name ].val = value.selected.value
+        }
+      } else {
+        if (this.user.hasOwnProperty(value.name) && this.user[ value.name ].hasOwnProperty('val')) {
+          this.user[ value.name ].val = ''
+        }
+      }
     }
   }
 }
@@ -268,9 +332,13 @@ export default {
 
 <style lang="scss">
 #registration-form {
+  position: relative;
   .field-container {
     display: flex;
     width: 100%;
+    &.columns {
+      flex-direction: column;
+    }
     &.centered-content {
       justify-content: center;
     }
@@ -292,6 +360,9 @@ export default {
       }
       .combo-fields {
         display: flex;
+        &.columns {
+          flex-direction: column;
+        }
         .custom-select {
           flex: 1;
           &.mobile-index-field {
@@ -341,6 +412,9 @@ export default {
       margin: 41px 0 107px 0;
       text-align: center;
     }
+  }
+  .error {
+    color: red;
   }
 }
 </style>

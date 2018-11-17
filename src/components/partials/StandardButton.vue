@@ -1,8 +1,8 @@
 <template>
-  <div class="standard-button" @click="clicked">
+  <button class="standard-button" @click="clicked">
     <span class="icon" v-if="icon" v-html="icon"></span>
     <span class="text">{{text}}</span>
-  </div>
+  </button>
 </template>
 <script>
 export default {

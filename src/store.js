@@ -47,6 +47,7 @@ export default new Vuex.Store({
     entertainmentList: entertainmentList,
     messages: messages,
     apiUrls: apiUrls,
+    userToken: localStorage.getItem('userToken') ? localStorage.getItem('userToken') : '',
     apiCredentials: apiCredentials,
     googleMap: googleMap,
     alphabet: alphabet,
@@ -97,6 +98,17 @@ export default new Vuex.Store({
     },
     SET_LOADING_STATE: (state, payload) => {
       state.loading[ payload.model ] = payload.value
+    },
+    SET_CURRENT_USER: (state, payload) => {
+      state.user = {
+        token: payload.token
+      }
+    },
+    SET_USER_TOKEN: (state, payload) => {
+      state.userToken = payload.token
+      if (payload.remember) {
+        localStorage.setItem('userToken', payload.token.toString())
+      }
     }
   },
   getters: {
@@ -234,6 +246,60 @@ export default new Vuex.Store({
           }
         }
       })
+    },
+    login: function (context, credentials) {
+      return new Promise((resolve, reject) => {
+        const url = context.state.apiUrls.loginAPI
+        const user = {
+          email: credentials.email,
+          password: credentials.password,
+          remember: credentials.remember
+        }
+        Axios.post(`${url}`, user)
+          .then(function (response) {
+            if (!response) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              resolve(response)
+              if (response.data.token) {
+                context.commit('SET_USER_TOKEN', { token: response.data.token, remember: user.remember })
+              }
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
+      })
+    },
+    register: function (context, payload) {
+      return new Promise((resolve, reject) => {
+        const url = context.state.apiUrls.registerAPI
+        const user = {
+          name: payload.name,
+          surname: payload.lastName,
+          email: payload.email,
+          mobile: `${payload.mobileIndex.val}${payload.mobile}`,
+          birthDate: `${payload.day.val}/${payload.month.val}/${payload.year.val}`,
+          sex: payload.gender.val,
+          country: payload.country.val,
+          city: payload.city.val,
+          password: payload.password
+        }
+        Axios.post(`${url}`, user)
+          .then(function (response) {
+            if (!response) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              resolve(response)
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
+      })
+    },
+    logout: function (context, payload) {
+      context.commit('SET_USER_TOKEN', { token: '', remember: true })
     }
   }
 })
