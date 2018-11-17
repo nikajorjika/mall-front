@@ -9,7 +9,7 @@
         <block-header-standard :title="t('not_registered_q')"/>
         <div class="register-buttons-container">
           <div class="register-button">
-            <router-link :to="{name: 'registration'}">
+            <router-link :to="{name: 'registration', locale: $store.getters.locale.locale}">
               <button-standard :text="t('register')"/>
             </router-link>
           </div>

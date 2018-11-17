@@ -1,7 +1,7 @@
 <template>
   <div class="language-switcher">
     <div class="lang-wrapper" @click="this.toggleShow">
-      <router-link to="#" class="text-center">
+      <router-link :to="nextRoute" class="text-center">
         {{currentLanguage.name}}
       </router-link>
     </div>
@@ -22,9 +22,18 @@ export default {
   },
   methods: {
     toggleShow: function () {
-      this.$store.commit('SET_LOCALE', this.languages[this.currentLanguage.locale])
-      this.$validator.localize(this.languages[this.currentLanguage.locale])
       this.currentLanguage = this.$store.getters.locale
+      this.$validator.localize(this.currentLanguage.locale)
+    }
+  },
+  computed: {
+    nextRoute: function () {
+      let params = this.$route.params
+      params.locale = this.languages[ this.currentLanguage.locale ]
+      return {
+        name: this.$route.name,
+        params: params
+      }
     }
   },
   mounted: function () {

@@ -47,7 +47,7 @@ export default new Vuex.Store({
     entertainmentList: entertainmentList,
     messages: messages,
     apiUrls: apiUrls,
-    userToken: localStorage.getItem('userToken') ? localStorage.getItem('userToken') : '',
+    user: localStorage.getItem('user') ? localStorage.getItem('user') : '',
     apiCredentials: apiCredentials,
     googleMap: googleMap,
     alphabet: alphabet,
@@ -99,15 +99,10 @@ export default new Vuex.Store({
     SET_LOADING_STATE: (state, payload) => {
       state.loading[ payload.model ] = payload.value
     },
-    SET_CURRENT_USER: (state, payload) => {
-      state.user = {
-        token: payload.token
-      }
-    },
-    SET_USER_TOKEN: (state, payload) => {
+    SET_USER: (state, payload) => {
       state.userToken = payload.token
       if (payload.remember) {
-        localStorage.setItem('userToken', payload.token.toString())
+        localStorage.setItem('user', payload.token.toString())
       }
     }
   },
@@ -262,7 +257,16 @@ export default new Vuex.Store({
             } else {
               resolve(response)
               if (response.data.token) {
-                context.commit('SET_USER_TOKEN', { token: response.data.token, remember: user.remember })
+                const userCredentials = {
+                  email: user.email,
+                  token: response.data.token
+                }
+                context.dispatch('getUser', userCredentials).then(function (response) {
+                  console.log(response)
+                }).catch(function (error) {
+                  console.log(error.response)
+                })
+                // context.commit('SET_USER', { token: response.data.token, remember: user.remember })
               }
             }
           })
@@ -286,6 +290,26 @@ export default new Vuex.Store({
           password: payload.password
         }
         Axios.post(`${url}`, user)
+          .then(function (response) {
+            if (!response) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              resolve(response)
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
+      })
+    },
+    getUser: function (context, { token, email }) {
+      return new Promise((resolve, reject) => {
+        const url = context.state.apiUrls.getUserAPI
+        const credentials = {
+          email: email,
+          token: token
+        }
+        Axios.get(`${url}/${credentials.email}`, credentials)
           .then(function (response) {
             if (!response) {
               resolve('RECORD NOT FOUND')

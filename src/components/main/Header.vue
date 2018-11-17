@@ -6,14 +6,14 @@
         <ul class="navigation-menu">
           <li v-for="(item, index) in $store.getters.navigation" v-bind:key="index">
             <div class="nav-drop">
-              <router-link :to="item.url" :class="item.children !== undefined ? 'has-child' : ''">
+              <router-link :to="`/${$store.getters.locale.locale}${item.url}`" :class="item.children !== undefined ? 'has-child' : ''">
                 <span>{{item.name[$store.getters.locale.locale]}}</span>
                 <span class="caret-down-icon" v-if="item.children !== undefined"><img src="../../assets/images/icons/carret-down.svg"></span>
               </router-link>
               <div v-if="item.children !== undefined" class="drop">
                   <ul>
                   <li v-for="(child, i) in item.children" v-bind:key="i">
-                    <router-link :to="item.url + child.url">{{child.name[$store.getters.locale.locale]}}</router-link>
+                    <router-link :to="`/${$store.getters.locale.locale}${item.url}${child.url}`">{{child.name[$store.getters.locale.locale]}}</router-link>
                   </li>
                 </ul>
               </div>
@@ -34,7 +34,7 @@
             <router-link to="#">{{t('contact')}}</router-link>
           </li>
           <li>
-            <router-link :to="{name: 'login'}">{{t('my_mall')}}</router-link>
+            <router-link :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}</router-link>
           </li>
           <li>
             <router-link to="#" class="text-center">

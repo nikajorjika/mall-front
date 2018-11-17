@@ -81,9 +81,9 @@ export default {
           _this.returnedError = ''
           _this.$store.dispatch('login', _this.user).then(function (response) {
             _this.loading = false
-            console.log(response)
+            _this.$route.push({ name: 'home' })
           }).catch((error) => {
-            if (error.response.data) {
+            if (error.response && error.response.data) {
               _this.returnedError = error.response.data.status
             }
             _this.loading = false

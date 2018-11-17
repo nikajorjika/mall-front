@@ -8,49 +8,49 @@ const navigation =
       },
       children: [
         {
-          url: '/about-us/guest-service',
+          url: '/guest-service',
           name: {
             en: 'GUEST SERVICES',
             ka: 'მომსახურება'
           }
         },
         {
-          url: '/about-us/mall-map',
+          url: '/mall-map',
           name: {
             en: 'mall map',
             ka: 'მოლის რუქა'
           }
         },
         {
-          url: '/about-us/mall-taxi',
+          url: '/mall-taxi',
           name: {
             en: 'tbilisi mall taxi',
             ka: 'თბილისი მოლის ტაქსი'
           }
         },
         {
-          url: '/about-us/gift-card',
+          url: '/gift-card',
           name: {
             en: 'gift card',
             ka: 'მომსახურება'
           }
         },
         {
-          url: '/about-us/marketing',
+          url: '/marketing',
           name: {
             en: 'marketing',
             ka: 'მარკეტინგი'
           }
         },
         {
-          url: '/about-us/leasing',
+          url: '/leasing',
           name: {
             en: 'leasing',
             ka: 'ლიზინგი'
           }
         },
         {
-          url: '/about-us/magazine',
+          url: '/magazine',
           name: {
             en: 'magazine',
             ka: 'ჟურნალი'

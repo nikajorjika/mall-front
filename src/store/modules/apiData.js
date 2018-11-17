@@ -5,6 +5,7 @@ const apiUrls = {
   eventsAPI: 'https://smartfinders.herokuapp.com/api/v1/website/events',
   registerAPI: 'https://smartfinders.herokuapp.com/api/v1/website/register',
   loginAPI: 'https://smartfinders.herokuapp.com/api/v1/website/login',
+  getUserAPI: 'https://smartfinders.herokuapp.com/api/v1/website/user',
   singleItemUrl: 'https://smartfinders.herokuapp.com/api/v1/website/item'
 }
 

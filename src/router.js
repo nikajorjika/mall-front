@@ -1,59 +1,78 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import store from './store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
+      redirect: `/${store.getters.locale.locale}`
+    },
+    {
+      path: '/:locale',
       name: 'home',
       component: Home
     },
     {
-      path: '/about-us/:page?',
+      path: '/:locale/about-us/:page?',
       name: 'about',
       props: true,
       component: () => import('./views/About.vue')
     },
     {
-      path: '/stores/:cat?',
+      path: '/:locale/stores/:cat?',
       name: 'stores',
       props: true,
       component: () => import('./views/Stores.vue')
     },
     {
-      path: '/store/details/:store?',
+      path: '/:locale/store/details/:store?',
       name: 'singleStore',
       props: true,
       component: () => import('./views/SingleStore.vue')
     },
     {
-      path: '/whats-new/:cat?/:id?',
+      path: '/:locale/whats-new/:cat?/:id?',
       name: 'whats-new',
       props: true,
       component: () => import('./views/News.vue')
     },
     {
-      path: '/entertainment',
+      path: '/:locale/entertainment',
       name: 'entertainment',
       props: true,
       component: () => import('./views/Entertainment.vue')
     },
     {
-      path: '/login',
+      path: '/:locale/login',
       name: 'login',
       props: true,
       component: () => import('./views/Login.vue')
     },
     {
-      path: '/register',
+      path: '/:locale/register',
       name: 'registration',
       props: true,
       component: () => import('./views/Registration.vue')
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  let language = to.params.locale
+  if (language) {
+    const languages = store.getters.languages
+    languages.forEach(function (object, index) {
+      if (object.locale === language) {
+        store.commit('SET_LOCALE', object.locale)
+      }
+    })
+    next()
+  }
+})
+
+export default router
