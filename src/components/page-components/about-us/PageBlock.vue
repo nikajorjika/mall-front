@@ -1,9 +1,9 @@
 <template>
   <div class="page-block">
-    <about-title :title="this.title"/>
-    <about-content :content="this.content"/>
+    <about-title :title="this.$store.state.pageData.aboutUs.title"/>
+    <about-content :content="this.$store.state.pageData.aboutUs.content"/>
     <div class="additional-info">
-      <div class="additional-info-item" v-for="additional in this.additionals" :key="additional.title">
+      <div class="additional-info-item" v-for="additional in this.$store.state.pageData.aboutUs.additional" :key="additional.title">
         <h4>{{additional.title}}</h4>
         <p v-html="additional.text"></p>
       </div>

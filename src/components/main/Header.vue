@@ -210,6 +210,9 @@ export default {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
+    @media screen and (max-width: 1730px){
+      display: none;
+    }
     > li {
       a {
         padding: 35.5px 18px;

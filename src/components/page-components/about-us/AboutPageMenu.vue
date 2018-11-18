@@ -2,8 +2,8 @@
   <div class="about-page-menu">
     <div class="menu-wrapper-outer">
       <ul class="menu-wrapper">
-        <li class="menu-item" v-for="item in this.items" :key="item.url">
-          <router-link :to="item.url" class="name">
+        <li class="menu-item" v-for="(item, index) in this.items" :key="index">
+          <router-link :to="`/${$store.getters.locale.locale}${item.url}`" class="name">
             {{item.name}}
           </router-link>
         </li>

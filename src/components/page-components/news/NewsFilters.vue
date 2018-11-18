@@ -56,6 +56,9 @@ export default {
   .filter-item {
     width: 260px;
     margin-right: 15.8px;
+    @media screen and (max-width: 1650px) {
+      width: 185px;
+    }
     &:first-child {
       margin-left: auto;
     }

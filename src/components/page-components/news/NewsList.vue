@@ -130,6 +130,9 @@ export default {
     border-right: 1px solid #dcdcdc;
     border-top: 1px solid #dcdcdc;
     position: relative;
+    @media screen and (max-width: 1650px) {
+      padding: 21px;
+    }
     &:nth-child(1),
     &:nth-child(2),
     &:nth-child(3) {

@@ -67,12 +67,18 @@ export default {
   .filter-item {
     width: 260px;
     margin-right: 15.8px;
+    @media screen and (max-width: 1650px){
+      width: 185px;
+    }
     &:first-child {
       margin-left: auto;
     }
   }
   .grid-toggle {
     display: flex;
+    @media screen and (max-width: 1650px){
+      margin-right: auto;
+    }
     .toggle-item {
       height: 49px;
       width: 49px;
@@ -84,6 +90,11 @@ export default {
       box-sizing: border-box;
       opacity: 0.3;
       cursor: pointer;
+      @media screen and (max-width: 1650px){
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+      }
       &.active {
         opacity: 1;
       }

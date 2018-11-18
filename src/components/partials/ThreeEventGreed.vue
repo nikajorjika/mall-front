@@ -58,6 +58,9 @@ export default {
       box-sizing: border-box;
       border-right: solid 1px #dcdcdc;
       padding: 0 30px;
+      @media screen and (max-width: 1366px){
+        padding: 0 21px;
+      }
       &:nth-child(3n + 3){
         border-right: none;
         margin-right: 0;

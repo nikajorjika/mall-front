@@ -19,10 +19,23 @@ const router = new Router({
       component: Home
     },
     {
-      path: '/:locale/about-us/:page?',
-      name: 'about',
+      path: '/:locale/about-us',
       props: true,
-      component: () => import('./views/About.vue')
+      component: () => import('./views/About.vue'),
+      children: [
+        {
+          path: '',
+          name: 'about',
+          props: true,
+          component: () => import('./components/page-components/about-us/PageBlock.vue')
+        },
+        {
+          path: 'guest-service',
+          name: 'guestService',
+          props: true,
+          component: () => import('./components/page-components/about-us/GuestServicePage.vue')
+        }
+      ]
     },
     {
       path: '/:locale/stores/:cat?',
@@ -64,6 +77,7 @@ const router = new Router({
 })
 router.beforeEach((to, from, next) => {
   let language = to.params.locale
+  console.log(to)
   if (language) {
     const languages = store.getters.languages
     languages.forEach(function (object, index) {

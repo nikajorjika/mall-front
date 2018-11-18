@@ -40,6 +40,9 @@ body {
 .container{
   max-width: 1364px;
   margin:0 auto;
+  @media screen and (max-width:1366px){
+    max-width: 1088px;
+  }
 }
 h1, h2, h3, h4, h5, h6{
   font-family: 'Muli','BPG Nino Mtavruli', sans-serif;

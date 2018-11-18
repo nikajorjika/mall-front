@@ -84,6 +84,7 @@ export default {
       font-size: 1.1rem;
       line-height: 1.27;
       color: #848484;
+      opacity: 1;
       margin: 0;
       .strong {
         color: #000;

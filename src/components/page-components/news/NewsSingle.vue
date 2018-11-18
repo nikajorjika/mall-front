@@ -102,7 +102,7 @@ export default {
         flex-direction: column;
         .close-button {
           display: flex;
-          .close-button-a{
+          .close-button-a {
             margin-left: auto;
           }
           .icon-container {
@@ -146,11 +146,20 @@ export default {
           }
         }
         .description-container {
-          margin: 31px 80px 0 0;
+          margin-top: 31px;
+          padding-top: 30%;
+          position: relative;
+          overflow-y: auto;
+          @media screen and (max-width: 1366px){
+            padding-top: 50%;
+          }
           p {
-            margin: 0;
+            margin: 0 80px 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
             color: #848484;
-            font-family: 'Muli Light','BPG Arial', 'sans-serif';
+            font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
           }
         }
       }
@@ -158,6 +167,9 @@ export default {
         position: relative;
         width: 100%;
         padding-top: 72.2%;
+        @media screen and (max-width: 1366px){
+          padding-top: 100%;
+        }
         img {
           height: 100%;
           width: 100%;
@@ -179,15 +191,15 @@ export default {
           cursor: pointer;
           .promotion-button {
             margin: auto;
-            font-family: 'Muli Light','BPG Nino Mtavruli', 'sans-serif';
+            font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
             text-transform: uppercase;
           }
         }
         .socials-inner-container {
           display: flex;
           margin-left: auto;
-          >span:last-child{
-            .social-item{
+          > span:last-child {
+            .social-item {
               margin-right: 0;
             }
           }
@@ -202,12 +214,12 @@ export default {
               width: 50%;
               font-size: 1.4rem;
               display: flex;
-              svg{
+              svg {
                 margin: auto;
               }
             }
-            .label{
-              margin:auto 0;
+            .label {
+              margin: auto 0;
             }
           }
         }

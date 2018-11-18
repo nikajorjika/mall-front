@@ -66,14 +66,21 @@ export default {
 <style lang="scss" >
 .standard-carousel {
   padding: 0 138px;
+  @media screen and (max-width: 1366px){
+    padding: 0 230px;
+  }
   .slide-container {
-    max-height: 326px;
+    padding-top: 100%;
+    position: relative;
     display: flex;
-    border: solid 0.5px #dcdcdc;
+    border: solid 1px #dcdcdc;
     margin-right: 20px;
     img {
-      max-width: 67%;
-      max-height: 70%;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
       object-fit: contain;
       margin: auto;
     }

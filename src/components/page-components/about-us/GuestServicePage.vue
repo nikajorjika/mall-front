@@ -11,8 +11,8 @@
   </div>
 </template>
 <script>
-import AboutContent from '../about-us/AboutPageContent'
-import AboutTitle from '../about-us/AboutPageTitle'
+import AboutContent from './AboutPageContent'
+import AboutTitle from './AboutPageTitle'
 
 export default {
   name: 'page-our-service',

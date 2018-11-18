@@ -21,16 +21,18 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Axios from 'axios'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import './mixin/mixin'
-
+import Vuebar from 'vuebar'
 const SocialSharing = require('vue-social-sharing')
-Vue.use(SocialSharing)
 
+Vue.use(SocialSharing)
 Vue.use(VeeValidate, {
   locale: store.state.locale.locale,
   dictionary: {
     ka: { attributes: dictionary.attributes, messages: dictionary.messages }
   }
 })
+
+Vue.use(Vuebar)
 
 Vue.use(VueGoogleMaps, {
   load: {

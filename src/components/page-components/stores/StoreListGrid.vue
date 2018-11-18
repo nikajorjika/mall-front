@@ -232,6 +232,8 @@ export default {
     width: calc(25% - 20px);
     box-sizing: border-box;
     padding-top: calc(25% - 20px);
+    @media screen and (max-width: 1650px){
+    }
     .store-inner {
       position: absolute;
       left: 0;

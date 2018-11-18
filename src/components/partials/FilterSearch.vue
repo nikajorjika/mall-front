@@ -49,6 +49,10 @@ export default {
       font-size: 1.3rem;
       padding-left: 13px;
       font-family: 'Muli SemiBold', 'BPG Nino Mtavruli','sans-serif';
+      @media screen and (max-width: 1650px){
+        font-size: 0.7rem;
+        padding-left: 9px;
+      }
     }
     .search-icon{
       display: block;
@@ -57,6 +61,12 @@ export default {
       top:50%;
       opacity: 0.6;
       transform: translateY(-50%);
+      @media screen and (max-width: 1650px){
+        img{
+          width: 8.4px;
+          height: 8.7px;
+        }
+      }
     }
   }
 }
