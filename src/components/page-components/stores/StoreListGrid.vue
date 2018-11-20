@@ -9,7 +9,7 @@
       <div class="store-list">
         <div class="store-list-item" v-for="(item, index) in stores" :key="index">
           <div class="store-inner">
-            <router-link :to="`/store/details/${item._id}`">
+            <router-link :to="`/${$store.getters.locale.locale}/store/details/${item._id}`">
               <store-item :item="item"/>
             </router-link>
           </div>

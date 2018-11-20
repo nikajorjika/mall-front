@@ -6,9 +6,9 @@
       </div>
     </div>
     <div class="new-list-outer">
-      <!--<div class="single-news-container" v-if="openItem">-->
-      <!--<news-single :item="openItem" @close="closeEvent"/>-->
-      <!--</div>-->
+      <div class="single-news-container news-loaded" v-if="loadedItem">
+        <news-single :item="loadedItem" @close="close"/>
+      </div>
       <div class="news-list">
         <div class="news-list-item" v-for="item in $store.getters.events" :key="item._id"
              :class="{open: openItem === item}">
@@ -37,22 +37,17 @@ import NewsSingle from './NewsSingle'
 
 export default {
   name: 'news-list',
-  mounted: function () {
-    this.initialLoad()
-    if (this.$route.params.id) {
-      // this.loadItem(this.$route.params.id)
+  watch: {
+    '$route.params.id': function () {
+      this.loadSingle()
     }
+  },
+  mounted: function () {
+    this.loadSingle()
   },
   props: {
     categories: {
       type: Object
-    }
-  },
-  watch: {
-    '$route.params.id': function (id) {
-      if (id) {
-        // this.loadItem(id)
-      }
     }
   },
   components: {
@@ -66,52 +61,51 @@ export default {
       hasMoreRecords: true,
       page: 1,
       offset: 3,
-      url: this.$store.state.apiUrls.eventsAPI,
-      singleUrl: this.$store.state.apiUrls.singleItemUrl,
       model: 'events',
-      openItem: null
+      loadedItem: null
+    }
+  },
+  computed: {
+    openItem: {
+      get: function () {
+        return this.$store.getters.events.find((element) => {
+          return element._id === this.$route.params.id
+        })
+      },
+      set: function (value) {
+        return value
+      }
     }
   },
   methods: {
-    loadMore: function (request) {
-      this.loadItems(request)
-    },
-    initialLoad: function (request) {
-      this.loadItems(request)
-    },
-    loadItems: function (customRequest) {
-      this.loading = true
-      const Request = Object.assign({
-        url: this.url, model: 'events', page: this.page, offset: this.offset
-      }, customRequest)
-      this.$store.dispatch('loadItems', Request).then((result) => {
-        this.loading = false
-        this.page++
-        if (result === 'NOT_ENOUGH_RECORDS') {
-          this.hasMoreRecords = false
-        }
-      })
+    loadSingle: function () {
+      if (this.$route.params.id && !this.openItem) {
+        this.$store.dispatch('loadSingle', { id: this.$route.params.id })
+          .then((response) => {
+            if (response.status === 'success') {
+              this.loadedItem = response.data
+            } else {
+              console.error('Something went wrong')
+            }
+          })
+          .catch((Error) => {
+            console.error(Error.message)
+          })
+      }
     },
     generateUrl: function (id) {
       const cat = this.$route.params.cat ? this.$route.params.cat : 'single'
-      return `/whats-new/${cat}/${id}`
+      return `/${this.$store.getters.locale.locale}/whats-new/${cat}/${id}`
     },
-    // loadItem: function (id) {
-    //   const Request = {
-    //     url: this.singleUrl, model: 'events', id: id
-    //   }
-    //   this.$store.dispatch('loadSingle', Request).then((result) => {
-    //     console.log(result)
-    //     if (result !== 'RECORD_NOT_FOUND') {
-    //       this.openItem = result
-    //     }
-    //   })
-    // },
     open: function (item) {
+      this.loadedItem = null
       this.openItem = item
     },
     close: function () {
-      this.openItem = null
+      this.openItem = this.loadedItem = null
+    },
+    loadMore: function () {
+      console.log('load_more')
     }
   }
 }
@@ -195,5 +189,8 @@ export default {
 
 .single-news-container {
   border-bottom: solid 1px #dcdcdc;
+  &.news-loaded {
+    padding-top: 22px;
+  }
 }
 </style>

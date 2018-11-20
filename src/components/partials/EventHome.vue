@@ -1,19 +1,21 @@
 <template>
   <div class="event-home" :class="this.type">
-    <div class="image-background">
-      <img src="https://placehold.it/1920x859" alt="Event Image">
-      <div class="event-item-content">
-        <div class="event-type">
-          <span>OFFER</span>
-        </div>
-        <div class="event-name">
-          <h3>FLASH OF COLOUR</h3>
-        </div>
-        <div class="event-description short">
-          <p>Bright accent tones add a subtle touch of character to easy yet</p>
+    <router-link to="">
+      <div class="image-background">
+        <img :src="item.photoUrl" :alt="item.name[$store.getters.locale.locale]">
+        <div class="event-item-content">
+          <div class="event-type">
+            <span>OFFER</span>
+          </div>
+          <div class="event-name">
+            <h3>{{item.name[$store.getters.locale.locale]}}</h3>
+          </div>
+          <div class="event-description short">
+            <p>{{shortDesc}}</p>
+          </div>
         </div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -22,14 +24,28 @@
 export default {
   name: 'event-home',
   props: {
+    item: {
+      type: Object,
+      default: () => {
+      }
+    },
     type: {
       type: String,
       default: ''
+    },
+    txtLimit: {
+      type: Number,
+      default: 80
     }
   },
   methods: {
     emitClick: function () {
       this.$emit('click')
+    }
+  },
+  computed: {
+    shortDesc: function () {
+      return this.item.description[ this.$store.getters.locale.locale ].length > this.txtLimit ? `${this.item.description[ this.$store.getters.locale.locale ].substr(0, parseInt(this.txtLimit))}...` : this.item.description[ this.$store.getters.locale.locale ]
     }
   }
 }
@@ -65,12 +81,24 @@ export default {
       position: absolute;
       object-fit: cover;
     }
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 2;
+      background-image: linear-gradient(to bottom right, transparent, #111211);
+      opacity: .6;
+    }
     .event-item-content {
       position: absolute;
       bottom: 77px;
       left: 90px;
       max-width: 698px;
       width: 100%;
+      z-index: 3;
       @media screen and (max-width: 1650px) {
         left: 63px;
         width: calc(100% - 63px);
@@ -90,20 +118,26 @@ export default {
       }
       .event-name {
         h3 {
+          position: relative;
           font-size: 3.8rem;
-          font-weight: normal;
-          font-style: normal;
-          font-stretch: normal;
-          text-align: left;
           padding: 13px 0 14.5px;
           margin: 0;
           line-height: 1.26;
           letter-spacing: 1px;
-          display: inline-block;
-          border-bottom: solid 1px #ffffff;
           color: #ffffff;
+          text-transform: uppercase;
           @media screen and (max-width: 1650px) {
             font-size: 2.6rem;
+          }
+          &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            max-width: 378px;
+            height: 1px;
+            background: #ffffff;
+            bottom: 0;
           }
         }
       }

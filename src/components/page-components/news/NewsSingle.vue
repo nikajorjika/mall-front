@@ -79,7 +79,7 @@ export default {
     },
     closeUrl: function () {
       const subCat = this.$route.params.cat !== 'single' ? this.$route.params.cat : ''
-      return `/whats-new/${subCat}`
+      return `/${this.$store.getters.locale.locale}/whats-new/${subCat}`
     }
   }
 }

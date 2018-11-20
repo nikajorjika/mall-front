@@ -1,0 +1,30 @@
+<template>
+  <div id="home-ads">
+    <div class="col-2" v-for="(item, index) in $store.getters.homeAds" :key="index" v-if="index <= 1">
+      <event-home :item="item" :type="'mini'"/>
+    </div>
+  </div>
+</template>
+<script>
+import EventHome from '../../partials/EventHome'
+
+export default {
+  name: 'home-ads',
+  components: { EventHome },
+  mounted: function () {
+    // this.$store.dispatch('getAdsItems').then((response) => {
+    //   console.log(response)
+    // })
+  }
+}
+</script>
+<style lang="scss">
+#home-ads {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  .col-2 {
+    width: calc(50% - 8px);
+  }
+}
+</style>

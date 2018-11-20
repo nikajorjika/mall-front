@@ -77,7 +77,6 @@ const router = new Router({
 })
 router.beforeEach((to, from, next) => {
   let language = to.params.locale
-  console.log(to)
   if (language) {
     const languages = store.getters.languages
     languages.forEach(function (object, index) {
@@ -85,8 +84,8 @@ router.beforeEach((to, from, next) => {
         store.commit('SET_LOCALE', object.locale)
       }
     })
-    next()
   }
+  next()
 })
 
 export default router

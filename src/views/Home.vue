@@ -2,25 +2,21 @@
   <div id="home">
     <section class="slider-section">
       <div class="slider">
-        <event-home/>
+        <!--<event-home/>-->
+        <home-slider/>
       </div>
       <div class="section-bottom">
-        <div class="col-2">
-          <event-home :type="'mini'"/>
-        </div>
-        <div class="col-2">
-          <event-home :type="'mini'"/>
-        </div>
+        <home-ads/>
       </div>
     </section>
     <section class="promotions">
-      <three-event-greed :title="t('promotions')" setter="SET_EVENTS" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed :title="t('promotions')" route="whats-new/promotions" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
     </section>
     <section class="events">
-      <three-event-greed :title="t('events')" setter="SET_EVENTS" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed :title="t('events')" route="whats-new/events" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
     </section>
     <section class="news">
-      <three-event-greed :title="t('news')" setter="SET_EVENTS" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed :title="t('news')" route="whats-new/news" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
     </section>
     <section class="stores">
       <standard-carousel :items="$store.getters.stores" :perPage="4" :title="'STORES'"/>
@@ -43,6 +39,8 @@ import ThreeEventGreed from '../components/partials/ThreeEventGreed'
 import StandardCarousel from '../components/partials/StandardCarousel'
 import HowToGet from '../components/partials/HowToGet'
 import SocialListBig from '../components/partials/SocialsListBig'
+import HomeSlider from '../components/page-components/home/HomeSlider'
+import HomeAds from '../components/page-components/home/Ads'
 
 export default {
   name: 'home',
@@ -51,6 +49,8 @@ export default {
     }
   },
   components: {
+    HomeAds,
+    HomeSlider,
     SocialListBig,
     HowToGet,
     StandardCarousel,
@@ -68,16 +68,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 #home {
-  .slider-section {
-    .section-bottom {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 16px;
-      .col-2 {
-        width: calc(50% - 8px);
-      }
-    }
-  }
   .stores{
     max-width: 1640px;
     margin: 0 auto;
