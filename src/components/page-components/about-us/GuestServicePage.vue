@@ -2,21 +2,18 @@
   <div class="page-our-service">
     <about-title :title="this.title"/>
     <about-content :content="this.content"/>
-    <ul class="service-list">
-      <li v-for="item in this.serviceList" :key="item.title">
-        <span class="icon-container"><img src="../../../assets/images/icons/carret-down.svg" alt=""></span><span
-        class="name-wrapper">{{item.title}}</span>
-      </li>
-    </ul>
+    <service-list :list="serviceList"/>
   </div>
 </template>
 <script>
 import AboutContent from './AboutPageContent'
 import AboutTitle from './AboutPageTitle'
+import ServiceList from './ServiceList'
 
 export default {
   name: 'page-our-service',
   components: {
+    ServiceList,
     AboutContent,
     AboutTitle
   },
@@ -73,29 +70,5 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page-our-service {
-  .service-list {
-    margin-top: 45px;
-    li {
-      display: flex;
-      margin: 20px 0;
-      .icon-container {
-        height: 3.3px;
-        width: 7.3px;
-        margin: auto 25.5px auto 0;
-        display: inline-block;
-        img{
-          display: block;
-          height: 100%;
-          width: 100%;
-        }
-      }
-      .name-wrapper {
-        opacity: 0.6;
-        font-family: 'Muli','BPG Arial', 'sans-serif';
-        font-size: 16px;
-        line-height: 1.25;
-      }
-    }
-  }
 }
 </style>

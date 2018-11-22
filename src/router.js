@@ -37,6 +37,18 @@ const router = new Router({
           name: 'guestService',
           props: true,
           component: () => import('./components/page-components/about-us/GuestServicePage.vue')
+        },
+        {
+          path: 'marketing',
+          name: 'marketing',
+          props: true,
+          component: () => import('./components/page-components/about-us/Marketing.vue')
+        },
+        {
+          path: 'leasing',
+          name: 'leasing',
+          props: true,
+          component: () => import('./components/page-components/about-us/Leasing.vue')
         }
       ]
     },

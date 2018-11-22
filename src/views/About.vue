@@ -47,7 +47,6 @@ export default {
 </script>
 <style lang="scss">
   .about-page{
-
     .about-outer-container{
       display: flex;
       flex-wrap: wrap;
@@ -56,6 +55,10 @@ export default {
         width: calc(100% - 260px);
         padding-right: 138px;
         box-sizing: border-box;
+        p{
+          color: #000;
+          opacity: 1;
+        }
       }
       .menu-container{
         width: 260px;

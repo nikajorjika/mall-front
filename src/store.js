@@ -492,6 +492,21 @@ export default new Vuex.Store({
             reject(error)
           })
       })
+    },
+    getAboutPage: function (context, url) {
+      return new Promise((resolve, reject) => {
+        Axios.get(url)
+          .then(function (response) {
+            if (!response.data.aboutPage.length) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              resolve(response.data.aboutPage)
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
+      })
     }
   }
 })
