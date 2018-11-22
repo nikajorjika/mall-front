@@ -10,13 +10,16 @@
       </div>
     </section>
     <section class="promotions">
-      <three-event-greed :title="t('promotions')" route="whats-new/promotions" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed :title="t('promotions')" route="whats-new/promotions" apiModel="frontPromotions" :api="$store.state.apiUrls.promotionsApi" :events="$store.getters.frontPromotions"/>
     </section>
     <section class="events">
-      <three-event-greed :title="t('events')" route="whats-new/events" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed :title="t('newCollections')" route="whats-new/new-collections" apiModel="frontNewCollections" :api="$store.state.apiUrls.newCollectionsApi" :events="$store.getters.frontNewCollections"/>
+    </section>
+    <section class="events">
+      <three-event-greed :title="t('events')" route="whats-new/events" apiModel="frontEvents" :api="$store.state.apiUrls.eventsAPI" :events="$store.getters.frontEvents"/>
     </section>
     <section class="news">
-      <three-event-greed :title="t('news')" route="whats-new/news" :events="$store.getters.events" @loadMore="this.loadMoreButton"/>
+      <three-event-greed :title="t('news')" route="whats-new/news" apiModel="frontNews" :api="$store.state.apiUrls.newsApi" :events="$store.getters.frontNews"/>
     </section>
     <section class="stores">
       <standard-carousel :items="$store.getters.stores" :perPage="4" :title="'STORES'"/>
@@ -58,11 +61,6 @@ export default {
     EventItem,
     BlockHeaderStandard,
     EventHome
-  },
-  methods: {
-    loadMoreButton: function () {
-      console.log('load more')
-    }
   }
 }
 </script>

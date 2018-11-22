@@ -23,11 +23,6 @@ export default {
     StoreListGrid,
     BlockHeaderStandard
   },
-  methods: {
-    loadMoreButton: function () {
-      console.log('load more')
-    }
-  },
   computed: {
     grouped: function () {
       return this.groupByAlphabet(this.$store.getters.storesList)

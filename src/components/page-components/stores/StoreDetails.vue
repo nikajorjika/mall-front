@@ -1,5 +1,6 @@
 <template>
   <div id="store-details">
+    <loading-big v-show="loading"/>
     <div class="store-details-container" v-if="store">
       <div class="store-details-cover">
         <img :src="store.photoUrl" :alt="store.name">
@@ -21,7 +22,8 @@
               <div class="content-main">
                 <div class="breadcrumb">
                   <div class="breadcrumb-item">
-                    <router-link :to="{name: 'home'}">{{t('home')}}</router-link>
+                    <router-link :to="{name: 'home', params:{locale: $store.getters.locale.locale}}">{{t('home')}}
+                    </router-link>
                   </div>
                   <div class="breadcrumb-item">
                     <router-link :to="{name: 'stores'}">{{t('stores')}}</router-link>
@@ -92,18 +94,27 @@
   </div>
 </template>
 <script>
+import LoadingBig from '../../partials/LoadingBig'
+
 export default {
   name: 'store-details',
+  components: { LoadingBig },
   mounted: function () {
-    this.$store.dispatch('findStore', this.$route.params.store).then((response) => {
-      if (Array.isArray(response) && response.length) {
-        this.store = response[ 0 ]
-      }
-    })
+    this.loadStore()
   },
   data: function () {
     return {
-      store: null
+      store: null,
+      loading: false
+    }
+  },
+  methods: {
+    loadStore: function () {
+      this.loading = true
+      this.$store.dispatch('findStore', this.$route.params.store).then((response) => {
+        this.store = response
+        this.loading = false
+      })
     }
   }
 }
@@ -244,26 +255,26 @@ export default {
             li {
               display: flex;
               margin-right: 54px;
-              font-family: 'Muli Light','BPG Arial','sans-serif';
+              font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
               font-size: 1.4rem;
               line-height: 1.29;
-              >span{
+              > span {
                 margin: auto 0;
               }
-              .icon{
+              .icon {
                 height: 34px;
                 width: 34px;
                 margin-right: 25px;
                 border: 1px solid #707070;
                 border-radius: 50%;
               }
-              .info{
+              .info {
                 color: #848484;
-                a{
+                a {
                   color: #2d83e6;
                   font-size: inherit;
                   line-height: inherit;
-                  &:hover{
+                  &:hover {
                     text-decoration: underline;
                   }
                 }

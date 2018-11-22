@@ -5,6 +5,7 @@
         <news-filters :categories="categories"/>
       </div>
     </div>
+    <loading-big v-show="loadingNews"/>
     <div class="new-list-outer">
       <div class="single-news-container news-loaded" v-if="loadedItem">
         <news-single :item="loadedItem" @close="close"/>
@@ -23,9 +24,9 @@
         </div>
       </div>
     </div>
-    <div class="grid-footer-container" v-if="this.hasMoreRecords">
-      <button v-if="$store.state.loading.events" class="loading">{{t('loading')}}</button>
-      <button v-else @click="loadMore">{{t('load_more')}}</button>
+    <div class="grid-footer-container" v-if="hasMore">
+      <button v-show="loading" class="loading">{{t('loading')}}</button>
+      <button v-show="!loading" @click="loadMore">{{t('load_more')}}</button>
     </div>
   </div>
 </template>
@@ -34,6 +35,7 @@
 import NewsFilters from './NewsFilters'
 import NewsItem from './NewsItem'
 import NewsSingle from './NewsSingle'
+import LoadingBig from '../../partials/LoadingBig'
 
 export default {
   name: 'news-list',
@@ -44,6 +46,7 @@ export default {
   },
   mounted: function () {
     this.loadSingle()
+    if (!this.$store.getters.events.length) this.fetchItems()
   },
   props: {
     categories: {
@@ -51,18 +54,20 @@ export default {
     }
   },
   components: {
+    LoadingBig,
     NewsSingle,
     NewsItem,
     NewsFilters
   },
   data: function () {
     return {
-      loading: false,
-      hasMoreRecords: true,
-      page: 1,
-      offset: 3,
+      page: 0,
+      offset: 9,
       model: 'events',
-      loadedItem: null
+      loadedItem: null,
+      loadingNews: false,
+      loading: false,
+      hasMore: true
     }
   },
   computed: {
@@ -104,8 +109,27 @@ export default {
     close: function () {
       this.openItem = this.loadedItem = null
     },
+    fetchItems: function () {
+      this.loadingNews = true
+      this.sendRequest('INITIAL_LOAD')
+    },
     loadMore: function () {
-      console.log('load_more')
+      this.page++
+      this.loading = true
+      this.sendRequest('LOAD_MORE')
+    },
+    sendRequest: function (setter) {
+      this.$store.dispatch('fetchItems', {
+        model: 'events',
+        api: this.$store.state.apiUrls.eventsAPI(this.page, this.offset),
+        setter: setter
+      }).then((response) => {
+        if (response.data.data.length < this.offset) this.hasMore = false
+        this.loading = false
+        this.loadingNews = false
+      }).catch((error) => {
+        console.error(error)
+      })
     }
   }
 }

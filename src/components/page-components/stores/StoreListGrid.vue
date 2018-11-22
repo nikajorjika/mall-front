@@ -5,6 +5,7 @@
         <store-filters :categories="categories" @changeView="changeView"/>
       </div>
     </div>
+    <loading-big v-show="loadingStores"/>
     <div class="container" v-if="viewGrid">
       <div class="store-list">
         <div class="store-list-item" v-for="(item, index) in stores" :key="index">
@@ -15,9 +16,9 @@
           </div>
         </div>
       </div>
-      <div class="grid-footer-container" v-if="this.hasMoreRecords">
-        <button v-if="$store.state.loading.stores" class="loading">{{t('loading')}}</button>
-        <button v-else @click="this.loadMore">{{t('load_more')}}</button>
+      <div class="grid-footer-container" v-if="hasMore && !loadingStores">
+        <button v-show="loading" class="loading">{{t('loading')}}</button>
+        <button v-show="!loading" @click="this.loadMore">{{t('load_more')}}</button>
       </div>
       <div class="loading-placeholder" v-else>
       </div>
@@ -88,10 +89,12 @@
 <script>
 import StoreItem from './StoreItem'
 import StoreFilters from './StoreFilters'
+import LoadingBig from '../../partials/LoadingBig'
 
 export default {
   name: 'store-list-grid',
   components: {
+    LoadingBig,
     StoreFilters,
     StoreItem
   },
@@ -101,6 +104,9 @@ export default {
         console.log('showList')
       }
     }
+  },
+  mounted: function () {
+    if (!this.$store.getters.stores.length) this.fetchItems()
   },
   props: {
     categories: {
@@ -190,9 +196,10 @@ export default {
   data: function () {
     return {
       loading: false,
-      hasMoreRecords: true,
+      loadingStores: false,
+      hasMore: true,
       page: 0,
-      offset: 1,
+      offset: 12,
       viewGrid: true,
       listStoresShowing: this.grouped,
       currentLetter: null
@@ -205,7 +212,27 @@ export default {
     filterList: function (value) {
       this.currentLetter = value
     },
+    fetchItems: function () {
+      this.loadingStores = true
+      this.sendRequest('INITIAL_LOAD')
+    },
     loadMore: function () {
+      this.page++
+      this.loading = true
+      this.sendRequest('LOAD_MORE')
+    },
+    sendRequest: function (setter) {
+      this.$store.dispatch('fetchItems', {
+        model: 'stores',
+        api: this.$store.state.apiUrls.storesAPI(this.page, this.offset),
+        setter: setter
+      }).then((response) => {
+        if (response.data.data.length < this.offset) this.hasMore = false
+        this.loading = false
+        this.loadingStores = false
+      }).catch((error) => {
+        console.error(error)
+      })
     }
   },
   computed: {

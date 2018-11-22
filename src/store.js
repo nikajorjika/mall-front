@@ -42,6 +42,10 @@ export default new Vuex.Store({
     navigation: navigation,
     hamburgerData: hamburgerData,
     events: events,
+    frontPromotions: [],
+    frontEvents: [],
+    frontNewCollections: [],
+    frontNews: [],
     stores: stores,
     storesList: storesList,
     entertainment: entertainment,
@@ -178,6 +182,9 @@ export default new Vuex.Store({
         state[ model ].push(element)
       })
     },
+    INITIAL_LOAD: (state, payload) => {
+      state[payload.model] = payload.data
+    },
     SET_LOADING_STATE: (state, payload) => {
       state.loading[ payload.model ] = payload.value
     },
@@ -191,6 +198,9 @@ export default new Vuex.Store({
       state.homeAds = payload
     },
     SET_SLIDER_ITEMS: (state, payload) => {
+      state.sliderItems = payload
+    },
+    SET_HOME_EVENTS: (state, payload) => {
       state.sliderItems = payload
     }
   },
@@ -245,6 +255,18 @@ export default new Vuex.Store({
     },
     homeAds: (state) => {
       return state.homeAds
+    },
+    frontPromotions: (state) => {
+      return state.frontPromotions
+    },
+    frontEvents: (state) => {
+      return state.frontEvents
+    },
+    frontNews: (state) => {
+      return state.frontNews
+    },
+    frontNewCollections: (state) => {
+      return state.frontNewCollections
     }
   },
   actions: {
@@ -320,19 +342,34 @@ export default new Vuex.Store({
             return item._id === request
           })
           if (store.length) {
-            resolve(store)
+            resolve(store[0])
           } else {
             context.dispatch('loadSingle', {
-              url: `${context.state.apiUrls.singleItemUrl}`,
               id: request,
               model: 'store'
             }).then(function (response) {
-              console.log(response)
+              resolve(response.data)
             }).catch(function (error) {
               console.log(error)
             })
           }
         }
+      })
+    },
+    fetchItems: function (context, request) {
+      return new Promise((resolve, reject) => {
+        Axios.get(request.api)
+          .then(function (response) {
+            if (response.data.length) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              resolve(response)
+              context.commit(request.setter, { data: response.data.data, model: request.model })
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
       })
     },
     login: function (context, credentials) {
