@@ -507,6 +507,22 @@ export default new Vuex.Store({
             reject(error)
           })
       })
+    },
+    getSocials: function (context) {
+      return new Promise((resolve, reject) => {
+        const url = context.state.apiUrls.socials
+        Axios.get(url)
+          .then(function (response) {
+            if (!response.data.length) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              resolve(response.data)
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
+      })
     }
   }
 })

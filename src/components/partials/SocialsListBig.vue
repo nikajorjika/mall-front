@@ -21,10 +21,22 @@ export default {
     SocialItem,
     BlockHeaderStandard
   },
+  mounted: function () {
+    if (!this.$store.getters.socials.length) this.getSocials()
+  },
   data: function () {
     return {
       title: 'SOCIALS',
       socialsList: this.$store.getters.socials
+    }
+  },
+  methods: {
+    getSocials: function () {
+      this.$store.dispatch('getSocials').then(function (response) {
+        console.log(response.data)
+      }).catch(function (error) {
+        console.error(error.message)
+      })
     }
   }
 }
@@ -33,7 +45,7 @@ export default {
 <style lang="scss">
 
 .socials-container-big {
-  .socials-container-outer{
+  .socials-container-outer {
     border-top: solid 1px #dcdcdc;
   }
   .socials-container {
@@ -43,7 +55,7 @@ export default {
     padding: 56px 0 64px;
     @media screen and (max-width: 1650px) {
       width: 100%;
-      max-width:1087px;
+      max-width: 1087px;
       margin-right: auto;
     }
     .social {

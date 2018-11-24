@@ -10,16 +10,20 @@
       </div>
     </section>
     <section class="promotions">
-      <three-event-greed :title="t('promotions')" route="whats-new/promotions" apiModel="frontPromotions" :api="$store.state.apiUrls.promotionsApi" :events="$store.getters.frontPromotions"/>
+      <three-event-greed :title="t('promotions')" route="whats-new/promotions" apiModel="frontPromotions"
+                         :api="$store.state.apiUrls.promotionsApi" :events="$store.getters.frontPromotions"/>
     </section>
     <section class="events">
-      <three-event-greed :title="t('newCollections')" route="whats-new/new-collections" apiModel="frontNewCollections" :api="$store.state.apiUrls.newCollectionsApi" :events="$store.getters.frontNewCollections"/>
+      <three-event-greed :title="t('newCollections')" route="whats-new/new-collections" apiModel="frontNewCollections"
+                         :api="$store.state.apiUrls.newCollectionsApi" :events="$store.getters.frontNewCollections"/>
     </section>
     <section class="events">
-      <three-event-greed :title="t('events')" route="whats-new/events" apiModel="frontEvents" :api="$store.state.apiUrls.eventsAPI" :events="$store.getters.frontEvents"/>
+      <three-event-greed :title="t('events')" route="whats-new/events" apiModel="frontEvents"
+                         :api="$store.state.apiUrls.eventsAPI" :events="$store.getters.frontEvents"/>
     </section>
     <section class="news">
-      <three-event-greed :title="t('news')" route="whats-new/news" apiModel="frontNews" :api="$store.state.apiUrls.newsApi" :events="$store.getters.frontNews"/>
+      <three-event-greed :title="t('news')" route="whats-new/news" apiModel="frontNews"
+                         :api="$store.state.apiUrls.newsApi" :events="$store.getters.frontNews"/>
     </section>
     <section class="stores">
       <standard-carousel :items="$store.getters.stores" :perPage="4" :title="'STORES'"/>
@@ -48,8 +52,10 @@ import HomeAds from '../components/page-components/home/Ads'
 export default {
   name: 'home',
   data: function () {
-    return {
-    }
+    return {}
+  },
+  beforeMount: function () {
+    if (!this.$store.getters.stores.length) this.sendRequest('INITIAL_LOAD')
   },
   components: {
     HomeAds,
@@ -61,12 +67,25 @@ export default {
     EventItem,
     BlockHeaderStandard,
     EventHome
+  },
+  methods: {
+    sendRequest: function (setter) {
+      this.$store.dispatch('fetchItems', {
+        model: 'stores',
+        api: this.$store.state.apiUrls.storesAPI(0, 12),
+        setter: setter
+      }).then((response) => {
+        console.log(response.message)
+      }).catch((error) => {
+        console.error(error)
+      })
+    }
   }
 }
 </script>
 <style lang="scss" scoped>
 #home {
-  .stores{
+  .stores {
     max-width: 1640px;
     margin: 0 auto;
     padding-bottom: 130px;

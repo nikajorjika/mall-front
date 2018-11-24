@@ -2,13 +2,14 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import store from './store'
+import Axios from 'axios/index'
 
 Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     return { x: 0, y: 0 }
   },
   routes: [
@@ -100,7 +101,22 @@ router.beforeEach((to, from, next) => {
       }
     })
   }
-  next()
+  const sessionToken = sessionStorage.getItem('websiteAuthToken')
+  if (sessionToken === null || sessionToken === '' || sessionToken === undefined || sessionToken === 'undefined') {
+    Axios.post(store.state.apiUrls.websiteAuthURL, {
+      username: store.state.apiCredentials.username,
+      password: store.state.apiCredentials.password
+    }).then((response) => {
+      sessionStorage.setItem('websiteAuthToken', response.data.token)
+      Axios.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + response.data.token
+      next()
+    }).catch((error) => {
+      console.log(error)
+    })
+  } else {
+    Axios.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + sessionToken
+    next()
+  }
 })
 
 export default router
