@@ -39,6 +39,7 @@ const messages = {
       not_registered_q: 'not registered?',
       sign_up: 'sign up',
       register: 'register',
+      please_enter_to_search: 'PRESS ENTER TO SEARCH',
       news: 'news'
     }
   },
@@ -81,6 +82,7 @@ const messages = {
       not_registered_q: 'არ ხართ დარეგისტრირებული?',
       sign_up: 'sign up',
       register: 'რეგისტრაცია',
+      please_enter_to_search: 'PRESS ENTER TO SEARCH',
       promotions: 'პრომოუშენები'
     }
   }

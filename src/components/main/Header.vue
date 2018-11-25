@@ -6,14 +6,18 @@
         <ul class="navigation-menu">
           <li v-for="(item, index) in $store.getters.navigation" v-bind:key="index">
             <div class="nav-drop">
-              <router-link :to="`/${$store.getters.locale.locale}${item.url}`" :class="item.children !== undefined ? 'has-child' : ''">
+              <router-link :to="`/${$store.getters.locale.locale}${item.url}`"
+                           :class="item.children !== undefined ? 'has-child' : ''">
                 <span>{{item.name[$store.getters.locale.locale]}}</span>
-                <span class="caret-down-icon" v-if="item.children !== undefined"><img src="../../assets/images/icons/carret-down.svg"></span>
+                <span class="caret-down-icon" v-if="item.children !== undefined"><img
+                  src="../../assets/images/icons/carret-down.svg"></span>
               </router-link>
               <div v-if="item.children !== undefined" class="drop">
-                  <ul>
+                <ul>
                   <li v-for="(child, i) in item.children" v-bind:key="i">
-                    <router-link :to="`/${$store.getters.locale.locale}${item.url}${child.url}`">{{child.name[$store.getters.locale.locale]}}</router-link>
+                    <router-link :to="`/${$store.getters.locale.locale}${item.url}${child.url}`">
+                      {{child.name[$store.getters.locale.locale]}}
+                    </router-link>
                   </li>
                 </ul>
               </div>
@@ -37,9 +41,16 @@
             <router-link :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}</router-link>
           </li>
           <li>
-            <router-link to="#" class="text-center">
-              <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
-            </router-link>
+            <div @click.prevent="toggleSearch()">
+              <router-link to="#" class="text-center">
+                <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
+              </router-link>
+            </div>
+            <transition name="fade">
+              <div class="search-wrapper" v-if="showSearch">
+                <search-container @close="toggleSearch()"/>
+              </div>
+            </transition>
           </li>
           <li>
             <language-switcher/>
@@ -55,19 +66,27 @@
 import drop from '../partials/DropDown'
 import HamburgerMenu from '../partials/HamburgerMenu'
 import LanguageSwitcher from '../partials/LanguageSwitcher'
+import SearchContainer from '../partials/SearchField'
 
 export default {
   name: 'nav-bar',
   data: function () {
-    return {}
+    return {
+      showSearch: false
+    }
   },
   components: {
+    SearchContainer,
     LanguageSwitcher,
     HamburgerMenu,
     'nav-drop': drop,
     'hamburger-menu': HamburgerMenu
   },
-  methods: {}
+  methods: {
+    toggleSearch: function () {
+      this.showSearch = !this.showSearch
+    }
+  }
 }
 </script>
 
@@ -115,15 +134,15 @@ export default {
             list-style-type: none;
             display: flex;
             background: #000;
-            li{
-              width:100%;
+            li {
+              width: 100%;
               position: relative;
               border-left: solid 1px #3a3838;
-              &:first-child{
+              &:first-child {
                 border-left: none;
               }
-              a{
-                width:100%;
+              a {
+                width: 100%;
                 padding: 22px 0;
                 display: block;
                 box-sizing: border-box;
@@ -135,7 +154,7 @@ export default {
                 letter-spacing: normal;
                 text-align: center;
                 color: #848484;
-                &:hover{
+                &:hover {
                   background: #ffffff;
                   color: #000;
                 }
@@ -158,7 +177,7 @@ export default {
       flex: 1;
       min-width: 18rem;
       .mall-logo {
-        font-family: 'Muli Bold','BPG Nino Mtavruli', 'sans-serif';
+        font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
         .logo {
           font-size: 2.3rem;
           letter-spacing: 0.1rem;
@@ -200,6 +219,21 @@ export default {
         }
       }
     }
+    .search-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      z-index: 999;
+      &.fade-leave-active {
+        animation: fadeOut .2s;
+      }
+      &.fade-enter-active {
+        animation: fadeIn .2s;
+      }
+    }
   }
   #hamburger-menu {
     margin: auto 0;
@@ -210,7 +244,7 @@ export default {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    @media screen and (max-width: 1730px){
+    @media screen and (max-width: 1730px) {
       display: none;
     }
     > li {
@@ -236,7 +270,7 @@ export default {
   li {
     text-transform: uppercase;
     font-size: 1.3rem;
-    font-family: 'Muli SemiBold','BPG Nino Mtavruli', 'sans-serif';
+    font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
   }
 }
 </style>
