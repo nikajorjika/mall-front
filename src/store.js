@@ -18,9 +18,9 @@ import entertainment from './store/modules/entertainments'
 import entertainmentList from './store/modules/entertainmentList'
 import dateOptions from './store/modules/dateOptions'
 import sliderItems from './store/modules/SliderItems'
+import './mixin/mixin'
 
 Vue.use(Vuex)
-
 export default new Vuex.Store({
   state: {
     noScroll: false,
@@ -52,7 +52,7 @@ export default new Vuex.Store({
     entertainmentList: entertainmentList,
     messages: messages,
     apiUrls: apiUrls,
-    user: localStorage.getItem('user') ? localStorage.getItem('user') : '',
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : (sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null),
     apiCredentials: apiCredentials,
     googleMap: googleMap,
     alphabet: alphabet,
@@ -162,7 +162,7 @@ export default new Vuex.Store({
         showInFeaturedSearch: true,
         showInSlider: true,
         websiteLink: ''
-      } ],
+      }],
     sliderItems: sliderItems
   },
   mutations: {
@@ -183,15 +183,17 @@ export default new Vuex.Store({
       })
     },
     INITIAL_LOAD: (state, payload) => {
-      state[payload.model] = payload.data
+      state[ payload.model ] = payload.data
     },
     SET_LOADING_STATE: (state, payload) => {
       state.loading[ payload.model ] = payload.value
     },
     SET_USER: (state, payload) => {
-      state.userToken = payload.token
+      state.user = payload.user
       if (payload.remember) {
-        localStorage.setItem('user', payload.token.toString())
+        localStorage.setItem('user', JSON.stringify(payload.user))
+      } else {
+        sessionStorage.setItem('user', JSON.stringify(payload.user))
       }
     },
     SET_HOME_ADS: (state, payload) => {
@@ -267,6 +269,9 @@ export default new Vuex.Store({
     },
     frontNewCollections: (state) => {
       return state.frontNewCollections
+    },
+    user: (state) => {
+      return state.user
     }
   },
   actions: {
@@ -342,7 +347,7 @@ export default new Vuex.Store({
             return item._id === request
           })
           if (store.length) {
-            resolve(store[0])
+            resolve(store[ 0 ])
           } else {
             context.dispatch('loadSingle', {
               id: request,
@@ -387,16 +392,12 @@ export default new Vuex.Store({
             } else {
               resolve(response)
               if (response.data.token) {
-                const userCredentials = {
-                  email: user.email,
-                  token: response.data.token
-                }
-                context.dispatch('getUser', userCredentials).then(function (response) {
-                  console.log(response)
-                }).catch(function (error) {
-                  console.log(error.response)
+                response.data.user.token = response.data.token
+                context.commit('SET_USER', {
+                  token: response.data.token,
+                  user: response.data.user,
+                  remember: user.remember
                 })
-                // context.commit('SET_USER', { token: response.data.token, remember: user.remember })
               }
             }
           })
@@ -425,6 +426,14 @@ export default new Vuex.Store({
               resolve('RECORD NOT FOUND')
             } else {
               resolve(response)
+              if (response.data.token) {
+                response.data.user.token = response.data.token
+                context.commit('SET_USER', {
+                  token: response.data.token,
+                  user: response.data.user,
+                  remember: user.remember
+                })
+              }
             }
           })
           .catch(function (error) {

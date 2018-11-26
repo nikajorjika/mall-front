@@ -38,7 +38,8 @@
             <router-link to="#">{{t('contact')}}</router-link>
           </li>
           <li>
-            <router-link :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}</router-link>
+            <router-link v-if="$store.getters.user" :to="`/${$store.getters.locale.locale}/login`">{{$store.getters.user.name}}</router-link>
+            <router-link v-else :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}</router-link>
           </li>
           <li>
             <div @click.prevent="toggleSearch()">
