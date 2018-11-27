@@ -1,7 +1,7 @@
 <template>
   <div id="registration-form">
     <white-spinner v-if="loading"/>
-    <form action="" ref="RegistrationForm">
+    <form @submit.prevent="register">
       <div v-if="returnedError.length" class="registration-error">
         <div class="error"><span>{{returnedError}}</span></div>
       </div>

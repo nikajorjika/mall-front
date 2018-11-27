@@ -17,6 +17,15 @@ Vue.mixin({
         storesList[ value.name[ store.getters.locale.locale ].charAt(0) ].push(value)
       })
       return storesList
+    },
+    getUser: function () {
+      let user = ''
+      if (localStorage.getItem('user')) {
+        user = sessionStorage.getItem('user')
+      } else if (localStorage.getItem('user')) {
+        user = localStorage.getItem('user')
+      }
+      return user
     }
   }
 })
