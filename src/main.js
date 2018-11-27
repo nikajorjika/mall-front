@@ -6,6 +6,7 @@ import './registerServiceWorker'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import VeeValidate from 'vee-validate'
 import dictionary from './lang/messages/ka'
+import VueMq from 'vue-mq'
 import {
   faCaretDown,
   faCaretRight,
@@ -38,6 +39,14 @@ Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyABserBqL7VFOHlWx4wrtgHKtTGzD0k90A',
     libraries: 'places'
+  }
+})
+Vue.use(VueMq, {
+  breakpoints: {
+    mobile: 760,
+    tablet: 1060,
+    laptop: 1366,
+    desktop: Infinity
   }
 })
 

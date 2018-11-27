@@ -33,13 +33,30 @@
         </div>
       </div>
       <div class="header-right">
-        <ul>
+        <ul v-if="$mq !== 'tablet' && $mq !== 'mobile'">
           <li>
             <router-link to="#">{{t('contact')}}</router-link>
           </li>
           <li>
             <router-link :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}</router-link>
           </li>
+          <li>
+            <div @click.prevent="toggleSearch()">
+              <router-link to="#" class="text-center">
+                <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
+              </router-link>
+            </div>
+            <transition name="fade">
+              <div class="search-wrapper" v-if="showSearch">
+                <search-container @close="toggleSearch()"/>
+              </div>
+            </transition>
+          </li>
+          <li>
+            <language-switcher/>
+          </li>
+        </ul>
+        <ul v-else>
           <li>
             <div @click.prevent="toggleSearch()">
               <router-link to="#" class="text-center">
@@ -176,6 +193,9 @@ export default {
       margin: auto 0;
       flex: 1;
       min-width: 18rem;
+      @media screen and (max-width: 760px) {
+        width:100px;
+      }
       .mall-logo {
         font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
         .logo {
@@ -183,6 +203,12 @@ export default {
           letter-spacing: 0.1rem;
           margin: 0;
           text-align: center;
+          @media screen and (max-width: 1366px) {
+            height: 17px;
+          }
+          @media screen and (max-width: 760px) {
+            height: 11.4px;
+          }
         }
       }
     }
@@ -200,8 +226,13 @@ export default {
             box-sizing: border-box;
             display: flex;
             text-align: center;
+            @media screen and (max-width: 760px) {
+              padding:23px;
+              min-width: 0;
+            }
             &.text-center {
               display: flex;
+              text-align: center;
               img {
                 margin: auto;
               }

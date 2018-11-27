@@ -6,22 +6,23 @@
     <transition name="fade">
       <div class="content-container" v-if="showMenu" @click="close">
         <div class="inner-content-container" @click.stop>
-          <div class="close-icon">
+          <div class="close-icon" :class="{hideSmall: currentItem !== null}">
             <default-icon class="hamburger-close-button" :icon="`close`" @click="toggleHamburgerMenu"/>
             <!--<search-container class="hamburger-search"/>-->
           </div>
           <div class="right-container">
-            <div class="ham-logo-container">
+            <div class="ham-logo-container" :class="{hideSmall: currentItem !== null}">
               <router-link to="/">
                 <img class="logo" src="../../assets/images/icons/TM_LOGO.svg">
               </router-link>
             </div>
-            <div class="menu-container">
+            <div class="menu-container" :class="{hideSmall: currentItem !== null}">
               <transition name="fadeIn">
                 <div class="list-wrapper" v-if="currentItem === null">
                   <div class="list-container" v-for="(data, i) in $store.state.hamburgerData" v-bind:key="i">
                     <h3 class="parent-title">
-                      <router-link class="title" :to="`/${$store.getters.locale.locale}${data.url}`">{{data.name[$store.getters.locale.locale]}}
+                      <router-link class="title" :to="`/${$store.getters.locale.locale}${data.url}`">
+                        {{data.name[$store.getters.locale.locale]}}
                       </router-link>
                       <span v-if="data.children !== undefined && data.children !== null && data.children.length"
                             class="open-children" @click="openChildren(data)"><span class="icon-container"><font-awesome-icon
@@ -44,7 +45,8 @@
                     <ul>
                       <li v-for="(child, index) in currentItem.children" :key="index"
                           :class="{rightBorder: index % 2 === 0 }">
-                        <router-link :to="`/${$store.getters.locale.locale}${currentItem.url}${child.url}`" class="child-menu-name">
+                        <router-link :to="`/${$store.getters.locale.locale}${currentItem.url}${child.url}`"
+                                     class="child-menu-name">
                           {{child.name[$store.getters.locale.locale]}}
                         </router-link>
                       </li>
@@ -163,6 +165,9 @@ export default {
       z-index: 4;
       position: relative;
       height: 100%;
+      @media screen and (max-width: 760px) {
+        flex-direction: column;
+      }
       .close {
         font-size: 14px;
       }
@@ -173,10 +178,16 @@ export default {
         .ham-logo-container {
           width: 155.8px;
           margin: 35.6px auto;
+          @media screen and (max-width: 760px) {
+            display: none;
+          }
         }
         .menu-container {
           position: relative;
           margin-top: 117px;
+          @media screen and (max-width: 760px) {
+            margin-top: 0;
+          }
           .list-wrapper {
             &.fadeIn-enter-to {
               animation: fadeIn .7s;
@@ -196,9 +207,15 @@ export default {
                 margin: 0;
                 border-bottom: solid 1px #dcdcdc;
                 display: flex;
+                @media screen and (max-width: 1366px) {
+                  font-size: 1.4rem;
+                }
                 .title {
                   padding: 25.5px 54px;
                   width: calc(100% - 80px);
+                  @media screen and (max-width: 1366px) {
+                    padding: 20px 36px;
+                  }
                 }
                 .open-children {
                   margin-left: auto;
@@ -207,6 +224,7 @@ export default {
                   display: flex;
                   .icon-container {
                     margin: auto;
+                    font-size: 1rem;
                   }
                 }
               }
@@ -246,6 +264,9 @@ export default {
             .list-parent-title {
               display: flex;
               margin: 0 0 121px;
+              @media screen and (max-width: 760px) {
+                margin: 46px 0 49px 0;
+              }
               .back-icon-container {
                 width: 64px;
                 font-size: 15px;
@@ -263,6 +284,9 @@ export default {
                 text-transform: uppercase;
                 margin: 0 96px 0 0;
                 text-align: center;
+                @media screen and (max-width: 760px) {
+                  font-size: 2.4rem;
+                }
               }
             }
             .children-list {
@@ -281,6 +305,10 @@ export default {
                     color: #000000;
                     display: block;
                     padding: 27px 54px;
+                    @media screen and (max-width: 760px) {
+                      padding: 36px 10px 36px 36px;
+                      font-size: 1.1rem;
+                    }
                   }
                   &:nth-child(1) {
                     border-top: 1px solid #dcdcdc;
@@ -307,6 +335,11 @@ export default {
         padding: 34.3px 33.8px;
         border-right: solid 1px #dcdcdc;
         box-sizing: border-box;
+        @media screen and (max-width: 760px) {
+          &.hideSmall {
+            display: none;
+          }
+        }
       }
     }
     .hamburger-search {

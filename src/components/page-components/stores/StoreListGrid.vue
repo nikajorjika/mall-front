@@ -252,14 +252,22 @@ export default {
   display: flex;
   flex-wrap: wrap;
   margin: 2px -10px;
+  @media screen and (max-width: 1110px){
+    margin: 2px 0;
+  }
+  @media screen and (max-width: 760px){
+    margin: 2px 26px;
+  }
   .store-list-item {
     position: relative;
     margin: 10px;
-    border: 0.5px solid #dcdcdc;
+    border: 1px solid rgba(220, 220, 220, 0.5);
     width: calc(25% - 20px);
     box-sizing: border-box;
     padding-top: calc(25% - 20px);
-    @media screen and (max-width: 1650px){
+    @media screen and (max-width: 760px){
+      width: calc(50% - 20px);
+      padding-top: calc(50% - 20px);
     }
     .store-inner {
       position: absolute;

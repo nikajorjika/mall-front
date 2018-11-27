@@ -15,7 +15,7 @@
       <custom-select :items="categories.sort.data"
                      :placeholder="categories.sort.placeholder"/>
     </div>
-    <div class="grid-toggle">
+    <div class="grid-toggle" v-if="$mq !== 'mobile'">
       <div class="show-grid toggle-item" :class="grid ? 'active' : ''" @click="toggleView(true)">
         <div class="icon-wrapper">
           <font-awesome-icon icon="th-large"/>
@@ -67,7 +67,7 @@ export default {
   .filter-item {
     width: 260px;
     margin-right: 15.8px;
-    @media screen and (max-width: 1650px){
+    @media screen and (max-width: 1650px) {
       width: 185px;
     }
     &:first-child {
@@ -76,7 +76,7 @@ export default {
   }
   .grid-toggle {
     display: flex;
-    @media screen and (max-width: 1650px){
+    @media screen and (max-width: 1650px) {
       margin-right: auto;
     }
     .toggle-item {
@@ -90,7 +90,7 @@ export default {
       box-sizing: border-box;
       opacity: 0.3;
       cursor: pointer;
-      @media screen and (max-width: 1650px){
+      @media screen and (max-width: 1650px) {
         width: 36px;
         height: 36px;
         font-size: 14px;
