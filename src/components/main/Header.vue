@@ -38,8 +38,19 @@
             <router-link to="#">{{t('contact')}}</router-link>
           </li>
           <li>
-            <router-link v-if="$store.getters.user" :to="`/${$store.getters.locale.locale}/login`">{{$store.getters.user.name}}</router-link>
+            <a @click.prevent="toggleActions()" v-if="$store.getters.user">
+                {{$store.getters.user.name}}
+            </a>
             <router-link v-else :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}</router-link>
+            <div class="user-action-block" v-show="showActions">
+              <ul>
+                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('notifications')}}</router-link></span></li>
+                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('subscribe_list')}}</router-link></span></li>
+                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('bookmarks')}}</router-link></span></li>
+                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('settings')}}</router-link></span></li>
+                <li><span class="action-label">{{t('log_out')}}</span></li>
+              </ul>
+            </div>
           </li>
           <li>
             <div @click.prevent="toggleSearch()">
@@ -90,6 +101,7 @@ export default {
   name: 'nav-bar',
   data: function () {
     return {
+      showActions: false,
       showSearch: false
     }
   },
@@ -103,6 +115,10 @@ export default {
   methods: {
     toggleSearch: function () {
       this.showSearch = !this.showSearch
+    },
+    toggleActions: function () {
+      console.log(this.showActions)
+      this.showActions = !this.showActions
     }
   }
 }
@@ -195,7 +211,7 @@ export default {
       flex: 1;
       min-width: 18rem;
       @media screen and (max-width: 760px) {
-        width:100px;
+        width: 100px;
       }
       .mall-logo {
         font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
@@ -216,19 +232,21 @@ export default {
     .header-right {
       flex: 8;
       align-self: flex-end;
-      ul {
+      > ul {
         display: flex;
         flex-wrap: wrap;
-        li {
+        >li {
           border-left: solid 1px #f1f1f1;
+          position: relative;
           a {
             padding: 35.5px 29px;
             min-width: 85px;
             box-sizing: border-box;
             display: flex;
             text-align: center;
+            cursor: pointer;
             @media screen and (max-width: 760px) {
-              padding:23px;
+              padding: 23px;
               min-width: 0;
             }
             &.text-center {
@@ -247,6 +265,35 @@ export default {
           }
           &:first-child {
             margin-left: auto;
+          }
+          .user-action-block{
+            position: absolute;
+            background: #ffffff;
+            z-index: 999;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, -11px);
+            padding: 32px;
+            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
+            ul{
+              li{
+                margin-bottom:14px;
+                .action-label{
+                  cursor: pointer;
+                  font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
+                  white-space: nowrap;
+                  a{
+                    padding: 0;
+                    &:hover {
+                      background: transparent;
+                    }
+                  }
+                }
+                &:last-child{
+                  margin-bottom: 0;
+                }
+              }
+            }
           }
         }
       }

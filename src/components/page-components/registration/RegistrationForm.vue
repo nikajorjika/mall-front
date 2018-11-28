@@ -156,6 +156,11 @@ import WhiteSpinner from '../../partials/LoadingSpinner'
 export default {
   name: 'registration-form',
   components: { WhiteSpinner, ButtonStandard, CustomSelect },
+  mounted: function () {
+    if (this.$store.getters.user) {
+      this.$router.back()
+    }
+  },
   data: function () {
     return {
       user: {

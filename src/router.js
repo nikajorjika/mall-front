@@ -9,7 +9,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior: function (to, from, savedPosition) {
     return { x: 0, y: 0 }
   },
   routes: [
@@ -92,15 +92,6 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  let language = to.params.locale
-  if (language) {
-    const languages = store.getters.languages
-    languages.forEach(function (object, index) {
-      if (object.locale === language) {
-        store.commit('SET_LOCALE', object.locale)
-      }
-    })
-  }
   const sessionToken = sessionStorage.getItem('websiteAuthToken')
   if (sessionToken === null || sessionToken === '' || sessionToken === undefined || sessionToken === 'undefined') {
     Axios.post(store.state.apiUrls.websiteAuthURL, {
@@ -116,6 +107,15 @@ router.beforeEach((to, from, next) => {
   } else {
     Axios.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + sessionToken
     next()
+  }
+  let language = to.params.locale
+  if (language) {
+    const languages = store.getters.languages
+    languages.forEach(function (object, index) {
+      if (object.locale === language) {
+        store.commit('SET_LOCALE', object.locale)
+      }
+    })
   }
 })
 

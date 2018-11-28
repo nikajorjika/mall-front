@@ -52,6 +52,11 @@ export default {
       returnedError: ''
     }
   },
+  mounted: function () {
+    if (this.$store.getters.user) {
+      this.$router.back()
+    }
+  },
   computed: {
     focusedUsername: function () {
       let result = false
@@ -73,20 +78,20 @@ export default {
       return require('../../../assets/images/icons/facebook.svg')
     },
     login: function () {
-      const _this = this
-      this.$validator.validateAll().then(function (status) {
+      this.$validator.validateAll().then((status) => {
         if (status) {
           // here we submit form
-          _this.loading = true
-          _this.returnedError = ''
-          _this.$store.dispatch('login', _this.user).then(function (response) {
-            _this.loading = false
-            _this.$route.push({ name: 'home' })
+          this.loading = true
+          this.returnedError = ''
+          this.$store.dispatch('login', this.user).then((response) => {
+            this.loading = false
+            console.log('login success')
+            this.$router.push({ name: 'home', params: { locale: this.$store.getters.locale.locale } })
           }).catch((error) => {
             if (error.response && error.response.data) {
-              _this.returnedError = error.response.data.status
+              this.returnedError = error.response.data.status
             }
-            _this.loading = false
+            this.loading = false
           })
         }
       })

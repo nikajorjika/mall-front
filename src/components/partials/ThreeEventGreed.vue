@@ -9,8 +9,9 @@
       </div>
     </div>
     <div class="greed-footer-container" v-show="hasMore">
-      <button v-show="!loading" @click="loadMore">{{t('more')}}</button>
-      <button v-show="loading">{{t('loading')}}</button>
+      <router-link :to="`/${$store.getters.locale.locale}/${route}`">
+        <button>{{t('more')}}</button>
+      </router-link>
     </div>
   </div>
 </template>
