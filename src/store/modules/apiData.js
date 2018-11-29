@@ -9,6 +9,8 @@ const apiUrls = {
   socials: 'https://smartfinders.herokuapp.com/api/v1/website/social-links',
   marketing: 'https://smartfinders.herokuapp.com/api/v1/website/about-page/5bdb52156155da077b01cd69',
   leasing: 'https://smartfinders.herokuapp.com/api/v1/website/about-page/5bdb52d565ee300780c8be70',
+  gift: 'https://smartfinders.herokuapp.com/api/v1/website/about-page/5bdb52156155da077b01cd72',
+  about: 'https://smartfinders.herokuapp.com/api/v1/website/about-page/5bdb52156155da077b01cd71',
   storesAPI: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/stores/${page}/${offset}`,
   eventsAPI: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/events/${page}/${offset}`,
   promotionsApi: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/promotions/${page}/${offset}`,

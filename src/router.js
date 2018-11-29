@@ -50,6 +50,12 @@ const router = new Router({
           name: 'leasing',
           props: true,
           component: () => import('./components/page-components/about-us/Leasing.vue')
+        },
+        {
+          path: 'gift-card',
+          name: 'giftCard',
+          props: true,
+          component: () => import('./components/page-components/about-us/Leasing.vue')
         }
       ]
     },

@@ -1,11 +1,15 @@
 <template>
   <div class="page-block">
-    <about-title :title="this.$store.state.pageData.aboutUs.title"/>
-    <about-content :content="this.$store.state.pageData.aboutUs.content"/>
+    <about-title :title="pageTitle"/>
+    <about-content :content="pageDescription"/>
     <div class="additional-info">
-      <div class="additional-info-item" v-for="additional in this.$store.state.pageData.aboutUs.additional" :key="additional.title">
-        <h4>{{additional.title}}</h4>
-        <p v-html="additional.text"></p>
+      <div class="additional-info-item">
+        <h4>{{workingHoursTitle}}</h4>
+        <p v-html="workingHours"></p>
+      </div>
+      <div class="additional-info-item">
+        <h4>{{carrefourTitle}}</h4>
+        <p v-html="carrefourWorkingHours"></p>
       </div>
     </div>
   </div>
@@ -19,6 +23,9 @@ export default {
   components: {
     AboutContent,
     AboutTitle
+  },
+  mounted: function () {
+    if (!this.pageDataContent.length) this.fetchPage()
   },
   props: {
     title: {
@@ -34,6 +41,48 @@ export default {
       default: function () {
         return []
       }
+    }
+  },
+  data: function () {
+    return {
+      pageData: null,
+      locale: this.$store.getters.locale.locale
+    }
+  },
+  computed: {
+    pageDataContent: function () {
+      return this.pageData ? JSON.parse(this.pageData.data) : ''
+    },
+    pageTitle: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
+    },
+    pageDescription: function () {
+      return this.pageDataContent ? `<p>${this.pageDataContent[ this.locale + 'Description' ].replace(/\n/g, "<br />")}</p>`: ''
+    },
+    workingHoursTitle: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'WorkingHoursTitle' ] : ''
+    },
+    workingHours: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'WorkingHours' ] : ''
+    },
+    carrefourTitle: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'CarrefourTitle' ] : ''
+    },
+    carrefourWorkingHours: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'CarrefourWorkingHours' ] : ''
+    }
+  },
+  methods: {
+    fetchPage: function () {
+      this.$store.dispatch('getAboutPage', this.$store.state.apiUrls.about)
+        .then((response) => {
+          if (Array.isArray(response)) {
+            this.pageData = response[ 0 ]
+          }
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
   }
 }

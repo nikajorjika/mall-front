@@ -23,7 +23,7 @@ import AboutTitle from './AboutPageTitle'
 import ServiceList from './ServiceList'
 
 export default {
-  name: 'page-block',
+  name: 'leasing-block',
   components: {
     ServiceList,
     AboutContent,
@@ -95,9 +95,9 @@ export default {
     fetchPage: function () {
       this.$store.dispatch('getAboutPage', this.$store.state.apiUrls.leasing)
         .then((response) => {
+          console.log(response)
           if (Array.isArray(response)) {
             this.pageData = response[ 0 ]
-            console.log(this.pageData)
           }
         })
         .catch((error) => {
