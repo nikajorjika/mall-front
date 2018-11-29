@@ -57,7 +57,7 @@ export default {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
     },
     pageDescription: function () {
-      return this.pageDataContent ? `<p>${this.pageDataContent[ this.locale + 'Description' ].replace(/\n/g, "<br />")}</p>`: ''
+      return this.pageDataContent ? `<p>${this.pageDataContent[ this.locale + 'Description' ].replace(/\n/g, '<br />')}</p>` : ''
     },
     workingHoursTitle: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'WorkingHoursTitle' ] : ''

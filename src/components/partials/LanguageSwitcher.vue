@@ -2,7 +2,7 @@
   <div class="language-switcher">
     <div class="lang-wrapper" @click="this.toggleShow">
       <router-link :to="nextRoute" class="text-center">
-        {{currentLanguage.name}}
+        {{displayLanguage.name}}
       </router-link>
     </div>
   </div>
@@ -34,6 +34,13 @@ export default {
         name: this.$route.name,
         params: params
       }
+    },
+    displayLanguage: function () {
+      return this.$store.state.languages.filter((item) => {
+        if (item.locale === this.languages[ this.currentLanguage.locale ]) {
+          return true
+        }
+      })[0]
     }
   },
   mounted: function () {

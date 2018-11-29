@@ -1,408 +1,429 @@
 <template>
-    <div id="nav">
-        <div class="header-wrapper">
-            <div class="header-left">
-                <hamburger-menu/>
-                <ul class="navigation-menu">
-                    <li v-for="(item, index) in $store.getters.navigation" v-bind:key="index">
-                        <div class="nav-drop">
-                            <router-link :to="`/${$store.getters.locale.locale}${item.url}`"
-                                         :class="item.children !== undefined ? 'has-child' : ''">
-                                <span>{{item.name[$store.getters.locale.locale]}}</span>
-                                <span class="caret-down-icon" v-if="item.children !== undefined"><img
-                                        src="../../assets/images/icons/carret-down.svg" alt="caret down"></span>
-                            </router-link>
-                            <div v-if="item.children !== undefined" class="drop">
-                                <ul>
-                                    <li v-for="(child, i) in item.children" v-bind:key="i">
-                                        <router-link :to="`/${$store.getters.locale.locale}${item.url}${child.url}`">
-                                            {{child.name[$store.getters.locale.locale]}}
-                                        </router-link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class="header-center">
-                <div class="mall-logo">
-                    <router-link to="/">
-                        <img class="logo" src="../../assets/images/icons/TM_LOGO.svg" alt="Tbilisi Mall Logo">
+  <div id="nav">
+    <div class="header-wrapper">
+      <div class="header-left">
+        <hamburger-menu/>
+        <ul class="navigation-menu">
+          <li v-for="(item, index) in $store.getters.navigation" v-bind:key="index">
+            <div class="nav-drop">
+              <router-link :to="`/${$store.getters.locale.locale}${item.url}`"
+                           :class="item.children !== undefined ? 'has-child' : ''">
+                <span>{{item.name[$store.getters.locale.locale]}}</span>
+                <span class="caret-down-icon" v-if="item.children !== undefined"><img
+                  src="../../assets/images/icons/carret-down.svg" alt="caret down"></span>
+              </router-link>
+              <div v-if="item.children !== undefined" class="drop">
+                <ul :class="{twoCol: item.children.length > 10 }">
+                  <li v-for="(child, i) in item.children" v-bind:key="i">
+                    <router-link :to="`/${$store.getters.locale.locale}${item.url}${child.url}`">
+                      {{child.name[$store.getters.locale.locale]}}
                     </router-link>
+                  </li>
+                </ul>
+                <div class="drop-image">
+                  <img src="../../assets/images/statics/tbm.jpg" alt="Tbilisi mall">
                 </div>
+              </div>
             </div>
-            <div class="header-right">
-                <ul v-if="$mq !== 'tablet' && $mq !== 'mobile'">
-                    <li>
-                        <router-link to="#">{{t('contact')}}</router-link>
-                    </li>
-                    <li>
-                        <a @click.prevent="toggleActions()" v-if="$store.getters.user">
-                            {{$store.getters.user.name}}
-                        </a>
-                        <router-link v-else :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}
-                        </router-link>
-                        <div class="user-action-block" v-show="showActions">
-                            <ul>
-                                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('notifications')}}</router-link></span>
-                                </li>
-                                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('subscribe_list')}}</router-link></span>
-                                </li>
-                                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('bookmarks')}}</router-link></span>
-                                </li>
-                                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('settings')}}</router-link></span>
-                                </li>
-                                <li><span class="action-label" @click="logOut">{{t('log_out')}}</span></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        <div @click.prevent="toggleSearch()">
-                            <router-link to="#" class="text-center">
-                                <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
-                            </router-link>
-                        </div>
-                        <transition name="fade">
-                            <div class="search-wrapper" v-if="showSearch">
-                                <search-container @close="toggleSearch()"/>
-                            </div>
-                        </transition>
-                    </li>
-                    <li>
-                        <language-switcher/>
-                    </li>
-                </ul>
-                <ul v-else>
-                    <li>
-                        <div @click.prevent="toggleSearch()">
-                            <router-link to="#" class="text-center">
-                                <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
-                            </router-link>
-                        </div>
-                        <transition name="fade">
-                            <div class="search-wrapper" v-if="showSearch">
-                                <search-container @close="toggleSearch()"/>
-                            </div>
-                        </transition>
-                    </li>
-                    <li>
-                        <language-switcher/>
-                    </li>
-                </ul>
-            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="header-center">
+        <div class="mall-logo">
+          <router-link to="/">
+            <img class="logo" src="../../assets/images/icons/TM_LOGO.svg" alt="Tbilisi Mall Logo">
+          </router-link>
         </div>
+      </div>
+      <div class="header-right">
+        <ul v-if="$mq !== 'tablet' && $mq !== 'mobile'">
+          <li>
+            <router-link to="#">{{t('contact')}}</router-link>
+          </li>
+          <li>
+            <a @click.prevent="toggleActions()" v-if="$store.getters.user">
+              {{$store.getters.user.name}}
+            </a>
+            <router-link v-else :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}
+            </router-link>
+            <div class="user-action-block" v-show="showActions">
+              <ul>
+                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('notifications')}}</router-link></span>
+                </li>
+                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('subscribe_list')}}</router-link></span>
+                </li>
+                <li><span class="action-label"><router-link
+                  :to="`/${$store.getters.locale.locale}`">{{t('bookmarks')}}</router-link></span>
+                </li>
+                <li><span class="action-label"><router-link
+                  :to="`/${$store.getters.locale.locale}`">{{t('settings')}}</router-link></span>
+                </li>
+                <li><span class="action-label" @click="logOut">{{t('log_out')}}</span></li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <div @click.prevent="toggleSearch()">
+              <router-link to="#" class="text-center">
+                <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
+              </router-link>
+            </div>
+            <transition name="fade">
+              <div class="search-wrapper" v-if="showSearch">
+                <search-container @close="toggleSearch()"/>
+              </div>
+            </transition>
+          </li>
+          <li>
+            <language-switcher/>
+          </li>
+        </ul>
+        <ul v-else>
+          <li>
+            <div @click.prevent="toggleSearch()">
+              <router-link to="#" class="text-center">
+                <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
+              </router-link>
+            </div>
+            <transition name="fade">
+              <div class="search-wrapper" v-if="showSearch">
+                <search-container @close="toggleSearch()"/>
+              </div>
+            </transition>
+          </li>
+          <li>
+            <language-switcher/>
+          </li>
+        </ul>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 
-  import drop from '../partials/DropDown'
-  import HamburgerMenu from '../partials/HamburgerMenu'
-  import LanguageSwitcher from '../partials/LanguageSwitcher'
-  import SearchContainer from '../partials/SearchField'
+import HamburgerMenu from '../partials/HamburgerMenu'
+import LanguageSwitcher from '../partials/LanguageSwitcher'
+import SearchContainer from '../partials/SearchField'
 
-  export default {
-    name: 'nav-bar',
-    data: function () {
-      return {
-        showActions: false,
-        showSearch: false
-      }
+export default {
+  name: 'nav-bar',
+  data: function () {
+    return {
+      showActions: false,
+      showSearch: false
+    }
+  },
+  components: {
+    SearchContainer,
+    LanguageSwitcher,
+    HamburgerMenu,
+    'hamburger-menu': HamburgerMenu
+  },
+  methods: {
+    toggleSearch: function () {
+      this.showSearch = !this.showSearch
     },
-    components: {
-      SearchContainer,
-      LanguageSwitcher,
-      HamburgerMenu,
-      'nav-drop': drop,
-      'hamburger-menu': HamburgerMenu
+    toggleActions: function () {
+      console.log(this.showActions)
+      this.showActions = !this.showActions
     },
-    methods: {
-      toggleSearch: function () {
-        this.showSearch = !this.showSearch
-      },
-      toggleActions: function () {
-        console.log(this.showActions)
-        this.showActions = !this.showActions
-      },
-      logOut: function () {
-        this.$store.dispatch('logout').then(() => {
-          this.showActions = false
-        }).catch((error) => {
-          console.error(error)
-        })
-      }
+    logOut: function () {
+      this.$store.dispatch('logout').then(() => {
+        this.showActions = false
+      }).catch((error) => {
+        console.error(error)
+      })
     }
   }
+}
 </script>
 
 <style lang="scss">
-    #nav {
-        background-color: #ffffff;
-        border-top: solid 1px #f1f1f1;
-        border-bottom: solid 1px #f1f1f1;
+#nav {
+  background-color: #ffffff;
+  border-top: solid 1px #f1f1f1;
+  border-bottom: solid 1px #f1f1f1;
 
-        .header-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            position: relative;
+  .header-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
 
-            .header-left {
-                display: flex;
-                flex-wrap: wrap;
-                flex: 8;
+    .header-left {
+      display: flex;
+      flex-wrap: wrap;
+      flex: 8;
 
-                .nav-drop {
-                    .has-child {
-                        display: flex;
+      .nav-drop {
+        position: relative;
+        .has-child {
+          display: flex;
 
-                        .caret-down-icon {
-                            margin: auto 0;
-                            height: 3.3px;
-                            width: 7.3px;
-                            display: inline-block;
-
-                            img {
-                                height: 100%;
-                                width: 100%;
-                                display: block;
-                                object-fit: contain;
-                            }
-                        }
-
-                        span {
-                            margin-right: 4.6px;
-                            display: inline-block;
-                        }
-                    }
-
-                    .drop {
-                        position: absolute;
-                        background: #fff;
-                        z-index: 999;
-                        width: auto;
-                        overflow: hidden;
-                        height: 0;
-
-                        ul {
-                            list-style-type: none;
-                            display: flex;
-                            background: #000;
-
-                            li {
-                                width: 100%;
-                                position: relative;
-                                border-left: solid 1px #3a3838;
-
-                                &:first-child {
-                                    border-left: none;
-                                }
-
-                                a {
-                                    width: 100%;
-                                    padding: 22px 0;
-                                    display: block;
-                                    box-sizing: border-box;
-                                    font-size: 12px;
-                                    font-weight: 300;
-                                    font-style: normal;
-                                    font-stretch: normal;
-                                    line-height: 1.25;
-                                    letter-spacing: normal;
-                                    text-align: center;
-                                    color: #848484;
-
-                                    &:hover {
-                                        background: #ffffff;
-                                        color: #000;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    &:hover {
-                        .drop {
-                            height: auto;
-                            width: 100%;
-                            left: 0;
-                            box-sizing: border-box;
-                        }
-                    }
-                }
-            }
-
-            .header-center {
-                margin: auto 0;
-                flex: 1;
-                min-width: 18rem;
-                @media screen and (max-width: 760px) {
-                    width: 100px;
-                }
-
-                .mall-logo {
-                    font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
-
-                    .logo {
-                        font-size: 2.3rem;
-                        letter-spacing: 0.1rem;
-                        margin: 0;
-                        text-align: center;
-                        @media screen and (max-width: 1366px) {
-                            height: 17px;
-                        }
-                        @media screen and (max-width: 760px) {
-                            height: 11.4px;
-                        }
-                    }
-                }
-            }
-
-            .header-right {
-                flex: 8;
-                align-self: flex-end;
-
-                > ul {
-                    display: flex;
-                    flex-wrap: wrap;
-
-                    > li {
-                        border-left: solid 1px #f1f1f1;
-                        position: relative;
-
-                        a {
-                            padding: 35.5px 29px;
-                            min-width: 85px;
-                            box-sizing: border-box;
-                            display: flex;
-                            text-align: center;
-                            cursor: pointer;
-                            @media screen and (max-width: 760px) {
-                                padding: 23px;
-                                min-width: 0;
-                            }
-
-                            &.text-center {
-                                display: flex;
-                                text-align: center;
-
-                                img {
-                                    margin: auto;
-                                }
-                            }
-
-                            &:hover {
-                                background: #f1f1f1;
-                            }
-
-                            img {
-                                margin: auto 0;
-                            }
-                        }
-
-                        &:first-child {
-                            margin-left: auto;
-                        }
-
-                        .user-action-block {
-                            position: absolute;
-                            background: #ffffff;
-                            z-index: 999;
-                            top: 100%;
-                            left: 50%;
-                            transform: translate(-50%, -11px);
-                            padding: 32px;
-                            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
-
-                            ul {
-                                li {
-                                    margin-bottom: 14px;
-
-                                    .action-label {
-                                        cursor: pointer;
-                                        font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
-                                        white-space: nowrap;
-
-                                        a {
-                                            padding: 0;
-
-                                            &:hover {
-                                                background: transparent;
-                                            }
-                                        }
-                                    }
-
-                                    &:last-child {
-                                        margin-bottom: 0;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            .search-wrapper {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: #fff;
-                z-index: 999;
-
-                &.fade-leave-active {
-                    animation: fadeOut .2s;
-                }
-
-                &.fade-enter-active {
-                    animation: fadeIn .2s;
-                }
-            }
-        }
-
-        #hamburger-menu {
+          .caret-down-icon {
             margin: auto 0;
+            height: 3.3px;
+            width: 7.3px;
+            display: inline-block;
+
+            img {
+              height: 100%;
+              width: 100%;
+              display: block;
+              object-fit: contain;
+            }
+          }
+
+          span {
+            margin-right: 4.6px;
+            display: inline-block;
+          }
         }
 
-        .navigation-menu {
-            border-left: solid 1px #f1f1f1;
-            border-right: solid 1px #f1f1f1;
+        .drop {
+          position: absolute;
+          background: #fff;
+          z-index: 999;
+          overflow: hidden;
+          left: 0;
+          top: calc(100% - 11px);
+          height: 0;
+          box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
+          display: flex;
+          padding-right: 182px;
+          ul {
             list-style-type: none;
+            padding: 24px 0;
+            &.twoCol{
+              width: 472px;
+              display: flex;
+              flex-wrap: wrap;
+              li{
+                width: 236px;
+                margin-right: 0;
+              }
+            }
+            li {
+              width: 100%;
+              position: relative;
+              white-space: nowrap;
+              margin-right: 90px;
+              &:first-child {
+                border-left: none;
+              }
+              a {
+                width: 100%;
+                padding: 7.5px 28px;
+                display: block;
+                box-sizing: border-box;
+                font-size: 12px;
+                font-weight: 300;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.25;
+                letter-spacing: normal;
+                color: #848484;
+
+                &:hover {
+                  background: #ffffff;
+                  color: #000;
+                }
+              }
+            }
+          }
+          .drop-image{
+            position: absolute;
+            height: 100%;
+            width:182px;
+            right: 0;
+            img{
+              height: 100%;
+              width:100%;
+              object-fit: cover;
+            }
+          }
+        }
+
+        &:hover {
+          .drop {
+            height: auto;
+            box-sizing: border-box;
+          }
+        }
+      }
+    }
+
+    .header-center {
+      margin: auto 0;
+      flex: 1;
+      min-width: 18rem;
+      @media screen and (max-width: 760px) {
+        width: 100px;
+      }
+
+      .mall-logo {
+        font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
+
+        .logo {
+          font-size: 2.3rem;
+          letter-spacing: 0.1rem;
+          margin: 0;
+          text-align: center;
+          @media screen and (max-width: 1366px) {
+            height: 17px;
+          }
+          @media screen and (max-width: 760px) {
+            height: 11.4px;
+          }
+        }
+      }
+    }
+
+    .header-right {
+      flex: 8;
+      align-self: flex-end;
+
+      > ul {
+        display: flex;
+        flex-wrap: wrap;
+
+        > li {
+          border-left: solid 1px #f1f1f1;
+          position: relative;
+
+          a {
+            padding: 35.5px 29px;
+            min-width: 85px;
+            box-sizing: border-box;
             display: flex;
-            flex-wrap: wrap;
-            @media screen and (max-width: 1730px) {
-                display: none;
+            text-align: center;
+            cursor: pointer;
+            @media screen and (max-width: 760px) {
+              padding: 23px;
+              min-width: 0;
             }
 
-            > li {
-                a {
-                    padding: 35.5px 18px;
-                    display: inline-block;
+            &.text-center {
+              display: flex;
+              text-align: center;
+
+              img {
+                margin: auto;
+              }
+            }
+
+            &:hover {
+              background: #f1f1f1;
+            }
+
+            img {
+              margin: auto 0;
+            }
+          }
+
+          &:first-child {
+            margin-left: auto;
+          }
+
+          .user-action-block {
+            position: absolute;
+            background: #ffffff;
+            z-index: 999;
+            top: 100%;
+            left: 50%;
+            transform: translate(-50%, -11px);
+            padding: 32px;
+            box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
+
+            ul {
+              li {
+                margin-bottom: 14px;
+
+                .action-label {
+                  cursor: pointer;
+                  font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
+                  white-space: nowrap;
+
+                  a {
+                    padding: 0;
 
                     &:hover {
-                        background: #f1f1f1;
+                      background: transparent;
                     }
-                }
-
-                &:first-child {
-                    a {
-                        padding-left: 26.5px;
-                    }
+                  }
                 }
 
                 &:last-child {
-                    a {
-                        padding-right: 26px;
-                    }
+                  margin-bottom: 0;
                 }
+              }
             }
+          }
         }
-
-        li {
-            text-transform: uppercase;
-            font-size: 1.3rem;
-            font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
-        }
+      }
     }
+
+    .search-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #fff;
+      z-index: 999;
+
+      &.fade-leave-active {
+        animation: fadeOut .2s;
+      }
+
+      &.fade-enter-active {
+        animation: fadeIn .2s;
+      }
+    }
+  }
+
+  #hamburger-menu {
+    margin: auto 0;
+  }
+
+  .navigation-menu {
+    border-left: solid 1px #f1f1f1;
+    border-right: solid 1px #f1f1f1;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    @media screen and (max-width: 1730px) {
+      display: none;
+    }
+
+    > li {
+      a {
+        padding: 35.5px 18px;
+        display: inline-block;
+
+        &:hover {
+          background: #f1f1f1;
+        }
+      }
+
+      &:first-child {
+        a {
+          padding-left: 26.5px;
+        }
+      }
+
+      &:last-child {
+        a {
+          padding-right: 26px;
+        }
+      }
+    }
+  }
+
+  li {
+    text-transform: uppercase;
+    font-size: 1.3rem;
+    font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
+  }
+}
 </style>
