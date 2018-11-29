@@ -162,7 +162,7 @@ export default new Vuex.Store({
         showInFeaturedSearch: true,
         showInSlider: true,
         websiteLink: ''
-      }],
+      } ],
     sliderItems: sliderItems
   },
   mutations: {
@@ -195,6 +195,11 @@ export default new Vuex.Store({
       } else {
         sessionStorage.setItem('user', JSON.stringify(payload.user))
       }
+    },
+    LOG_OUT: (state) => {
+      localStorage.setItem('user', '{}')
+      sessionStorage.setItem('user', '{}')
+      state.user = null
     },
     SET_HOME_ADS: (state, payload) => {
       state.homeAds = payload
@@ -461,8 +466,11 @@ export default new Vuex.Store({
           })
       })
     },
-    logout: function (context, payload) {
-      context.commit('SET_USER_TOKEN', { token: '', remember: true })
+    logout: function (context) {
+      return new Promise((resolve) => {
+        context.commit('LOG_OUT')
+        resolve()
+      })
     },
     getSliderItems: function (context) {
       return new Promise((resolve, reject) => {

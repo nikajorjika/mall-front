@@ -83,9 +83,8 @@ export default {
           // here we submit form
           this.loading = true
           this.returnedError = ''
-          this.$store.dispatch('login', this.user).then((response) => {
+          this.$store.dispatch('login', this.user).then(() => {
             this.loading = false
-            console.log('login success')
             this.$router.push({ name: 'home', params: { locale: this.$store.getters.locale.locale } })
           }).catch((error) => {
             if (error.response && error.response.data) {
