@@ -4,16 +4,17 @@
       <h3>{{this.title}}</h3>
     </div>
     <div class="staff-container">
-      <carousel class="staff-wrapper" :perPage="this.perPage" :scrollPerPage="false" :navigationEnabled="true" :paginationEnabled="false"
+      <carousel class="staff-wrapper" :perPage="this.perPage" :scrollPerPage="false" :navigationEnabled="true"
+                :paginationEnabled="false"
                 :navigationPrevLabel="this.printPrevIcon()" :navigationNextLabel="this.printNextIcon()">
-        <slide  v-for="item in this.staff" :key="item.id">
+        <slide v-for="(item, index) in $store.getters.team" :key="index">
           <div class="staff-item">
             <div class="img-container">
-              <img :src="item.image" :alt="item.name">
+              <img :src="item.photoUrl" :alt="item['name'+ $store.getters.locale.locale.toUpperCase()]">
             </div>
             <div class="name-wrapper">
-              <h3>{{item.name}}</h3>
-              <p>{{item.position}}</p>
+              <h3>{{item['name'+ $store.getters.locale.locale.toUpperCase()]}}</h3>
+              <p>{{item['position'+ $store.getters.locale.locale.toUpperCase()]}}</p>
             </div>
           </div>
         </slide>
@@ -32,6 +33,11 @@ export default {
   components: {
     Carousel,
     Slide
+  },
+  mounted: function () {
+    if (!this.$store.getters.team.length) {
+      this.fetchData()
+    }
   },
   props: {
     title: {
@@ -63,38 +69,54 @@ export default {
     },
     printNextIcon: function () {
       return `<span class="arrow arrow-right"><img src="${this.rightArrow}"></span>`
+    },
+    fetchData: function () {
+      this.$store.dispatch('getTeam')
+        .then((response) => {
+          if (response !== 'RECORD NOT FOUND') {
+            this.$store.commit('SET_TEAM', response)
+          }
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     }
   }
 }
 </script>
 <style lang="scss">
-.staff-carousel{
-  .title-container{
-    h3{
+.staff-carousel {
+  .title-container {
+    h3 {
       margin: 74px 0 0;
       font-size: 4rem;
       color: #000;
       text-align: center;
     }
   }
-  .staff-wrapper{
+  .staff-wrapper {
     width: 812px;
     margin: 54px auto 111px;
-    .staff-item{
-      .img-container{
+    .staff-item {
+      .img-container {
         overflow: hidden;
         border-radius: 50%;
         height: 139px;
-        width:139px;
-        margin:0 auto;
+        width: 139px;
+        margin: 0 auto;
+        img{
+          height: 100%;
+          width:100%;
+          object-fit: cover;
+        }
       }
-      h3{
+      h3 {
         font-size: 1.6rem;
         color: #000;
         margin: 21px 0 8px;
         text-align: center;
       }
-      p{
+      p {
         margin: 8px 0;
         font-size: 1.4rem;
         font-weight: 300;

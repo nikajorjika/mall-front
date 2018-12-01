@@ -35,7 +35,7 @@ const router = new Router({
         },
         {
           path: 'guest-service',
-          name: 'guestService',
+          name: 'guest_service',
           props: true,
           component: () => import('./components/page-components/about-us/GuestServicePage.vue')
         },
@@ -52,10 +52,22 @@ const router = new Router({
           component: () => import('./components/page-components/about-us/Leasing.vue')
         },
         {
+          path: 'magazine',
+          name: 'magazine',
+          props: true,
+          component: () => import('./components/page-components/about-us/Magazine.vue')
+        },
+        {
           path: 'gift-card',
-          name: 'giftCard',
+          name: 'gift_card',
           props: true,
           component: () => import('./components/page-components/about-us/Leasing.vue')
+        },
+        {
+          path: 'tbilisi-mall-taxi',
+          name: 'mallTaxi',
+          props: true,
+          component: () => import('./components/page-components/about-us/MallTaxi.vue')
         }
       ]
     },

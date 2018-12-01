@@ -3,6 +3,18 @@
     <about-title :title="pageTitle"/>
     <about-content :content="pageDescription"/>
     <service-list :list="list"/>
+    <about-content :content="secondaryDescription"/>
+    <div class="additional-info">
+      <div class="additional-info-item">
+        <h4>{{contactInfoTitle}}</h4>
+        <p>
+          {{contactInfoFirst}}
+          <br>
+          <br>
+          {{contactInfoSecond}}
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -11,7 +23,7 @@ import AboutTitle from './AboutPageTitle'
 import ServiceList from './ServiceList'
 
 export default {
-  name: 'page-block',
+  name: 'leasing-block',
   components: {
     ServiceList,
     AboutContent,
@@ -52,6 +64,18 @@ export default {
     pageDescription: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Description' ] : ''
     },
+    contactInfoTitle: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoTitle' ] : ''
+    },
+    contactInfoFirst: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoFirst' ] : ''
+    },
+    contactInfoSecond: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoSecond' ] : ''
+    },
+    secondaryDescription: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'SecondaryDescription' ] : ''
+    },
     list: function () {
       let result = []
       if (this.pageDataContent) {
@@ -69,8 +93,9 @@ export default {
   },
   methods: {
     fetchPage: function () {
-      this.$store.dispatch('getAboutPage', this.$store.state.apiUrls.guestService)
+      this.$store.dispatch('getAboutPage', this.$store.state.apiUrls.magazine)
         .then((response) => {
+          console.log(response)
           if (Array.isArray(response)) {
             this.pageData = response[ 0 ]
           }

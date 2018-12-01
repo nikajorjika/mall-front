@@ -58,35 +58,35 @@ const pageData = {
   },
   aboutUsMenu: [
     {
-      name: 'ABOUT US',
+      name: 'about_us',
       url: '/about-us'
     },
     {
-      name: 'GUEST SERVICE',
+      name: 'guest_service',
       url: '/about-us/guest-service'
     },
     {
-      name: 'MALL MAP',
+      name: 'mall_map',
       url: '/about-us/mall-map'
     },
     {
-      name: 'TBILISI MALL TAXI',
+      name: 'tbilisi_mall_taxi',
       url: '/about-us/tbilisi-mall-taxi'
     },
     {
-      name: 'GIFT CARD',
+      name: 'gift_card',
       url: '/about-us/gift-card'
     },
     {
-      name: 'MARKETING',
+      name: 'marketing',
       url: '/about-us/marketing'
     },
     {
-      name: 'LEASING',
+      name: 'leasing',
       url: '/about-us/leasing'
     },
     {
-      name: 'MAGAZINE',
+      name: 'magazine',
       url: '/about-us/magazine'
     }
   ]

@@ -5,7 +5,7 @@ import store from '../store'
 Vue.mixin({
   methods: {
     t: function (index) {
-      return messages[ store.getters.locale.locale ][ 'statics' ][ index ]
+      return messages[ store.getters.locale.locale ][ 'statics' ][ index ] ? messages[ store.getters.locale.locale ][ 'statics' ][ index ] : index
     },
     groupByAlphabet: function (stores) {
       // const alphabet = store.state.alphabet[ store.getters.locale.locale ]

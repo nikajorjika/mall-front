@@ -57,6 +57,7 @@ export default new Vuex.Store({
     googleMap: googleMap,
     alphabet: alphabet,
     dateOptions: dateOptions,
+    team: [],
     socials: [
       {
         icon: 'facebook-f',
@@ -209,6 +210,9 @@ export default new Vuex.Store({
     },
     SET_HOME_EVENTS: (state, payload) => {
       state.sliderItems = payload
+    },
+    SET_TEAM: (state, payload) => {
+      state.team = payload
     }
   },
   getters: {
@@ -226,6 +230,9 @@ export default new Vuex.Store({
     },
     stores: (state) => {
       return state.stores
+    },
+    team: (state) => {
+      return state.team
     },
     storesList: (state) => {
       return state.storesList
@@ -534,6 +541,22 @@ export default new Vuex.Store({
               resolve('RECORD NOT FOUND')
             } else {
               resolve(response.data)
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
+      })
+    },
+    getTeam: function (context) {
+      return new Promise((resolve, reject) => {
+        const url = context.state.apiUrls.team
+        Axios.get(url)
+          .then(function (response) {
+            if (!response.data.data.length) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              resolve(response.data.data)
             }
           })
           .catch(function (error) {

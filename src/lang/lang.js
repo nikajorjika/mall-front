@@ -45,6 +45,18 @@ const messages = {
       sign_up: 'sign up',
       register: 'register',
       please_enter_to_search: 'PRESS ENTER TO SEARCH',
+      gel: 'ლ',
+      our_team: 'our team',
+      marketing: 'marketing',
+      leasing: 'leasing',
+      magazine: 'magazine',
+      gift_card: 'gift card',
+      mallTaxi: 'mall taxi',
+      mall_map: 'mall map',
+      tbilisi_mall_taxi: 'tbilisi mall taxi',
+      about_mall: 'about mall',
+      about_us: 'about us',
+      guest_service: 'guest service',
       news: 'news'
     }
   },
@@ -93,6 +105,18 @@ const messages = {
       sign_up: 'sign up',
       register: 'რეგისტრაცია',
       please_enter_to_search: 'PRESS ENTER TO SEARCH',
+      gel: 'ლ',
+      our_team: 'ჩვენი გუნდი',
+      marketing: 'მარკეტინგი',
+      leasing: 'ლიზინგი',
+      magazine: 'ჟურნალი',
+      gift_card: 'სასაჩუქრე ბარათი',
+      mallTaxi: 'მოლის ტაქსი',
+      tbilisi_mall_taxi: 'მოლის ტაქსი',
+      mall_map: 'მოლის რუქა',
+      about_mall: 'მოლის შესახებ',
+      guest_service: 'მომსახურებები',
+      about_us: 'ჩვენს შესახებ',
       promotions: 'პრომოუშენები'
     }
   }

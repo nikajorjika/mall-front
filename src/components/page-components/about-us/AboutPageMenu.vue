@@ -1,10 +1,10 @@
 <template>
   <div class="about-page-menu">
-    <div class="menu-wrapper-outer">
+    <div class="menu-wrapper-outer" :class="{fixedHeight: $route.name === 'about'}">
       <ul class="menu-wrapper">
         <li class="menu-item" v-for="(item, index) in this.items" :key="index">
           <router-link :to="`/${$store.getters.locale.locale}${item.url}`" class="name">
-            {{item.name}}
+            {{t(item.name)}}
           </router-link>
         </li>
       </ul>
@@ -29,29 +29,36 @@ export default {
 }
 </script>
 <style lang="scss">
-  .menu-wrapper-outer{
-    height: 698px;
+.about-page-menu {
+  height: 100%;
+  .menu-wrapper-outer {
+    height: 100%;
     border-left: solid 1px #dcdcdc;
     border-right: solid 1px #dcdcdc;
     display: flex;
-    .menu-wrapper{
-      margin: auto 0 auto 73px;
-      .menu-item{
-        a{
-          font-family: 'Muli','BPG Arial', 'sans-serif';
+    &.fixedHeight {
+      height: 698px;
+    }
+    .menu-wrapper {
+      margin: 135px 0 auto 73px;
+      .menu-item {
+        a {
+          font-family: 'Muli', 'BPG Arial', 'sans-serif';
           font-size: 1.6rem;
           padding: 12px 0;
           display: block;
           line-height: 1.25;
           color: #00000099;
-          &:hover{
+          text-transform: uppercase;
+          &:hover {
             color: #000000d1;
           }
-          &.router-link-exact-active{
+          &.router-link-exact-active {
             color: #000000;
           }
         }
       }
     }
   }
+}
 </style>
