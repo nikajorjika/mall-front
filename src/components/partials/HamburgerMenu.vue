@@ -140,7 +140,7 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 3;
+    z-index: 99;
     background: rgba(0, 0, 0, 0.4);
     &.fade-leave-active {
       animation: fadeOut .5s;

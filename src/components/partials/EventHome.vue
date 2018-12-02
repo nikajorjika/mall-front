@@ -72,7 +72,10 @@ export default {
   .image-background {
     width: 100%;
     position: relative;
-    padding-top: 45.14%;
+    height: 859px;
+    @media screen and (max-width: 1650px) {
+      height: 546px;
+    }
     img {
       width: 100%;
       height: 100%;
@@ -103,6 +106,11 @@ export default {
         left: 63px;
         width: calc(100% - 63px);
       }
+      @media screen and (max-width: 760px){
+        bottom: 47px;
+        left: 36px;
+        width: calc(100% - 36px);
+      }
       .event-type {
         font-size: 1.8rem;
         font-weight: 300;
@@ -114,6 +122,9 @@ export default {
         line-height: 1.28;
         @media screen and (max-width: 1650px) {
           font-size: 1.2rem;
+        }
+        @media screen and (max-width: 760px) {
+          font-size: 1rem;
         }
       }
       .event-name {
@@ -128,6 +139,10 @@ export default {
           text-transform: uppercase;
           @media screen and (max-width: 1650px) {
             font-size: 2.6rem;
+          }
+          @media screen and (max-width: 760px) {
+            font-size: 2.4rem;
+            padding: 6.1px 0 6.4px;
           }
           &:after {
             content: '';
@@ -154,6 +169,9 @@ export default {
           margin: 14px 0 0;
           @media screen and (max-width: 1650px) {
             font-size: 1.7rem;
+          }
+          @media screen and (max-width: 760px) {
+            font-size: 1.2rem;
           }
         }
       }

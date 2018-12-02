@@ -1,14 +1,19 @@
 <template>
   <div class="standard-carousel">
     <block-header-standard :title="this.title"/>
-    <carousel :perPage="this.perPage" :scrollPerPage="false" :navigationEnabled="true" :paginationEnabled="false"
-              :navigationPrevLabel="this.printPrevIcon()" :navigationNextLabel="this.printNextIcon()">
-      <slide v-for="item in items" v-bind:key="item._id">
-        <div class="slide-container">
-          <img :src="item.logoUrl" alt="">
-        </div>
-      </slide>
-    </carousel>
+    <div class="carousel-big" v-if="$mq !== 'mobile'">
+      <carousel :perPage="this.perPage" :scrollPerPage="false" :navigationEnabled="true" :paginationEnabled="false"
+                :navigationPrevLabel="this.printPrevIcon()" :perPageCustom="[[0, 1],[480, 2],[760, 3], [1024, 4]]" :navigationNextLabel="this.printNextIcon()">
+        <slide v-for="item in items" v-bind:key="item._id">
+          <div class="slide-container">
+            <img :src="item.logoUrl" alt="">
+          </div>
+        </slide>
+      </carousel>
+    </div>
+    <div class="carousel-small" v-else>
+      <small-slider/>
+    </div>
   </div>
 </template>
 
@@ -19,10 +24,12 @@ import {
   Carousel,
   Slide
 } from 'vue-carousel'
+import SmallSlider from './SmallSlider'
 
 export default {
   name: 'standard-carousel',
   components: {
+    SmallSlider,
     BlockHeaderStandard,
     EventItem,
     Carousel,
@@ -69,6 +76,9 @@ export default {
   @media screen and (max-width: 1366px){
     padding: 0 230px;
   }
+  @media screen and (max-width: 1060px){
+    padding: 0 120px;
+  }
   .slide-container {
     padding-top: 100%;
     position: relative;
@@ -87,15 +97,25 @@ export default {
   }
   .VueCarousel-navigation-prev{
     left: -100px;
+    @media screen and (max-width: 1366px){
+      left: -70px;
+    }
   }
   .VueCarousel-navigation-next{
     right: -78px;
+    @media screen and (max-width: 1366px){
+      right: -70px;
+    }
   }
   .arrow {
     position: relative;
     width: 33px;
     height: 81.3px;
     display: block;
+    @media screen and (max-width: 1366px){
+      width: 21.9px;
+      height: 53.9px;
+    }
   }
 }
 </style>

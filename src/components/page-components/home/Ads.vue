@@ -12,9 +12,9 @@ export default {
   name: 'home-ads',
   components: { EventHome },
   mounted: function () {
-    // this.$store.dispatch('getAdsItems').then((response) => {
-    //   console.log(response)
-    // })
+    this.$store.dispatch('getAdsItems').then((response) => {
+      console.log(response)
+    })
   }
 }
 </script>
@@ -23,8 +23,16 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-top: 16px;
+  @media screen and (max-width: 760px) {
+    flex-direction: column;
+    margin-top:0;
+  }
   .col-2 {
     width: calc(50% - 8px);
+    @media screen and (max-width: 760px) {
+      width:100%;
+      margin-top: 1px;
+    }
   }
 }
 </style>

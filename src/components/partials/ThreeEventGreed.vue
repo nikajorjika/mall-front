@@ -95,6 +95,9 @@ export default {
       border-bottom: solid 1px #dcdcdc;
       width: calc(100% - 60px);
       margin: 0 auto;
+      @media screen and (max-width: 760px) {
+        width: 100%;
+      }
     }
     .event-item-outer {
       width: 33.33%;
@@ -103,6 +106,15 @@ export default {
       padding: 0 30px;
       @media screen and (max-width: 1366px) {
         padding: 0 21px;
+      }
+      @media screen and (max-width: 760px) {
+        width: 100%;
+        border-bottom: 1px solid #dcdcdc;
+        margin-bottom:18px;
+        &:last-child{
+          margin-bottom: 0;
+          border-bottom: none;
+        }
       }
       &:nth-child(3n + 3) {
         border-right: none;
@@ -116,6 +128,9 @@ export default {
   .greed-footer-container {
     text-align: center;
     border-bottom: solid 1px #dcdcdc;
+    @media screen and (max-width: 760px) {
+      background: #f9f9f9;
+    }
     button {
       background: transparent;
       text-transform: uppercase;

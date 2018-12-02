@@ -84,87 +84,8 @@ export default new Vuex.Store({
     footer: footerData,
     newsFilters: newsFilters,
     storeFilters: storeFilters,
-    homeAds: [
-      {
-        name: {
-          ka: 'თიბისი',
-          en: 'tbc',
-          ru: 'tbc'
-        },
-        description: {
-          ka: 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. \nჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.\nსაუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.',
-          en: 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. \nჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.\nსაუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.',
-          ru: 'თიბისი ბანკი წარმოადგენს ლიდერ კომპანიას საქართველოს ფინანსურ სექტორში. \nჩვენ ვქმნით ახალ შესაძლებლობებს ადამიანებისა და კომპანიების წარმატებისთვის.\nსაუკეთესო თანამშრომლებით, ძლიერი ბრენდით, ინოვაციური შეთავაზებებითა და გამორჩეული ხარისხით, თიბისი არის საუკეთესო ბანკი საქართველოში.'
-        },
-        socials: {
-          facebook: '',
-          twitter: '',
-          youtube: '',
-          pinterest: ''
-        },
-        filters: [
-          'Discount Card',
-          'Amex'
-        ],
-        tags: [
-          'Women'
-        ],
-        _id: '5b9d4045d5c08e1752f7da05',
-        logoUrl: 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/5ea8fdfb-eb15-40ae-a1eb-b949fccea814.jpeg',
-        photoUrl: 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/c0bc8943-4918-49f5-b228-9641b63e2ebc.jpeg',
-        categoryId: '5b9d3c8c62973c001fd2c69b',
-        subcategoryId: '5b9d3fa4d5c08e1752f7da03',
-        isApproved: true,
-        createdBy: 'user',
-        coverVideoLink: '',
-        floor: '0',
-        kaLogoUrl: 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/2bbef246-fa96-47a7-85f7-4ac1abd11078.jpeg',
-        phone: '',
-        showInAdsBlock: true,
-        showInFeaturedSearch: true,
-        showInSlider: true,
-        websiteLink: ''
-      }, {
-        name: {
-          ka: 'დეფაქტო',
-          en: 'deacto',
-          ru: 'defacto'
-        },
-        description: {
-          ka: 'ქალის სამოსი და აქსესუარები, მამაკაცის სამოსი და აქსესუარები, ბავშვისა და ორსულის სამოსი, ფეხსაცმელი',
-          en: 'ქალის სამოსი და აქსესუარები, მამაკაცის სამოსი და აქსესუარები, ბავშვისა და ორსულის სამოსი, ფეხსაცმელი',
-          ru: 'ქალის სამოსი და აქსესუარები, მამაკაცის სამოსი და აქსესუარები, ბავშვისა და ორსულის სამოსი, ფეხსაცმელი'
-        },
-        socials: {
-          facebook: '',
-          twitter: '',
-          youtube: '',
-          pinterest: ''
-        },
-        filters: [
-          'Tax free',
-          'Gift Card'
-        ],
-        tags: [
-          'Children'
-        ],
-        _id: '5b9d40a8d5c08e1752f7da06',
-        logoUrl: 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/3e2930c2-ca60-463d-81a9-136b4fed87a3.jpeg',
-        photoUrl: 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/90b28b9f-c9fb-4779-afef-d48b51cb2a3c.jpeg',
-        categoryId: '5b9d3c1f62973c001fd2c698',
-        subcategoryId: '5b9d3f02d5c08e1752f7d9ff',
-        isApproved: true,
-        createdBy: 'asd',
-        coverVideoLink: '',
-        floor: '0',
-        kaLogoUrl: 'https://bucketeer-06ddb2e0-9e6b-41fd-887f-2e5fabcd2cc6.s3.amazonaws.com/5d55a2cd-c2fc-44f9-82f9-1d75196b2573.jpeg',
-        phone: '',
-        showInAdsBlock: false,
-        showInFeaturedSearch: true,
-        showInSlider: true,
-        websiteLink: ''
-      } ],
-    sliderItems: sliderItems
+    homeAds: [],
+    sliderItems: []
   },
   mutations: {
     SET_LOCALE: (state, locale) => {
@@ -488,7 +409,7 @@ export default new Vuex.Store({
               resolve('RECORD NOT FOUND')
             } else {
               resolve(response)
-              context.commit('SET_SLIDER_ITEMS', response.data)
+              context.commit('SET_SLIDER_ITEMS', response.data.data)
             }
           })
           .catch(function (error) {
