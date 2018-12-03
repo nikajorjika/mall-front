@@ -76,11 +76,22 @@ export default {
       @media screen and (max-width: 1650px){
         height: 66px;
       }
+      @media screen and (max-width: 760px){
+        flex-direction: column;
+        height: auto;
+      }
       .selects-container{
         width: 281.2px;
         margin: auto 25px;
         @media screen and (max-width: 1650px){
           width: 200px;
+        }
+        @media screen and (max-width: 760px){
+          width: calc(100% - 72px);
+          margin: 16px auto 0 auto;
+          &:last-child{
+            margin-bottom: 16px;
+          }
         }
       }
     }

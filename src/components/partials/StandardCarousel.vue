@@ -6,7 +6,7 @@
                 :navigationPrevLabel="this.printPrevIcon()" :perPageCustom="[[0, 1],[480, 2],[760, 3], [1024, 4]]" :navigationNextLabel="this.printNextIcon()">
         <slide v-for="item in items" v-bind:key="item._id">
           <div class="slide-container">
-            <img :src="item.logoUrl" alt="">
+            <img :src="item.logoUrl" :alt="item.name[$store.getters.locale.locale]">
           </div>
         </slide>
       </carousel>
@@ -72,49 +72,51 @@ export default {
 
 <style lang="scss" >
 .standard-carousel {
-  padding: 0 138px;
-  @media screen and (max-width: 1366px){
-    padding: 0 230px;
-  }
-  @media screen and (max-width: 1060px){
-    padding: 0 120px;
-  }
-  .slide-container {
-    padding-top: 100%;
-    position: relative;
-    display: flex;
-    border: solid 1px #dcdcdc;
-    margin-right: 20px;
-    img {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      object-fit: contain;
-      margin: auto;
-    }
-  }
-  .VueCarousel-navigation-prev{
-    left: -100px;
+  .carousel-big{
+    padding: 0 138px;
     @media screen and (max-width: 1366px){
-      left: -70px;
+      padding: 0 230px;
     }
-  }
-  .VueCarousel-navigation-next{
-    right: -78px;
-    @media screen and (max-width: 1366px){
-      right: -70px;
+    @media screen and (max-width: 1060px){
+      padding: 0 120px;
     }
-  }
-  .arrow {
-    position: relative;
-    width: 33px;
-    height: 81.3px;
-    display: block;
-    @media screen and (max-width: 1366px){
-      width: 21.9px;
-      height: 53.9px;
+    .slide-container {
+      padding-top: 100%;
+      position: relative;
+      display: flex;
+      border: solid 1px #dcdcdc;
+      margin-right: 20px;
+      img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: contain;
+        margin: auto;
+      }
+    }
+    .VueCarousel-navigation-prev{
+      left: -100px;
+      @media screen and (max-width: 1366px){
+        left: -70px;
+      }
+    }
+    .VueCarousel-navigation-next{
+      right: -78px;
+      @media screen and (max-width: 1366px){
+        right: -70px;
+      }
+    }
+    .arrow {
+      position: relative;
+      width: 33px;
+      height: 81.3px;
+      display: block;
+      @media screen and (max-width: 1366px){
+        width: 21.9px;
+        height: 53.9px;
+      }
     }
   }
 }

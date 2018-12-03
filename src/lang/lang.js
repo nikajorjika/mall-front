@@ -11,6 +11,8 @@ const messages = {
       share: 'share',
       username_placeholder: 'Enter email address',
       password_placeholder: 'Enter password',
+      email_validation: 'Need valid email',
+      email_validation_message: 'Please fill in valid email',
       stores: 'store',
       events: 'events',
       promotion: 'promotion',
@@ -57,7 +59,9 @@ const messages = {
       about_mall: 'about mall',
       about_us: 'about us',
       guest_service: 'guest service',
-      news: 'news'
+      news: 'news',
+      joinNow: 'JOIN NOW',
+      subscribeText: 'Sign up for our newsletter to receive special offers, event invitations, and more.'
     }
   },
   ka: {
@@ -76,6 +80,8 @@ const messages = {
       first_name_placeholder: 'სახელი',
       last_name_placeholder: 'გვარი',
       email_placeholder: 'ელ-ფოსტა',
+      email_validation: 'ელ-ფოსტის ფორმატი არასწორია',
+      email_validation_message: 'გთხოვთ შეიყვანოთ სწორი ელ-ფოსტის ფორმატი',
       mobile_placeholder: 'მობილურის ნომერი',
       birth_date_placeholder: 'დაბადების თარიღი',
       gender_placeholder: 'სქესი',
@@ -117,7 +123,9 @@ const messages = {
       about_mall: 'მოლის შესახებ',
       guest_service: 'მომსახურებები',
       about_us: 'ჩვენს შესახებ',
-      promotions: 'პრომოუშენები'
+      promotions: 'პრომოუშენები',
+      joinNow: 'შემოგვიერთდი',
+      subscribeText: 'გამოიწერე ჩვენი საიტი და მიიღე სიახლეები შემოთავაზებების და სიახლეების შესახებ.'
     }
   }
 }

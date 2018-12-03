@@ -1,14 +1,14 @@
 <template>
   <div id="home-slider">
-    <carousel :perPage="perPage" :scrollPerPage="false" paginationActiveColor="#ffffff" paginationColor="#ffffff"
-              :paginationPadding="8" :navigationEnabled="true" :paginationEnabled="true"
-              :navigationPrevLabel="this.printPrevIcon()" :navigationNextLabel="this.printNextIcon()">
-      <slide v-for="(item, index) in this.$store.getters.sliderItems" v-bind:key="index">
-        <div class="slide-container">
-          <event-home :item="item" :txtLimit="40"/>
+    <div class="slider-wrapper">
+      <agile :options="options" v-if="showSlider" :prevArrow="printPrevIcon()" :nextArrow="printNextIcon()">
+        <div class="slide" v-for="(item, index) in this.$store.getters.sliderItems" :key="index">
+          <div class="slide-container">
+            <event-home :item="item" :txtLimit="40"/>
+          </div>
         </div>
-      </slide>
-    </carousel>
+      </agile>
+    </div>
   </div>
 </template>
 <script>
@@ -25,15 +25,24 @@ export default {
     Carousel,
     Slide
   },
-  data: () => {
+  data: function () {
     return {
-      perPage: 1
+      perPage: 1,
+      showSlider: false,
+      options: {
+        arrows: true,
+        dots: true
+      }
     }
   },
   mounted: function () {
-    this.$store.dispatch('getSliderItems').then((response) => {
-      console.log(response)
-    })
+    if (!this.$store.getters.sliderItems.length) {
+      this.$store.dispatch('getSliderItems').then(() => {
+        this.showSlider = true
+      })
+    }else{
+      this.showSlider = true
+    }
   },
   methods: {
     printPrevIcon: function () {
@@ -58,43 +67,64 @@ export default {
 </script>
 <style lang="scss">
 #home-slider {
-  .VueCarousel-pagination {
-    display: none;
-    position: absolute;
-    bottom: 14px;
-    @media screen and (max-width: 760px) {
-      display: block;
-    }
-    .VueCarousel-dot--active {
-      .VueCarousel-dot-button {
-        opacity: 0.6;
-        background-color: #ffffff;
+  .slider-wrapper {
+    position: relative;
+
+    .agile__dots {
+      display: none;
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      @media screen and (max-width: 760px) {
+        display: flex;
+      }
+      .agile__dot {
+        opacity: 0.3;
+        border-right: none;
+        margin-left: 16px;
+        &.agile__dot--current {
+          opacity: 0.6;
+        }
+        button {
+          border: none;
+          padding: 0;
+          width: 7px;
+          height: 7px;
+          background-color: #ffffff;
+          border-radius: 50%;
+        }
       }
     }
-    .VueCarousel-dot-button {
-      opacity: 0.3;
-      background-color: #ffffff;
+
+    .agile__arrow {
+      background-color: transparent;
+      border: none;
+      position: absolute;
+      top: 50%;
+      cursor: pointer;
+      @media screen and (max-width: 760px) {
+        display: none;
+      }
+
+      &.agile__arrow--prev {
+        left: 40px;
+        margin: 0;
+        transform: translate(0, -50%);
+      }
+
+      &.agile__arrow--next {
+        right: 40px;
+        transform: translate(0, -50%);
+      }
     }
-  }
-  .VueCarousel-navigation {
-    @media screen and (max-width: 760px) {
-      display: none;
+
+    .arrow {
+      position: relative;
+      width: 33px;
+      height: 81.3px;
+      display: block;
     }
-    .VueCarousel-navigation-prev {
-      left: 40px;
-      margin: 0;
-      transform: translate(0, -50%);
-    }
-    .VueCarousel-navigation-next {
-      right: 40px;
-      transform: translate(0, -50%);
-    }
-  }
-  .arrow {
-    position: relative;
-    width: 33px;
-    height: 81.3px;
-    display: block;
   }
 }
 </style>

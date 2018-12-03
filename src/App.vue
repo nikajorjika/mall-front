@@ -4,6 +4,7 @@
       <nav-bar/>
       <router-view/>
       <footer-component/>
+      <notifications group="notify" />
     </div>
   </div>
 </template>

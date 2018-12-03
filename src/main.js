@@ -6,6 +6,7 @@ import './registerServiceWorker'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import VeeValidate from 'vee-validate'
 import dictionary from './lang/messages/ka'
+import Notifications from 'vue-notification'
 import VueMq from 'vue-mq'
 import {
   faCaretDown,
@@ -23,6 +24,7 @@ import Axios from 'axios'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import './mixin/mixin'
 import Vuebar from 'vuebar'
+import VueAgile from 'vue-agile'
 const SocialSharing = require('vue-social-sharing')
 
 Vue.use(SocialSharing)
@@ -34,7 +36,8 @@ Vue.use(VeeValidate, {
 })
 
 Vue.use(Vuebar)
-
+Vue.use(VueAgile)
+Vue.use(Notifications)
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyABserBqL7VFOHlWx4wrtgHKtTGzD0k90A',

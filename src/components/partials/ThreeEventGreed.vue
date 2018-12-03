@@ -111,6 +111,7 @@ export default {
         width: 100%;
         border-bottom: 1px solid #dcdcdc;
         margin-bottom:18px;
+        border-right: none;
         &:last-child{
           margin-bottom: 0;
           border-bottom: none;

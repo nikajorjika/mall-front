@@ -1,95 +1,186 @@
 <template>
   <footer id="footer">
-    <section class="subscribe">
-      <newsletter-subscribe/>
-    </section>
-    <div class="footer-content">
-      <div class="menus-wrapper">
-        <div class="menu-item" v-for="item in this.menus" v-bind:key="item.title">
-          <footer-menu-item :title="item.title" :items="item"/>
-        </div>
-        <div class="menu-item">
-          <footer-menu-item :title="this.hours.title" :items="hours"/>
-          <footer-menu-item v-for="(item, index) in this.contactInfo" :key="index" :title="item.title" :items="item" class="mini"/>
+    <div class="desktop-footer">
+      <section class="subscribe">
+        <newsletter-subscribe/>
+      </section>
+      <div class="footer-content" v-if="$mq !== 'mobile'">
+        <div class="menus-wrapper">
+          <div class="menu-item" v-for="item in this.menus" v-bind:key="item.title">
+            <footer-menu-item :title="item.title" :items="item"/>
+          </div>
+          <div class="menu-item">
+            <footer-menu-item :title="this.hours.title" :items="hours"/>
+            <footer-menu-item v-for="(item, index) in this.contactInfo" :key="index" :title="item.title" :items="item"
+                              class="mini"/>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="copyright">
-      <p class="copyright-content">Copyright © <span class="strong">Tbilisi Mall</span> - All rights reserved</p>
+      <div class="footer-content footer-mobile-content" v-else>
+        <div class="menus-wrapper">
+          <div class="mobile-menu-item" v-for="(item, index) in this.menus" :key="index">
+            <div class="menu-group">
+              <div class="group-title" @click="toggleMenu(item)">
+                <h5>{{item.title}}</h5>
+                <span class="dropdown-icon"><font-awesome-icon icon="caret-down"/></span>
+              </div>
+              <transition name="slideDown">
+                <div class="group" v-if="menuOpen === item">
+                  <ul class="content-ul">
+                    <li v-for="(child, index2) in item.list" :key="index2" class="content-li">
+                      <router-link :to="child.url">
+                        <div class="item-wrapper">
+                          {{child.name}}
+                        </div>
+                      </router-link>
+                    </li>
+                  </ul>
+                </div>
+              </transition>
+            </div>
+          </div>
+          <div class="menu-item bottom-menu-part">
+            <footer-menu-item :title="this.hours.title" :items="hours"/>
+            <footer-menu-item v-for="(item, index) in this.contactInfo" :key="index" :title="item.title" :items="item"
+                              class="mini"/>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p class="copyright-content">Copyright © <span class="strong">Tbilisi Mall</span> - All rights reserved</p>
+      </div>
     </div>
   </footer>
 </template>
 
 <script>
-import NewsletterSubscribe from '../partials/NewsLetters'
-import FooterMenuItem from '../partials/FooterMenuItem'
+  import NewsletterSubscribe from '../partials/NewsLetters'
+  import FooterMenuItem from '../partials/FooterMenuItem'
 
-export default {
-  name: 'footer-component',
-  components: {
-    FooterMenuItem,
-    NewsletterSubscribe
-  },
-  data: function () {
-    return {
-      menus: this.$store.getters.footerMenus,
-      hours: {
-        title: 'WORKING HOURS:',
-        list: [{
-          name: 'Everyday: from - 10:00 to 22:00',
-          url: '#'
-        }]
-      },
-      contactInfo: [{
-        title: 'ADDRESS:',
-        list: [{
-          name: '16 km Agmashenebeli Alley, \n 0131 Tbilisi, Georgia',
-          url: '#'
-        }]
-      }, {
-        title: '',
-        list: [{
-          name: 'info@tbilisimall.com',
-          url: '#'
+  export default {
+    name: 'footer-component',
+    components: {
+      FooterMenuItem,
+      NewsletterSubscribe
+    },
+    data: function () {
+      return {
+        menus: this.$store.getters.footerMenus,
+        menuOpen: null,
+        hours: {
+          title: 'WORKING HOURS:',
+          list: [ {
+            name: 'Everyday: from - 10:00 to 22:00',
+            url: '#'
+          } ]
+        },
+        contactInfo: [ {
+          title: 'ADDRESS:',
+          list: [ {
+            name: '16 km Agmashenebeli Alley, \n 0131 Tbilisi, Georgia',
+            url: '#'
+          } ]
         }, {
-          name: '+995 322 505 556',
-          url: '#'
-        }]
-      }]
-    }
-  }
-}
-</script>
-<style lang="scss">
-#footer {
-  .footer-content {
-    padding: 84px 0;
-    background-color: #f9f9f9;
-    border-top: 1px solid #dcdcdc;
-    border-bottom: solid 0.5px #eeeeee;
-  }
-  .menus-wrapper {
-    display: flex;
-    width: 85%;
-    margin: 0 auto;
-    .menu-item {
-      width: 25%;
-    }
-  }
-  .copyright {
-    .copyright-content {
-      padding: 10.5px;
-      text-align: center;
-      font-family: 'Muli Light','BPG Arial', 'sans-serif';
-      font-size: 1.1rem;
-      line-height: 1.27;
-      color: #848484;
-      opacity: 1;
-      margin: 0;
-      .strong {
-        color: #000;
+          title: '',
+          list: [ {
+            name: 'info@tbilisimall.com',
+            url: '#'
+          }, {
+            name: '+995 322 505 556',
+            url: '#'
+          } ]
+        } ]
+      }
+    },
+    methods: {
+      toggleMenu: function (item) {
+        this.menuOpen = this.menuOpen === item ? null : item
       }
     }
   }
-}
+</script>
+<style lang="scss">
+  #footer {
+    .footer-content {
+      padding: 84px 0;
+      background-color: #f9f9f9;
+      border-top: 1px solid #dcdcdc;
+      border-bottom: solid 0.5px #eeeeee;
+      @media screen and (max-width: 760px) {
+        padding: 0;
+      }
+    }
+
+    .menus-wrapper {
+      display: flex;
+      width: 85%;
+      margin: 0 auto;
+      @media screen and (max-width: 760px) {
+        flex-direction: column;
+      }
+
+      .menu-item {
+        width: 25%;
+        @media screen and (max-width: 760px) {
+          width: 100%;
+        }
+      }
+    }
+
+    .footer-mobile-content {
+      .menus-wrapper {
+        width: 100%;
+        .menu-group {
+          .group-title {
+            display: flex;
+            padding: 25px 36px;
+            background: #ffffff;
+            border-bottom: 1px solid #dcdcdc;
+
+            h5 {
+              font-size: 1.8rem;
+              margin: 0;
+              text-transform: uppercase;
+            }
+
+            .dropdown-icon {
+              margin: auto 0 auto auto;
+            }
+          }
+
+          .group {
+            ul {
+              display: flex;
+              flex-direction: column;
+
+              li {
+                margin: 10px 36px;
+              }
+            }
+          }
+        }
+        .bottom-menu-part{
+          margin: 60px 36px;
+          width: calc(100% - 72px);
+        }
+      }
+    }
+
+    .copyright {
+      .copyright-content {
+        padding: 10.5px;
+        text-align: center;
+        font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
+        font-size: 1.1rem;
+        line-height: 1.27;
+        color: #848484;
+        opacity: 1;
+        margin: 0;
+
+        .strong {
+          color: #000;
+        }
+      }
+    }
+  }
 </style>

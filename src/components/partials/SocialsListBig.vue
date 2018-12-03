@@ -43,7 +43,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .socials-container-big {
   .socials-container-outer {
     border-top: solid 1px #dcdcdc;
@@ -53,10 +52,16 @@ export default {
     width: 85%;
     margin: 0 auto;
     padding: 56px 0 64px;
+    @media screen and (max-width: 825px) {
+      flex-direction: column;
+    }
     @media screen and (max-width: 1650px) {
       width: 100%;
       max-width: 1087px;
       margin-right: auto;
+    }
+    @media screen and (max-width: 960px) {
+      flex-wrap: wrap;
     }
     .social {
       margin-right: 16px;
@@ -64,6 +69,18 @@ export default {
       @media screen and (max-width: 1650px) {
         width: 264px;
         margin-right: auto;
+      }
+      @media screen and (max-width: 1060px) {
+        width: 225px;
+        margin: auto;
+      }
+      @media screen and (max-width: 960px) {
+        margin: 0 auto 12px;
+        width: 40%;
+      }
+      @media screen and (max-width: 825px) {
+        width: 90%;
+        max-width: 398px;
       }
     }
   }

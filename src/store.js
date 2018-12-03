@@ -85,7 +85,7 @@ export default new Vuex.Store({
     newsFilters: newsFilters,
     storeFilters: storeFilters,
     homeAds: [],
-    sliderItems: []
+    sliderItems:[]
   },
   mutations: {
     SET_LOCALE: (state, locale) => {

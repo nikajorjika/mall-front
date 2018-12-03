@@ -26,7 +26,7 @@
                          :api="$store.state.apiUrls.newsApi" :events="$store.getters.frontNews"/>
     </section>
     <section class="stores">
-      <standard-carousel :items="$store.getters.stores" :perPage="4" :title="'STORES'"/>
+      <standard-carousel v-if="storeCarousel" :items="$store.getters.stores" :perPage="4" :title="'STORES'"/>
     </section>
     <section class="how-to-get">
       <how-to-get/>
@@ -52,7 +52,9 @@ import HomeAds from '../components/page-components/home/Ads'
 export default {
   name: 'home',
   data: function () {
-    return {}
+    return {
+      storeCarousel: false
+    }
   },
   beforeMount: function () {
     if (!this.$store.getters.stores.length) this.sendRequest('INITIAL_LOAD')
@@ -76,6 +78,7 @@ export default {
         setter: setter
       }).then((response) => {
         console.log(response.message)
+        this.storeCarousel = true
       }).catch((error) => {
         console.error(error)
       })
@@ -90,6 +93,12 @@ export default {
     margin: 0 auto;
     padding-bottom: 130px;
     border-bottom: solid 1px #dcdcdc;
+    @media screen and (max-width: 1366px){
+      padding-bottom: 80px;
+    }
+    @media screen and (max-width: 760px){
+      padding-bottom: 40px;
+    }
   }
 }
 </style>
