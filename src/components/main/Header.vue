@@ -149,7 +149,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     position: relative;
-
     .header-left {
       display: flex;
       flex-wrap: wrap;
@@ -159,7 +158,6 @@ export default {
         position: relative;
         .has-child {
           display: flex;
-
           .caret-down-icon {
             margin: auto 0;
             height: 3.3px;
@@ -255,8 +253,10 @@ export default {
 
     .header-center {
       margin: auto 0;
-      flex: 1;
-      min-width: 18rem;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       @media screen and (max-width: 760px) {
         width: 100px;
       }

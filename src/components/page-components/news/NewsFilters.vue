@@ -53,11 +53,19 @@ export default {
 <style lang="scss" scoped>
 .news-filters {
   display: flex;
+  @media screen and (max-width: 760px) {
+    flex-direction: column;
+  }
   .filter-item {
     width: 260px;
     margin-right: 15.8px;
     @media screen and (max-width: 1650px) {
       width: 185px;
+    }
+    @media screen and (max-width: 760px) {
+      width: 100%;
+      margin-bottom: 16px;
+      height: 34px;
     }
     &:first-child {
       margin-left: auto;

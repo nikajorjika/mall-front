@@ -38,10 +38,7 @@ export default {
       padding-top: 112%;
       position: relative;
       @media screen and (max-width: 760px){
-        padding-top: 59%;
-      }
-      @media screen and (max-width: 480px){
-        padding-top: 87%;
+        padding-top: 114%;
       }
       img{
         width:100%;

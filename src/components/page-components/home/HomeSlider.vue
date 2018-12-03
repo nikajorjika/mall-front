@@ -40,7 +40,7 @@ export default {
       this.$store.dispatch('getSliderItems').then(() => {
         this.showSlider = true
       })
-    }else{
+    } else {
       this.showSlider = true
     }
   },

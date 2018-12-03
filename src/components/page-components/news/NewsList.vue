@@ -1,7 +1,11 @@
 <template>
   <div class="news-list-container">
     <div class="filters-outer">
-      <div class="container">
+      <div class="filter-toggle" @click="openActiveFilters" v-if=" $mq === 'mobile'">
+        <h2>{{t('filter')}}</h2> <span class="filter-icon" :class="{open: activeFilters}"><font-awesome-icon
+        icon="caret-down"/></span>
+      </div>
+      <div class="container filters-inner" v-if="activeFilters || $mq !== 'mobile'">
         <news-filters :categories="categories"/>
       </div>
     </div>
@@ -15,7 +19,8 @@
              :class="{open: openItem === item}">
           <div class="news-inner" @click="open(item)">
             <router-link :to="generateUrl(item._id)">
-              <news-item :item="item"/>
+              <news-item :item="item" v-if="$mq !== 'mobile'"/>
+              <event-item :event="item" v-else/>
             </router-link>
           </div>
           <div class="single-news-container" v-if="openItem === item">
@@ -31,11 +36,11 @@
   </div>
 </template>
 <script>
-
 import NewsFilters from './NewsFilters'
 import NewsItem from './NewsItem'
 import NewsSingle from './NewsSingle'
 import LoadingBig from '../../partials/LoadingBig'
+import EventItem from '../../partials/EventView'
 
 export default {
   name: 'news-list',
@@ -54,6 +59,7 @@ export default {
     }
   },
   components: {
+    EventItem,
     LoadingBig,
     NewsSingle,
     NewsItem,
@@ -67,7 +73,8 @@ export default {
       loadedItem: null,
       loadingNews: false,
       loading: false,
-      hasMore: true
+      hasMore: true,
+      activeFilters: false
     }
   },
   computed: {
@@ -106,6 +113,9 @@ export default {
       this.loadedItem = null
       this.openItem = item
     },
+    openActiveFilters: function (item) {
+      this.activeFilters = !this.activeFilters
+    },
     close: function () {
       this.openItem = this.loadedItem = null
     },
@@ -135,6 +145,33 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.news-list-container {
+  @media screen and (max-width: 760px) {
+    .filters-outer {
+      padding: 0;
+      .filter-toggle {
+        padding: 22px;
+        border-bottom: 1px solid #dcdcdc;
+        display: flex;
+        justify-content: center;
+        h2 {
+          margin: 0;
+          text-transform: uppercase;
+        }
+        .filter-icon {
+          margin: auto 5px;
+          &.open {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+    .filters-inner {
+      padding: 32px 34px;
+    }
+  }
+}
+
 .news-list {
   display: flex;
   flex-wrap: wrap;
@@ -150,6 +187,10 @@ export default {
     position: relative;
     @media screen and (max-width: 1650px) {
       padding: 21px;
+    }
+    @media screen and (max-width: 760px) {
+      width:100%;
+      border: none;
     }
     &:nth-child(1),
     &:nth-child(2),
