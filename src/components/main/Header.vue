@@ -5,25 +5,27 @@
         <hamburger-menu/>
         <ul class="navigation-menu">
           <li v-for="(item, index) in $store.getters.navigation" v-bind:key="index">
-            <div class="nav-drop">
+            <div class="nav-drop" @mouseover="showChild = item" @mouseout="showChild = null">
               <router-link :to="`/${$store.getters.locale.locale}${item.url}`"
                            :class="item.children !== undefined ? 'has-child' : ''">
                 <span>{{item.name[$store.getters.locale.locale]}}</span>
                 <span class="caret-down-icon" v-if="item.children !== undefined"><img
                   src="../../assets/images/icons/carret-down.svg" alt="caret down"></span>
               </router-link>
-              <div v-if="item.children !== undefined" class="drop">
-                <ul :class="{twoCol: item.children.length > 10 }">
-                  <li v-for="(child, i) in item.children" v-bind:key="i">
-                    <router-link :to="`/${$store.getters.locale.locale}${item.url}${child.url}`">
-                      {{child.name[$store.getters.locale.locale]}}
-                    </router-link>
-                  </li>
-                </ul>
-                <div class="drop-image">
-                  <img src="../../assets/images/statics/tbm.jpg" alt="Tbilisi mall">
+              <transition name="slideUp">
+                <div v-if="item.children !== undefined && showChild === item" class="drop">
+                  <ul :class="{twoCol: item.children.length > 10 }">
+                    <li v-for="(child, i) in item.children" v-bind:key="i">
+                      <router-link :to="`/${$store.getters.locale.locale}${item.url}${child.url}`">
+                        {{child.name[$store.getters.locale.locale]}}
+                      </router-link>
+                    </li>
+                  </ul>
+                  <div class="drop-image">
+                    <img src="../../assets/images/statics/tbm.jpg" alt="Tbilisi mall">
+                  </div>
                 </div>
-              </div>
+              </transition>
             </div>
           </li>
         </ul>
@@ -111,6 +113,7 @@ export default {
   data: function () {
     return {
       showActions: false,
+      showChild: null,
       showSearch: false
     }
   },
@@ -127,6 +130,9 @@ export default {
     toggleActions: function () {
       console.log(this.showActions)
       this.showActions = !this.showActions
+    },
+    showChildren: function (item) {
+      this.showChild = item
     },
     logOut: function () {
       this.$store.dispatch('logout').then(() => {
@@ -185,18 +191,23 @@ export default {
           overflow: hidden;
           left: 0;
           top: calc(100% - 11px);
-          height: 0;
           box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
           display: flex;
           padding-right: 182px;
+          &.slideUp-enter-active {
+            animation: subMenuEnter .4s;
+          }
+          &.slideUp-leave-active {
+            animation: subMenuLeave .2s;
+          }
           ul {
             list-style-type: none;
             padding: 24px 0;
-            &.twoCol{
+            &.twoCol {
               width: 472px;
               display: flex;
               flex-wrap: wrap;
-              li{
+              li {
                 width: 236px;
                 margin-right: 0;
               }
@@ -221,7 +232,6 @@ export default {
                 line-height: 1.25;
                 letter-spacing: normal;
                 color: #848484;
-
                 &:hover {
                   background: #ffffff;
                   color: #000;
@@ -229,14 +239,14 @@ export default {
               }
             }
           }
-          .drop-image{
+          .drop-image {
             position: absolute;
             height: 100%;
-            width:182px;
+            width: 182px;
             right: 0;
-            img{
+            img {
               height: 100%;
-              width:100%;
+              width: 100%;
               object-fit: cover;
             }
           }

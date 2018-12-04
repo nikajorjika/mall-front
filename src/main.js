@@ -25,16 +25,11 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import './mixin/mixin'
 import Vuebar from 'vuebar'
 import VueAgile from 'vue-agile'
+import VueSimpleSVG from 'vue-simple-svg'
 const SocialSharing = require('vue-social-sharing')
 
 Vue.use(SocialSharing)
-Vue.use(VeeValidate, {
-  locale: store.state.locale.locale,
-  dictionary: {
-    ka: { attributes: dictionary.attributes, messages: dictionary.messages }
-  }
-})
-
+Vue.use(VueSimpleSVG)
 Vue.use(Vuebar)
 Vue.use(VueAgile)
 Vue.use(Notifications)
@@ -42,6 +37,12 @@ Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyABserBqL7VFOHlWx4wrtgHKtTGzD0k90A',
     libraries: 'places'
+  }
+})
+Vue.use(VeeValidate, {
+  locale: store.state.locale.locale,
+  dictionary: {
+    ka: { attributes: dictionary.attributes, messages: dictionary.messages }
   }
 })
 Vue.use(VueMq, {

@@ -20,7 +20,7 @@
           <button-standard type="submit" :text="t('next')"/>
         </div>
         <div class="login-button">
-          <button-standard :text="t('login')" :icon="`<img src='${getFacebookIcon()}' height='14'/>`"/>
+          <button-standard :text="t('login')" :icon="getFacebookIcon()" customColor="#4267b2" iconWidth="7.5" iconHeight="15"/>
         </div>
       </div>
       <div class="forgot-password">

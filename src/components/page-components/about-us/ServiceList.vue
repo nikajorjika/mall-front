@@ -45,7 +45,7 @@ export default {
       .icon-container {
         height: 3.3px;
         width: 7.3px;
-        margin: auto 25.5px auto 0;
+        margin: auto 7.5px auto 0;
         display: inline-block;
         img {
           display: block;
@@ -69,9 +69,9 @@ export default {
         opacity: 1;
       }
       p {
-        margin:15px 24px;
+        margin: 15px 16px;
         font-family: 'Muli', 'BPG Arial', 'sans-serif';
-        font-size: 16px;
+        font-size: 14px;
         line-height: 1.25;
       }
     }

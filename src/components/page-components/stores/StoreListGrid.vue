@@ -8,7 +8,7 @@
     <loading-big v-show="loadingStores"/>
     <div class="container" v-if="viewGrid">
       <div class="store-list">
-        <div class="store-list-item" v-for="(item, index) in stores" :key="index">
+        <div class="store-list-item" v-for="(item, index) in $store.getters.stores" :key="index">
           <div class="store-inner">
             <router-link :to="`/${$store.getters.locale.locale}/store/details/${item._id}`">
               <store-item :item="item"/>
@@ -106,6 +106,7 @@ export default {
     }
   },
   mounted: function () {
+    this.scroll()
     if (!this.$store.getters.stores.length) this.fetchItems()
   },
   props: {
@@ -114,9 +115,6 @@ export default {
     },
     grouped: {
       type: Object
-    },
-    stores: {
-      type: Array
     },
     services: {
       type: Array,
@@ -200,6 +198,7 @@ export default {
       hasMore: true,
       page: 0,
       offset: 12,
+      requestSent: false,
       viewGrid: true,
       listStoresShowing: this.grouped,
       currentLetter: null
@@ -216,6 +215,15 @@ export default {
       this.loadingStores = true
       this.sendRequest('INITIAL_LOAD')
     },
+    scroll: function () {
+      window.onscroll = () => {
+        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight > document.documentElement.offsetHeight - document.getElementById('footer').offsetHeight
+        if (bottomOfWindow && !this.requestSent) {
+          this.requestSent = true
+          this.loadMore()
+        }
+      }
+    },
     loadMore: function () {
       this.page++
       this.loading = true
@@ -230,6 +238,9 @@ export default {
         if (response.data.data.length < this.offset) this.hasMore = false
         this.loading = false
         this.loadingStores = false
+        if (response.data.data.length) {
+          this.requestSent = false
+        }
       }).catch((error) => {
         console.error(error)
       })
@@ -252,10 +263,10 @@ export default {
   display: flex;
   flex-wrap: wrap;
   margin: 2px -10px;
-  @media screen and (max-width: 1110px){
+  @media screen and (max-width: 1110px) {
     margin: 2px 0;
   }
-  @media screen and (max-width: 760px){
+  @media screen and (max-width: 760px) {
     margin: 2px 26px;
   }
   .store-list-item {
@@ -265,7 +276,7 @@ export default {
     width: calc(25% - 20px);
     box-sizing: border-box;
     padding-top: calc(25% - 20px);
-    @media screen and (max-width: 760px){
+    @media screen and (max-width: 760px) {
       width: calc(50% - 20px);
       padding-top: calc(50% - 20px);
     }

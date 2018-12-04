@@ -1,18 +1,18 @@
 <template>
   <div class="custom-select" ref="dropdownMenu">
-    <div class="selected-item" @click="toggleBody">
-      <span class="selected" v-if="this.selectedItem"><span class="non-breakable">{{this.selectedItem.name[$store.getters.locale.locale]}}</span> <font-awesome-icon
+    <div class="selected-item" @click="toggleBody" :class="{open: open}">
+      <span class="selected" v-if="selectedItem"><span class="non-breakable">{{this.selectedItem.name[$store.getters.locale.locale]}}</span> <font-awesome-icon
         icon="caret-down"/></span>
-      <span class="placeholder" v-if="!this.selectedItem"><span class="non-breakable">{{this.placeholder[$store.getters.locale.locale]}}</span> <font-awesome-icon
+      <span class="placeholder" v-if="!selectedItem"><span class="non-breakable">{{this.placeholder[$store.getters.locale.locale]}}</span> <font-awesome-icon
         icon="caret-down"/></span>
     </div>
-    <div class="selectable-items" v-if="this.open">
+    <div class="selectable-items" v-if="open">
       <ul>
         <li class="placeholder">
           <div class="item" @click="fireSelect(null)">{{this.placeholder[$store.getters.locale.locale]}}</div>
         </li>
-        <li v-for="(item, index) in this.items" v-bind:key="index">
-          <div class="item" @click="fireSelect(item)">{{item.name[$store.getters.locale.locale]}}</div>
+        <li v-for="(item, index) in items" v-bind:key="index">
+          <div class="item" @click="fireSelect(item)" :class="{currentItem: item === selectedItem}">{{item.name[$store.getters.locale.locale]}}</div>
         </li>
       </ul>
     </div>
@@ -98,9 +98,13 @@ export default {
   position: relative;
   .selected-item {
     padding: 16.5px 13px;
-    border: solid 0.5px #dcdcdc;
+    border: 1px solid rgba(220, 220, 220, 0.51);
     background-color: #ffffff;
     cursor: pointer;
+    &.open{
+      border: 1px solid #000000;
+      border-bottom: 1px solid rgba(220, 220, 220, 0.51);
+    }
     @media screen and (max-width: 1650px) {
       padding: 12px 9px;
     }
@@ -135,7 +139,8 @@ export default {
     }
   }
   .selectable-items {
-    border: solid 1px #dcdcdc;
+    border: solid 1px #000000;
+    border-top: none;
     background-color: #ffffff;
     position: absolute;
     top: 100%;
@@ -165,6 +170,10 @@ export default {
           &:hover {
             background: #f9f9f9;
             color: #000;
+          }
+          &.currentItem{
+            color: #ffffff;
+            background: #000;
           }
         }
         &.placeholder {

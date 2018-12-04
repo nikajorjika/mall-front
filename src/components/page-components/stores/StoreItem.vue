@@ -1,7 +1,10 @@
 <template>
   <div class="store-item">
     <div class="store-wrapper">
-      <img :src="this.item.logoUrl" :alt="this.item.name">
+      <img :src="item.logoUrl" :alt="item.name[$store.getters.locale.locale]">
+    </div>
+    <div class="store-flip">
+      <h3>{{item.name[$store.getters.locale.locale]}}</h3>
     </div>
   </div>
 </template>
@@ -26,6 +29,7 @@ export default {
 .store-item {
   width: 100%;
   height: 100%;
+  position: relative;
   .store-wrapper {
     display: flex;
     width: 100%;
@@ -36,6 +40,26 @@ export default {
       max-width: 100%;
       object-fit: contain;
       object-position: center;
+    }
+  }
+  .store-flip{
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #f9f9f9;
+    display: flex;
+    transition: opacity 0.3s;
+    &:hover{
+      opacity: 1;
+    }
+    h3{
+      margin:auto;
+      font-size: 18px;
+      text-transform: uppercase;
+      line-height: 1.28;
     }
   }
 }

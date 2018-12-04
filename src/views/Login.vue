@@ -14,7 +14,7 @@
             </router-link>
           </div>
           <div class="register-button">
-            <button-standard :text="t('sign_up')" :icon="`<img src='${getFacebookIcon()}' height='14'/>`"/>
+            <button-standard :text="t('sign_up')" :icon="getFacebookIcon()" customColor="#4267b2"/>
           </div>
         </div>
       </div>
