@@ -266,6 +266,7 @@ export default {
       position: absolute;
       top: 50%;
       left: 50%;
+      width: 156px;
       transform: translate(-50%, -50%);
       @media screen and (max-width: 760px) {
         width: 100px;
@@ -273,7 +274,6 @@ export default {
 
       .mall-logo {
         font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
-
         .logo {
           font-size: 2.3rem;
           letter-spacing: 0.1rem;

@@ -124,20 +124,20 @@ self.__precacheManifest = [
     "url": "/css/chunk-vendors.7e6c2fa7.css"
   },
   {
-    "revision": "bee85b57b6f4cd2ec6fd",
-    "url": "/js/app.176361c6.js"
+    "revision": "6a9990b7e32c06adf22d",
+    "url": "/js/app.bcfa553d.js"
   },
   {
     "revision": "93944d938d6d42cc6359",
     "url": "/js/chunk-10996ba4.f0bcf32d.js"
   },
   {
-    "revision": "9ff12f694e5951a6f51a9d63b05062e7",
-    "url": "/fonts/OpenSans-Light.9ff12f69.ttf"
-  },
-  {
     "revision": "d7d5d4588a9f50c99264bc12e4892a7c",
     "url": "/fonts/OpenSans-Regular.d7d5d458.ttf"
+  },
+  {
+    "revision": "9ff12f694e5951a6f51a9d63b05062e7",
+    "url": "/fonts/OpenSans-Light.9ff12f69.ttf"
   },
   {
     "revision": "e1c83f9474e0cc1d84a13c6d1ddf3ca5",
@@ -164,12 +164,12 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
   },
   {
-    "revision": "6530709ce0aadf3283db6512a8fcabec",
-    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
-  },
-  {
     "revision": "26ec7406f51c5efb79ecc2885a5b887c",
     "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
+  },
+  {
+    "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
   },
   {
     "revision": "9c57740b6f314b7db24f8cddde741770",
@@ -180,8 +180,8 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-nino-mtavruli-webfont.afcdb491.ttf"
   },
   {
-    "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
+    "revision": "6530709ce0aadf3283db6512a8fcabec",
+    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
   },
   {
     "revision": "97a80250cdafef79da7329c445faeaa6",
@@ -244,11 +244,11 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "a030bc84e0a33b933b8e751630c0aefc",
+    "revision": "39ca31a0339b7cae39102a415e81688a",
     "url": "/index.html"
   },
   {
-    "revision": "bee85b57b6f4cd2ec6fd",
-    "url": "/css/app.9f21e386.css"
+    "revision": "6a9990b7e32c06adf22d",
+    "url": "/css/app.07c2d7e4.css"
   }
 ];
