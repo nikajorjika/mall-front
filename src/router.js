@@ -10,7 +10,10 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   scrollBehavior: function (to, from, savedPosition) {
-    return { x: 0, y: 0 }
+    const exception = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine' ]
+    if (exception.indexOf(to.name) === -1 && exception.indexOf(from.name) === -1) {
+      return { x: 0, y: 0 }
+    }
   },
   routes: [
     {
@@ -111,6 +114,19 @@ const router = new Router({
 })
 router.beforeEach((to, from, next) => {
   const sessionToken = sessionStorage.getItem('websiteAuthToken')
+  let language = to.params.locale
+  if (language) {
+    const languages = store.getters.languages
+    languages.forEach(function (object, index) {
+      if (object.locale === language) {
+        store.commit('SET_LOCALE', object.locale)
+      }
+    })
+  }
+  const aboutPages = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine' ]
+  if (aboutPages.indexOf(to.name) !== -1) {
+    store.commit('SET_LOADING_STATE', { model: 'page', value: true })
+  }
   if (sessionToken === null || sessionToken === '' || sessionToken === undefined || sessionToken === 'undefined') {
     Axios.post(store.state.apiUrls.websiteAuthURL, {
       username: store.state.apiCredentials.username,
@@ -125,15 +141,6 @@ router.beforeEach((to, from, next) => {
   } else {
     Axios.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + sessionToken
     next()
-  }
-  let language = to.params.locale
-  if (language) {
-    const languages = store.getters.languages
-    languages.forEach(function (object, index) {
-      if (object.locale === language) {
-        store.commit('SET_LOCALE', object.locale)
-      }
-    })
   }
 })
 

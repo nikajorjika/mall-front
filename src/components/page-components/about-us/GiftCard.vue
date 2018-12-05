@@ -30,7 +30,11 @@ export default {
     AboutTitle
   },
   mounted: function () {
-    if (!this.$store.getters.giftCard) this.fetchPage()
+    if (!this.$store.getters.giftCard) {
+      this.fetchPage()
+    } else {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    }
   },
   props: {
     title: {
@@ -57,7 +61,7 @@ export default {
   },
   computed: {
     pageDataContent: function () {
-      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][0].data) : ''
+      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][ 0 ].data) : ''
     },
     pageTitle: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
@@ -66,18 +70,17 @@ export default {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Description' ] : ''
     },
     imageUrl: function () {
-      return this.$store.getters[ this.model ] ? this.$store.getters[ this.model ][0].photoUrl : ''
+      return this.$store.getters[ this.model ] ? this.$store.getters[ this.model ][ 0 ].photoUrl : ''
     }
   },
   methods: {
     fetchPage: function () {
-      this.$store.dispatch('getAboutPage', { url: this.$store.state.apiUrls.gift, model: this.model })
-        .then((response) => {
-          console.log(response)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+      this.$store.dispatch('getAboutPage', {
+        url: this.$store.state.apiUrls.gift,
+        model: this.model
+      }).catch((error) => {
+        console.error(error)
+      })
     }
   }
 }
@@ -89,16 +92,16 @@ export default {
     color: #000;
     opacity: 1;
   }
-  .content-container{
+  .content-container {
     display: flex;
-    .part-left{
-      width:100%;
+    .part-left {
+      width: 100%;
     }
-    .part-right{
+    .part-right {
       margin: 0 90px;
     }
   }
-  .list-label{
+  .list-label {
     font-size: 1.8rem;
     line-height: 1.28;
     font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';

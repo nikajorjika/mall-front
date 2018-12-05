@@ -70,13 +70,9 @@ export default {
         api: this.$store.state.apiUrls.giftStores,
         model: this.model,
         setter: this.magSetter
-      }).then(() => {
-        console.log(this.$store.getters.giftStoresList)
-        console.log('success')
+      }).catch((error) => {
+        console.error(error)
       })
-        .catch((error) => {
-          console.error(error)
-        })
     },
     filterList: function (value) {
       this.currentLetter = value
@@ -86,45 +82,45 @@ export default {
 </script>
 
 <style lang="scss">
-.gift-stores{
-  .alphabet-header{
+.gift-stores {
+  .alphabet-header {
     padding-bottom: 8px;
     border-bottom: 1px solid #dcdcdc;
-    .alphabet-header-wrapper{
+    .alphabet-header-wrapper {
       display: flex;
       justify-content: space-between;
-      .alphabet-item{
+      .alphabet-item {
         font-size: 14px;
         line-height: 1.29;
         text-transform: uppercase;
         color: #dcdcdc;
-        .active{
+        .active {
           color: #000;
           cursor: pointer;
         }
       }
     }
   }
-  .alphabetic-container{
-    .alphabetic-container-inner{
+  .alphabetic-container {
+    .alphabetic-container-inner {
       border-bottom: 1px solid #dcdcdc;
       padding: 27px 0 27px 35px;
-      .alphabet-wrapper{
+      .alphabet-wrapper {
         display: flex;
-        .alphabet-item{
+        .alphabet-item {
           font-size: 6rem;
           line-height: 1.25;
           text-transform: uppercase;
-          width:275px;
+          width: 275px;
         }
-        .items-container{
+        .items-container {
           width: 100%;
           display: flex;
           flex-wrap: wrap;
-          .item{
+          .item {
             width: calc(33% - 15px);
             margin: 0 15px 10px 0;
-            .item-wrapper{
+            .item-wrapper {
               font-size: 1.6rem;
               line-height: 1.25;
               font-family: 'Muli', 'BPG Arial', 'sans-serif';

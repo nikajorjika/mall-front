@@ -39,7 +39,11 @@ export default {
     AboutTitle
   },
   mounted: function () {
-    if (!this.$store.getters[this.model]) this.fetchPage()
+    if (!this.$store.getters[ this.model ]) {
+      this.fetchPage()
+    } else {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    }
   },
   props: {
     title: {
@@ -66,7 +70,7 @@ export default {
   },
   computed: {
     pageDataContent: function () {
-      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][0].data) : ''
+      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][ 0 ].data) : ''
     },
     pageTitle: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
@@ -86,13 +90,12 @@ export default {
   },
   methods: {
     fetchPage: function () {
-      this.$store.dispatch('getAboutPage', {url: this.$store.state.apiUrls.leasing, model: this.model})
-        .then((response) => {
-          console.log(response)
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+      this.$store.dispatch('getAboutPage', {
+        url: this.$store.state.apiUrls.leasing,
+        model: this.model
+      }).catch((error) => {
+        console.error(error)
+      })
     }
   }
 }
@@ -107,25 +110,25 @@ export default {
       padding: 14px 33px;
       margin-right: 16px;
       min-width: 398px;
-      .contact-info-inner{
-        p{
+      .contact-info-inner {
+        p {
           font-size: 1.8rem;
           margin: 0;
           line-height: 1.28;
-          &.bold{
+          &.bold {
             font-weight: 900;
             margin-bottom: 21px;
           }
         }
-        a{
+        a {
           color: #2d83e6;
           font-size: 1.6rem;
           margin: 0;
           line-height: 1.88;
         }
 
-        &:nth-child(4){
-          p{
+        &:nth-child(4) {
+          p {
             font-size: 1.6rem;
           }
         }

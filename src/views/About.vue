@@ -1,7 +1,7 @@
 <template>
   <div class="about-page container">
     <section class="about-us about-outer-container">
-      <div class="page-block-container">
+      <div class="page-block-container" :class="{loading: $store.getters.loading.page}">
         <div class="breadcrumb">
           <ul>
             <li v-for="(item, index) in breadcrumb" :key="index">
@@ -27,7 +27,6 @@ import AboutUsMenu from '../components/page-components/about-us/AboutPageMenu'
 import StaffCarousel from '../components/page-components/about-us/OurTeam'
 import AboutTitle from '../components/page-components/about-us/AboutPageTitle'
 import PageOurService from '../components/page-components/about-us/GuestServicePage'
-
 export default {
   name: 'about-us',
   components: {
@@ -100,6 +99,7 @@ export default {
     .page-block-container {
       width: calc(100% - 260px);
       box-sizing: border-box;
+      position: relative;
       p {
         color: #000;
         opacity: 1;

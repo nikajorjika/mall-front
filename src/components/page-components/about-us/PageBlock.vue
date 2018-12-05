@@ -25,7 +25,11 @@ export default {
     AboutTitle
   },
   mounted: function () {
-    if (!this.$store.getters[this.model]) this.fetchPage()
+    if (!this.$store.getters[ this.model ]) {
+      this.fetchPage()
+    } else {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    }
   },
   props: {
     title: {
@@ -52,7 +56,7 @@ export default {
   },
   computed: {
     pageDataContent: function () {
-      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][0].data) : ''
+      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][ 0 ].data) : ''
     },
     pageTitle: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
@@ -75,15 +79,12 @@ export default {
   },
   methods: {
     fetchPage: function () {
-      this.$store.dispatch('getAboutPage', { url: this.$store.state.apiUrls.about, model: this.model })
-        .then((response) => {
-          if (Array.isArray(response)) {
-            console.log(response)
-          }
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+      this.$store.dispatch('getAboutPage', {
+        url: this.$store.state.apiUrls.about,
+        model: this.model
+      }).catch((error) => {
+        console.error(error)
+      })
     }
   }
 }

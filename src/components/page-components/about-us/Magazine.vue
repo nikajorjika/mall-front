@@ -17,8 +17,10 @@
         <div class="download-button">
           <a :href="item.fileUrl" target="_blank">
             <button><span class="download-text">{{t('download')}}</span>
-              <img src="../../../assets/images/icons/download-black.svg" class="download-icon black" alt="Download Icon">
-              <img src="../../../assets/images/icons/download-white.svg" class="download-icon white" alt="Download Icon">
+              <img src="../../../assets/images/icons/download-black.svg" class="download-icon black"
+                   alt="Download Icon">
+              <img src="../../../assets/images/icons/download-white.svg" class="download-icon white"
+                   alt="Download Icon">
             </button>
           </a>
         </div>
@@ -39,7 +41,11 @@ export default {
     AboutTitle
   },
   mounted: function () {
-    if (!this.$store.getters[ this.model ]) this.fetchPage()
+    if (!this.$store.getters[ this.model ]) {
+      this.fetchPage()
+    } else {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    }
   },
   props: {
     title: {
@@ -79,13 +85,11 @@ export default {
         api: this.$store.state.apiUrls.magazine,
         model: this.model,
         setter: this.magSetter
+      }).then(() => {
+        this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+      }).catch((error) => {
+        console.error(error)
       })
-        .then(() => {
-          console.log('Success')
-        })
-        .catch((error) => {
-          console.error(error)
-        })
     },
     formatData: function (date) {
       const ts = new Date(date)
@@ -151,6 +155,7 @@ export default {
           border: none;
           border-top: 1px solid #dcdcdc;
           padding: 57px 0 70px 0;
+          background-color: transparent;
           font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
           font-size: 2.4rem;
           text-transform: uppercase;
@@ -169,11 +174,11 @@ export default {
             z-index: 0;
             transition: height .3s;
           }
-          .download-text{
+          .download-text {
             z-index: 1;
           }
           &:hover {
-            .download-text{
+            .download-text {
               color: #ffffff;
             }
             &:before {

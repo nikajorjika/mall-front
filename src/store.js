@@ -17,7 +17,6 @@ import { apiUrls, apiCredentials } from './store/modules/apiData'
 import entertainment from './store/modules/entertainments'
 import entertainmentList from './store/modules/entertainmentList'
 import dateOptions from './store/modules/dateOptions'
-import sliderItems from './store/modules/SliderItems'
 import './mixin/mixin'
 
 Vue.use(Vuex)
@@ -36,7 +35,8 @@ export default new Vuex.Store({
     ],
     loading: {
       stores: false,
-      events: false
+      events: false,
+      page: false
     },
     locale: localStorage.getItem('locale') ? localStorage.getItem('locale') : 'en',
     navigation: navigation,
@@ -93,7 +93,7 @@ export default new Vuex.Store({
     newsFilters: newsFilters,
     storeFilters: storeFilters,
     homeAds: [],
-    sliderItems:[]
+    sliderItems: []
   },
   mutations: {
     SET_LOCALE: (state, locale) => {
@@ -114,7 +114,7 @@ export default new Vuex.Store({
     },
     SET_PAGE: (state, payload) => {
       const model = payload.model
-      state[model] = payload.data
+      state[ model ] = payload.data
     },
     INITIAL_LOAD: (state, payload) => {
       state[ payload.model ] = payload.data
@@ -247,6 +247,9 @@ export default new Vuex.Store({
     },
     giftStoresList: (state) => {
       return state.giftStoresList
+    },
+    loading: (state) => {
+      return state.loading
     }
   },
   actions: {
@@ -344,7 +347,6 @@ export default new Vuex.Store({
               resolve('RECORD NOT FOUND')
             } else {
               resolve(response)
-              console.log(response.data.data)
               context.commit(request.setter, { data: response.data.data, model: request.model })
             }
           })
@@ -489,6 +491,7 @@ export default new Vuex.Store({
               resolve('RECORD NOT FOUND')
             } else {
               context.commit('SET_PAGE', { model: payload.model, data: response.data.aboutPage })
+              context.commit('SET_LOADING_STATE', { model: 'page', value: false })
               resolve(response.data.aboutPage)
             }
           })
