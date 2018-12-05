@@ -59,9 +59,11 @@ const messages = {
       tbilisi_mall_taxi: 'tbilisi mall taxi',
       about_mall: 'about mall',
       about_us: 'about us',
+      download: 'download',
       guest_service: 'guest service',
       news: 'news',
       joinNow: 'JOIN NOW',
+      see_the_list_below: 'See the list of shops below:',
       subscribeText: 'Sign up for our newsletter to receive special offers, event invitations, and more.'
     }
   },
@@ -125,8 +127,10 @@ const messages = {
       about_mall: 'მოლის შესახებ',
       guest_service: 'მომსახურებები',
       about_us: 'ჩვენს შესახებ',
+      download: 'გადმოწერა',
       promotions: 'პრომოუშენები',
       joinNow: 'შემოგვიერთდი',
+      see_the_list_below: 'იხილეთ მაღაზიების სია  :',
       subscribeText: 'გამოიწერე ჩვენი საიტი და მიიღე სიახლეები შემოთავაზებების და სიახლეების შესახებ.'
     }
   }

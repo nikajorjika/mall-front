@@ -1,18 +1,27 @@
 <template>
   <div class="page-block">
-    <about-title :title="pageTitle"/>
-    <about-content :content="pageDescription"/>
-    <service-list :list="list"/>
-    <about-content :content="secondaryDescription"/>
-    <div class="additional-info">
-      <div class="additional-info-item">
-        <h4>{{contactInfoTitle}}</h4>
-        <p>
-          {{contactInfoFirst}}
-          <br>
-          <br>
-          {{contactInfoSecond}}
-        </p>
+    <about-title :title="t('magazine')"/>
+    <div class="magazines-container">
+      <div class="magazine-item" v-for="(item, index) in $store.getters.magazines" :key="index">
+        <div class="magazine-image-container">
+          <img :src="item.photoUrl" :alt="item.photoUrl[$store.getters.locale.locale]">
+        </div>
+        <div class="magazine-date">
+          <div class="date-wrapper">
+            <span>{{formatData(item.date)}}</span>
+          </div>
+          <div class="name-wrapper">
+            <h4>{{item[`name${$store.getters.locale.locale.toUpperCase()}`]}}</h4>
+          </div>
+        </div>
+        <div class="download-button">
+          <a :href="item.fileUrl" target="_blank">
+            <button><span class="download-text">{{t('download')}}</span>
+              <img src="../../../assets/images/icons/download-black.svg" class="download-icon black" alt="Download Icon">
+              <img src="../../../assets/images/icons/download-white.svg" class="download-icon white" alt="Download Icon">
+            </button>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -30,7 +39,7 @@ export default {
     AboutTitle
   },
   mounted: function () {
-    if (!this.pageDataContent.length) this.fetchPage()
+    if (!this.$store.getters[ this.model ]) this.fetchPage()
   },
   props: {
     title: {
@@ -51,100 +60,146 @@ export default {
   data: function () {
     return {
       pageData: null,
-      locale: this.$store.getters.locale.locale
+      locale: this.$store.getters.locale.locale,
+      model: 'magazine',
+      magSetter: 'SET_MAGAZINES'
     }
   },
   computed: {
     pageDataContent: function () {
-      return this.pageData ? JSON.parse(this.pageData.data) : ''
+      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][ 0 ].data) : ''
     },
     pageTitle: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
-    },
-    pageDescription: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'Description' ] : ''
-    },
-    contactInfoTitle: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoTitle' ] : ''
-    },
-    contactInfoFirst: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoFirst' ] : ''
-    },
-    contactInfoSecond: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoSecond' ] : ''
-    },
-    secondaryDescription: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'SecondaryDescription' ] : ''
-    },
-    list: function () {
-      let result = []
-      if (this.pageDataContent) {
-        const data = this.pageDataContent[ this.locale + 'Additional' ]
-        for (let i = 0; i < data.length; i++) {
-          result.push({
-            title: data[ i ],
-            content: data[ i + 1 ]
-          })
-          i++
-        }
-      }
-      return result
     }
   },
   methods: {
     fetchPage: function () {
-      this.$store.dispatch('getAboutPage', this.$store.state.apiUrls.magazine)
-        .then((response) => {
-          console.log(response)
-          if (Array.isArray(response)) {
-            this.pageData = response[ 0 ]
-          }
+      this.$store.dispatch('fetchItems', {
+        api: this.$store.state.apiUrls.magazine,
+        model: this.model,
+        setter: this.magSetter
+      })
+        .then(() => {
+          console.log('Success')
         })
         .catch((error) => {
           console.error(error)
         })
+    },
+    formatData: function (date) {
+      const ts = new Date(date)
+      return `${ts.getDay()} . ${ts.getMonth()} . ${ts.getFullYear()}`
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 .page-block {
-  p {
-    color: #000;
-    opacity: 1;
-  }
-  .additional-info {
-    margin-top: 85px;
-    margin-bottom: 74.5px;
+  padding-right: 2px;
+  .magazines-container {
     display: flex;
-    .additional-info-item {
-      width: 376px;
-      margin-right: 12px;
-      h4 {
-        font-size: 2.4rem;
-        margin: 21px 0;
-        line-height: 1.25;
-        font-weight: bold;
-        font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
-      }
-      p {
-        max-width: 246px;
-        .color-grey {
-          color: #848484;
+    .magazine-item {
+      width: calc(50% - 15.5px);
+      margin-right: 15.5px;
+      border: 1px solid #dcdcdc;
+
+      .magazine-image-container {
+        padding-top: 100%;
+        position: relative;
+
+        img {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          left: 0;
+          top: 0;
+          object-fit: cover;
+          object-position: center;
         }
       }
-    }
-  }
-}
-</style>
 
-<style lang="scss">
-.page-block {
-  .additional-info {
-    .additional-info-item {
-      p {
-        .color-grey {
+      .magazine-date {
+        display: flex;
+        padding: 15px;
+
+        .date-wrapper {
           color: #848484;
+          margin-left: auto;
+
+          span {
+            font-size: 1.2rem;
+            line-height: 1.25;
+          }
+        }
+
+        .name-wrapper {
+          margin-right: auto;
+
+          h4 {
+            font-size: 1.2rem;
+            line-height: 1.25;
+            margin: 0 0 0 9px;
+          }
+        }
+      }
+
+      .download-button {
+        button {
+          width: 100%;
+          border-radius: 0;
+          border: none;
+          border-top: 1px solid #dcdcdc;
+          padding: 57px 0 70px 0;
+          font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
+          font-size: 2.4rem;
+          text-transform: uppercase;
+          display: flex;
+          justify-content: center;
+          position: relative;
+          cursor: pointer;
+          &:before {
+            content: '';
+            background: #000000;
+            position: absolute;
+            height: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 0;
+            transition: height .3s;
+          }
+          .download-text{
+            z-index: 1;
+          }
+          &:hover {
+            .download-text{
+              color: #ffffff;
+            }
+            &:before {
+              height: 100%;
+            }
+            .download-icon {
+              z-index: 1;
+              &.black {
+                display: none;
+              }
+
+              &.white {
+                display: block;
+              }
+            }
+          }
+
+          .download-icon {
+            width: 12.3px;
+            height: 17.6px;
+            margin: auto 0 auto 15px;
+
+            &.white {
+              display: none;
+            }
+          }
         }
       }
     }

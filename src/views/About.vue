@@ -71,6 +71,9 @@ export default {
 }
 </script>
 <style lang="scss">
+.page-block{
+  padding-right: 138px;
+}
 .about-page {
   .breadcrumb{
     ul{
@@ -96,7 +99,6 @@ export default {
     margin: 97px 0 57.5px;
     .page-block-container {
       width: calc(100% - 260px);
-      padding-right: 138px;
       box-sizing: border-box;
       p {
         color: #000;

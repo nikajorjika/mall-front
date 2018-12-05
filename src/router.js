@@ -61,7 +61,7 @@ const router = new Router({
           path: 'gift-card',
           name: 'gift_card',
           props: true,
-          component: () => import('./components/page-components/about-us/Leasing.vue')
+          component: () => import('./components/page-components/about-us/GiftCard.vue')
         },
         {
           path: 'tbilisi-mall-taxi',

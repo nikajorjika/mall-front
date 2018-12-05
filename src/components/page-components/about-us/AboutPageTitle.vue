@@ -22,6 +22,7 @@ export default {
     line-height: 1.25;
     color: #000;
     margin: 10px 0 63px;
+    text-transform: uppercase;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="about-content-container">
-    <p v-html="this.content"></p>
+    <p v-html="customContent"></p>
   </div>
 </template>
 <script>
@@ -11,6 +11,11 @@ export default {
     content: {
       type: String,
       default: ''
+    }
+  },
+  computed: {
+    customContent: function () {
+      return this.content !== '' ? `<p>${this.content.replace(/\n/g, '<br />')}</p>` : ''
     }
   }
 }

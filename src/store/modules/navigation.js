@@ -208,13 +208,6 @@ const navigation =
         en: 'services',
         ka: 'სერვისები'
       }
-    },
-    {
-      url: '/for-kids',
-      name: {
-        en: 'for kids',
-        ka: 'ბავშვებისთვის'
-      }
     }
   ]
 export default navigation

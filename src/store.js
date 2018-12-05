@@ -48,6 +48,7 @@ export default new Vuex.Store({
     frontNews: [],
     stores: stores,
     storesList: storesList,
+    giftStoresList: [],
     entertainment: entertainment,
     entertainmentList: entertainmentList,
     messages: messages,
@@ -57,6 +58,13 @@ export default new Vuex.Store({
     googleMap: googleMap,
     alphabet: alphabet,
     dateOptions: dateOptions,
+    aboutUs: null,
+    leasing: null,
+    guestServices: null,
+    mallTaxi: null,
+    marketing: null,
+    giftCard: null,
+    magazines: [],
     team: [],
     socials: [
       {
@@ -104,6 +112,10 @@ export default new Vuex.Store({
         state[ model ].push(element)
       })
     },
+    SET_PAGE: (state, payload) => {
+      const model = payload.model
+      state[model] = payload.data
+    },
     INITIAL_LOAD: (state, payload) => {
       state[ payload.model ] = payload.data
     },
@@ -134,6 +146,12 @@ export default new Vuex.Store({
     },
     SET_TEAM: (state, payload) => {
       state.team = payload
+    },
+    SET_MAGAZINES: (state, payload) => {
+      state.magazines = payload.data
+    },
+    SET_GIFT_STORES: (state, payload) => {
+      state.giftStoresList = payload.data
     }
   },
   getters: {
@@ -145,6 +163,27 @@ export default new Vuex.Store({
     },
     navigation: (state) => {
       return state.navigation
+    },
+    aboutUs: (state) => {
+      return state.aboutUs
+    },
+    leasing: (state) => {
+      return state.leasing
+    },
+    guestServices: (state) => {
+      return state.guestServices
+    },
+    mallTaxi: (state) => {
+      return state.mallTaxi
+    },
+    marketing: (state) => {
+      return state.marketing
+    },
+    magazines: (state) => {
+      return state.magazines
+    },
+    giftCard: (state) => {
+      return state.giftCard
     },
     events: (state) => {
       return state.events
@@ -205,6 +244,9 @@ export default new Vuex.Store({
     },
     user: (state) => {
       return state.user
+    },
+    giftStoresList: (state) => {
+      return state.giftStoresList
     }
   },
   actions: {
@@ -302,6 +344,7 @@ export default new Vuex.Store({
               resolve('RECORD NOT FOUND')
             } else {
               resolve(response)
+              console.log(response.data.data)
               context.commit(request.setter, { data: response.data.data, model: request.model })
             }
           })
@@ -438,13 +481,14 @@ export default new Vuex.Store({
           })
       })
     },
-    getAboutPage: function (context, url) {
+    getAboutPage: function (context, payload) {
       return new Promise((resolve, reject) => {
-        Axios.get(url)
+        Axios.get(payload.url)
           .then(function (response) {
             if (!response.data.aboutPage.length) {
               resolve('RECORD NOT FOUND')
             } else {
+              context.commit('SET_PAGE', { model: payload.model, data: response.data.aboutPage })
               resolve(response.data.aboutPage)
             }
           })

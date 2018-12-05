@@ -30,7 +30,7 @@ export default {
     AboutTitle
   },
   mounted: function () {
-    if (!this.pageDataContent.length) this.fetchPage()
+    if (!this.$store.getters[this.model]) this.fetchPage()
   },
   props: {
     title: {
@@ -51,12 +51,13 @@ export default {
   data: function () {
     return {
       pageData: null,
-      locale: this.$store.getters.locale.locale
+      locale: this.$store.getters.locale.locale,
+      model: 'marketing'
     }
   },
   computed: {
     pageDataContent: function () {
-      return this.pageData ? JSON.parse(this.pageData.data) : ''
+      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][0].data) : ''
     },
     pageTitle: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
@@ -93,7 +94,7 @@ export default {
   },
   methods: {
     fetchPage: function () {
-      this.$store.dispatch('getAboutPage', this.$store.state.apiUrls.marketing)
+      this.$store.dispatch('getAboutPage', {url: this.$store.state.apiUrls.marketing, model: this.model})
         .then((response) => {
           if (Array.isArray(response)) {
             this.pageData = response[ 0 ]

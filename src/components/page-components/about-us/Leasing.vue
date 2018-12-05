@@ -2,17 +2,26 @@
   <div class="page-block">
     <about-title :title="pageTitle"/>
     <about-content :content="pageDescription"/>
-    <service-list :list="list"/>
-    <about-content :content="secondaryDescription"/>
     <div class="additional-info">
-      <div class="additional-info-item">
-        <h4>{{contactInfoTitle}}</h4>
-        <p>
-          {{contactInfoFirst}}
-          <br>
-          <br>
-          {{contactInfoSecond}}
-        </p>
+      <div class="contact-info">
+        <div class="contact-info-inner" v-for="(item, index) in contactInfoFirst" :key="index">
+          <p :class="{bold: index === 1}" v-if="index !== 2">
+            {{item}}
+          </p>
+          <a :href="`mailto:${item}`" v-else>
+            {{item}}
+          </a>
+        </div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-info-inner" v-for="(item, index) in contactInfoSecond" :key="index">
+          <p :class="{bold: index === 1}" v-if="index !== 2">
+            {{item}}
+          </p>
+          <a :href="`mailto:${item}`" v-else>
+            {{item}}
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -30,7 +39,7 @@ export default {
     AboutTitle
   },
   mounted: function () {
-    if (!this.pageDataContent.length) this.fetchPage()
+    if (!this.$store.getters[this.model]) this.fetchPage()
   },
   props: {
     title: {
@@ -51,12 +60,13 @@ export default {
   data: function () {
     return {
       pageData: null,
-      locale: this.$store.getters.locale.locale
+      locale: this.$store.getters.locale.locale,
+      model: 'leasing'
     }
   },
   computed: {
     pageDataContent: function () {
-      return this.pageData ? JSON.parse(this.pageData.data) : ''
+      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][0].data) : ''
     },
     pageTitle: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
@@ -68,37 +78,17 @@ export default {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoTitle' ] : ''
     },
     contactInfoFirst: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoFirst' ] : ''
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'FirstContact' ] : ''
     },
     contactInfoSecond: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoSecond' ] : ''
-    },
-    secondaryDescription: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'SecondaryDescription' ] : ''
-    },
-    list: function () {
-      let result = []
-      if (this.pageDataContent) {
-        const data = this.pageDataContent[ this.locale + 'Additional' ]
-        for (let i = 0; i < data.length; i++) {
-          result.push({
-            title: data[ i ],
-            content: data[ i + 1 ]
-          })
-          i++
-        }
-      }
-      return result
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'SecondContact' ] : ''
     }
   },
   methods: {
     fetchPage: function () {
-      this.$store.dispatch('getAboutPage', this.$store.state.apiUrls.leasing)
+      this.$store.dispatch('getAboutPage', {url: this.$store.state.apiUrls.leasing, model: this.model})
         .then((response) => {
           console.log(response)
-          if (Array.isArray(response)) {
-            this.pageData = response[ 0 ]
-          }
         })
         .catch((error) => {
           console.error(error)
@@ -109,28 +99,35 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page-block {
-  p {
-    color: #000;
-    opacity: 1;
-  }
   .additional-info {
-    margin-top: 85px;
-    margin-bottom: 74.5px;
     display: flex;
-    .additional-info-item {
-      width: 376px;
-      margin-right: 12px;
-      h4 {
-        font-size: 2.4rem;
-        margin: 21px 0;
-        line-height: 1.25;
-        font-weight: bold;
-        font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
-      }
-      p {
-        max-width: 246px;
-        .color-grey {
-          color: #848484;
+    margin-top: 28px;
+    .contact-info {
+      background: #f9f9f9;
+      padding: 14px 33px;
+      margin-right: 16px;
+      min-width: 398px;
+      .contact-info-inner{
+        p{
+          font-size: 1.8rem;
+          margin: 0;
+          line-height: 1.28;
+          &.bold{
+            font-weight: 900;
+            margin-bottom: 21px;
+          }
+        }
+        a{
+          color: #2d83e6;
+          font-size: 1.6rem;
+          margin: 0;
+          line-height: 1.88;
+        }
+
+        &:nth-child(4){
+          p{
+            font-size: 1.6rem;
+          }
         }
       }
     }
