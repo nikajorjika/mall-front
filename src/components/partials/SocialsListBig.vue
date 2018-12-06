@@ -3,7 +3,7 @@
     <block-header-standard :title="this.title"/>
     <div class="socials-container-outer">
       <div class="socials-container">
-        <div class="social" v-for="item in this.socialsList" v-bind:key="item.name">
+        <div class="social" v-for="(item, index) in $store.getters.socials" v-bind:key="index">
           <social-item :item="item"/>
         </div>
       </div>
@@ -21,22 +21,9 @@ export default {
     SocialItem,
     BlockHeaderStandard
   },
-  mounted: function () {
-    if (!this.$store.getters.socials.length) this.getSocials()
-  },
   data: function () {
     return {
-      title: 'SOCIALS',
-      socialsList: this.$store.getters.socials
-    }
-  },
-  methods: {
-    getSocials: function () {
-      this.$store.dispatch('getSocials').then(function (response) {
-        console.log(response.data)
-      }).catch(function (error) {
-        console.error(error.message)
-      })
+      title: 'SOCIALS'
     }
   }
 }

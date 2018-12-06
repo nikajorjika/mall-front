@@ -1,14 +1,14 @@
 <template>
   <div class="socials-item">
-    <a :href="this.item.url" target="_blank">
-      <div class="social-item-container" :class="this.viewStyle">
+    <a :href="item.link" target="_blank">
+      <div class="social-item-container" :class="viewStyle">
         <div class="social-logo-container">
           <div class="icon-wrapper">
-            <font-awesome-icon :icon="{ prefix: 'fab', iconName: this.item.icon }"/>
+            <font-awesome-icon :icon="{ prefix: 'fab', iconName: getIconName(item.name) }"/>
           </div>
         </div>
         <div class="social-text-container">
-          {{this.item.name}}
+          {{item.name}}
         </div>
       </div>
     </a>
@@ -43,7 +43,7 @@ export default {
     background-color: #ffffff;
     display: flex;
     transition: all 0.1s;
-    &:hover{
+    &:hover {
       background-color: #eaeaea;
     }
     .social-logo-container {
@@ -51,15 +51,15 @@ export default {
       border-right: solid 1px #dcdcdc;
       display: flex;
       width: 62px;
-      @media screen and (max-width: 1650px){
+      @media screen and (max-width: 1650px) {
         font-size: 1.3rem;
       }
-      .icon-wrapper{
+      .icon-wrapper {
         margin: auto;
       }
     }
     .social-text-container {
-      font-family: "Muli SemiBold",'BPG Nino Mtavruli', 'sans-serif';
+      font-family: "Muli SemiBold", 'BPG Nino Mtavruli', 'sans-serif';
       font-size: 1.7rem;
       font-weight: 600;
       line-height: 1.24;
@@ -68,7 +68,7 @@ export default {
       padding: 20px 0;
       width: 100%;
       text-align: center;
-      @media screen and (max-width: 1650px){
+      @media screen and (max-width: 1650px) {
         font-size: .8rem;
         padding: 15px 0;
       }

@@ -26,6 +26,16 @@ Vue.mixin({
         user = localStorage.getItem('user')
       }
       return user
+    },
+    getIconName: (index) => {
+      const icons = {
+        'TM Twitter': 'twitter',
+        'TM Facebook': 'facebook-f',
+        'TM Pinterest': 'pinterest',
+        'TM LinkedIn': 'linkedin-in',
+        'TM YouTube': 'youtube'
+      }
+      return icons[ index ]
     }
   }
 })

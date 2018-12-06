@@ -6,12 +6,21 @@
       </section>
       <div class="footer-content" v-if="$mq !== 'mobile'">
         <div class="menus-wrapper">
-          <div class="menu-item" v-for="item in this.menus" v-bind:key="item.title">
-            <footer-menu-item :title="item.title" :items="item"/>
+          <!--<div class="menu-item" v-for="item in this.menus" v-bind:key="item.title">-->
+          <!--<footer-menu-item :title="item.title" :items="item"/>-->
+          <!--</div>-->
+          <div class="menu-item">
+            <footer-menu-item :title="t('main')" :items="$store.getters.navigation"/>
           </div>
           <div class="menu-item">
-            <footer-menu-item :title="this.hours.title" :items="hours"/>
-            <footer-menu-item v-for="(item, index) in this.contactInfo" :key="index" :title="item.title" :items="item"
+            <footer-menu-item :title="t('information')" :items="$store.state.staticPages"/>
+          </div>
+          <div class="menu-item">
+            <footer-socials-item :title="t('socials')" :items="$store.state.socials"/>
+          </div>
+          <div class="menu-item">
+            <footer-menu-item :title="t('working_hours')" :items="hours"/>
+            <footer-menu-item :title="t('address')" :items="contactInfo"
                               class="mini"/>
           </div>
         </div>
@@ -40,8 +49,8 @@
             </div>
           </div>
           <div class="menu-item bottom-menu-part">
-            <footer-menu-item :title="this.hours.title" :items="hours"/>
-            <footer-menu-item v-for="(item, index) in this.contactInfo" :key="index" :title="item.title" :items="item"
+            <footer-menu-item :title="t('working_hours')" :items="hours"/>
+            <footer-menu-item v-for="(item, index) in contactInfo" :key="index" :title="t('address')" :items="item"
                               class="mini"/>
           </div>
         </div>
@@ -56,10 +65,12 @@
 <script>
 import NewsletterSubscribe from '../partials/NewsLetters'
 import FooterMenuItem from '../partials/FooterMenuItem'
+import FooterSocialsItem from '../partials/FooterSocials'
 
 export default {
   name: 'footer-component',
   components: {
+    FooterSocialsItem,
     FooterMenuItem,
     NewsletterSubscribe
   },
@@ -67,29 +78,35 @@ export default {
     return {
       menus: this.$store.getters.footerMenus,
       menuOpen: null,
-      hours: {
-        title: 'WORKING HOURS:',
-        list: [ {
-          name: 'Everyday: from - 10:00 to 22:00',
+      hours: [ {
+        name: {
+          en: 'Everyday: from - 10:00 to 22:00',
+          ka: 'ყოველ დღე: 10:00-დან 22:00-მდე'
+        },
+        url: '#'
+      } ],
+      contactInfo: [
+        {
+          name: {
+            en: '16 km Agmashenebeli Avenue, <br> 0131 Tbilisi, Georgia',
+            ka: '16 კმ აღმაშენებლის გამზირი, <br> 0131 თბილისი, საქართველო'
+          },
           url: '#'
+        },
+        {
+          name: {
+            en: 'info@tbilisimall.com',
+            ka: 'info@tbilisimall.com'
+          },
+          url: ''
+        },
+        {
+          name: {
+            en: '+995 322 505 556',
+            ka: '+995 322 505 556'
+          },
+          url: ''
         } ]
-      },
-      contactInfo: [ {
-        title: 'ADDRESS:',
-        list: [ {
-          name: '16 km Agmashenebeli Alley, \n 0131 Tbilisi, Georgia',
-          url: '#'
-        } ]
-      }, {
-        title: '',
-        list: [ {
-          name: 'info@tbilisimall.com',
-          url: '#'
-        }, {
-          name: '+995 322 505 556',
-          url: '#'
-        } ]
-      } ]
     }
   },
   methods: {

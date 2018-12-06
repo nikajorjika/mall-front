@@ -55,6 +55,35 @@
                 </div>
               </transition>
             </div>
+            <div class="hamburger-info-block">
+              <div class="additional-info-item">
+                <h4>{{t('working_hours')}}:</h4>
+                <p v-html="t('working_hours_content')"></p>
+              </div>
+              <div class="additional-info-item">
+                <h4>{{t('address')}}:</h4>
+                <p v-html="t('address_content')"></p>
+              </div>
+              <div class="additional-info-item">
+                <ul>
+                  <li class="" v-for="(social, index) in $store.getters.socials" :key="index">
+                    <a :href="social.link" target="_blank">
+                      <font-awesome-icon :icon="{ prefix: 'fab', iconName: getIconName(social.name) }"/>
+                    </a>
+                  </li>
+                </ul>
+                <div class="email-wrapper">
+                  <a href="mailto:info@tbilisimall.com">
+                    info@tbilisimall.com
+                  </a>
+                </div>
+                <div class="phone-wrapper">
+                  <a href="tel:+995322505556">
+                    +995 322 505 556
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -69,6 +98,9 @@ import SearchContainer from './SearchField'
 
 export default {
   name: 'hamburger-menu',
+  mounted: function () {
+    if (!this.$store.getters.socials.length) this.getSocials()
+  },
   data: function () {
     return {
       showMenu: false,
@@ -91,6 +123,13 @@ export default {
       this.showMenu = false
       this.currentItem = null
       this.$store.commit('SET_NO_SCROLL', false)
+    },
+    getSocials: function () {
+      this.$store.dispatch('getSocials').then(function (response) {
+        console.log(response.data)
+      }).catch(function (error) {
+        console.error(error.message)
+      })
     }
   },
   watch: {
@@ -325,6 +364,60 @@ export default {
                     }
                   }
                 }
+              }
+            }
+          }
+        }
+        .hamburger-info-block {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 108px 0 125px 0;
+          padding-left: 55px;
+          .additional-info-item {
+            width: 33%;
+            display: flex;
+            flex-direction: column;
+            h4 {
+              font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
+              font-size: 2.4rem;
+              text-transform: uppercase;
+              color: #000;
+              margin: 0;
+              line-height: 1.25;
+            }
+            p {
+              font-size: 1.4rem;
+              font-family: 'Muli', 'BPG Arial', 'sans-serif';
+              color: #848484;
+              opacity: 1;
+              margin: auto 0 0;
+            }
+            ul {
+              display: flex;
+              width: 128px;
+              justify-content: space-between;
+              li {
+                margin: auto 0;
+              }
+            }
+            .email-wrapper {
+              width: 128px;
+              margin-top: auto;
+              a {
+                font-size: 1.4rem;
+                font-family: 'Muli', 'BPG Arial', 'sans-serif';
+                color: #2d83e6;
+                line-height: 1.29;
+              }
+            }
+            .phone-wrapper {
+              width: 128px;
+              margin-top: auto;
+              a {
+                font-size: 1.4rem;
+                font-family: 'Muli', 'BPG Arial', 'sans-serif';
+                color: #848484;
+                line-height: 1.29;
               }
             }
           }

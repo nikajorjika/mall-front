@@ -14,6 +14,7 @@ import alphabet from './store/modules/alphabet'
 import { apiUrls, apiCredentials } from './store/modules/apiData'
 import dateOptions from './store/modules/dateOptions'
 import './mixin/mixin'
+import staticPages from './store/modules/staticPages'
 
 Vue.use(Vuex)
 export default new Vuex.Store({
@@ -64,30 +65,10 @@ export default new Vuex.Store({
     team: [],
     subscribed: [],
     bookmarked: [],
-    socials: [
-      {
-        icon: 'facebook-f',
-        name: 'facebook',
-        url: 'https://facebook.com'
-      },
-      {
-        icon: 'twitter',
-        name: 'twitter',
-        url: 'https://facebook.com'
-      },
-      {
-        icon: 'youtube',
-        name: 'youtube',
-        url: 'https://facebook.com'
-      },
-      {
-        icon: 'pinterest',
-        name: 'pinterest',
-        url: 'https://facebook.com'
-      }
-    ],
+    socials: [],
     pageData: pageData,
     footer: footerData,
+    staticPages: staticPages,
     newsFilters: newsFilters,
     storeFilters: storeFilters,
     homeAds: [],
@@ -260,6 +241,9 @@ export default new Vuex.Store({
     },
     SET_USER_BOOKMARKS: (state, payload) => {
       state.bookmarked = payload
+    },
+    SET_SOCIALS: (state, payload) => {
+      state.socials = payload
     }
   },
   actions: {
@@ -281,7 +265,7 @@ export default new Vuex.Store({
             }
           })
           .catch(function (error) {
-            console.log(error)
+            console.error(error)
             reject(error)
             context.commit('SET_LOADING_STATE', { model: model, value: false })
           })
@@ -305,7 +289,7 @@ export default new Vuex.Store({
             }
           })
           .catch(function (error) {
-            console.log(error)
+            console.error(error)
             reject(error)
             context.commit('SET_LOADING_STATE', { model: model, value: false })
           })
@@ -323,7 +307,7 @@ export default new Vuex.Store({
             }
           })
           .catch(function (error) {
-            console.log(error)
+            console.error(error)
             reject(error)
           })
       })
@@ -343,7 +327,7 @@ export default new Vuex.Store({
             }).then(function (response) {
               resolve(response.data)
             }).catch(function (error) {
-              console.log(error)
+              console.error(error)
             })
           }
         }
@@ -386,8 +370,12 @@ export default new Vuex.Store({
                   user: response.data.user,
                   remember: user.remember
                 })
-                context.dispatch('getSubscribed').catch((error) => { console.error(error) })
-                context.dispatch('getBookmarks').catch((error) => { console.error(error) })
+                context.dispatch('getSubscribed').catch((error) => {
+                  console.error(error)
+                })
+                context.dispatch('getBookmarks').catch((error) => {
+                  console.error(error)
+                })
               }
             }
           })
@@ -517,10 +505,10 @@ export default new Vuex.Store({
         const url = context.state.apiUrls.socials
         Axios.get(url)
           .then(function (response) {
-            console.log(response)
-            if (!response.data.length) {
+            if (!response.data.data.length) {
               resolve('RECORD NOT FOUND')
             } else {
+              context.commit('SET_SOCIALS', response.data.data)
               resolve(response.data)
             }
           })

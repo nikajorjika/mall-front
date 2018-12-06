@@ -1,16 +1,17 @@
 <template>
   <div class="footer-menu-item">
     <div class="title-container">
-      <h4 class="title">{{this.title}}</h4>
+      <h4 class="title">{{title}}</h4>
     </div>
     <div class="content-container">
       <ul class="content-ul">
-        <li v-for="item in this.items.list" v-bind:key="item.name" class="content-li">
-          <router-link :to="item.url">
-            <div class="item-wrapper">
-              {{item.name}}
+        <li v-for="(item, index) in items" :key="index" class="content-li">
+          <router-link :to="`/${locale}/${item.url}`" v-if="item.url !== '#' && item.url !== ''">
+            <div class="item-wrapper" v-html="item.name[locale]">
             </div>
           </router-link>
+          <div class="item-wrapper" v-html="item.name[locale]" v-else>
+          </div>
         </li>
       </ul>
     </div>
@@ -24,13 +25,18 @@ export default {
       type: String
     },
     items: {
-      type: Object,
+      type: Array,
       default: () => {
         return {
           title: '',
           list: []
         }
       }
+    }
+  },
+  computed: {
+    locale: function () {
+      return this.$store.getters.locale.locale
     }
   }
 }
