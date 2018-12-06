@@ -517,6 +517,7 @@ export default new Vuex.Store({
         const url = context.state.apiUrls.socials
         Axios.get(url)
           .then(function (response) {
+            console.log(response)
             if (!response.data.length) {
               resolve('RECORD NOT FOUND')
             } else {

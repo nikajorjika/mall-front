@@ -105,16 +105,34 @@ export default {
   .additional-info {
     display: flex;
     margin-top: 28px;
+    @media screen and (max-width: 1000px){
+      flex-direction: column;
+    }
+    @media screen and (max-width: 550px){
+      padding: 0 36px;
+    }
     .contact-info {
       background: #f9f9f9;
       padding: 14px 33px;
       margin-right: 16px;
       min-width: 398px;
+      @media screen and (max-width: 1366px){
+        min-width: 302px;
+      }
+      @media screen and (max-width: 1000px){
+        margin-bottom: 12px;
+      }
+      @media screen and (max-width: 550px){
+        min-width: 0;
+      }
       .contact-info-inner {
         p {
           font-size: 1.8rem;
           margin: 0;
           line-height: 1.28;
+          @media screen and (max-width: 550px){
+            font-size: 1.3rem;
+          }
           &.bold {
             font-weight: 900;
             margin-bottom: 21px;
@@ -125,11 +143,17 @@ export default {
           font-size: 1.6rem;
           margin: 0;
           line-height: 1.88;
+          @media screen and (max-width: 550px){
+            font-size: 1.3rem;
+          }
         }
 
         &:nth-child(4) {
           p {
             font-size: 1.6rem;
+            @media screen and (max-width: 550px){
+              font-size: 1.3rem;
+            }
           }
         }
       }

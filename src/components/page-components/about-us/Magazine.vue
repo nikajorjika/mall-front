@@ -103,11 +103,19 @@ export default {
   padding-right: 2px;
   .magazines-container {
     display: flex;
+    @media screen and (max-width: 550px){
+      flex-direction: column;
+      padding: 0 36px;
+    }
     .magazine-item {
       width: calc(50% - 15.5px);
       margin-right: 15.5px;
       border: 1px solid #dcdcdc;
-
+      @media screen and (max-width: 550px){
+        width: 100%;
+        margin-bottom: 15px;
+        margin-right: 0;
+      }
       .magazine-image-container {
         padding-top: 100%;
         position: relative;
@@ -163,6 +171,9 @@ export default {
           justify-content: center;
           position: relative;
           cursor: pointer;
+          @media screen and (max-width: 1000px){
+            padding: 35px 0 44px 0;
+          }
           &:before {
             content: '';
             background: #000000;

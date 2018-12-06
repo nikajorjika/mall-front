@@ -16,8 +16,10 @@
           </a>
         </div>
         <div class="bookmark">
-          <div class="span" @click="bookmark(item._id)">
-            <font-awesome-icon icon="bookmark"/>
+          <div @click="bookmark(item._id)">
+            <!--<font-awesome-icon icon="bookmark"/>-->
+            <img src="../../../assets/images/icons/bookmark.svg" alt="Bookmark" v-show="!bookmarked.length">
+            <img src="../../../assets/images/icons/bookmarked.svg" alt="Bookmark" v-show="bookmarked.length">
           </div>
         </div>
         <div class="title-container">
@@ -80,6 +82,13 @@ export default {
     redirect: {
       type: Boolean,
       default: true
+    }
+  },
+  computed: {
+    bookmarked: function () {
+      return this.$store.getters.bookmarked.filter(object => {
+        return object._id === this.item._id
+      })
     }
   },
   methods: {
@@ -168,6 +177,11 @@ export default {
         .bookmark {
           margin: 14px 0;
           font-size: 25px;
+          cursor: pointer;
+          img {
+            width: 18.4px;
+            height: 25.9px;
+          }
         }
         .title-container {
           .title {

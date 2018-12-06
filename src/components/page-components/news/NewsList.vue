@@ -50,7 +50,6 @@ export default {
     }
   },
   mounted: function () {
-    this.loadSingle()
     if (!this.$store.getters.events.length) this.fetchItems()
   },
   props: {
