@@ -83,9 +83,15 @@ export default {
 
 <style lang="scss">
 .gift-stores {
+  @media screen and (max-width: 550px){
+    margin: 0 36px;
+  }
   .alphabet-header {
     padding-bottom: 8px;
     border-bottom: 1px solid #dcdcdc;
+    @media screen and (max-width: 550px){
+      display: none;
+    }
     .alphabet-header-wrapper {
       display: flex;
       justify-content: space-between;
@@ -102,9 +108,17 @@ export default {
     }
   }
   .alphabetic-container {
+    @media screen and (max-width: 550px){
+      &:first-child{
+        border-top: 1px solid #dcdcdc;
+      }
+    }
     .alphabetic-container-inner {
       border-bottom: 1px solid #dcdcdc;
       padding: 27px 0 27px 35px;
+      @media screen and (max-width: 550px){
+        padding: 27px 0 27px 0;
+      }
       .alphabet-wrapper {
         display: flex;
         .alphabet-item {
@@ -112,6 +126,11 @@ export default {
           line-height: 1.25;
           text-transform: uppercase;
           width: 275px;
+          @media screen and (max-width: 550px){
+            width: auto;
+            font-size: 3.5rem;
+            margin-right: 39px;
+          }
         }
         .items-container {
           width: 100%;
@@ -120,10 +139,16 @@ export default {
           .item {
             width: calc(33% - 15px);
             margin: 0 15px 10px 0;
+            @media screen and (max-width: 550px){
+              width: calc(50% - 15px);
+            }
             .item-wrapper {
               font-size: 1.6rem;
               line-height: 1.25;
               font-family: 'Muli', 'BPG Arial', 'sans-serif';
+              @media screen and (max-width: 550px){
+                font-size: 1.3rem;
+              }
             }
           }
         }

@@ -37,6 +37,9 @@ export default {
 <style lang="scss" scoped>
 .service-list {
   margin-top: 45px;
+  @media screen and (max-width: 550px) {
+    padding: 0 36px;
+  }
   li {
     cursor: pointer;
     .parent-container {
@@ -55,8 +58,12 @@ export default {
       }
       .name-wrapper {
         font-family: 'Muli', 'BPG Arial', 'sans-serif';
-        font-size: 16px;
+        font-size: 1.3rem;
         line-height: 1.25;
+        @media screen and (max-width: 550px) {
+          font-size: 1.3rem;
+
+        }
       }
     }
     .content {

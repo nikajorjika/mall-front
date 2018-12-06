@@ -11,7 +11,7 @@
         </div>
         <router-view></router-view>
       </div>
-      <div class="menu-container">
+      <div class="menu-container" v-if="$mq !== 'mobile'">
         <about-us-menu :items="this.aboutMenu" active=''/>
       </div>
       <div class="our-team" v-if="$route.name === 'about'">
@@ -27,6 +27,7 @@ import AboutUsMenu from '../components/page-components/about-us/AboutPageMenu'
 import StaffCarousel from '../components/page-components/about-us/OurTeam'
 import AboutTitle from '../components/page-components/about-us/AboutPageTitle'
 import PageOurService from '../components/page-components/about-us/GuestServicePage'
+
 export default {
   name: 'about-us',
   components: {
@@ -70,19 +71,29 @@ export default {
 }
 </script>
 <style lang="scss">
-.page-block{
+.page-block {
   padding-right: 138px;
+  @media screen and (max-width: 1456px) {
+    padding-right: 40px;
+  }
+  @media screen and (max-width: 550px) {
+    padding-right: 0;
+  }
 }
+
 .about-page {
-  .breadcrumb{
-    ul{
+  .breadcrumb {
+    @media screen and (max-width: 550px) {
+      padding: 0 36px;
+    }
+    ul {
       display: flex;
-      li{
+      li {
         color: #848484;
         font-size: 1.1rem;
         font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
         text-transform: capitalize;
-        &:not(:last-child):after{
+        &:not(:last-child):after {
           content: '>';
           font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
           font-size: 1.1rem;
@@ -100,6 +111,15 @@ export default {
       width: calc(100% - 260px);
       box-sizing: border-box;
       position: relative;
+      @media screen and (max-width: 1456px) {
+        padding-left: 12px;
+      }
+      @media screen and (max-width: 760px) {
+        width: 100%;
+      }
+      @media screen and (max-width: 550px) {
+        padding-left: 0;
+      }
       p {
         color: #000;
         opacity: 1;

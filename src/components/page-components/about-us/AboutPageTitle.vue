@@ -23,6 +23,13 @@ export default {
     color: #000;
     margin: 10px 0 63px;
     text-transform: uppercase;
+    @media screen and (max-width: 1456px) {
+      margin: 8px 0 45px;
+    }
+    @media screen and (max-width: 550px) {
+      padding: 0 36px;
+      font-size: 2.5rem;
+    }
   }
 }
 </style>

@@ -95,8 +95,15 @@ export default {
     margin-top: 85px;
     margin-bottom: 74.5px;
     display: flex;
+    @media screen and (max-width: 550px) {
+      background: #f9f9f9;
+      border-top: 1px solid #dcdcdc;
+      border-bottom: 1px solid #dcdcdc;
+      flex-direction: column;
+      padding: 40px 36px;
+    }
     .additional-info-item {
-      width: 376px;
+      width: 320px;
       margin-right: 12px;
       h4 {
         font-size: 2.4rem;

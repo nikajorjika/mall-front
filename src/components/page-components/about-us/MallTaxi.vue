@@ -112,6 +112,13 @@ export default {
   }
   .taxi-prices {
     margin-top: 91px;
+    @media screen and (max-width: 1100px){
+      margin-top: 37px;
+    }
+
+    @media screen and (max-width: 550px) {
+      padding: 0 36px;
+    }
     ul {
       display: flex;
       flex-direction: column;
@@ -141,6 +148,13 @@ export default {
 .page-block {
   .taxi-additional {
     display: flex;
+    @media screen and (max-width: 1100px){
+      flex-direction: column;
+    }
+
+    @media screen and (max-width: 550px) {
+      padding: 0 36px;
+    }
     .block-left {
       p {
         font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
@@ -149,13 +163,18 @@ export default {
         line-height: 6.9rem;
         color: #848484;
         margin: 0;
+
+        @media screen and (max-width: 1366px){
+          font-size: 2.9rem;
+          line-height: 55px;
+        }
         .formatter-spans {
           &:first-child {
             color: #000;
           }
           &:last-child {
             display: block;
-            font-size: 5.5rem;
+            font-size: 4.4rem;
           }
         }
       }
@@ -170,6 +189,11 @@ export default {
         line-height: 1.25;
         color: #848484;
         margin: auto auto 0 auto;
+        @media screen and (max-width: 1100px){
+          margin-left: 0;
+          font-size: 1.4rem;
+          margin-top: 30px;
+        }
       }
     }
   }

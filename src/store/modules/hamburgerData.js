@@ -207,13 +207,6 @@ const hamburgerData = [
       en: 'services',
       ka: 'სერვისები'
     }
-  },
-  {
-    url: '/for-kids',
-    name: {
-      en: 'for kids',
-      ka: 'ბავშვებისთვის'
-    }
   }
 ]
 

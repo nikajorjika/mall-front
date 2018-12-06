@@ -1,5 +1,5 @@
 <template>
-  <div id="news-single">
+  <div class="news-single">
     <div class="single-wrapper">
       <div class="half-col single-left">
         <div class="image-container">
@@ -8,12 +8,17 @@
       </div>
       <div class="half-col single-right">
         <div class="close-button">
-          <router-link :to="closeUrl()" class="close-button-a">
+          <router-link :to="closeUrl()" class="close-button-a" v-if="redirect">
             <default-icon class="hamburger-close-button" :icon="`close`" @click="closeEvent"/>
           </router-link>
+          <a class="close-button-a" v-else>
+            <default-icon class="hamburger-close-button" :icon="`close`" @click="closeEvent"/>
+          </a>
         </div>
         <div class="bookmark">
-          <font-awesome-icon icon="bookmark"/>
+          <div class="span" @click="bookmark(item._id)">
+            <font-awesome-icon icon="bookmark"/>
+          </div>
         </div>
         <div class="title-container">
           <h2 class="title">{{item.name[$store.getters.locale.locale]}}</h2>
@@ -71,6 +76,10 @@ export default {
       default: () => {
         return {}
       }
+    },
+    redirect: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
@@ -80,12 +89,40 @@ export default {
     closeUrl: function () {
       const subCat = this.$route.params.cat !== 'single' ? this.$route.params.cat : ''
       return `/${this.$store.getters.locale.locale}/whats-new/${subCat}`
+    },
+    bookmark: function (id) {
+      const user = this.$store.getters.user
+      if (!user) {
+        this.$router.push({ name: 'login' })
+      } else {
+        this.$http.post(this.$store.state.apiUrls.bookmark, {
+          userToken: user.token,
+          itemId: id
+        }).then(() => {
+          this.$notify({
+            group: 'notify',
+            type: 'success',
+            title: this.t('bookmarked_successfully')
+          })
+          this.$store.dispatch('getBookmarks').catch((error) => {
+            console.error(error)
+          })
+        }).catch((error) => {
+          console.error(error)
+          this.$notify({
+            group: 'notify',
+            type: 'error',
+            title: 'Error',
+            text: error
+          })
+        })
+      }
     }
   }
 }
 </script>
 <style lang="scss">
-#news-single {
+.news-single {
   .single-wrapper {
     animation: fadeIn 1s;
     overflow: hidden;
@@ -150,7 +187,7 @@ export default {
           padding-top: 30%;
           position: relative;
           overflow-y: auto;
-          @media screen and (max-width: 1366px){
+          @media screen and (max-width: 1366px) {
             padding-top: 50%;
           }
           p {
@@ -167,7 +204,7 @@ export default {
         position: relative;
         width: 100%;
         padding-top: 72.2%;
-        @media screen and (max-width: 1366px){
+        @media screen and (max-width: 1366px) {
           padding-top: 100%;
         }
         img {

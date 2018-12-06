@@ -10,7 +10,7 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   scrollBehavior: function (to, from, savedPosition) {
-    const exception = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine' ]
+    const exception = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine', 'whats-new' ]
     if (exception.indexOf(to.name) === -1 && exception.indexOf(from.name) === -1) {
       return { x: 0, y: 0 }
     }
@@ -97,6 +97,18 @@ const router = new Router({
       name: 'entertainment',
       props: true,
       component: () => import('./views/Entertainment.vue')
+    },
+    {
+      path: '/:locale/user/subscribed',
+      name: 'subscribed',
+      props: true,
+      component: () => import('./views/Subscribed.vue')
+    },
+    {
+      path: '/:locale/user/bookmarks',
+      name: 'bookmarks',
+      props: true,
+      component: () => import('./views/Bookmarks.vue')
     },
     {
       path: '/:locale/login',

@@ -8,10 +8,10 @@
       <div class="additional-info-item">
         <h4>{{contactInfoTitle}}</h4>
         <p>
-          {{contactInfoFirst}}
+          <span class="color-grey">{{contactInfoFirst}}</span>
           <br>
           <br>
-          {{contactInfoSecond}}
+          <span class="color-grey">{{contactInfoSecond}}</span>
         </p>
       </div>
     </div>
@@ -118,6 +118,9 @@ export default {
     margin-top: 85px;
     margin-bottom: 74.5px;
     display: flex;
+    @media screen and (max-width: 550px) {
+      padding: 0 36px;
+    }
     .additional-info-item {
       width: 376px;
       margin-right: 12px;
@@ -127,9 +130,16 @@ export default {
         line-height: 1.25;
         font-weight: bold;
         font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
+        @media screen and (max-width: 550px) {
+          font-size: 1.7rem;
+
+        }
       }
       p {
         max-width: 246px;
+        @media screen and (max-width: 550px) {
+          font-size: 1.2rem;
+        }
         .color-grey {
           color: #848484;
         }

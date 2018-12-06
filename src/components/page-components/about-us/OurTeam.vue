@@ -92,6 +92,7 @@ export default {
       font-size: 4rem;
       color: #000;
       text-align: center;
+      text-transform: uppercase;
     }
   }
   .staff-wrapper {

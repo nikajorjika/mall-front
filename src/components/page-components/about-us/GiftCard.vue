@@ -88,6 +88,9 @@ export default {
 <style lang="scss" scoped>
 .page-block {
   padding-right: 18px;
+  @media screen and (max-width: 550px){
+    padding:0;
+  }
   p {
     color: #000;
     opacity: 1;
@@ -99,6 +102,12 @@ export default {
     }
     .part-right {
       margin: 0 90px;
+      @media screen and (max-width: 1366px){
+        margin: 0 0 0 20px;
+      }
+      @media screen and (max-width: 480px){
+        display: none;
+      }
     }
   }
   .list-label {
@@ -106,6 +115,9 @@ export default {
     line-height: 1.28;
     font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
     margin: 34px 0;
+    @media screen and (max-width: 550px){
+      margin: 0 36px;
+    }
   }
   .additional-info {
     margin-top: 85px;

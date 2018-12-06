@@ -12,7 +12,7 @@
               <img :src="store.logoUrl" :alt="store.name[$store.getters.locale.locale]">
             </div>
             <div class="subscribe-button-container">
-              <button class="subscribe-button">
+              <button class="subscribe-button" @click="subscribe(store._id)">
                 {{t('subscribe')}}
               </button>
             </div>
@@ -89,6 +89,7 @@
             </div>
           </div>
         </div>
+        {{$store.getters.subscribed}}
       </div>
     </div>
   </div>
@@ -115,6 +116,34 @@ export default {
         this.store = response
         this.loading = false
       })
+    },
+    subscribe: function (id) {
+      const user = this.$store.getters.user
+      if (!user) {
+        this.$router.push({ name: 'login' })
+      } else {
+        this.$http.post(this.$store.state.apiUrls.subscribe, {
+          userToken: user.token,
+          storeId: id
+        }).then(() => {
+          this.$notify({
+            group: 'notify',
+            type: 'success',
+            title: this.t('subscribed_successfully')
+          })
+          this.$store.dispatch('getSubscribed').catch((error) => {
+            console.error(error)
+          })
+        }).catch((error) => {
+          console.error(error)
+          this.$notify({
+            group: 'notify',
+            type: 'error',
+            title: 'Error',
+            text: error
+          })
+        })
+      }
     }
   }
 }
@@ -175,15 +204,35 @@ export default {
           margin-top: 10px;
           .subscribe-button {
             border: 1px solid #eead16;
+            font-family: 'Muli', 'BPG Arial','sans-serif';
             width: 100%;
             padding: 12px 0 16px 0;
-            background: #fff;
+            background: transparent;
             font-size: 1.3rem;
             text-transform: capitalize;
             line-height: 1.23;
             text-align: center;
             color: #eead16;
             cursor: pointer;
+            position: relative;
+            &:before{
+              content: '';
+              position: absolute;
+              height: 0;
+              width: 100%;
+              background: #eead16;
+              z-index: -1;
+              bottom:0;
+              left: 0;
+              transition: height 0.3s;
+            }
+            &:hover{
+              color: #ffffff;
+              &:before{
+                height: 100%;
+                transition: height 0.3s;
+              }
+            }
           }
         }
       }

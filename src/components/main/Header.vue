@@ -43,7 +43,7 @@
             <router-link to="#">{{t('contact')}}</router-link>
           </li>
           <li>
-            <a @click.prevent="toggleActions()" v-if="$store.getters.user">
+            <a @click.stop.prevent="toggleActions()" v-if="$store.getters.user">
               {{$store.getters.user.name}}
             </a>
             <router-link v-else :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}
@@ -52,10 +52,10 @@
               <ul>
                 <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('notifications')}}</router-link></span>
                 </li>
-                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('subscribe_list')}}</router-link></span>
+                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}/user/subscribed`">{{t('subscribe_list')}}</router-link></span>
                 </li>
                 <li><span class="action-label"><router-link
-                  :to="`/${$store.getters.locale.locale}`">{{t('bookmarks')}}</router-link></span>
+                  :to="`/${$store.getters.locale.locale}/user/bookmarks`">{{t('bookmarks')}}</router-link></span>
                 </li>
                 <li><span class="action-label"><router-link
                   :to="`/${$store.getters.locale.locale}`">{{t('settings')}}</router-link></span>
@@ -117,6 +117,9 @@ export default {
       showSearch: false
     }
   },
+  created: function () {
+    document.addEventListener('click', this.documentClick)
+  },
   components: {
     SearchContainer,
     LanguageSwitcher,
@@ -128,7 +131,6 @@ export default {
       this.showSearch = !this.showSearch
     },
     toggleActions: function () {
-      console.log(this.showActions)
       this.showActions = !this.showActions
     },
     showChildren: function (item) {
@@ -140,6 +142,9 @@ export default {
       }).catch((error) => {
         console.error(error)
       })
+    },
+    documentClick: function () {
+      this.showActions = false
     }
   }
 }
@@ -402,7 +407,7 @@ export default {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    @media screen and (max-width: 1730px) {
+    @media screen and (max-width: 1520px) {
       display: none;
     }
 

@@ -22,10 +22,16 @@ export default {
 </script>
 <style lang="scss">
 .about-content-container {
+  @media screen and (max-width: 550px) {
+    padding: 0 36px;
+  }
   p {
     font-size: 1.6rem;
     line-height: 1.25;
     color: #000;
+    @media screen and (max-width: 550px) {
+      font-size: 1.3rem;
+    }
   }
 }
 </style>

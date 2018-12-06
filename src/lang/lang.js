@@ -63,6 +63,9 @@ const messages = {
       guest_service: 'guest service',
       news: 'news',
       joinNow: 'JOIN NOW',
+      subscribed_successfully: 'You have successfully subscribed item',
+      bookmarked_successfully: 'You have successfully bookmarked item',
+      subscribe_list_stores: 'subscribed list',
       see_the_list_below: 'See the list of shops below:',
       subscribeText: 'Sign up for our newsletter to receive special offers, event invitations, and more.'
     }
@@ -130,6 +133,9 @@ const messages = {
       download: 'გადმოწერა',
       promotions: 'პრომოუშენები',
       joinNow: 'შემოგვიერთდი',
+      subscribed_successfully: 'მაღაზიის გამოწერა წარმატებით დასრულდა',
+      bookmarked_successfully: 'სიახლე წარმატებით შეინახა',
+      subscribe_list_stores: 'გამოწერილი მაღაზიები',
       see_the_list_below: 'იხილეთ მაღაზიების სია  :',
       subscribeText: 'გამოიწერე ჩვენი საიტი და მიიღე სიახლეები შემოთავაზებების და სიახლეების შესახებ.'
     }

@@ -58,14 +58,15 @@ export default {
     .image-background {
       width: 100%;
       position: relative;
+      overflow: hidden;
       padding-top: 71.7%;
       img {
-        width: 100%;
         height: 100%;
-        left: 0;
-        top: 0;
+        left: 50%;
+        top: 50%;
+        display: block;
         position: absolute;
-        object-fit: cover;
+        transform: translate(-50%, -50%);
       }
     }
   }
