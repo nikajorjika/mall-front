@@ -4,7 +4,7 @@
       <custom-select :items="categories.categories.data"
                      :placeholder="categories.categories.placeholder"/>
     </div>
-    <div class="filter-item">
+    <div class="filter-item search-item">
       <filter-search/>
     </div>
     <div class="filter-item">
@@ -77,6 +77,11 @@ export default {
       width: 100%;
       margin-bottom: 16px;
       height: 34px;
+    }
+    &.search-item {
+      @media screen and (max-width: 760px) {
+        display: none;
+      }
     }
     &:first-child {
       margin-left: auto;

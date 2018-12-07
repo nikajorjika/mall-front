@@ -27,19 +27,19 @@
       </div>
       <div class="footer-content footer-mobile-content" v-else>
         <div class="menus-wrapper">
-          <div class="mobile-menu-item" v-for="(item, index) in this.menus" :key="index">
+          <div class="mobile-menu-item">
             <div class="menu-group">
-              <div class="group-title" @click="toggleMenu(item)">
-                <h5>{{item.title}}</h5>
+              <div class="group-title" @click="toggleMenu('main')">
+                <h5>{{t('main')}}</h5>
                 <span class="dropdown-icon"><font-awesome-icon icon="caret-down"/></span>
               </div>
               <transition name="slideDown">
-                <div class="group" v-if="menuOpen === item">
+                <div class="group" v-if="menuOpen === 'main'">
                   <ul class="content-ul">
-                    <li v-for="(child, index2) in item.list" :key="index2" class="content-li">
+                    <li v-for="(child, index2) in $store.getters.navigation" :key="index2" class="content-li">
                       <router-link :to="child.url">
                         <div class="item-wrapper">
-                          {{child.name}}
+                          {{child.name[$store.getters.locale.locale]}}
                         </div>
                       </router-link>
                     </li>
@@ -48,9 +48,51 @@
               </transition>
             </div>
           </div>
+          <div class="mobile-menu-item">
+            <div class="menu-group">
+              <div class="group-title" @click="toggleMenu('information')">
+                <h5>{{t('information')}}</h5>
+                <span class="dropdown-icon"><font-awesome-icon icon="caret-down"/></span>
+              </div>
+              <transition name="slideDown">
+                <div class="group" v-if="menuOpen === 'information'">
+                  <ul class="content-ul">
+                    <li v-for="(child, index2) in $store.state.staticPages" :key="index2" class="content-li">
+                      <router-link :to="child.url">
+                        <div class="item-wrapper">
+                          {{child.name[$store.getters.locale.locale]}}
+                        </div>
+                      </router-link>
+                    </li>
+                  </ul>
+                </div>
+              </transition>
+            </div>
+          </div>
+          <div class="mobile-menu-item">
+            <div class="menu-group">
+              <div class="group-title" @click="toggleMenu('socials')">
+                <h5>{{t('socials')}}</h5>
+                <span class="dropdown-icon"><font-awesome-icon icon="caret-down"/></span>
+              </div>
+              <transition name="slideDown">
+                <div class="group" v-if="menuOpen === 'socials'">
+                  <ul class="content-ul">
+                    <li v-for="(child, index2) in $store.state.socials" :key="index2" class="content-li">
+                      <a :href="child.link" target="_blank">
+                        <div class="item-wrapper">
+                          {{child.name}}
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </transition>
+            </div>
+          </div>
           <div class="menu-item bottom-menu-part">
             <footer-menu-item :title="t('working_hours')" :items="hours"/>
-            <footer-menu-item v-for="(item, index) in contactInfo" :key="index" :title="t('address')" :items="item"
+            <footer-menu-item :title="t('address')" :items="contactInfo"
                               class="mini"/>
           </div>
         </div>

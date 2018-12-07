@@ -67,20 +67,61 @@ export default {
 <style lang="scss">
 .contact-page-container {
   .section-item {
+    @media screen and (max-width: 1380px) {
+      padding: 0 15px;
+    }
+    @media screen and (max-width: 760px) {
+      padding: 0;
+    }
     .parts-wrapper {
       display: flex;
+      @media screen and (max-width: 760px) {
+        flex-direction: column;
+      }
     }
   }
 
   .part {
     border-right: 1px solid #dcdcdc;
+    @media screen and (max-width: 760px) {
+      width: 100%;
+      border-right: none;
+    }
     &.part-left {
       padding-right: 154px;
       flex: 1;
+      @media screen and (max-width: 1380px) {
+        padding-right: 20px;
+      }
+      @media screen and (max-width: 760px) {
+        padding: 0 15px;
+      }
+      @media screen and (max-width: 550px) {
+        padding: 0;
+      }
     }
     &.part-right {
       width: 398px;
       padding: 0 30px;
+      @media screen and (max-width: 956px) {
+        width: 320px;
+      }
+      @media screen and (max-width: 760px) {
+        width: 100%;
+        padding: 0;
+        border-top: 1px solid #dcdcdc;
+      }
+      .contact-form-container {
+        margin-top: 135px;
+        @media screen and (max-width: 760px) {
+          margin-top: 0;
+          padding:  45px 15px 0;
+        }
+        @media screen and (max-width: 550px) {
+          margin-top: 0;
+          padding:  45px 36px 0;
+        }
+      }
     }
   }
 
@@ -88,6 +129,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
 
+    @media screen and (max-width: 550px) {
+      padding: 0 36px;
+    }
     .list-item {
       width: calc(50% - 8px);
       background-color: #f9f9f9;
@@ -96,6 +140,14 @@ export default {
       display: flex;
       flex-direction: column;
 
+      @media screen and (max-width: 956px) {
+        width: calc(100% - 15px);
+      }
+
+      @media screen and (max-width: 760px) {
+        width: 100%;
+        margin: 0;
+      }
       &:nth-child(2n + 2) {
         margin-right: 0;
       }
@@ -131,5 +183,3 @@ export default {
   }
 }
 </style>
-
-

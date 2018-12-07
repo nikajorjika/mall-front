@@ -14,7 +14,7 @@ Vue.mixin({
         if (storesList[ value.name[ store.getters.locale.locale ].charAt(0) ] === undefined) {
           storesList[ value.name[ store.getters.locale.locale ].charAt(0) ] = []
         }
-        storesList[ value.name[ store.getters.locale.locale ].charAt(0) ].push(value)
+        storesList[ value.name[ store.getters.locale.locale ].charAt(0).toUpperCase() ].push(value)
       })
       return storesList
     },

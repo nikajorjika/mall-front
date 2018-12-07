@@ -2,7 +2,19 @@
   <div class="store-list-grid">
     <div class="filters-outer">
       <div class="container">
-        <store-filters :categories="categories" @changeView="changeView"/>
+        <div class="filter-toggle" v-if=" $mq === 'mobile'">
+          <div class="mobile-search">
+            <div class="search-icon">
+              <img src="../../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
+            </div>
+            <input type="text" class="search-input" :placeholder="t('store_mobile_search')" >
+          </div>
+          <div class="filter-toggle-part"  @click="activeFilters = !activeFilters" >
+            <h2>{{t('filter')}}</h2> <span class="filter-icon" :class="{open: activeFilters}"><font-awesome-icon
+            icon="caret-down"/></span>
+          </div>
+        </div>
+        <store-filters class="filter-mobile-class" :categories="categories" v-if="activeFilters || $mq !== 'mobile'" @changeView="changeView"/>
       </div>
     </div>
     <loading-big v-show="loadingStores"/>
@@ -29,7 +41,7 @@
           <div class="alphabet-item" v-for="(value, index) in $store.getters.alphabet[$store.getters.locale.locale]"
                :key="index">
             <span @click="filterList(value)"
-                  :class="{active: grouped[value] !== undefined && grouped[value].length !== 0 }">{{value}}
+                  :class="{active: grouped[value.toUpperCase()] !== undefined && grouped[value.toUpperCase()].length !== 0 }">{{value}}
             </span>
           </div>
         </div>
@@ -45,13 +57,13 @@
       <div class="store-list-container">
         <div class="store-list-wrapper">
           <div class="alphabetic-container" v-for="letter in currentAlphabetFilter" :key="letter">
-            <div class="alphabetic-container-inner" v-if="grouped[letter]">
+            <div class="alphabetic-container-inner" v-if="grouped[letter.toUpperCase()]">
               <div class="alphabet-wrapper">
                 <div class="alphabet-item">
-                  {{letter}}
+                  {{letter.toUpperCase()}}
                 </div>
                 <div class="items-container">
-                  <div class="item" v-for="(value, index) in grouped[letter]" :key="index">
+                  <div class="item" v-for="(value, index) in grouped[letter.toUpperCase()]" :key="index">
                     <div v-if="value !== undefined" class="item-wrapper">
                       <div class="item-column name">
                         <span class="name-inner">
@@ -59,15 +71,11 @@
                         </span>
                       </div>
                       <div class="item-column tags">
-                        <span class="tag"><span class="tag-inner">Women</span></span>
-                        <span class="tag"><span class="tag-inner">Men</span></span>
-                        <span class="tag"><span class="tag-inner">Men</span></span>
-                        <span class="tag"><span class="tag-inner">Men</span></span>
-                        <span class="tag"><span class="tag-inner">Men</span></span>
-                        <span class="tag"><span class="tag-inner">Children</span></span>
+                        <span class="tag" v-for="(tag, index) in value.tags" :key="index"><span class="tag-inner">{{tag}}</span></span>
                       </div>
                       <div class="item-column services">
-                        <span class="service" v-for="(service, serviceIndex) in services" :key="serviceIndex">{{service.name[$store.getters.locale.locale]}}</span>
+                        <span class="service" v-for="(service, serviceIndex) in services" :key="serviceIndex"
+                              :class="{active: checkIfFilters(value.filters, service)}">{{service.name[$store.getters.locale.locale]}}</span>
                       </div>
                       <div class="item-column activities">
                         <span class="activity" v-for="(activity, activityIndex) in activities" :key="activityIndex">{{activity.name[$store.getters.locale.locale]}}</span>
@@ -90,10 +98,12 @@
 import StoreItem from './StoreItem'
 import StoreFilters from './StoreFilters'
 import LoadingBig from '../../partials/LoadingBig'
+import FilterSearch from '../../partials/FilterSearch'
 
 export default {
   name: 'store-list-grid',
   components: {
+    FilterSearch,
     LoadingBig,
     StoreFilters,
     StoreItem
@@ -101,7 +111,6 @@ export default {
   watch: {
     viewGrid: function (value) {
       if (!value) {
-        console.log('showList')
       }
     }
   },
@@ -123,9 +132,9 @@ export default {
           {
             name: {
               en: 'Tax free',
-              ka: 'Tax Free'
+              ka: 'Tax free'
             },
-            value: 'Tax Free'
+            value: 'Tax free'
           },
           {
             name: {
@@ -201,12 +210,16 @@ export default {
       requestSent: false,
       viewGrid: true,
       listStoresShowing: this.grouped,
-      currentLetter: null
+      currentLetter: null,
+      activeFilters: false
     }
   },
   methods: {
     changeView: function (view) {
       this.viewGrid = view
+      if (!this.$store.getters.storesList.length) {
+        this.getStoreList()
+      }
     },
     filterList: function (value) {
       this.currentLetter = value
@@ -223,6 +236,10 @@ export default {
           this.loadMore()
         }
       }
+    },
+    checkIfFilters: function (checkToArray, checkValue) {
+      const str = checkToArray.join('')
+      return str.toLowerCase().includes(checkValue.name[this.$store.getters.locale.locale].toLowerCase())
     },
     loadMore: function () {
       this.page++
@@ -244,6 +261,15 @@ export default {
       }).catch((error) => {
         console.error(error)
       })
+    },
+    getStoreList: function () {
+      this.$store.dispatch('fetchItems', {
+        model: 'storesList',
+        api: this.$store.state.apiUrls.storeList,
+        setter: 'SET_STORE_LIST'
+      }).catch((error) => {
+        console.error(error)
+      })
     }
   },
   computed: {
@@ -259,6 +285,57 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.store-list-grid{
+  .filters-outer{
+    @media screen and (max-width: 760px) {
+      padding: 0;
+    }
+    .filter-mobile-class{
+      @media screen and (max-width: 760px) {
+        padding: 32px 36px;
+        border-top: 1px solid #dcdcdc;
+      }
+    }
+  }
+}
+.filter-toggle{
+  display: flex;
+  .filter-toggle-part{
+    display: flex;
+    width: 126px;
+    h2{
+      margin: auto 0 auto auto;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+    .filter-icon{
+      margin: auto auto auto 5px;
+    }
+  }
+  .mobile-search{
+    flex: 1;
+    display: flex;
+    position: relative;
+    border-right: 1px solid #dcdcdc;
+    padding: 24px;
+    input{
+      height: 100%;
+      width:100%;
+      background: transparent;
+      padding: 0 5px 0 29px;
+      border: none;
+      font-size: 1.2rem;
+      &:focus{
+        outline: none;
+      }
+    }
+    .search-icon{
+      position: absolute;
+      left: 29px;
+    }
+  }
+}
 .store-list {
   display: flex;
   flex-wrap: wrap;
@@ -436,6 +513,9 @@ export default {
                 color: #dcdcdc;
                 white-space: nowrap;
                 margin-right: 37px;
+                &.active{
+                  color: #000;
+                }
               }
             }
             .activities {

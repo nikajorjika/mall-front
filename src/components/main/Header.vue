@@ -40,7 +40,7 @@
       <div class="header-right">
         <ul v-if="$mq !== 'tablet' && $mq !== 'mobile'">
           <li>
-            <router-link to="#">{{t('contact')}}</router-link>
+            <router-link :to="`/${$store.getters.locale.locale}/page/contact`">{{t('contact')}}</router-link>
           </li>
           <li>
             <a @click.stop.prevent="toggleActions()" v-if="$store.getters.user">

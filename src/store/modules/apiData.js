@@ -20,6 +20,7 @@ const apiUrls = {
   getSubscribed: 'https://smartfinders.herokuapp.com/api/v1/website/subscribed-stores-list',
   bookmark: 'https://smartfinders.herokuapp.com/api/v1/website/bookmark-item',
   getBookmarked: 'https://smartfinders.herokuapp.com/api/v1/website/bookmarked-items-list',
+  storeList: `https://smartfinders.herokuapp.com/api/v1/website/stores-list-view`,
   storesAPI: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/stores/${page}/${offset}`,
   eventsAPI: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/events/${page}/${offset}`,
   promotionsApi: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/promotions/${page}/${offset}`,

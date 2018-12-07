@@ -55,6 +55,16 @@
                 </div>
               </transition>
             </div>
+            <language-switcher class="language-switcher" v-if="$mq === 'mobile' && currentItem === null"/>
+            <div class="mobile-socials" v-if="$mq === 'mobile' && currentItem === null">
+              <ul>
+                <li class="" v-for="(social, index) in $store.getters.socials" :key="index">
+                  <a :href="social.link" target="_blank">
+                    <font-awesome-icon :icon="{ prefix: 'fab', iconName: getIconName(social.name) }"/>
+                  </a>
+                </li>
+              </ul>
+            </div>
             <div class="hamburger-info-block">
               <div class="additional-info-item">
                 <h4>{{t('working_hours')}}:</h4>
@@ -65,7 +75,7 @@
                 <p v-html="t('address_content')"></p>
               </div>
               <div class="additional-info-item">
-                <ul>
+                <ul  v-if="$mq !== 'mobile'">
                   <li class="" v-for="(social, index) in $store.getters.socials" :key="index">
                     <a :href="social.link" target="_blank">
                       <font-awesome-icon :icon="{ prefix: 'fab', iconName: getIconName(social.name) }"/>
@@ -95,6 +105,7 @@
 
 import DefaultIcon from './DefaultIcons'
 import SearchContainer from './SearchField'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default {
   name: 'hamburger-menu',
@@ -152,6 +163,7 @@ export default {
     }
   },
   components: {
+    LanguageSwitcher,
     SearchContainer,
     DefaultIcon
   }
@@ -373,10 +385,19 @@ export default {
           flex-wrap: wrap;
           margin: 108px 0 125px 0;
           padding-left: 55px;
+          @media screen and (max-width: 760px){
+            flex-direction: column;
+            margin:0;
+            padding:16px 36px 60px;
+            background: #f9f9f9;
+          }
           .additional-info-item {
             width: 33%;
             display: flex;
             flex-direction: column;
+            @media screen and (max-width: 760px){
+              width: 100%;
+            }
             h4 {
               font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
               font-size: 2.4rem;
@@ -384,6 +405,9 @@ export default {
               color: #000;
               margin: 0;
               line-height: 1.25;
+              @media screen and (max-width: 760px){
+                margin:44px 0 13px;
+              }
             }
             p {
               font-size: 1.4rem;
@@ -391,6 +415,9 @@ export default {
               color: #848484;
               opacity: 1;
               margin: auto 0 0;
+              @media screen and (max-width: 760px){
+                margin-bottom: 13px;
+              }
             }
             ul {
               display: flex;
@@ -439,6 +466,41 @@ export default {
       width: 90%;
       max-width: 1655px;
       margin: 0 auto;
+    }
+    .mobile-socials{
+      ul{
+        display: flex;
+        li{
+          flex: 1;
+          border-right: 1px solid #dcdcdc;
+          border-bottom: 1px solid #dcdcdc;
+          &:last-child{
+            border-right: none;
+          }
+          a{
+            display: block;
+            padding-top: 100%;
+            position: relative;
+            svg{
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              height: 14px;
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
+    }
+    .language-switcher{
+      padding:20px;
+      border-bottom:1px solid #dcdcdc;
+      .lang-wrapper{
+        text-align: center;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
+      }
     }
   }
 }

@@ -31,7 +31,6 @@
       <div class="field-container">
         <textarea id="contact-message" :placeholder="t('your_message')" v-validate="'required'" autocomplete="off"
                   name="message" v-model="contact.message" cols="12" rows="12"></textarea>
-        <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
       </div>
       <div class="field-container">
         <input id="subscribe" autocomplete="off" type="checkbox"
@@ -133,7 +132,6 @@ export default {
 
         &:focus {
           outline: none;
-
           + label {
             transform: translateY(-130%);
           }
@@ -148,6 +146,7 @@ export default {
         background-color: #f9f9f9;
         resize: none;
         border: 1px solid rgba(0, 0, 0, 0.66);
+        text-transform: capitalize;
       }
     }
     .contact-send-button{
@@ -158,14 +157,41 @@ export default {
       padding:12px;
       display: flex;
       background: #f9f9f9;
+      position: relative;
+      cursor: pointer;
+      &:before{
+        content: '';
+        height: 0;
+        width: 100%;
+        z-index: 0;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background: #000;
+        transition: height 0.3s;
+      }
+      &:hover{
+        &:before{
+          height: 100%;
+          transition: height 0.3s;
+        }
+        span{
+          color: #ffffff;
+        }
+        img{
+          filter: invert(1);
+        }
+      }
       img{
         width: 17.5px;
         height: 12.3px;
         margin: auto auto auto 16px;
+        z-index: 2;
       }
       span{
         margin-left: auto;
         text-transform: capitalize;
+        z-index: 2;
       }
     }
   }

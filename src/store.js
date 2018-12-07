@@ -244,6 +244,9 @@ export default new Vuex.Store({
     },
     SET_SOCIALS: (state, payload) => {
       state.socials = payload
+    },
+    SET_STORE_LIST: (state, payload) => {
+      state.storesList = payload.data
     }
   },
   actions: {

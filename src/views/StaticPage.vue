@@ -63,6 +63,9 @@ export default {
 <style lang="scss">
 .static-page-container {
   margin: 96px auto 300px;
+  @media screen and (max-width: 760px) {
+    margin: 96px auto 100px;
+  }
   &.noMargin{
     margin-bottom:0;
   }
@@ -80,6 +83,9 @@ export default {
 
 .static-page-container {
   .breadcrumb {
+    @media screen and (max-width: 1380px){
+      padding: 0 15px;
+    }
     @media screen and (max-width: 550px) {
       padding: 0 36px;
     }
