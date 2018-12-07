@@ -75,6 +75,43 @@ const router = new Router({
       ]
     },
     {
+      path: '/:locale/page',
+      props: true,
+      component: () => import('./views/StaticPage.vue'),
+      children: [
+        {
+          path: '',
+          name: 'DefaultStatic',
+          props: true,
+          component: () => import('./components/page-components/statics/AboutCompany.vue')
+        },
+        {
+          path: 'about-company',
+          name: 'AboutCompany',
+          props: true,
+          component: () => import('./components/page-components/statics/AboutCompany.vue')
+        },
+        {
+          path: 'career',
+          name: 'Career',
+          props: true,
+          component: () => import('./components/page-components/statics/Career.vue')
+        },
+        {
+          path: 'how-to-get',
+          name: 'HowToGet',
+          props: true,
+          component: () => import('./components/page-components/statics/HowToGet.vue')
+        },
+        {
+          path: 'contact',
+          name: 'Contact',
+          props: true,
+          component: () => import('./components/page-components/statics/Contact.vue')
+        }
+      ]
+    },
+    {
       path: '/:locale/stores/:cat?',
       name: 'stores',
       props: true,

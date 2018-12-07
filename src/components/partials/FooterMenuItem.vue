@@ -6,7 +6,7 @@
     <div class="content-container">
       <ul class="content-ul">
         <li v-for="(item, index) in items" :key="index" class="content-li">
-          <router-link :to="`/${locale}/${item.url}`" v-if="item.url !== '#' && item.url !== ''">
+          <router-link :to="`/${locale}${item.url}`" v-if="item.url !== '#' && item.url !== ''">
             <div class="item-wrapper" v-html="item.name[locale]">
             </div>
           </router-link>

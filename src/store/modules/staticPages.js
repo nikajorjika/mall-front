@@ -1,35 +1,35 @@
 const staticPages =
   [
     {
-      url: '/about-company',
+      url: '/page/about-company',
       name: {
         en: 'About Company',
         ka: 'კომპანიის შესახებ'
       }
     },
     {
-      url: '/media',
+      url: '/page/media',
       name: {
         en: 'Media',
         ka: 'მედია'
       }
     },
     {
-      url: '/career',
+      url: '/page/career',
       name: {
         en: 'Career',
         ka: 'კარიერა'
       }
     },
     {
-      url: '/how-to-get',
+      url: '/page/how-to-get',
       name: {
         en: 'How to Get',
         ka: 'როგორ მივიდე'
       }
     },
     {
-      url: '/Contact',
+      url: '/page/contact',
       name: {
         en: 'Contact',
         ka: 'კონტაქტი'
