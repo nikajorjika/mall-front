@@ -1,7 +1,7 @@
 <template>
   <div class="bookmarks-list-component">
     <ul>
-      <li v-for="(item, index) in $store.getters.bookmarked" :key="index">
+      <li v-for="(item, index) in $store.getters.bookmarked" :key="index" v-if="item">
         <div class="news-wrapper">
           <news-single :item="item" @close="bookmark(item._id)" :redirect="false"/>
         </div>

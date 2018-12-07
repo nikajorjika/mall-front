@@ -1,5 +1,5 @@
 <template>
-  <div id="registration-form">
+  <div id="settings-form">
     <white-spinner v-if="loading"/>
     <form @submit.prevent="register">
       <div v-if="returnedError.length" class="registration-error">
@@ -15,7 +15,7 @@
         <div class="field-wrapper">
           <label for="registration-last-name">{{t('last_name_placeholder')}}*</label>
           <input type="text" id="registration-last-name" v-validate="'required'" name="lastName" placeholder=""
-                 v-model="user.lastName">
+                 v-model="user.surname">
           <span v-show="errors.first('lastName')" class="error">{{ errors.first('lastName') }}</span>
         </div>
       </div>
@@ -30,44 +30,31 @@
       <div class="field-container">
         <div class="field-wrapper">
           <label for="registration-phone">{{t('mobile_placeholder')}}*</label>
-          <div class="combo-fields">
-            <input type="hidden" name="mobileIndex" v-validate="'required'" v-model="user.mobileIndex.val">
-            <custom-select class="mobile-index-field"
-                           :items="user.mobileIndex.options"
-                           :placeholder="user.mobileIndex.placeholder"
-                           :selectedDefault="user.mobileIndex.options[0]"
-                           name="mobileIndex" @change="onSelectAction"/>
-            <input type="text" id="registration-phone" v-validate="'required|numeric'" name="phone" placeholder=""
-                   v-model="user.mobile">
-          </div>
-          <div v-if="errors.first('mobileIndex')">
-            <div v-show="errors.first('mobileIndex')" class="error">{{ errors.first('mobileIndex') }}</div>
-          </div>
-          <div v-else-if="errors.first('phone')">
-            <div v-show="errors.first('phone')" class="error">{{ errors.first('phone') }}</div>
-          </div>
+          <input type="text" id="registration-phone" v-validate="'required'" name="phone" placeholder=""
+                 v-model="user.mobile">
+          <div v-show="errors.first('phone')" class="error">{{ errors.first('phone') }}</div>
         </div>
       </div>
       <div class="field-container">
         <div class="field-wrapper">
           <label>{{t('birth_date_placeholder')}}*</label>
           <div class="combo-fields">
-            <input type="hidden" name="day" v-validate="'required'" v-model="user.day.val">
-            <custom-select class="b-date-field" :items="user.day.options"
-                           :selectedDefault="user.day.options[0]"
-                           :placeholder="user.day.placeholder"
+            <input type="hidden" name="day" v-validate="'required'" v-model="selectData.day.val">
+            <custom-select class="b-date-field" :items="selectData.day.options"
+                           :selectedDefault="day"
+                           :placeholder="selectData.day.placeholder"
                            name="day"
                            @change="onSelectAction"/>
-            <input type="hidden" name="month" v-validate="'required'" v-model="user.month.val">
-            <custom-select class="b-date-field" :items="user.month.options"
-                           :selectedDefault="user.month.options[0]"
-                           :placeholder="user.month.placeholder"
+            <input type="hidden" name="month" v-validate="'required'" v-model="selectData.month.val">
+            <custom-select class="b-date-field" :items="selectData.month.options"
+                           :selectedDefault="month"
+                           :placeholder="selectData.month.placeholder"
                            name="month"
                            @change="onSelectAction"/>
-            <input type="hidden" name="year" v-validate="'required'" v-model="user.year.val">
-            <custom-select class="b-date-field" :items="user.year.options"
-                           :selectedDefault="user.year.options[0]"
-                           :placeholder="user.year.placeholder"
+            <input type="hidden" name="year" v-validate="'required'" v-model="selectData.year.val">
+            <custom-select class="b-date-field" :items="selectData.year.options"
+                           :selectedDefault="year"
+                           :placeholder="selectData.year.placeholder"
                            name="year"
                            @change="onSelectAction"/>
           </div>
@@ -84,10 +71,10 @@
         <div class="field-wrapper">
           <label>{{t('gender_placeholder')}}*</label>
           <div class="combo-fields columns">
-            <input type="hidden" name="gender" v-validate="'required'" v-model="user.gender.val">
-            <custom-select class="gender-field" :items="user.gender.options" name="gender"
-                           :selectedDefault="user.gender.options[0]"
-                           :placeholder="user.gender.placeholder" @change="onSelectAction"/>
+            <input type="hidden" name="gender" v-validate="'required'" v-model="user.sex">
+            <custom-select class="gender-field" :items="selectData.gender.options" name="gender"
+                           :selectedDefault="gender"
+                           :placeholder="selectData.gender.placeholder" @change="onSelectAction"/>
             <div v-show="errors.first('gender')" class="error">{{ errors.first('gender') }}</div>
           </div>
         </div>
@@ -96,20 +83,20 @@
         <div class="field-wrapper">
           <label>{{t('country_placeholder')}}*</label>
           <div class="combo-fields columns">
-            <input type="hidden" name="country" v-validate="'required'" v-model="user.country.val">
-            <custom-select class="country-field" name="country" :items="user.country.options"
-                           :selectedDefault="user.country.options[0]"
-                           :placeholder="user.country.placeholder" @change="onSelectAction"/>
+            <input type="hidden" name="country" v-validate="'required'" v-model="selectData.country.val">
+            <custom-select class="country-field" name="country" :items="selectData.country.options"
+                           :selectedDefault="selectData.country.options[0]"
+                           :placeholder="selectData.country.placeholder" @change="onSelectAction"/>
             <div v-show="errors.first('country')" class="error">{{ errors.first('country') }}</div>
           </div>
         </div>
         <div class="field-wrapper">
           <label>{{t('city_placeholder')}}*</label>
           <div class="combo-fields columns">
-            <input type="hidden" name="city" v-validate="'required'" v-model="user.city.val">
-            <custom-select class="city-field" name="city" :items="user.city.options"
-                           :selectedDefault="user.city.options[0]"
-                           :placeholder="user.city.placeholder" @change="onSelectAction"/>
+            <input type="hidden" name="city" v-validate="'required'" v-model="selectData.city.val">
+            <custom-select class="city-field" name="city" :items="selectData.city.options"
+                           :selectedDefault="selectData.city.options[0]"
+                           :placeholder="selectData.city.placeholder" @change="onSelectAction"/>
             <div v-show="errors.first('city')" class="error">{{ errors.first('city') }}</div>
           </div>
         </div>
@@ -132,17 +119,13 @@
       </div>
 
       <div class="field-container columns">
-        <div class="terms-set">
-          <input type="checkbox" v-validate="'required'" name="terms" id="terms-and-conditions" v-model="user.terms">
-          <label for="terms-and-conditions">Accept <a href="">terms and conditions</a></label>
-        </div>
         <div v-show="errors.first('terms')"
              class="error">{{ errors.first('terms') }}
         </div>
       </div>
       <div class="field-container centered-content">
         <div class="register-button-container">
-          <button-standard :text="t('register')" @click="register"/>
+          <button-standard :text="t('save')" @click="register"/>
         </div>
       </div>
     </form>
@@ -154,40 +137,14 @@ import ButtonStandard from '../../partials/StandardButton'
 import WhiteSpinner from '../../partials/LoadingSpinner'
 
 export default {
-  name: 'registration-form',
+  name: 'settings-form',
   components: { WhiteSpinner, ButtonStandard, CustomSelect },
   data: function () {
     return {
-      user: {
-        name: 'Nika',
-        lastName: 'Jorjoliani',
-        email: 'nikajorjika1993@gmail.com',
-        mobileIndex: {
-          val: '+995',
-          options: [
-            {
-              name: {
-                ka: 'საქ +995',
-                en: 'GEO +995'
-              },
-              value: '+995'
-            }, {
-              name: {
-                ka: 'რუს +007',
-                en: 'RUS +007'
-              },
-              value: '+007'
-            }
-          ],
-          placeholder: {
-            en: 'Index',
-            ka: 'ინდექსი'
-          }
-        },
-        mobile: '123123123',
+      user: this.$store.getters.user,
+      selectData: {
         city: {
           val: 'tbilisi',
-          errors: [],
           options: [
             {
               name: {
@@ -210,7 +167,6 @@ export default {
         },
         country: {
           val: 'georgia',
-          errors: [],
           options: [
             {
               name: {
@@ -233,7 +189,6 @@ export default {
         },
         day: {
           val: '1',
-          errors: [],
           options: this.$store.state.dateOptions.day.options,
           placeholder: {
             en: 'Day',
@@ -250,9 +205,9 @@ export default {
           }
         },
         year: {
-          val: '122',
+          val: '1955',
           errors: [],
-          options: this.$store.state.dateOptions.year.options,
+          options: this.$store.state.dateOptions.year.options(),
           placeholder: {
             en: 'Year',
             ka: 'წელი'
@@ -260,7 +215,6 @@ export default {
         },
         gender: {
           val: 'male',
-          errors: [],
           options: [
             {
               name: {
@@ -280,10 +234,7 @@ export default {
             en: 'Gender',
             ka: 'სქესი'
           }
-        },
-        password: '123123',
-        repeatPassword: '123123',
-        terms: true
+        }
       },
       loading: false,
       returnedError: ''
@@ -327,16 +278,76 @@ export default {
         }
       }
     }
+  },
+  computed: {
+    day: function () {
+      console.log(this.$store.getters.user)
+      const tmp = this.user.birthDate.split('/')[ 0 ]
+      const result = this.selectData.day.options.filter(object => {
+        if (object && object.value === tmp) {
+          return object
+        }
+      })
+      return result.length ? result[0] : ''
+    },
+    month: function () {
+      const tmp = this.user.birthDate.split('/')[ 1 ]
+      const result = this.selectData.month.options.filter(object => {
+        if (object && object.value === tmp) {
+          return object
+        }
+      })
+      return result.length ? result[0] : ''
+    },
+    year: function () {
+      const tmp = this.user.birthDate.split('/')[ 2 ]
+      const result = this.selectData.year.options.filter(object => {
+        if (object && object.value === tmp) {
+          return object
+        }
+      })
+      return result.length ? result[0] : ''
+    },
+    gender: function () {
+      const tmp = this.user.sex
+      const result = this.selectData.gender.options.filter(object => {
+        if (object && object.value === tmp) {
+          return object
+        }
+      })
+      return result.length ? result[0] : ''
+    },
+    city: function () {
+      const tmp = this.user.sex
+      const result = this.selectData.city.options.filter(object => {
+        if (object && object.value === tmp) {
+          return object
+        }
+      })
+      return result.length ? result[0] : ''
+    },
+    country: function () {
+      const tmp = this.user.sex
+      const result = this.selectData.country.options.filter(object => {
+        if (object && object.value === tmp) {
+          return object
+        }
+      })
+      return result.length ? result[0] : ''
+    }
   }
 }
 </script>
 
 <style lang="scss">
-#registration-form {
+#settings-form {
   position: relative;
   .field-container {
     display: flex;
     width: 100%;
+    @media screen and (max-width: 550px){
+      flex-direction: column;
+    }
     &.columns {
       flex-direction: column;
     }
@@ -344,10 +355,13 @@ export default {
       justify-content: center;
     }
     .field-wrapper {
-      width: calc(50% - 16px);
+      width: calc(50% - 8px);
       margin-right: 16px;
       display: flex;
       flex-direction: column;
+      @media screen and (max-width: 550px){
+        width:100%;
+      }
       label {
         margin: 15px 0 6px;
         font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
@@ -412,6 +426,11 @@ export default {
     .register-button-container {
       margin: 41px 0 107px 0;
       text-align: center;
+      .standard-button{
+        @media screen and (max-width: 550px){
+          width:100%;
+        }
+      }
     }
   }
   .error {

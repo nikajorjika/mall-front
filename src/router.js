@@ -148,6 +148,12 @@ const router = new Router({
       component: () => import('./views/Bookmarks.vue')
     },
     {
+      path: '/:locale/user/settings',
+      name: 'settings',
+      props: true,
+      component: () => import('./views/Settings.vue')
+    },
+    {
       path: '/:locale/login',
       name: 'login',
       props: true,

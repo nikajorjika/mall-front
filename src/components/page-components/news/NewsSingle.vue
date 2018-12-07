@@ -87,7 +87,9 @@ export default {
   computed: {
     bookmarked: function () {
       return this.$store.getters.bookmarked.filter(object => {
-        return object._id === this.item._id
+        if (object) {
+          return object._id === this.item._id
+        }
       })
     }
   },

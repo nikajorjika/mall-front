@@ -14,7 +14,12 @@ import RegistrationForm from '../components/page-components/registration/Registr
 
 export default {
   name: 'registration-page',
-  components: { RegistrationForm, BlockHeaderStandard }
+  components: { RegistrationForm, BlockHeaderStandard },
+  mounted: function () {
+    if (this.$store.getters.user) {
+      this.$router.back()
+    }
+  }
 }
 </script>
 <style lang="scss">

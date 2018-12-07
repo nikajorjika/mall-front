@@ -58,7 +58,7 @@
                   :to="`/${$store.getters.locale.locale}/user/bookmarks`">{{t('bookmarks')}}</router-link></span>
                 </li>
                 <li><span class="action-label"><router-link
-                  :to="`/${$store.getters.locale.locale}`">{{t('settings')}}</router-link></span>
+                  :to="`/${$store.getters.locale.locale}/user/settings`">{{t('settings')}}</router-link></span>
                 </li>
                 <li><span class="action-label" @click="logOut">{{t('log_out')}}</span></li>
               </ul>

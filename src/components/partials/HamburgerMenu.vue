@@ -137,7 +137,7 @@ export default {
     },
     getSocials: function () {
       this.$store.dispatch('getSocials').then(function (response) {
-        console.log(response.data)
+        // console.log(response.data)
       }).catch(function (error) {
         console.error(error.message)
       })

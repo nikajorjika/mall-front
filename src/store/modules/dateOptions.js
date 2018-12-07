@@ -309,21 +309,21 @@ const dateOptions = {
     ]
   },
   year: {
-    options: [
-      {
-        name: {
-          ka: 'საქ +995',
-          en: 'GEO +995'
-        },
-        value: '+995'
-      }, {
-        name: {
-          ka: 'რუს +007',
-          en: 'RUS +007'
-        },
-        value: '+007'
+    options: function () {
+      let years = []
+      let i = 1955
+      while (i >= 1955 && i <= 2018) {
+        years.push({
+          name: {
+            ka: i,
+            en: i
+          },
+          value: i
+        })
+        i++
       }
-    ]
+      return years
+    }
   }
 }
 
