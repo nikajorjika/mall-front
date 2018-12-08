@@ -36,10 +36,14 @@ export default {
     height: 100%;
     img {
       margin: auto;
-      max-height: 100%;
-      max-width: 100%;
+      max-height: calc(100% - 100px);
+      max-width: calc(100% - 100px);
       object-fit: contain;
       object-position: center;
+      @media screen and (max-width: 1500px){
+        max-height: calc(100% - 50px);
+        max-width: calc(100% - 50px);
+      }
     }
   }
   .store-flip{

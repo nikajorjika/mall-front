@@ -19,7 +19,7 @@
         </div>
         <div class="inner-container form-open" @click.stop>
           <div class="text-part">
-            <input type="text" v-validate="'required|email'" :placeholder="t('subscribeText')" name="email"
+            <input type="text" v-validate="'required|email'" :placeholder="t('enter_your_email')" name="email"
                    class="input">
           </div>
           <div class="btn-part">

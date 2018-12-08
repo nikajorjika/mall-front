@@ -118,6 +118,12 @@ const router = new Router({
       component: () => import('./views/Stores.vue')
     },
     {
+      path: '/:locale/media',
+      name: 'Media',
+      props: true,
+      component: () => import('./views/Media.vue')
+    },
+    {
       path: '/:locale/store/details/:store?',
       name: 'singleStore',
       props: true,

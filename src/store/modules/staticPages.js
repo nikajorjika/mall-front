@@ -8,7 +8,7 @@ const staticPages =
       }
     },
     {
-      url: '/page/media',
+      url: '/media',
       name: {
         en: 'Media',
         ka: 'მედია'

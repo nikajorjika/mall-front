@@ -112,7 +112,7 @@ export default {
   }
   .taxi-prices {
     margin-top: 91px;
-    @media screen and (max-width: 1100px){
+    @media screen and (max-width: 1100px) {
       margin-top: 37px;
     }
 
@@ -133,9 +133,13 @@ export default {
         &:last-child {
           border-bottom: 1px solid #dcdcdc;
         }
+        @media screen and (max-width: 550px) {
+          font-size: 1.4rem;
+        }
         span {
           &:last-child {
             margin-left: auto;
+            white-space: nowrap;
           }
         }
       }
@@ -148,7 +152,7 @@ export default {
 .page-block {
   .taxi-additional {
     display: flex;
-    @media screen and (max-width: 1100px){
+    @media screen and (max-width: 1100px) {
       flex-direction: column;
     }
 
@@ -164,9 +168,12 @@ export default {
         color: #848484;
         margin: 0;
 
-        @media screen and (max-width: 1366px){
+        @media screen and (max-width: 1366px) {
           font-size: 2.9rem;
           line-height: 55px;
+        }
+        @media screen and (max-width: 375px) {
+          font-size: 2.5rem;
         }
         .formatter-spans {
           &:first-child {
@@ -175,6 +182,9 @@ export default {
           &:last-child {
             display: block;
             font-size: 4.4rem;
+            @media screen and (max-width: 375px) {
+              font-size: 3.6rem;
+            }
           }
         }
       }
@@ -189,7 +199,7 @@ export default {
         line-height: 1.25;
         color: #848484;
         margin: auto auto 0 auto;
-        @media screen and (max-width: 1100px){
+        @media screen and (max-width: 1100px) {
           margin-left: 0;
           font-size: 1.4rem;
           margin-top: 30px;

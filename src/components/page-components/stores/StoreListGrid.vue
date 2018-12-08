@@ -18,7 +18,7 @@
       </div>
     </div>
     <loading-big v-show="loadingStores"/>
-    <div class="container" v-if="viewGrid">
+    <div class="container" v-if="viewGrid ||  $mq === 'mobile'">
       <div class="store-list">
         <div class="store-list-item" v-for="(item, index) in $store.getters.stores" :key="index">
           <div class="store-inner">
@@ -344,7 +344,7 @@ export default {
     margin: 2px 0;
   }
   @media screen and (max-width: 760px) {
-    margin: 2px 26px;
+    margin: 3px;
   }
   .store-list-item {
     position: relative;

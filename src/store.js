@@ -66,6 +66,7 @@ export default new Vuex.Store({
     subscribed: [],
     bookmarked: [],
     socials: [],
+    media: [],
     pageData: pageData,
     footer: footerData,
     staticPages: staticPages,
@@ -95,6 +96,9 @@ export default new Vuex.Store({
     },
     mallTaxi: (state) => {
       return state.mallTaxi
+    },
+    media: (state) => {
+      return state.media
     },
     marketing: (state) => {
       return state.marketing

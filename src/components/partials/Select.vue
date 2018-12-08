@@ -103,7 +103,18 @@ export default {
     cursor: pointer;
     &.open{
       border: 1px solid #000000;
-      border-bottom: 1px solid rgba(220, 220, 220, 0.51);
+      border-bottom: none;
+      position: relative;
+      &:before{
+        content: '';
+        width: 88%;
+        height: 1px;
+        background: #dcdcdc;
+        position: absolute;
+        bottom:0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
     }
     @media screen and (max-width: 1650px) {
       padding: 12px 9px;

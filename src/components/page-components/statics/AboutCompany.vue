@@ -5,8 +5,8 @@
   </div>
 </template>
 <script>
-import AboutTitle from "../about-us/AboutPageTitle";
-import AboutContent from "../about-us/AboutPageContent";
+import AboutTitle from '../about-us/AboutPageTitle'
+import AboutContent from '../about-us/AboutPageContent'
 
 export default {
   name: 'about-company',
@@ -19,3 +19,10 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.about-company-container{
+  @media screen and (max-width: 1380px) and (min-width:550px){
+    padding: 0 15px;
+  }
+}
+</style>

@@ -37,7 +37,7 @@
                 <div class="group" v-if="menuOpen === 'main'">
                   <ul class="content-ul">
                     <li v-for="(child, index2) in $store.getters.navigation" :key="index2" class="content-li">
-                      <router-link :to="child.url">
+                      <router-link :to="`/${locale}${child.url}`">
                         <div class="item-wrapper">
                           {{child.name[$store.getters.locale.locale]}}
                         </div>
@@ -58,7 +58,7 @@
                 <div class="group" v-if="menuOpen === 'information'">
                   <ul class="content-ul">
                     <li v-for="(child, index2) in $store.state.staticPages" :key="index2" class="content-li">
-                      <router-link :to="child.url">
+                      <router-link :to="`/${locale}${child.url}`">
                         <div class="item-wrapper">
                           {{child.name[$store.getters.locale.locale]}}
                         </div>
@@ -154,6 +154,11 @@ export default {
   methods: {
     toggleMenu: function (item) {
       this.menuOpen = this.menuOpen === item ? null : item
+    }
+  },
+  computed: {
+    locale: function () {
+      return this.$store.getters.locale.locale
     }
   }
 }

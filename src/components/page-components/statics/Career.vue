@@ -7,9 +7,9 @@
   </div>
 </template>
 <script>
-import AboutTitle from "../about-us/AboutPageTitle";
-import AboutContent from "../about-us/AboutPageContent";
-import ServiceList from "../about-us/ServiceList";
+import AboutTitle from '../about-us/AboutPageTitle'
+import AboutContent from '../about-us/AboutPageContent'
+import ServiceList from '../about-us/ServiceList'
 
 export default {
   name: 'about-company',
@@ -28,7 +28,7 @@ export default {
         title: 'LEADING COMPANY IN GEORGIA',
         content: 'CORPORATE CULTURE PLEASANT ENVIRONMENT'
       } ],
-      jobOffers: 'Below you will find the current job openings at Tbilisi Mall. Please keep checking back for future career opportunity updates.',
+      jobOffers: 'Below you will find the current job openings at Tbilisi Mall. Please keep checking back for future career opportunity updates.'
     }
   }
 }

@@ -48,6 +48,7 @@ const messages = {
       sign_up: 'sign up',
       register: 'register',
       please_enter_to_search: 'PRESS ENTER TO SEARCH',
+      store_mobile_search: 'Search for shop or brand',
       gel: 'ლ',
       name: 'name',
       email: 'email',
@@ -72,6 +73,7 @@ const messages = {
       download: 'download',
       guest_service: 'guest service',
       news: 'news',
+      information: 'information',
       joinNow: 'JOIN NOW',
       subscribed_successfully: 'You have successfully subscribed item',
       bookmarked_successfully: 'You have successfully bookmarked item',
@@ -81,7 +83,8 @@ const messages = {
       address_content: '16 km Agmashenebeli Alley, <br> 0131 Tbilisi, Georgia',
       subscribe_list_stores: 'subscribed list',
       see_the_list_below: 'See the list of shops below:',
-      subscribeText: 'Sign up for our newsletter to receive special offers, event invitations, and more.'
+      subscribeText: 'Sign up for our newsletter to receive special offers, event invitations, and more.',
+      enter_your_email: 'Enter your email address'
     }
   },
   ka: {
@@ -98,6 +101,7 @@ const messages = {
       stores: 'მაღაზიები',
       events: 'ივენთები',
       next: 'შემდეგი',
+      information: 'ინფორმაცია',
       first_name_placeholder: 'სახელი',
       last_name_placeholder: 'გვარი',
       email_placeholder: 'ელ-ფოსტა',
@@ -142,6 +146,7 @@ const messages = {
       sign_up: 'sign up',
       register: 'რეგისტრაცია',
       please_enter_to_search: 'PRESS ENTER TO SEARCH',
+      store_mobile_search: 'მოძებნე მაღაზია ან ბრენდი',
       gel: 'ლ',
       our_team: 'ჩვენი გუნდი',
       marketing: 'მარკეტინგი',
@@ -165,7 +170,8 @@ const messages = {
       bookmarked_successfully: 'სიახლე წარმატებით შეინახა',
       subscribe_list_stores: 'გამოწერილი მაღაზიები',
       see_the_list_below: 'იხილეთ მაღაზიების სია  :',
-      subscribeText: 'გამოიწერე ჩვენი საიტი და მიიღე სიახლეები შემოთავაზებების და სიახლეების შესახებ.'
+      subscribeText: 'გამოიწერე ჩვენი საიტი და მიიღე სიახლეები შემოთავაზებების და სიახლეების შესახებ.',
+      enter_your_email: 'შეიყვანეთ თქვენი ელ-ფოსტა'
     }
   }
 }
