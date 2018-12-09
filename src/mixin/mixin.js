@@ -28,16 +28,17 @@ Vue.mixin({
       return user
     },
     createSlug: function (str) {
-      const a = 'àáäâãåèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;'
-      const b = 'aaaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh------'
-      const p = new RegExp(a.split('').join('|'), 'g')
-      return str.toString().toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(p, c => b.charAt(a.indexOf(c)))
-        .replace(/&/g, '-and-')
-        .replace(/[^w\-]+/g, '')
-        .replace(/\-\-+/g, '-')
-        .replace(/^-+/, '')
+      let slug = ''
+      let strLower = str.toLowerCase()
+      slug = strLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e')
+      slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a')
+      slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o')
+      slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u')
+      slug = slug.replace(/đ/gi, 'd')
+      slug = slug.replace(/\s*$/g, '')
+      slug = slug.replace(/\s+/g, '-')
+
+      return slug
     },
     formatPhoneNumber: function (phone) {
       return phone.replace(/(\+995)?(\d{3})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')
