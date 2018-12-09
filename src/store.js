@@ -75,6 +75,7 @@ export default new Vuex.Store({
     newsFilters: newsFilters,
     storeFilters: storeFilters,
     homeAds: [],
+    categories: [],
     sliderItems: []
   },
   getters: {
@@ -86,6 +87,9 @@ export default new Vuex.Store({
     },
     navigation: (state) => {
       return state.navigation
+    },
+    categories: (state) => {
+      return state.categories
     },
     aboutUs: (state) => {
       return state.aboutUs
@@ -197,6 +201,9 @@ export default new Vuex.Store({
     },
     SET_NO_SCROLL: (state, newValue) => {
       state.noScroll = newValue
+    },
+    SET_CATEGORIES: (state, newValue) => {
+      state.categories = newValue
     },
     SET_NAVIGATION: (state, newValue) => {
       state.noScroll = newValue
@@ -357,6 +364,22 @@ export default new Vuex.Store({
             } else {
               resolve(response)
               context.commit(request.setter, { data: response.data.data, model: request.model })
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
+      })
+    },
+    getCategories: function (context, request) {
+      return new Promise((resolve, reject) => {
+        Axios.get(context.state.apiUrls.categories)
+          .then(function (response) {
+            if (response.data.length) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              resolve(response)
+              context.commit('SET_CATEGORIES', response.data.data)
             }
           })
           .catch(function (error) {

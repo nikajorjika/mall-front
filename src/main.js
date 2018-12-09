@@ -35,7 +35,7 @@ Vue.use(VueAgile)
 Vue.use(Notifications)
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyABserBqL7VFOHlWx4wrtgHKtTGzD0k90A',
+    key: 'AIzaSyAcuJoeoWXCUeGGDIW8EWcunpDmjqWeZ9g',
     libraries: 'places'
   }
 })

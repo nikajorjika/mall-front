@@ -4,7 +4,7 @@
       <agile :options="options" :next-arrow="getArrow()" :prev-arrow="getArrow()">
         <div class="slide" v-for="(item, index) in this.$store.getters.stores" :key="index">
           <div class="small-slide-container">
-            <img :src="item.logoUrl" :alt="item.name[$store.getters.locale.locale]">
+            <img :src="item.logoUrl" :alt="item.name[locale]">
           </div>
         </div>
       </agile>

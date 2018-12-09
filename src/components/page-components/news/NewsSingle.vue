@@ -1,5 +1,5 @@
 <template>
-  <div class="news-single">
+  <div class="news-single" :id="item._id">
     <div class="single-wrapper">
       <div class="half-col single-left">
         <div class="image-container">
@@ -23,13 +23,13 @@
           </div>
         </div>
         <div class="title-container">
-          <h2 class="title">{{item.name[$store.getters.locale.locale]}}</h2>
+          <h2 class="title">{{item.name[locale]}}</h2>
           <h4 class="sub-title">
             SUPER
           </h4>
         </div>
         <div class="description-container">
-          <p v-html="item.description[$store.getters.locale.locale]">
+          <p v-html="item.description[locale]">
           </p>
         </div>
         <div class="socials-container">
@@ -99,7 +99,7 @@ export default {
     },
     closeUrl: function () {
       const subCat = this.$route.params.cat !== 'single' ? this.$route.params.cat : ''
-      return `/${this.$store.getters.locale.locale}/whats-new/${subCat}`
+      return `/${this.locale}/whats-new/${subCat}`
     },
     bookmark: function (id) {
       const user = this.$store.getters.user

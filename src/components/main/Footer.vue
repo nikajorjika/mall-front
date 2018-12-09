@@ -39,7 +39,7 @@
                     <li v-for="(child, index2) in $store.getters.navigation" :key="index2" class="content-li">
                       <router-link :to="`/${locale}${child.url}`">
                         <div class="item-wrapper">
-                          {{child.name[$store.getters.locale.locale]}}
+                          {{child.name[locale]}}
                         </div>
                       </router-link>
                     </li>
@@ -60,7 +60,7 @@
                     <li v-for="(child, index2) in $store.state.staticPages" :key="index2" class="content-li">
                       <router-link :to="`/${locale}${child.url}`">
                         <div class="item-wrapper">
-                          {{child.name[$store.getters.locale.locale]}}
+                          {{child.name[locale]}}
                         </div>
                       </router-link>
                     </li>
@@ -158,7 +158,7 @@ export default {
   },
   computed: {
     locale: function () {
-      return this.$store.getters.locale.locale
+      return this.locale
     }
   }
 }

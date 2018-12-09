@@ -124,13 +124,13 @@ const router = new Router({
       component: () => import('./views/Media.vue')
     },
     {
-      path: '/:locale/store/details/:store?',
+      path: '/:locale/store/:slug?/:store?',
       name: 'singleStore',
       props: true,
       component: () => import('./views/SingleStore.vue')
     },
     {
-      path: '/:locale/whats-new/:cat?/:id?',
+      path: '/:locale/whats-new/:cat?/:slug?/:id?',
       name: 'whats-new',
       props: true,
       component: () => import('./views/News.vue')

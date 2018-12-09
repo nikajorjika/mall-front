@@ -2,14 +2,14 @@
   <div class="event-item">
     <div class="wrapper">
       <div class="img-wrapper">
-        <img :src="event.photoUrl" :alt="event.name[$store.getters.locale.locale]">
+        <img :src="event.photoUrl" :alt="event.name[locale]">
       </div>
       <div class="content-container">
         <div class="title">
-          <h3>{{event.name[$store.getters.locale.locale]}}</h3>
+          <h3>{{event.name[locale]}}</h3>
         </div>
         <div class="description">
-          <p>{{event.description[$store.getters.locale.locale]}}</p>
+          <p>{{event.description[locale]}}</p>
         </div>
       </div>
     </div>

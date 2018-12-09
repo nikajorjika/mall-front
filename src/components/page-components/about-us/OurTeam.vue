@@ -10,11 +10,11 @@
         <slide v-for="(item, index) in $store.getters.team" :key="index">
           <div class="staff-item">
             <div class="img-container">
-              <img :src="item.photoUrl" :alt="item['name'+ $store.getters.locale.locale.toUpperCase()]">
+              <img :src="item.photoUrl" :alt="item['name'+ locale.toUpperCase()]">
             </div>
             <div class="name-wrapper">
-              <h3>{{item['name'+ $store.getters.locale.locale.toUpperCase()]}}</h3>
-              <p>{{item['position'+ $store.getters.locale.locale.toUpperCase()]}}</p>
+              <h3>{{item['name'+ locale.toUpperCase()]}}</h3>
+              <p>{{item['position'+ locale.toUpperCase()]}}</p>
             </div>
           </div>
         </slide>

@@ -1,6 +1,6 @@
 <template>
   <div id="page-stores">
-    <block-header-standard :title="this.title[$store.getters.locale.locale]"/>
+    <block-header-standard :title="this.title[locale]"/>
     <news-list :categories="$store.state.newsFilters"/>
   </div>
 </template>

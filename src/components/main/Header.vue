@@ -6,9 +6,9 @@
         <ul class="navigation-menu">
           <li v-for="(item, index) in $store.getters.navigation" v-bind:key="index">
             <div class="nav-drop" @mouseover="showChild = item" @mouseout="showChild = null">
-              <router-link :to="`/${$store.getters.locale.locale}${item.url}`"
+              <router-link :to="`/${locale}${item.url}`"
                            :class="item.children !== undefined ? 'has-child' : ''">
-                <span>{{item.name[$store.getters.locale.locale]}}</span>
+                <span>{{item.name[locale]}}</span>
                 <span class="caret-down-icon" v-if="item.children !== undefined"><img
                   src="../../assets/images/icons/carret-down.svg" alt="caret down"></span>
               </router-link>
@@ -16,8 +16,8 @@
                 <div v-if="item.children !== undefined && showChild === item" class="drop">
                   <ul :class="{twoCol: item.children.length > 10 }">
                     <li v-for="(child, i) in item.children" v-bind:key="i">
-                      <router-link :to="`/${$store.getters.locale.locale}${item.url}${child.url}`">
-                        {{child.name[$store.getters.locale.locale]}}
+                      <router-link :to="`/${locale}${item.url}${child.url}`">
+                        {{child.name[locale]}}
                       </router-link>
                     </li>
                   </ul>
@@ -40,25 +40,25 @@
       <div class="header-right">
         <ul v-if="$mq !== 'tablet' && $mq !== 'mobile'">
           <li>
-            <router-link :to="`/${$store.getters.locale.locale}/page/contact`">{{t('contact')}}</router-link>
+            <router-link :to="`/${locale}/page/contact`">{{t('contact')}}</router-link>
           </li>
           <li>
             <a @click.stop.prevent="toggleActions()" v-if="$store.getters.user">
               {{$store.getters.user.name}}
             </a>
-            <router-link v-else :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}
+            <router-link v-else :to="`/${locale}/login`">{{t('my_mall')}}
             </router-link>
             <div class="user-action-block" v-show="showActions">
               <ul>
-                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('notifications')}}</router-link></span>
+                <li><span class="action-label"><router-link :to="`/${locale}`">{{t('notifications')}}</router-link></span>
                 </li>
-                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}/user/subscribed`">{{t('subscribe_list')}}</router-link></span>
-                </li>
-                <li><span class="action-label"><router-link
-                  :to="`/${$store.getters.locale.locale}/user/bookmarks`">{{t('bookmarks')}}</router-link></span>
+                <li><span class="action-label"><router-link :to="`/${locale}/user/subscribed`">{{t('subscribe_list')}}</router-link></span>
                 </li>
                 <li><span class="action-label"><router-link
-                  :to="`/${$store.getters.locale.locale}/user/settings`">{{t('settings')}}</router-link></span>
+                  :to="`/${locale}/user/bookmarks`">{{t('bookmarks')}}</router-link></span>
+                </li>
+                <li><span class="action-label"><router-link
+                  :to="`/${locale}/user/settings`">{{t('settings')}}</router-link></span>
                 </li>
                 <li><span class="action-label" @click="logOut">{{t('log_out')}}</span></li>
               </ul>

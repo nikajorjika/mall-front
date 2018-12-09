@@ -2,7 +2,7 @@
   <div class="gift-stores">
     <div class="alphabet-header">
       <div class="alphabet-header-wrapper">
-        <div class="alphabet-item" v-for="(value, index) in $store.getters.alphabet[$store.getters.locale.locale]"
+        <div class="alphabet-item" v-for="(value, index) in $store.getters.alphabet[locale]"
              :key="index">
             <span @click="filterList(value)"
                   :class="{active: grouped[value.toUpperCase()] !== undefined && grouped[value.toUpperCase()].length !== 0 }">{{value}}
@@ -22,7 +22,7 @@
                 <div class="item" v-for="(value, index) in grouped[letter.toUpperCase()]" :key="index">
                   <div v-if="value !== undefined" class="item-wrapper">
                     <span class="name">
-                      {{value.name[$store.getters.locale.locale]}}
+                      {{value.name[locale]}}
                     </span>
                   </div>
                 </div>
@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     currentAlphabetFilter: function () {
-      const alph = this.$store.getters.alphabet[ this.$store.getters.locale.locale ]
+      const alph = this.$store.getters.alphabet[ this.locale ]
       if (this.currentLetter === null) {
         return alph
       } else {

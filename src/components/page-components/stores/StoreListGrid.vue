@@ -22,7 +22,7 @@
       <div class="store-list">
         <div class="store-list-item" v-for="(item, index) in $store.getters.stores" :key="index">
           <div class="store-inner">
-            <router-link :to="`/${$store.getters.locale.locale}/store/details/${item._id}`">
+            <router-link :to="`/${locale}/store/${createSlug(item.name['en'])}/${item._id}`">
               <store-item :item="item"/>
             </router-link>
           </div>
@@ -38,7 +38,7 @@
     <div class="store-list-view" v-else>
       <div class="alphabet-header">
         <div class="alphabet-header-wrapper">
-          <div class="alphabet-item" v-for="(value, index) in $store.getters.alphabet[$store.getters.locale.locale]"
+          <div class="alphabet-item" v-for="(value, index) in $store.getters.alphabet[locale]"
                :key="index">
             <span @click="filterList(value)"
                   :class="{active: grouped[value.toUpperCase()] !== undefined && grouped[value.toUpperCase()].length !== 0 }">{{value}}
@@ -67,7 +67,7 @@
                     <div v-if="value !== undefined" class="item-wrapper">
                       <div class="item-column name">
                         <span class="name-inner">
-                          {{value.name[$store.getters.locale.locale]}}
+                          {{value.name[locale]}}
                         </span>
                       </div>
                       <div class="item-column tags">
@@ -75,10 +75,10 @@
                       </div>
                       <div class="item-column services">
                         <span class="service" v-for="(service, serviceIndex) in services" :key="serviceIndex"
-                              :class="{active: checkIfFilters(value.filters, service)}">{{service.name[$store.getters.locale.locale]}}</span>
+                              :class="{active: checkIfFilters(value.filters, service)}">{{service.name[locale]}}</span>
                       </div>
                       <div class="item-column activities">
-                        <span class="activity" v-for="(activity, activityIndex) in activities" :key="activityIndex">{{activity.name[$store.getters.locale.locale]}}</span>
+                        <span class="activity" v-for="(activity, activityIndex) in activities" :key="activityIndex">{{activity.name[locale]}}</span>
                       </div>
                     </div>
                   </div>
@@ -239,7 +239,7 @@ export default {
     },
     checkIfFilters: function (checkToArray, checkValue) {
       const str = checkToArray.join('')
-      return str.toLowerCase().includes(checkValue.name[this.$store.getters.locale.locale].toLowerCase())
+      return str.toLowerCase().includes(checkValue.name[this.locale].toLowerCase())
     },
     loadMore: function () {
       this.page++
@@ -274,7 +274,7 @@ export default {
   },
   computed: {
     currentAlphabetFilter: function () {
-      const alph = this.$store.getters.alphabet[ this.$store.getters.locale.locale ]
+      const alph = this.$store.getters.alphabet[ this.locale ]
       if (this.currentLetter === null) {
         return alph.slice(0, 4)
       } else {

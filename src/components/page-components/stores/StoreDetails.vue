@@ -9,11 +9,16 @@
         <div class="store-details-content">
           <div class="logo-part-wrapper">
             <div class="logo-container">
-              <img :src="store.logoUrl" :alt="store.name[$store.getters.locale.locale]">
+              <img :src="store.logoUrl" :alt="store.name[locale]">
             </div>
             <div class="subscribe-button-container">
               <button class="subscribe-button" @click="subscribe(store._id)">
-                {{t('subscribe')}}
+                <span class="subscribe" v-if="!isSubscribed">
+                  {{t('subscribe')}}
+                </span>
+                <span class="unsubscribe" v-else>
+                  {{t('unsubscribe')}}
+                </span>
               </button>
             </div>
           </div>
@@ -22,21 +27,21 @@
               <div class="content-main">
                 <div class="breadcrumb">
                   <div class="breadcrumb-item">
-                    <router-link :to="{name: 'home', params:{locale: $store.getters.locale.locale}}">{{t('home')}}
+                    <router-link :to="{name: 'home', params:{locale: locale}}">{{t('home')}}
                     </router-link>
                   </div>
                   <div class="breadcrumb-item">
                     <router-link :to="{name: 'stores'}">{{t('stores')}}</router-link>
                   </div>
                   <div class="breadcrumb-item">
-                    <router-link to=""> {{store.name[$store.getters.locale.locale]}}</router-link>
+                    <router-link to=""> {{store.name[locale]}}</router-link>
                   </div>
                 </div>
                 <div class="title-container">
-                  <h1 class="title">{{store.name[$store.getters.locale.locale]}}</h1>
+                  <h1 class="title">{{store.name[locale]}}</h1>
                 </div>
                 <div class="p-container">
-                  <p v-html="store.description[$store.getters.locale.locale]"></p>
+                  <p v-html="formatP(store.description[locale])"></p>
                 </div>
               </div>
               <div class="content-socials">
@@ -45,23 +50,23 @@
                     <h4>{{t('socials')}}</h4>
                   </div>
                   <ul>
-                    <li class="">
-                      <a href="https://facebook.com" target="_blank">
+                    <li v-if="store.socials.facebook.length">
+                      <a :href="store.socials.facebook" target="_blank">
                         <img src="../../../assets/images/icons/facebook.svg" height="15">
                       </a>
                     </li>
-                    <li class="">
-                      <a href="https://facebook.com" target="_blank">
+                    <li v-if="store.socials.twitter.length">
+                      <a :href="store.socials.twitter" target="_blank">
                         <img src="../../../assets/images/icons/twitter.svg" height="12">
                       </a>
                     </li>
-                    <li class="">
-                      <a href="https://facebook.com" target="_blank">
+                    <li v-if="store.socials.youtube.length">
+                      <a :href="store.socials.youtube" target="_blank">
                         <img src="../../../assets/images/icons/youtube.svg" height="10">
                       </a>
                     </li>
-                    <li class="">
-                      <a href="https://facebook.com" target="_blank">
+                    <li v-if="store.socials.pinterest.length">
+                      <a :href="store.socials.pinterest" target="_blank">
                         <img src="../../../assets/images/icons/pinterest.svg" height="15">
                       </a>
                     </li>
@@ -72,16 +77,20 @@
             <div class="contact-info">
               <ul>
                 <li>
-                  <span class="icon store-phone"></span>
+                  <span class="icon store-phone">
+                    <img src="../../../assets/images/icons/Phone.svg" alt="Phone icon">
+                  </span>
                   <span class="info">
-                    +995 322 204 333
+                    {{formatPhoneNumber(store.phone)}}
                   </span>
                 </li>
                 <li>
-                  <span class="icon store-link"></span>
+                  <span class="icon store-link">
+                    <img src="../../../assets/images/icons/Web.svg" alt="Web icon">
+                  </span>
                   <span class="info">
-                    <a href="http://www.zara.com" target="_blank">
-                      http://www.zara.com
+                    <a :href="formatUrl(store.websiteLink)" target="_blank">
+                      {{store.websiteLink}}
                     </a>
                   </span>
                 </li>
@@ -89,24 +98,81 @@
             </div>
           </div>
         </div>
-        {{$store.getters.subscribed}}
+      </div>
+      <div class="share-container">
+        <social-sharing :url="currentFullUrl"
+                        class="share-inner"
+                        :title="store.name[locale]"
+                        :description="store.description[locale]"
+                        :hashtags="formatFilters"
+                        inline-template>
+          <div>
+            <network network="facebook">
+              <button class="share-button">
+                <span class="icon-container">
+                  <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/>
+                </span>
+                <span>{{t('share_on_facebook')}}</span>
+              </button>
+            </network>
+            <network network="twitter">
+              <button class="share-button">
+                <span class="icon-container">
+                  <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/>
+                </span>
+                <span>{{t('share_on_twitter')}}</span>
+              </button>
+            </network>
+            <network network="linkedin">
+              <button class="share-button">
+                <span class="icon-container">
+                  <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/>
+                </span>
+                <span>{{t('share_on_linkedin')}}</span>
+              </button>
+            </network>
+          </div>
+        </social-sharing>
       </div>
     </div>
   </div>
 </template>
 <script>
 import LoadingBig from '../../partials/LoadingBig'
+import SocialSharingNetwork from 'vue-social-sharing/src/social-sharing-network'
+import ButtonStandard from '../../partials/StandardButton'
 
 export default {
   name: 'store-details',
-  components: { LoadingBig },
+  components: { ButtonStandard, SocialSharingNetwork, LoadingBig },
   mounted: function () {
     this.loadStore()
+    if (!this.$store.getters.subscribed.length) {
+      this.$store.dispatch('getSubscribed').catch((error) => {
+        console.error(error)
+      })
+    }
   },
   data: function () {
     return {
       store: null,
       loading: false
+    }
+  },
+  computed: {
+    isSubscribed: function () {
+      if (!this.$store.getters.user) {
+        return false
+      }
+      const store = this.$store.getters.subscribed.filter(object => {
+        if (object._id === this.store._id) {
+          return object
+        }
+      })
+      return store.length
+    },
+    formatFilters: function () {
+      return this.store.filters.join(',')
     }
   },
   methods: {
@@ -144,6 +210,9 @@ export default {
           })
         })
       }
+    },
+    getFacebookIcon: function () {
+      return require('../../../assets/images/icons/facebook.svg')
     }
   }
 }
@@ -160,6 +229,69 @@ export default {
         content: '>';
         display: inline-block;
         margin: 0 5px;
+      }
+    }
+  }
+}
+
+.share-container {
+  .share-inner {
+    display: flex;
+    justify-content: center;
+    padding: 25px 0;
+    border-top: 1px solid #dcdcdc;
+    .share-button {
+      border: 1px solid #dcdcdc;
+      display: flex;
+      background: transparent;
+      width: 293px;
+      margin: 0 5px;
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      &:before {
+        content: '';
+        height: 0;
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        position: absolute;
+        background: #000;
+        z-index: 0;
+        transition: height .3s;
+      }
+      &:hover {
+        &:before {
+          height: 100%;
+        }
+        span {
+          &:first-child {
+            svg {
+              filter: invert(1);
+            }
+          }
+          &:last-child {
+            color: #ffffff;
+          }
+        }
+      }
+      span {
+        margin: auto 0;
+        z-index: 1;
+        &:first-child {
+          width: 46px;
+          padding: 15px 0;
+          border-right: 1px solid #dcdcdc;
+          font-size: 1.5rem;
+        }
+        &:last-child {
+          width: 100%;
+          margin: auto;
+          font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
+          font-size: 12px;
+          line-height: 1.25;
+          text-transform: uppercase;
+        }
       }
     }
   }
@@ -204,7 +336,7 @@ export default {
           margin-top: 10px;
           .subscribe-button {
             border: 1px solid #eead16;
-            font-family: 'Muli', 'BPG Arial','sans-serif';
+            font-family: 'Muli', 'BPG Arial', 'sans-serif';
             width: 100%;
             padding: 12px 0 16px 0;
             background: transparent;
@@ -215,20 +347,21 @@ export default {
             color: #eead16;
             cursor: pointer;
             position: relative;
-            &:before{
+            &:before {
               content: '';
               position: absolute;
               height: 0;
               width: 100%;
               background: #eead16;
               z-index: -1;
-              bottom:0;
+              bottom: 0;
               left: 0;
               transition: height 0.3s;
             }
-            &:hover{
+            &.active,
+            &:hover {
               color: #ffffff;
-              &:before{
+              &:before {
                 height: 100%;
                 transition: height 0.3s;
               }
@@ -314,8 +447,12 @@ export default {
                 height: 34px;
                 width: 34px;
                 margin-right: 25px;
-                border: 1px solid #707070;
-                border-radius: 50%;
+                /*border: 1px solid #707070;*/
+                /*border-radius: 50%;*/
+                img {
+                  height: 100%;
+                  width: 100%;
+                }
               }
               .info {
                 color: #848484;

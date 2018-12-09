@@ -25,7 +25,7 @@ export default {
         username: this.$store.state.apiCredentials.username,
         password: this.$store.state.apiCredentials.password
       }).then(function (response) {
-        // sessionStorage.setItem('websiteAuthToken', response.data.token)
+        sessionStorage.setItem('websiteAuthToken', response.data.token)
         console.log(response)
         _this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
       }).catch(function (error) {

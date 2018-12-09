@@ -1,6 +1,6 @@
 <template>
   <div id="page-stores">
-    <block-header-standard :title="this.title[$store.getters.locale.locale]"/>
+    <block-header-standard :title="this.title[locale]"/>
     <store-list-grid :grouped="grouped" :stores="$store.getters.entertainment" :storesList="$store.getters.entertainmentList" :categories="$store.getters.storeFilters"/>
   </div>
 </template>

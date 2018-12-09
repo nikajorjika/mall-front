@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(store, index) in $store.getters.subscribed" :key="index">
         <div class="img-container">
-          <img :src="store.logoUrl" :alt="store.name[$store.getters.locale.locale]">
+          <img :src="store.logoUrl" :alt="store.name[locale]">
         </div>
         <div class="close-container" @click="deleteEvent(store._id)">
           <div class="close-button">

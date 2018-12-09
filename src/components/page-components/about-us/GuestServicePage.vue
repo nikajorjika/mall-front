@@ -43,7 +43,6 @@ export default {
   data: function () {
     return {
       pageData: null,
-      locale: this.$store.getters.locale.locale,
       model: 'guestServices'
     }
   },

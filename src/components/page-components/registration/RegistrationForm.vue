@@ -299,7 +299,7 @@ export default {
             _this.loading = true
             _this.$store.dispatch('register', _this.user).then(function () {
               _this.loading = false
-              this.$router.push({ name: 'home', params: { locale: this.$store.getters.locale.locale } })
+              this.$router.push({ name: 'home', params: { locale: this.locale } })
             }).catch((error) => {
               if (error.response.data) {
                 _this.returnedError = error.response.data.status

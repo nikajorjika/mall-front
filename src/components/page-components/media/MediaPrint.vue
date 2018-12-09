@@ -27,9 +27,6 @@ export default {
     }
   },
   computed: {
-    locale: function () {
-      return this.$store.getters.locale.locale
-    },
     title: function () {
       return this.item ? this.item[ `name${this.locale.toUpperCase()}` ] : ''
     },

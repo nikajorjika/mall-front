@@ -27,6 +27,24 @@ Vue.mixin({
       }
       return user
     },
+    createSlug: function (str) {
+      const a = 'àáäâãåèéëêìíïîòóöôùúüûñçßÿœæŕśńṕẃǵǹḿǘẍźḧ·/_,:;'
+      const b = 'aaaaaaeeeeiiiioooouuuuncsyoarsnpwgnmuxzh------'
+      const p = new RegExp(a.split('').join('|'), 'g')
+      return str.toString().toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(p, c => b.charAt(a.indexOf(c)))
+        .replace(/&/g, '-and-')
+        .replace(/[^w\-]+/g, '')
+        .replace(/\-\-+/g, '-')
+        .replace(/^-+/, '')
+    },
+    formatPhoneNumber: function (phone) {
+      return phone.replace(/(\+995)?(\d{3})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')
+    },
+    formatUrl: function (url) {
+      return url.replace(/^(?:http(s)?:\/\/)?([\S.-])/, 'https://$2')
+    },
     getIconName: (index) => {
       const icons = {
         'TM Twitter': 'twitter',
@@ -36,6 +54,17 @@ Vue.mixin({
         'TM YouTube': 'youtube'
       }
       return icons[ index ]
+    },
+    formatP: function (content) {
+      return `<p>${content.replace(/\n/g, '<br />')}</p>`
+    }
+  },
+  computed: {
+    locale: function () {
+      return this.$store.getters.locale.locale
+    },
+    currentFullUrl: function () {
+      return window.location.href
     }
   }
 })

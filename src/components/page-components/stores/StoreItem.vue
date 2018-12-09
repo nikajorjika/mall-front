@@ -1,10 +1,10 @@
 <template>
   <div class="store-item">
     <div class="store-wrapper">
-      <img :src="item.logoUrl" :alt="item.name[$store.getters.locale.locale]">
+      <img :src="item.logoUrl" :alt="item.name[locale]">
     </div>
     <div class="store-flip">
-      <h3>{{item.name[$store.getters.locale.locale]}}</h3>
+      <h3>{{item.name[locale]}}</h3>
     </div>
   </div>
 </template>

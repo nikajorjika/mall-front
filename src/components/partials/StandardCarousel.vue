@@ -6,7 +6,7 @@
                 :navigationPrevLabel="this.printPrevIcon()" :perPageCustom="[[0, 1],[480, 2],[760, 3], [1024, 4]]" :navigationNextLabel="this.printNextIcon()">
         <slide v-for="item in items" v-bind:key="item._id">
           <div class="slide-container">
-            <img :src="item.logoUrl" :alt="item.name[$store.getters.locale.locale]">
+            <img :src="item.logoUrl" :alt="item.name[locale]">
           </div>
         </slide>
       </carousel>
