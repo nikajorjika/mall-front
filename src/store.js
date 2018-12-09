@@ -56,6 +56,8 @@ export default new Vuex.Store({
     alphabet: alphabet,
     dateOptions: dateOptions,
     aboutUs: null,
+    aboutCompany: null,
+    career: null,
     leasing: null,
     guestServices: null,
     mallTaxi: null,
@@ -87,6 +89,12 @@ export default new Vuex.Store({
     },
     aboutUs: (state) => {
       return state.aboutUs
+    },
+    aboutCompany: (state) => {
+      return state.aboutCompany
+    },
+    career: (state) => {
+      return state.career
     },
     leasing: (state) => {
       return state.leasing
