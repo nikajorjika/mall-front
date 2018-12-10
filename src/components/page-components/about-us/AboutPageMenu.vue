@@ -3,7 +3,7 @@
     <div class="menu-wrapper-outer" :class="{fixedHeight: $route.name === 'about'}">
       <ul class="menu-wrapper">
         <li class="menu-item" v-for="(item, index) in this.items" :key="index">
-          <router-link :to="`/${$store.getters.locale.locale}${item.url}`" class="name">
+          <router-link :to="`/${locale}${item.url}`" class="name">
             {{t(item.name)}}
           </router-link>
         </li>

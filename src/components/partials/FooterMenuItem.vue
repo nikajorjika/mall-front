@@ -33,11 +33,6 @@ export default {
         }
       }
     }
-  },
-  computed: {
-    locale: function () {
-      return this.$store.getters.locale.locale
-    }
   }
 }
 </script>

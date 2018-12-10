@@ -7,14 +7,15 @@
             <div class="search-icon">
               <img src="../../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
             </div>
-            <input type="text" class="search-input" :placeholder="t('store_mobile_search')" >
+            <input type="text" class="search-input" :placeholder="t('store_mobile_search')">
           </div>
-          <div class="filter-toggle-part"  @click="activeFilters = !activeFilters" >
+          <div class="filter-toggle-part" @click="activeFilters = !activeFilters">
             <h2>{{t('filter')}}</h2> <span class="filter-icon" :class="{open: activeFilters}"><font-awesome-icon
             icon="caret-down"/></span>
           </div>
         </div>
-        <store-filters class="filter-mobile-class" :categories="categories" v-if="activeFilters || $mq !== 'mobile'" @changeView="changeView"/>
+        <store-filters class="filter-mobile-class" :categories="categories" v-if="activeFilters || $mq !== 'mobile'"
+                       @changeView="changeView"/>
       </div>
     </div>
     <loading-big v-show="loadingStores"/>
@@ -22,7 +23,7 @@
       <div class="store-list">
         <div class="store-list-item" v-for="(item, index) in $store.getters.stores" :key="index">
           <div class="store-inner">
-            <router-link :to="`/${$store.getters.locale.locale}/store/details/${item._id}`">
+            <router-link :to="`/${locale}/store/${createSlug(item.name['en'])}/${item._id}`">
               <store-item :item="item"/>
             </router-link>
           </div>
@@ -38,7 +39,7 @@
     <div class="store-list-view" v-else>
       <div class="alphabet-header">
         <div class="alphabet-header-wrapper">
-          <div class="alphabet-item" v-for="(value, index) in $store.getters.alphabet[$store.getters.locale.locale]"
+          <div class="alphabet-item" v-for="(value, index) in $store.getters.alphabet[locale]"
                :key="index">
             <span @click="filterList(value)"
                   :class="{active: grouped[value.toUpperCase()] !== undefined && grouped[value.toUpperCase()].length !== 0 }">{{value}}
@@ -67,7 +68,7 @@
                     <div v-if="value !== undefined" class="item-wrapper">
                       <div class="item-column name">
                         <span class="name-inner">
-                          {{value.name[$store.getters.locale.locale]}}
+                          {{value.name[locale]}}
                         </span>
                       </div>
                       <div class="item-column tags">
@@ -75,10 +76,11 @@
                       </div>
                       <div class="item-column services">
                         <span class="service" v-for="(service, serviceIndex) in services" :key="serviceIndex"
-                              :class="{active: checkIfFilters(value.filters, service)}">{{service.name[$store.getters.locale.locale]}}</span>
+                              :class="{active: checkIfFilters(value.filters, service)}">{{service.name[locale]}}</span>
                       </div>
                       <div class="item-column activities">
-                        <span class="activity" v-for="(activity, activityIndex) in activities" :key="activityIndex" :class="{active: value.activities[activity.value] > 0 }">{{activity.name[$store.getters.locale.locale]}}</span>
+                        <span class="activity" v-for="(activity, activityIndex) in activities" :key="activityIndex"
+                              :class="{active: value.activities[activity.value] > 0 }">{{activity.name[locale]}}</span>
                       </div>
                     </div>
                   </div>
@@ -164,31 +166,31 @@ export default {
       type: Array,
       default:
         () => {
-          return [{
-              name: {
-                en: 'Promotion',
-                ka: 'Promotion'
-              },
-              value: 'offer'
-            }, {
-              name: {
-                en: 'New collections',
-                ka: 'New collections'
-              },
-              value: 'newCollections'
-            }, {
-              name: {
-                en: 'Events',
-                ka: 'Events'
-              },
-              value: 'events'
-            }, {
-              name: {
-                en: 'News',
-                ka: 'News'
-              },
-              value: 'news'
-            }
+          return [ {
+            name: {
+              en: 'Promotion',
+              ka: 'Promotion'
+            },
+            value: 'offer'
+          }, {
+            name: {
+              en: 'New collections',
+              ka: 'New collections'
+            },
+            value: 'newCollections'
+          }, {
+            name: {
+              en: 'Events',
+              ka: 'Events'
+            },
+            value: 'events'
+          }, {
+            name: {
+              en: 'News',
+              ka: 'News'
+            },
+            value: 'news'
+          }
           ]
         }
     }
@@ -232,7 +234,7 @@ export default {
     },
     checkIfFilters: function (checkToArray, checkValue) {
       const str = checkToArray.join('')
-      return str.toLowerCase().includes(checkValue.name[this.$store.getters.locale.locale].toLowerCase())
+      return str.toLowerCase().includes(checkValue.name[ this.locale ].toLowerCase())
     },
     loadMore: function () {
       this.page++
@@ -267,7 +269,7 @@ export default {
   },
   computed: {
     currentAlphabetFilter: function () {
-      const alph = this.$store.getters.alphabet[ this.$store.getters.locale.locale ]
+      const alph = this.$store.getters.alphabet[ this.locale ]
       if (this.currentLetter === null) {
         return alph.slice(0, 4)
       } else {
@@ -278,12 +280,13 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.store-list-grid{
-  .filters-outer{
+.store-list-grid {
+  .filters-outer {
     @media screen and (max-width: 760px) {
       padding: 0;
     }
-    .filter-mobile-class{
+
+    .filter-mobile-class {
       @media screen and (max-width: 760px) {
         padding: 32px 36px;
         border-top: 1px solid #dcdcdc;
@@ -291,44 +294,53 @@ export default {
     }
   }
 }
-.filter-toggle{
+
+.filter-toggle {
   display: flex;
-  .filter-toggle-part{
+
+  .filter-toggle-part {
     display: flex;
     width: 126px;
-    h2{
+
+    h2 {
       margin: auto 0 auto auto;
       font-size: 1.6rem;
       text-transform: uppercase;
       line-height: 1.25;
     }
-    .filter-icon{
+
+    .filter-icon {
       margin: auto auto auto 5px;
     }
   }
-  .mobile-search{
+
+  .mobile-search {
     flex: 1;
     display: flex;
     position: relative;
     border-right: 1px solid #dcdcdc;
     padding: 24px;
-    input{
+
+    input {
       height: 100%;
-      width:100%;
+      width: 100%;
       background: transparent;
       padding: 0 5px 0 29px;
       border: none;
       font-size: 1.2rem;
-      &:focus{
+
+      &:focus {
         outline: none;
       }
     }
-    .search-icon{
+
+    .search-icon {
       position: absolute;
       left: 29px;
     }
   }
 }
+
 .store-list {
   display: flex;
   flex-wrap: wrap;
@@ -339,6 +351,7 @@ export default {
   @media screen and (max-width: 760px) {
     margin: 3px;
   }
+
   .store-list-item {
     position: relative;
     margin: 10px;
@@ -350,6 +363,7 @@ export default {
       width: calc(50% - 20px);
       padding-top: calc(50% - 20px);
     }
+
     .store-inner {
       position: absolute;
       left: 0;
@@ -365,18 +379,22 @@ export default {
   max-width: 1642px;
   width: 100%;
   margin: 40px auto 8px;
+
   .alphabet-header-wrapper {
     display: flex;
     width: 100%;
     justify-content: space-between;
+
     .alphabet-item {
       font-family: 'Muli', 'BPG Nino Mtavruli', 'sans-serif';
       text-transform: uppercase;
       font-size: 1.4rem;
       box-sizing: border-box;
+
       span {
         opacity: .3;
         pointer-events: none;
+
         &.active {
           opacity: 1;
           pointer-events: auto;
@@ -390,31 +408,39 @@ export default {
 .alph-list-header {
   background-color: #f9f9f9;
   border-top: 1px solid #dcdcdc;
+
   ul {
     display: flex;
     max-width: 1642px;
     margin: 0 auto;
     width: 100%;
+
     li {
       padding: 7px 0;
+
       &.brand {
         width: 33%;
         text-align: right;
+
         span {
           display: block;
           margin-right: 95px;
         }
       }
+
       &.tags {
         width: 18%;
         text-align: center;
       }
+
       &.additional-services {
         width: 25%;
       }
+
       &.activities {
         width: 21%;
       }
+
       span {
         font-size: 1.2rem;
         font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
@@ -428,11 +454,13 @@ export default {
 .alphabetic-container {
   .alphabetic-container-inner {
     border-bottom: 1px solid rgba(132, 132, 132, 0.51);
+
     .alphabet-wrapper {
       display: flex;
       max-width: 1642px;
       margin: 14px auto;
       width: 100%;
+
       .alphabet-item {
         font-size: 6.4rem;
         width: 16.87%;
@@ -441,9 +469,11 @@ export default {
         text-transform: uppercase;
         padding: 48px 0 48px 36px;
       }
+
       .items-container {
         width: 83%;
         position: relative;
+
         &:after {
           content: '';
           position: absolute;
@@ -454,13 +484,16 @@ export default {
           top: 0;
           height: 100%;
         }
+
         .item {
           .item-wrapper {
             display: flex;
+
             .item-column {
               width: 20%;
               margin-top: 14px;
             }
+
             .name {
               font-family: 'Muli', 'BPG Nino Mtavruli', 'sans-serif';
               text-transform: uppercase;
@@ -469,9 +502,11 @@ export default {
               line-height: 1.2;
               display: flex;
               width: 19.1%;
+
               .name-inner {
               }
             }
+
             .tags {
               display: flex;
               flex-wrap: wrap;
@@ -479,6 +514,7 @@ export default {
               margin-top: 14px;
               width: 21.3%;
               padding-right: 12px;
+
               .tag {
                 font-family: 'Muli', 'BPG Arial', 'sans-serif';
                 text-transform: capitalize;
@@ -487,6 +523,7 @@ export default {
                 border-radius: 2px;
                 font-size: 1.2rem;
                 line-height: 1.33;
+
                 .tag-inner {
                   display: block;
                   padding: 2px 9px;
@@ -494,10 +531,12 @@ export default {
                 }
               }
             }
+
             .services {
               display: flex;
               width: 30.2%;
               flex-wrap: wrap;
+
               .service {
                 font-family: 'Muli', 'BPG Arial', 'sans-serif';
                 text-transform: capitalize;
@@ -506,15 +545,18 @@ export default {
                 color: #dcdcdc;
                 white-space: nowrap;
                 margin-right: 37px;
-                &.active{
+
+                &.active {
                   color: #000;
                 }
               }
             }
+
             .activities {
               display: flex;
               width: 25.3%;
               flex-wrap: wrap;
+
               .activity {
                 font-family: 'Muli', 'BPG Arial', 'sans-serif';
                 text-transform: capitalize;
@@ -523,7 +565,8 @@ export default {
                 color: #dcdcdc;
                 white-space: nowrap;
                 margin-right: 15px;
-                &.active{
+
+                &.active {
                   color: #2d83e6;
                 }
               }
@@ -542,6 +585,7 @@ export default {
 .loading-container {
   display: flex;
   padding: 30px;
+
   .loading-big {
     margin: auto;
   }
@@ -550,6 +594,7 @@ export default {
 .grid-footer-container {
   text-align: center;
   border-top: solid 1px #dcdcdc;
+
   button {
     background: transparent;
     border: none;

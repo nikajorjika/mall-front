@@ -1,7 +1,7 @@
 <template>
   <div id="settings-form">
     <white-spinner v-if="loading"/>
-    <form @submit.prevent="register">
+    <form @submit.prevent="register" v-if="user">
       <div v-if="returnedError.length" class="registration-error">
         <div class="error"><span>{{returnedError}}</span></div>
       </div>
@@ -250,7 +250,7 @@ export default {
             _this.loading = true
             _this.$store.dispatch('register', _this.user).then(function () {
               _this.loading = false
-              this.$router.push({ name: 'home', params: { locale: this.$store.getters.locale.locale } })
+              this.$router.push({ name: 'home', params: { locale: this.locale } })
             }).catch((error) => {
               if (error.response.data) {
                 _this.returnedError = error.response.data.status

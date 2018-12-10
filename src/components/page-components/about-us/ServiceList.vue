@@ -5,7 +5,7 @@
         <span class="icon-container"><img src="../../../assets/images/icons/carret-down.svg" alt=""></span><span
         class="name-wrapper">{{item.title}}</span>
       </div>
-      <div class="content" :class="{open: openItem === item}">
+      <div class="content" :class="{open: openItem.indexOf(item) !== -1}">
         <p>
           {{item.content}}
         </p>
@@ -23,12 +23,17 @@ export default {
   },
   data: () => {
     return {
-      openItem: null
+      openItem: []
     }
   },
   methods: {
     toggle: function (item) {
-      this.openItem = this.openItem === item ? null : item
+      let index = this.openItem.indexOf(item)
+      if (index !== -1) {
+        this.openItem.splice(index, 1)
+      } else {
+        this.openItem.push(item)
+      }
     }
   }
 }
@@ -40,22 +45,27 @@ export default {
   @media screen and (max-width: 550px) {
     padding: 0 36px;
   }
+
   li {
     cursor: pointer;
+
     .parent-container {
       display: flex;
       margin: 20px 0;
+
       .icon-container {
         height: 3.3px;
         width: 7.3px;
         margin: auto 7.5px auto 0;
         display: inline-block;
+
         img {
           display: block;
           height: 100%;
           width: 100%;
         }
       }
+
       .name-wrapper {
         font-family: 'Muli', 'BPG Arial', 'sans-serif';
         font-size: 1.3rem;
@@ -66,15 +76,18 @@ export default {
         }
       }
     }
+
     .content {
       overflow: hidden;
       opacity: 0;
       height: 0;
       transition: all 0.3s;
+
       &.open {
         height: auto;
         opacity: 1;
       }
+
       p {
         margin: 15px 16px;
         font-family: 'Muli', 'BPG Arial', 'sans-serif';

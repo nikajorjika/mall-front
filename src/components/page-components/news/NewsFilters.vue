@@ -2,7 +2,7 @@
   <div class="news-filters">
     <div class="filter-item">
       <custom-select :items="categories.categories.data" :placeholder="categories.categories.placeholder"
-                     name="category" :value="$route.params.cat" @change="updateElement"/>
+                     name="category" :value="category" @change="updateElement"/>
     </div>
     <div class="filter-item">
       <custom-select :items="categories.brands.data" name="brand" :placeholder="categories.brands.placeholder"
@@ -46,6 +46,12 @@ export default {
       if (selected.selected !== null) {
         this.filters[ selected.name ] = selected.selected.value
       }
+    }
+  },
+  computed: {
+    category: function () {
+      console.log(this.$route.params.cat)
+      return this.$route.params.cat
     }
   }
 }

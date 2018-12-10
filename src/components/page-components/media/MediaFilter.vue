@@ -7,7 +7,7 @@
       </div>
       <ul v-if="activeFilters || $mq !== 'mobile'">
         <li v-for="(item, index) in filters" :key="index" @click="activeFilter = item.value">
-          <span :class="{active: activeFilter === item.value}">{{item.name[$store.getters.locale.locale]}}</span>
+          <span :class="{active: activeFilter === item.value}">{{item.name[locale]}}</span>
         </li>
       </ul>
     </div>

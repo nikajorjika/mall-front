@@ -18,7 +18,7 @@
         <div class="news-list-item" v-for="item in $store.getters.events" :key="item._id"
              :class="{open: openItem === item}">
           <div class="news-inner" @click="open(item)">
-            <router-link :to="generateUrl(item._id)">
+            <router-link :to="generateUrl(item)">
               <news-item :item="item" v-if="$mq !== 'mobile'"/>
               <event-item :event="item" v-else/>
             </router-link>
@@ -104,9 +104,11 @@ export default {
           })
       }
     },
-    generateUrl: function (id) {
+    generateUrl: function (item) {
+      const id = item._id
       const cat = this.$route.params.cat ? this.$route.params.cat : 'single'
-      return `/${this.$store.getters.locale.locale}/whats-new/${cat}/${id}`
+      let slug = `/${this.createSlug(item.name[ 'en' ])}`
+      return `/${this.locale}/whats-new/${cat}${slug}/${id}`
     },
     open: function (item) {
       this.loadedItem = null
@@ -188,7 +190,7 @@ export default {
       padding: 21px;
     }
     @media screen and (max-width: 760px) {
-      width:100%;
+      width: 100%;
       border: none;
     }
     &:nth-child(1),

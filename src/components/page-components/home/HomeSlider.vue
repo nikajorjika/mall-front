@@ -32,7 +32,7 @@ export default {
       options: {
         arrows: true,
         dots: true,
-        autoplay: true,
+        autoplay: true
       }
     }
   },

@@ -28,7 +28,7 @@ export default {
   },
   computed: {
     locale: function () {
-      return this.$store.getters.locale.locale
+      return this.locale
     },
     pageDataContent: function () {
       return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][ 0 ].data) : ''

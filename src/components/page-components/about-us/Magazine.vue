@@ -4,14 +4,14 @@
     <div class="magazines-container">
       <div class="magazine-item" v-for="(item, index) in $store.getters.magazines" :key="index">
         <div class="magazine-image-container">
-          <img :src="item.photoUrl" :alt="item.photoUrl[$store.getters.locale.locale]">
+          <img :src="item.photoUrl" :alt="item.photoUrl[locale]">
         </div>
         <div class="magazine-date">
           <div class="date-wrapper">
             <span>{{formatData(item.date)}}</span>
           </div>
           <div class="name-wrapper">
-            <h4>{{item[`name${$store.getters.locale.locale.toUpperCase()}`]}}</h4>
+            <h4>{{item[`name${locale.toUpperCase()}`]}}</h4>
           </div>
         </div>
         <div class="download-button">
@@ -66,7 +66,6 @@ export default {
   data: function () {
     return {
       pageData: null,
-      locale: this.$store.getters.locale.locale,
       model: 'magazine',
       magSetter: 'SET_MAGAZINES'
     }

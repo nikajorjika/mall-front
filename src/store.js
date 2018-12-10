@@ -67,6 +67,7 @@ export default new Vuex.Store({
     team: [],
     subscribed: [],
     bookmarked: [],
+    notifications: [],
     socials: [],
     media: [],
     pageData: pageData,
@@ -75,6 +76,8 @@ export default new Vuex.Store({
     newsFilters: newsFilters,
     storeFilters: storeFilters,
     homeAds: [],
+    categories: [],
+    searchResult: [],
     sliderItems: []
   },
   getters: {
@@ -84,8 +87,14 @@ export default new Vuex.Store({
     alphabet: (state) => {
       return state.alphabet
     },
+    searchResult: (state) => {
+      return state.searchResult
+    },
     navigation: (state) => {
       return state.navigation
+    },
+    categories: (state) => {
+      return state.categories
     },
     aboutUs: (state) => {
       return state.aboutUs
@@ -180,6 +189,9 @@ export default new Vuex.Store({
     subscribed: (state) => {
       return state.subscribed
     },
+    notifications: (state) => {
+      return state.notifications
+    },
     bookmarked: (state) => {
       return state.bookmarked
     },
@@ -197,6 +209,12 @@ export default new Vuex.Store({
     },
     SET_NO_SCROLL: (state, newValue) => {
       state.noScroll = newValue
+    },
+    SET_CATEGORIES: (state, newValue) => {
+      state.categories = newValue
+    },
+    SET_SEARCH_RESULT: (state, newValue) => {
+      state.searchResult = newValue
     },
     SET_NAVIGATION: (state, newValue) => {
       state.noScroll = newValue
@@ -253,6 +271,9 @@ export default new Vuex.Store({
     },
     SET_USER_BOOKMARKS: (state, payload) => {
       state.bookmarked = payload
+    },
+    SET_USER_NOTIFICATIONS: (state, payload) => {
+      state.notifications = payload
     },
     SET_SOCIALS: (state, payload) => {
       state.socials = payload
@@ -356,8 +377,23 @@ export default new Vuex.Store({
               resolve('RECORD NOT FOUND')
             } else {
               resolve(response)
-              console.log(response.data)
               context.commit(request.setter, { data: response.data.data, model: request.model })
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
+      })
+    },
+    getCategories: function (context, request) {
+      return new Promise((resolve, reject) => {
+        Axios.get(context.state.apiUrls.categories)
+          .then(function (response) {
+            if (response.data.length) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              resolve(response)
+              context.commit('SET_CATEGORIES', response.data.data)
             }
           })
           .catch(function (error) {
@@ -461,6 +497,19 @@ export default new Vuex.Store({
         resolve()
       })
     },
+    search: function (context, keyword) {
+      return new Promise((resolve) => {
+        Axios.post(context.state.apiUrls.search,{name: keyword})
+          .then((response) => {
+            console.log(response.data)
+            context.commit('SET_SEARCH_RESULT', response.data.data)
+            resolve(response.data)
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      })
+    },
     getSliderItems: function (context) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.getSliderItems
@@ -557,6 +606,23 @@ export default new Vuex.Store({
               resolve('RECORD NOT FOUND')
             } else {
               context.commit('SET_USER_BOOKMARKS', response.data.bookmarkedItems)
+              resolve(response.data)
+            }
+          })
+          .catch(function (error) {
+            reject(error)
+          })
+      })
+    },
+    getNotifications: function (context) {
+      return new Promise((resolve, reject) => {
+        Axios.post(context.state.apiUrls.notifications, { userToken: context.getters.user.token })
+          .then(function (response) {
+            console.log(response)
+            if (!response.data.bookmarkedItems.length) {
+              resolve('RECORD NOT FOUND')
+            } else {
+              context.commit('SET_USER_NOTIFICATIONS', response.data.bookmarkedItems)
               resolve(response.data)
             }
           })

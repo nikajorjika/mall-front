@@ -46,7 +46,7 @@ export default {
     breadcrumb: function () {
       let breadcrumb = [ {
         index: 'home',
-        url: `/${this.$store.getters.locale.locale}`
+        url: `/${this.locale}`
       } ]
       if (this.$route.name !== 'DefaultStatic') {
         const obj = {

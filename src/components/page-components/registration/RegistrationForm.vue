@@ -35,7 +35,6 @@
             <custom-select class="mobile-index-field"
                            :items="user.mobileIndex.options"
                            :placeholder="user.mobileIndex.placeholder"
-                           :selectedDefault="user.mobileIndex.options[0]"
                            name="mobileIndex" @change="onSelectAction"/>
             <input type="text" id="registration-phone" v-validate="'required|numeric'" name="phone" placeholder=""
                    v-model="user.mobile">
@@ -54,19 +53,16 @@
           <div class="combo-fields">
             <input type="hidden" name="day" v-validate="'required'" v-model="user.day.val">
             <custom-select class="b-date-field" :items="user.day.options"
-                           :selectedDefault="user.day.options[0]"
                            :placeholder="user.day.placeholder"
                            name="day"
                            @change="onSelectAction"/>
             <input type="hidden" name="month" v-validate="'required'" v-model="user.month.val">
             <custom-select class="b-date-field" :items="user.month.options"
-                           :selectedDefault="user.month.options[0]"
                            :placeholder="user.month.placeholder"
                            name="month"
                            @change="onSelectAction"/>
             <input type="hidden" name="year" v-validate="'required'" v-model="user.year.val">
             <custom-select class="b-date-field" :items="user.year.options"
-                           :selectedDefault="user.year.options[0]"
                            :placeholder="user.year.placeholder"
                            name="year"
                            @change="onSelectAction"/>
@@ -86,7 +82,6 @@
           <div class="combo-fields columns">
             <input type="hidden" name="gender" v-validate="'required'" v-model="user.gender.val">
             <custom-select class="gender-field" :items="user.gender.options" name="gender"
-                           :selectedDefault="user.gender.options[0]"
                            :placeholder="user.gender.placeholder" @change="onSelectAction"/>
             <div v-show="errors.first('gender')" class="error">{{ errors.first('gender') }}</div>
           </div>
@@ -98,7 +93,6 @@
           <div class="combo-fields columns">
             <input type="hidden" name="country" v-validate="'required'" v-model="user.country.val">
             <custom-select class="country-field" name="country" :items="user.country.options"
-                           :selectedDefault="user.country.options[0]"
                            :placeholder="user.country.placeholder" @change="onSelectAction"/>
             <div v-show="errors.first('country')" class="error">{{ errors.first('country') }}</div>
           </div>
@@ -108,7 +102,6 @@
           <div class="combo-fields columns">
             <input type="hidden" name="city" v-validate="'required'" v-model="user.city.val">
             <custom-select class="city-field" name="city" :items="user.city.options"
-                           :selectedDefault="user.city.options[0]"
                            :placeholder="user.city.placeholder" @change="onSelectAction"/>
             <div v-show="errors.first('city')" class="error">{{ errors.first('city') }}</div>
           </div>
@@ -159,9 +152,9 @@ export default {
   data: function () {
     return {
       user: {
-        name: 'Nika',
-        lastName: 'Jorjoliani',
-        email: 'nikajorjika1993@gmail.com',
+        name: '',
+        lastName: '',
+        email: '',
         mobileIndex: {
           val: '+995',
           options: [
@@ -184,7 +177,7 @@ export default {
             ka: 'ინდექსი'
           }
         },
-        mobile: '123123123',
+        mobile: '',
         city: {
           val: 'tbilisi',
           errors: [],
@@ -232,7 +225,7 @@ export default {
           }
         },
         day: {
-          val: '1',
+          val: '',
           errors: [],
           options: this.$store.state.dateOptions.day.options,
           placeholder: {
@@ -241,7 +234,7 @@ export default {
           }
         },
         month: {
-          val: '1',
+          val: '',
           errors: [],
           options: this.$store.state.dateOptions.month.options,
           placeholder: {
@@ -250,16 +243,16 @@ export default {
           }
         },
         year: {
-          val: '122',
+          val: '',
           errors: [],
-          options: this.$store.state.dateOptions.year.options,
+          options: this.$store.state.dateOptions.year.options(),
           placeholder: {
             en: 'Year',
             ka: 'წელი'
           }
         },
         gender: {
-          val: 'male',
+          val: '',
           errors: [],
           options: [
             {
@@ -281,9 +274,9 @@ export default {
             ka: 'სქესი'
           }
         },
-        password: '123123',
-        repeatPassword: '123123',
-        terms: true
+        password: '',
+        repeatPassword: '',
+        terms: false
       },
       loading: false,
       returnedError: ''
@@ -299,7 +292,7 @@ export default {
             _this.loading = true
             _this.$store.dispatch('register', _this.user).then(function () {
               _this.loading = false
-              this.$router.push({ name: 'home', params: { locale: this.$store.getters.locale.locale } })
+              this.$router.push({ name: 'home', params: { locale: this.locale } })
             }).catch((error) => {
               if (error.response.data) {
                 _this.returnedError = error.response.data.status

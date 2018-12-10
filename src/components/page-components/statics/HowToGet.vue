@@ -8,7 +8,7 @@
 </template>
 <script>
 import MapWithDirections from '../../partials/MapDirections'
-import AboutTitle from "../about-us/AboutPageTitle";
+import AboutTitle from '../about-us/AboutPageTitle'
 export default {
   components: { AboutTitle, MapWithDirections }
 }

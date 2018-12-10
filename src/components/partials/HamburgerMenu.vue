@@ -21,8 +21,8 @@
                 <div class="list-wrapper" v-if="currentItem === null">
                   <div class="list-container" v-for="(data, i) in $store.state.hamburgerData" v-bind:key="i">
                     <h3 class="parent-title">
-                      <router-link class="title" :to="`/${$store.getters.locale.locale}${data.url}`">
-                        {{data.name[$store.getters.locale.locale]}}
+                      <router-link class="title" :to="`/${locale}${data.url}`">
+                        {{data.name[locale]}}
                       </router-link>
                       <span v-if="data.children !== undefined && data.children !== null && data.children.length"
                             class="open-children" @click="openChildren(data)"><span class="icon-container"><font-awesome-icon
@@ -39,15 +39,15 @@
                         <img src="../../assets/images/icons/arrow-left-dark.svg" alt="" height="15.5" width="8.5">
                       </div>
                     </div>
-                    <h4>{{currentItem.name[$store.getters.locale.locale]}}</h4>
+                    <h4>{{currentItem.name[locale]}}</h4>
                   </div>
                   <div class="children-list">
                     <ul>
                       <li v-for="(child, index) in currentItem.children" :key="index"
                           :class="{rightBorder: index % 2 === 0 }">
-                        <router-link :to="`/${$store.getters.locale.locale}${currentItem.url}${child.url}`"
+                        <router-link :to="`/${locale}${currentItem.url}${child.url}`"
                                      class="child-menu-name">
-                          {{child.name[$store.getters.locale.locale]}}
+                          {{child.name[locale]}}
                         </router-link>
                       </li>
                     </ul>

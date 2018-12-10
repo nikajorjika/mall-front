@@ -1,14 +1,14 @@
 <template>
   <div class="event-home" :class="this.type">
-    <router-link to="">
+    <router-link :to="`${locale}/whats-new/single/${createSlug(item.name[locale])}/${item._id}`">
       <div class="image-background">
-        <img :src="item.photoUrl" :alt="item.name[$store.getters.locale.locale]">
+        <img :src="item.photoUrl" :alt="item.name[locale]">
         <div class="event-item-content">
           <div class="event-type">
             <span>OFFER</span>
           </div>
           <div class="event-name">
-            <h3>{{item.name[$store.getters.locale.locale]}}</h3>
+            <h3>{{item.name[locale]}}</h3>
           </div>
           <div class="event-description short">
             <p>{{shortDesc}}</p>
@@ -45,7 +45,7 @@ export default {
   },
   computed: {
     shortDesc: function () {
-      return this.item.description[ this.$store.getters.locale.locale ].length > this.txtLimit ? `${this.item.description[ this.$store.getters.locale.locale ].substr(0, parseInt(this.txtLimit))}...` : this.item.description[ this.$store.getters.locale.locale ]
+      return this.item.description[ this.locale ].length > this.txtLimit ? `${this.item.description[ this.locale ].substr(0, parseInt(this.txtLimit))}...` : this.item.description[ this.locale ]
     }
   }
 }

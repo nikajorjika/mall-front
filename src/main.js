@@ -16,6 +16,7 @@ import {
   faAngleRight,
   faThLarge,
   faList,
+  faLink,
   faBookmark
 } from '@fortawesome/free-solid-svg-icons'
 import { faFacebookF, faTwitter, faYoutube, faPinterest, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
@@ -35,7 +36,7 @@ Vue.use(VueAgile)
 Vue.use(Notifications)
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyABserBqL7VFOHlWx4wrtgHKtTGzD0k90A',
+    key: 'AIzaSyAcuJoeoWXCUeGGDIW8EWcunpDmjqWeZ9g',
     libraries: 'places'
   }
 })
@@ -63,6 +64,7 @@ library.add(faBookmark)
 library.add(faAngleRight)
 library.add(faFacebookF)
 library.add(faTwitter)
+library.add(faLink)
 library.add(faYoutube)
 library.add(faPinterest)
 library.add(faThLarge)

@@ -1,7 +1,7 @@
 <template>
   <div class="filter-search">
     <div class="input-wrapper">
-      <input type="text" class="search-input" :placeholder="placeholder[$store.getters.locale.locale]" @input="onChange" v-model="searchText">
+      <input type="text" class="search-input" :placeholder="placeholder[locale]" @input="onChange" v-model="searchText">
       <div class="search-icon">
         <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
       </div>

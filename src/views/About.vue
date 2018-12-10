@@ -53,10 +53,10 @@ export default {
     breadcrumb: function () {
       let breadcrumb = [ {
         index: 'home',
-        url: `/${this.$store.getters.locale.locale}`
+        url: `/${this.locale}`
       }, {
         index: 'about_mall',
-        url: `/${this.$store.getters.locale.locale}/about-us`
+        url: `/${this.locale}/about-us`
       } ]
       if (this.$route.name !== 'about') {
         const obj = {

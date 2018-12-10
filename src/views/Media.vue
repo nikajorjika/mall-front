@@ -1,6 +1,6 @@
 <template>
   <div class="media-page">
-    <block-header-standard :title="title[$store.getters.locale.locale]"/>
+    <block-header-standard :title="title[locale]"/>
     <media-filters/>
     <media-list/>
   </div>

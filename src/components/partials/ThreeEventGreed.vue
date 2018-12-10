@@ -2,14 +2,14 @@
   <div class="three-event-greed">
     <block-header-standard :title="this.title"/>
     <div class="flex-col-3">
-      <div class="event-item-outer" v-for="(event, index) in this.events" v-bind:key="index">
-        <router-link :to="`/${$store.getters.locale.locale}/${route}/${event._id}`">
+      <div class="event-item-outer" v-for="(event, index) in this.events" :key="index">
+        <router-link :to="`/${locale}/whats-new/single/${createSlug(event.name['en'])}/${event._id}`">
           <event-item :event="event"/>
         </router-link>
       </div>
     </div>
     <div class="greed-footer-container" v-show="hasMore">
-      <router-link :to="`/${$store.getters.locale.locale}/${route}`">
+      <router-link :to="`/${locale}/whats-new/${route}`">
         <button>{{t('more')}}</button>
       </router-link>
     </div>

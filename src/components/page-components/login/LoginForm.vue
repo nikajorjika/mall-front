@@ -85,7 +85,7 @@ export default {
           this.returnedError = ''
           this.$store.dispatch('login', this.user).then(() => {
             this.loading = false
-            this.$router.push({ name: 'home', params: { locale: this.$store.getters.locale.locale } })
+            this.$router.push({ name: 'home', params: { locale: this.locale } })
           }).catch((error) => {
             if (error.response && error.response.data) {
               this.returnedError = error.response.data.status

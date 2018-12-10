@@ -11,11 +11,10 @@
       </div>
       <div class="map-wrapper">
         <!--<GmapMap-->
-          <!--:center="{lat:41, lng:41}"-->
-          <!--:zoom="7"-->
-          <!--map-type-id="terrain"-->
-          <!--style="width: 100%; height: 807px"-->
-          <!--v-bind:options="{ styles: this.googleMap.mapStyle }"-->
+          <!--:center="{lat:41.750296, lng:44.8177615}"-->
+          <!--:zoom="12"-->
+          <!--class="main-google-map"-->
+          <!--:options="{ styles: this.googleMap.mapStyle }"-->
         <!--&gt;-->
         <!--</GmapMap>-->
       </div>
@@ -68,6 +67,13 @@ export default {
     .map-wrapper{
       border-top: solid 1px #dcdcdc;
       border-bottom: solid 1px #dcdcdc;
+      .main-google-map{
+        width:100%;
+        height: 807px;
+        @media screen and (max-width: 1655px){
+          height: 574px;
+        }
+      }
     }
     .select-outer{
       display: flex;

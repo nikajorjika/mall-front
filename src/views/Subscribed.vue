@@ -13,7 +13,7 @@ import BlockHeaderStandard from '../components/partials/BlockHeader'
 import SubscribedListComponent from '../components/page-components/user/SubscribedList'
 
 export default {
-  name: '',
+  name: 'subscribed-page',
   components: { SubscribedListComponent, BlockHeaderStandard }
 }
 </script>

@@ -13,7 +13,7 @@ import BlockHeaderStandard from '../components/partials/BlockHeader'
 import BookmarksListComponent from '../components/page-components/user/BookmarksList'
 
 export default {
-  name: '',
+  name: 'bookmarks-page',
   components: { BookmarksListComponent, BlockHeaderStandard }
 }
 </script>

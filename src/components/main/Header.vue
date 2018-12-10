@@ -6,9 +6,9 @@
         <ul class="navigation-menu">
           <li v-for="(item, index) in $store.getters.navigation" v-bind:key="index">
             <div class="nav-drop" @mouseover="showChild = item" @mouseout="showChild = null">
-              <router-link :to="`/${$store.getters.locale.locale}${item.url}`"
+              <router-link :to="`/${locale}${item.url}`"
                            :class="item.children !== undefined ? 'has-child' : ''">
-                <span>{{item.name[$store.getters.locale.locale]}}</span>
+                <span>{{item.name[locale]}}</span>
                 <span class="caret-down-icon" v-if="item.children !== undefined"><img
                   src="../../assets/images/icons/carret-down.svg" alt="caret down"></span>
               </router-link>
@@ -16,8 +16,8 @@
                 <div v-if="item.children !== undefined && showChild === item" class="drop">
                   <ul :class="{twoCol: item.children.length > 10 }">
                     <li v-for="(child, i) in item.children" v-bind:key="i">
-                      <router-link :to="`/${$store.getters.locale.locale}${item.url}${child.url}`">
-                        {{child.name[$store.getters.locale.locale]}}
+                      <router-link :to="`/${locale}${item.url}${child.url}`">
+                        {{child.name[locale]}}
                       </router-link>
                     </li>
                   </ul>
@@ -40,25 +40,28 @@
       <div class="header-right">
         <ul v-if="$mq !== 'tablet' && $mq !== 'mobile'">
           <li>
-            <router-link :to="`/${$store.getters.locale.locale}/page/contact`">{{t('contact')}}</router-link>
+            <router-link :to="`/${locale}/page/contact`">{{t('contact')}}</router-link>
           </li>
           <li>
             <a @click.stop.prevent="toggleActions()" v-if="$store.getters.user">
               {{$store.getters.user.name}}
             </a>
-            <router-link v-else :to="`/${$store.getters.locale.locale}/login`">{{t('my_mall')}}
+            <router-link v-else :to="`/${locale}/login`">{{t('my_mall')}}
             </router-link>
-            <div class="user-action-block" v-show="showActions">
+            <div class="user-action-block" v-show="showActions && $store.getters.user">
               <ul>
-                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}`">{{t('notifications')}}</router-link></span>
-                </li>
-                <li><span class="action-label"><router-link :to="`/${$store.getters.locale.locale}/user/subscribed`">{{t('subscribe_list')}}</router-link></span>
-                </li>
-                <li><span class="action-label"><router-link
-                  :to="`/${$store.getters.locale.locale}/user/bookmarks`">{{t('bookmarks')}}</router-link></span>
+                <li :class="{active: $store.getters.user ? $store.getters.user.hasNewNotification : false}"><span
+                  class="action-label"><router-link
+                  :to="`/${locale}/user/notifications`">{{t('notifications')}}</router-link></span>
                 </li>
                 <li><span class="action-label"><router-link
-                  :to="`/${$store.getters.locale.locale}/user/settings`">{{t('settings')}}</router-link></span>
+                  :to="`/${locale}/user/subscribed`">{{t('subscribe_list')}}</router-link></span>
+                </li>
+                <li><span class="action-label"><router-link
+                  :to="`/${locale}/user/bookmarks`">{{t('bookmarks')}}</router-link></span>
+                </li>
+                <li><span class="action-label"><router-link
+                  :to="`/${locale}/user/settings`">{{t('settings')}}</router-link></span>
                 </li>
                 <li><span class="action-label" @click="logOut">{{t('log_out')}}</span></li>
               </ul>
@@ -139,6 +142,9 @@ export default {
     logOut: function () {
       this.$store.dispatch('logout').then(() => {
         this.showActions = false
+        if (this.$route.fullPath.indexOf('/user') !== -1) {
+          this.$router.push({ name: 'home', params: { locale: this.locale } })
+        }
       }).catch((error) => {
         console.error(error)
       })
@@ -160,6 +166,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     position: relative;
+
     .header-left {
       display: flex;
       flex-wrap: wrap;
@@ -167,8 +174,10 @@ export default {
 
       .nav-drop {
         position: relative;
+
         .has-child {
           display: flex;
+
           .caret-down-icon {
             margin: auto 0;
             height: 3.3px;
@@ -199,32 +208,40 @@ export default {
           box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
           display: flex;
           padding-right: 182px;
+
           &.slideUp-enter-active {
             animation: subMenuEnter .4s;
           }
+
           &.slideUp-leave-active {
             animation: subMenuLeave .2s;
           }
+
           ul {
             list-style-type: none;
             padding: 24px 0;
+
             &.twoCol {
               width: 472px;
               display: flex;
               flex-wrap: wrap;
+
               li {
                 width: 236px;
                 margin-right: 0;
               }
             }
+
             li {
               width: 100%;
               position: relative;
               white-space: nowrap;
               margin-right: 90px;
+
               &:first-child {
                 border-left: none;
               }
+
               a {
                 width: 100%;
                 padding: 7.5px 28px;
@@ -237,6 +254,7 @@ export default {
                 line-height: 1.25;
                 letter-spacing: normal;
                 color: #848484;
+
                 &:hover {
                   background: #ffffff;
                   color: #000;
@@ -244,11 +262,13 @@ export default {
               }
             }
           }
+
           .drop-image {
             position: absolute;
             height: 100%;
             width: 182px;
             right: 0;
+
             img {
               height: 100%;
               width: 100%;
@@ -279,6 +299,7 @@ export default {
 
       .mall-logo {
         font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
+
         .logo {
           font-size: 2.3rem;
           letter-spacing: 0.1rem;
@@ -353,6 +374,18 @@ export default {
             ul {
               li {
                 margin-bottom: 14px;
+                display: flex;
+
+                &.active {
+                  &:after {
+                    content: '';
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 50%;
+                    background-color: #e62d2d;
+                    margin: auto 0 auto 10px;
+                  }
+                }
 
                 .action-label {
                   cursor: pointer;

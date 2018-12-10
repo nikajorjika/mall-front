@@ -1,5 +1,5 @@
 <template>
-  <div class="news-single">
+  <div class="news-single" :id="item._id">
     <div class="single-wrapper">
       <div class="half-col single-left">
         <div class="image-container">
@@ -23,13 +23,13 @@
           </div>
         </div>
         <div class="title-container">
-          <h2 class="title">{{item.name[$store.getters.locale.locale]}}</h2>
+          <h2 class="title">{{item.name[locale]}}</h2>
           <h4 class="sub-title">
             SUPER
           </h4>
         </div>
         <div class="description-container">
-          <p v-html="item.description[$store.getters.locale.locale]">
+          <p v-html="item.description[locale]">
           </p>
         </div>
         <div class="socials-container">
@@ -38,7 +38,11 @@
               <span>{{t('promotion')}}</span>
             </div>
           </div>
-          <social-sharing url="" inline-template>
+          <social-sharing :url="currentFullUrl"
+                          class="share-inner"
+                          :title="item.name[locale]"
+                          :description="item.description[locale]"
+                          inline-template>
             <div class="socials-inner-container">
               <network network="facebook">
                 <div class="social-item">
@@ -58,6 +62,11 @@
                   <span class="label">share</span>
                 </div>
               </network>
+              <div class="social-item" @click="copyUrl('news-item-current-url')">
+                <input id="news-item-current-url" :value="currentFullUrl" type="hidden">
+                <span class="icon"><font-awesome-icon icon="link"/></span>
+                <span class="label">{{t('copyLink')}}</span>
+              </div>
             </div>
           </social-sharing>
         </div>
@@ -86,6 +95,7 @@ export default {
   },
   computed: {
     bookmarked: function () {
+      console.log(this.item)
       return this.$store.getters.bookmarked.filter(object => {
         if (object) {
           return object._id === this.item._id
@@ -99,7 +109,7 @@ export default {
     },
     closeUrl: function () {
       const subCat = this.$route.params.cat !== 'single' ? this.$route.params.cat : ''
-      return `/${this.$store.getters.locale.locale}/whats-new/${subCat}`
+      return `/${this.locale}/whats-new/${subCat}`
     },
     bookmark: function (id) {
       const user = this.$store.getters.user

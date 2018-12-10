@@ -22,7 +22,7 @@ const navigation =
           }
         },
         {
-          url: '/mall-taxi',
+          url: '/tbilisi-mall-taxi',
           name: {
             en: 'tbilisi mall taxi',
             ka: 'თბილისი მოლის ტაქსი'
