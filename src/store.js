@@ -499,7 +499,7 @@ export default new Vuex.Store({
     },
     search: function (context, keyword) {
       return new Promise((resolve) => {
-        Axios.post(context.state.apiUrls.search,{name: keyword})
+        Axios.post(context.state.apiUrls.search, { name: keyword })
           .then((response) => {
             console.log(response.data)
             context.commit('SET_SEARCH_RESULT', response.data.data)

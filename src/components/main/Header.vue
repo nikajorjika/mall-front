@@ -132,6 +132,7 @@ export default {
   methods: {
     toggleSearch: function () {
       this.showSearch = !this.showSearch
+      this.$store.commit('SET_NO_SCROLL', this.showSearch)
     },
     toggleActions: function () {
       this.showActions = !this.showActions
@@ -419,7 +420,7 @@ export default {
       bottom: 0;
       background: #fff;
       z-index: 999;
-
+      overflow-y: auto;
       &.fade-leave-active {
         animation: fadeOut .2s;
       }
