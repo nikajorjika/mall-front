@@ -78,7 +78,7 @@
                               :class="{active: checkIfFilters(value.filters, service)}">{{service.name[$store.getters.locale.locale]}}</span>
                       </div>
                       <div class="item-column activities">
-                        <span class="activity" v-for="(activity, activityIndex) in activities" :key="activityIndex">{{activity.name[$store.getters.locale.locale]}}</span>
+                        <span class="activity" v-for="(activity, activityIndex) in activities" :key="activityIndex" :class="{active: value.activities[activity.value] > 0 }">{{activity.name[$store.getters.locale.locale]}}</span>
                       </div>
                     </div>
                   </div>
@@ -164,37 +164,30 @@ export default {
       type: Array,
       default:
         () => {
-          return [
-            {
+          return [{
               name: {
-                en: 'Sales',
-                ka: 'sales'
+                en: 'Promotion',
+                ka: 'Promotion'
               },
-              value: 'Sales'
-            }, {
-              name: {
-                en: 'Offers',
-                ka: 'Offers'
-              },
-              value: 'Offers'
+              value: 'offer'
             }, {
               name: {
                 en: 'New collections',
                 ka: 'New collections'
               },
-              value: 'New collections'
+              value: 'newCollections'
             }, {
               name: {
                 en: 'Events',
                 ka: 'Events'
               },
-              value: 'Events'
+              value: 'events'
             }, {
               name: {
                 en: 'News',
                 ka: 'News'
               },
-              value: 'News'
+              value: 'news'
             }
           ]
         }
@@ -530,6 +523,9 @@ export default {
                 color: #dcdcdc;
                 white-space: nowrap;
                 margin-right: 15px;
+                &.active{
+                  color: #2d83e6;
+                }
               }
             }
           }

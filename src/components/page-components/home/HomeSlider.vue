@@ -31,7 +31,8 @@ export default {
       showSlider: false,
       options: {
         arrows: true,
-        dots: true
+        dots: true,
+        autoplay: true,
       }
     }
   },

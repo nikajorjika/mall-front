@@ -356,6 +356,7 @@ export default new Vuex.Store({
               resolve('RECORD NOT FOUND')
             } else {
               resolve(response)
+              console.log(response.data)
               context.commit(request.setter, { data: response.data.data, model: request.model })
             }
           })

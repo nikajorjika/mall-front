@@ -32,7 +32,7 @@ const navigation =
           url: '/gift-card',
           name: {
             en: 'gift card',
-            ka: 'მომსახურება'
+            ka: 'სასაჩუქრე ბარათი'
           }
         },
         {
