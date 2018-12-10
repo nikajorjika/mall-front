@@ -11,10 +11,11 @@ Vue.mixin({
       // const alphabet = store.state.alphabet[ store.getters.locale.locale ]
       let storesList = {}
       stores.forEach(function (value) {
-        if (storesList[ value.name[ store.getters.locale.locale ].charAt(0) ] === undefined) {
-          storesList[ value.name[ store.getters.locale.locale ].charAt(0) ] = []
+        const fLetter = value.name[ store.getters.locale.locale ].charAt(0).toLowerCase()
+        if (storesList[ fLetter ] === undefined) {
+          storesList[ fLetter ] = []
         }
-        storesList[ value.name[ store.getters.locale.locale ].charAt(0).toUpperCase() ].push(value)
+        storesList[ fLetter ].push(value)
       })
       return storesList
     },

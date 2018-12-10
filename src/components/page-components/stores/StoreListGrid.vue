@@ -42,12 +42,12 @@
           <div class="alphabet-item" v-for="(value, index) in $store.getters.alphabet[locale]"
                :key="index">
             <span @click="filterList(value)"
-                  :class="{active: grouped[value.toUpperCase()] !== undefined && grouped[value.toUpperCase()].length !== 0 }">{{value}}
+                  :class="{active: grouped[value.toLowerCase()] !== undefined && grouped[value.toLowerCase()].length !== 0 }">{{value}}
             </span>
           </div>
         </div>
       </div>
-      <div class="alph-list-header">
+      <div class="alph-list-header" v-if="listLoaded">
         <ul>
           <li class="brand"><span>{{t('brand')}}</span></li>
           <li class="tags"><span>{{t('tags')}}</span></li>
@@ -58,13 +58,13 @@
       <div class="store-list-container">
         <div class="store-list-wrapper">
           <div class="alphabetic-container" v-for="letter in currentAlphabetFilter" :key="letter">
-            <div class="alphabetic-container-inner" v-if="grouped[letter.toUpperCase()]">
+            <div class="alphabetic-container-inner" v-if="grouped[letter.toLowerCase()]">
               <div class="alphabet-wrapper">
                 <div class="alphabet-item">
                   {{letter.toUpperCase()}}
                 </div>
                 <div class="items-container">
-                  <div class="item" v-for="(value, index) in grouped[letter.toUpperCase()]" :key="index">
+                  <div class="item" v-for="(value, index) in grouped[letter.toLowerCase()]" :key="index">
                     <div v-if="value !== undefined" class="item-wrapper">
                       <div class="item-column name">
                         <span class="name-inner">
@@ -118,7 +118,14 @@ export default {
   },
   mounted: function () {
     this.scroll()
-    if (!this.$store.getters.stores.length) this.fetchItems()
+    if (!this.$store.getters.stores.length) {
+      this.fetchItems()
+    }
+    if (!this.$store.getters.categories.length) {
+      this.$store.dispatch('getCategories').then((response) => {
+        console.log(this.$store.getters.categories)
+      })
+    }
   },
   props: {
     categories: {
@@ -206,6 +213,7 @@ export default {
       viewGrid: true,
       listStoresShowing: this.grouped,
       currentLetter: null,
+      listLoaded: false,
       activeFilters: false
     }
   },
@@ -262,6 +270,8 @@ export default {
         model: 'storesList',
         api: this.$store.state.apiUrls.storeList,
         setter: 'SET_STORE_LIST'
+      }).then(() => {
+        this.listLoaded = true
       }).catch((error) => {
         console.error(error)
       })

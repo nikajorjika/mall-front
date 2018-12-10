@@ -1,7 +1,7 @@
 <template>
   <div class="custom-select" ref="dropdownMenu">
     <div class="selected-item" @click="toggleBody" :class="{open: open}">
-      <span class="selected" v-if="selectedItem"><span class="non-breakable">{{selectedItem.name[locale]}}</span> <font-awesome-icon
+      <span class="selected" v-if="selectedItem"><span class="non-breakable">{{selectedItem[nameField][locale]}}</span> <font-awesome-icon
         icon="caret-down"/></span>
       <span class="placeholder" v-if="!selectedItem"><span class="non-breakable">{{placeholder[locale]}}</span> <font-awesome-icon
         icon="caret-down"/></span>
@@ -12,7 +12,7 @@
           <div class="item" @click="fireSelect(null)">{{placeholder[locale]}}</div>
         </li>
         <li v-for="(item, index) in items" v-bind:key="index">
-          <div class="item" @click="fireSelect(item)" :class="{currentItem: item === selectedItem}">{{item.name[locale]}}</div>
+          <div class="item" @click="fireSelect(item)" :class="{currentItem: item === selectedItem}">{{item[nameField][locale]}}</div>
         </li>
       </ul>
     </div>
@@ -53,6 +53,14 @@ export default {
     name: {
       type: String,
       default: 'select'
+    },
+    nameField: {
+      type: String,
+      default: 'name'
+    },
+    valueField: {
+      type: String,
+      default: 'value'
     },
     value: {
       type: String,

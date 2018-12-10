@@ -153,11 +153,15 @@ export default {
       width: calc(50% - 52px);
       &.single-left {
         margin: 0 22px 0 30px;
+        @media screen and (max-width: 1236px){
+          width: 100%;
+        }
       }
       &.single-right {
         margin: 0 30px 0 22px;
         display: flex;
         flex-direction: column;
+        min-width: 566px;
         .close-button {
           display: flex;
           .close-button-a {
@@ -216,6 +220,9 @@ export default {
           @media screen and (max-width: 1366px) {
             padding-top: 50%;
           }
+          @media screen and (max-width: 1250px) {
+            padding-top: 23%;
+          }
           p {
             margin: 0 80px 0 0;
             position: absolute;
@@ -229,10 +236,8 @@ export default {
       .image-container {
         position: relative;
         width: 100%;
-        padding-top: 72.2%;
-        @media screen and (max-width: 1366px) {
-          padding-top: 100%;
-        }
+        height: 100%;
+        min-height: 650px;
         img {
           height: 100%;
           width: 100%;

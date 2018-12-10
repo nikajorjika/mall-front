@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="this.$store.getters.noScroll? 'open': ''">
+  <div id="app" :class="$store.getters.noScroll? 'open': ''">
     <div class="app-wrapper" ref="app">
       <nav-bar/>
       <router-view/>
@@ -8,7 +8,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import FooterComponent from './components/main/Footer'
 import NavBar from './components/main/Header'

@@ -1,7 +1,7 @@
 <template>
   <div class="store-filters">
     <div class="filter-item">
-      <custom-select :items="categories.categories.data"
+      <custom-select :items="$store.getters.categories.subcategories" nameField="translates" valueField="_id"
                      :placeholder="categories.categories.placeholder"/>
     </div>
     <div class="filter-item search-item">

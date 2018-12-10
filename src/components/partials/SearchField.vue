@@ -16,6 +16,18 @@
     <div class="search-result-container">
       <div class="before-search" v-if="showFeaturedSearch">
         <block-header-standard title="FEATURED SEARCH"/>
+        <div class="search-ads-block">
+          <div class="ads-single">
+
+          </div>
+        </div>
+        <div class="search-ads-block">
+          <div class="ads-news">
+            <div class="ads-news-item" v-for="(news, index) in $store.getters.homeAds" :key="index">
+              <event-item :event="news"/>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="search-in-progress" v-else>
         <div class="searching-title">
@@ -27,11 +39,13 @@
               <h6 :class="{active : !filter}" @click="filter = null">{{t('all')}} <span>({{total}})</span></h6>
             </div>
             <div class="tab" v-for="(tab, index) in $store.getters.searchResult" :key="index">
-              <h6 :class="{active : filter === index.toLowerCase()}" @click="filter = index.toLowerCase()">{{t(index.toLowerCase())}} <span>({{tab.length}})</span></h6>
+              <h6 :class="{active : filter === index.toLowerCase()}" @click="filter = index.toLowerCase()">
+                {{t(index.toLowerCase())}} <span>({{tab.length}})</span></h6>
             </div>
           </div>
           <div class="search-content">
-            <div class="wrapper-block" v-for="(tab, index) in $store.getters.searchResult" :key="index" v-if="filter === index.toLowerCase() || !filter">
+            <div class="wrapper-block" v-for="(tab, index) in $store.getters.searchResult" :key="index"
+                 v-if="filter === index.toLowerCase() || !filter">
               <div class="block-title-container">
                 <h3>{{t(index.toLowerCase())}}</h3>
               </div>
@@ -68,6 +82,11 @@ export default {
       type: String,
       default: ''
     }
+  },
+  mounted: function () {
+    this.$store.dispatch('getAdsItems').catch((error) => {
+      console.error(error)
+    })
   },
   data: () => {
     return {
@@ -142,10 +161,10 @@ export default {
           font-size: 1.4rem;
           margin: 0;
           position: relative;
-          &:after{
+          &:after {
             position: absolute;
             content: '';
-            bottom:-4px;
+            bottom: -4px;
             left: 0;
             height: 1px;
             background: #000;
@@ -153,8 +172,8 @@ export default {
             transition: transform .3s;
             transform: scale(0);
           }
-          &.active{
-            &:after{
+          &.active {
+            &:after {
               transform: scale(1);
             }
           }
@@ -238,6 +257,22 @@ export default {
   }
 
   .search-result-container {
+    .before-search {
+      .search-ads-block {
+        border-top: 1px solid #dcdcdc;
+        .ads-news {
+          display: grid;
+          grid-template-columns: 33.33% 33.33% 33.33%;
+          width: 95%;
+          max-width: 1694px;
+          margin: 0 auto 77px;
+          .ads-news-item {
+            padding: 27px;
+            border-right: 1px solid #dcdcdc;
+          }
+        }
+      }
+    }
   }
 
   .search-in-progress {

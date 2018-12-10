@@ -385,7 +385,7 @@ export default new Vuex.Store({
           })
       })
     },
-    getCategories: function (context, request) {
+    getCategories: function (context) {
       return new Promise((resolve, reject) => {
         Axios.get(context.state.apiUrls.categories)
           .then(function (response) {

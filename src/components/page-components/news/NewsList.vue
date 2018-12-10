@@ -15,9 +15,9 @@
         <news-single :item="loadedItem" @close="close"/>
       </div>
       <div class="news-list">
-        <div class="news-list-item" v-for="item in $store.getters.events" :key="item._id"
-             :class="{open: openItem === item}">
-          <div class="news-inner" @click="open(item)">
+        <div class="news-list-item" v-for="(item, index) in $store.getters.events" :key="index"
+             :class="{open: openItem === item, hideNews: absolute.indexOf(index) !== -1}" :id="`event-${index}`">
+          <div class="news-inner" @click="open(item, index)">
             <router-link :to="generateUrl(item)">
               <news-item :item="item" v-if="$mq !== 'mobile'"/>
               <event-item :event="item" v-else/>
@@ -86,6 +86,25 @@ export default {
       set: function (value) {
         return value
       }
+    },
+    absolute: function () {
+      const index = this.$store.getters.events.indexOf(this.openItem)
+      const absolute = []
+      if (index !== -1) {
+        if (((index + 1) % 3) === 0) {
+          absolute.push(index - 1)
+          absolute.push(index - 2)
+        }
+        if (((index + 1) % 3) === 1) {
+          absolute.push(index + 1)
+          absolute.push(index + 2)
+        }
+        if (((index + 1) % 3) === 2) {
+          absolute.push(index - 1)
+          absolute.push(index + 1)
+        }
+      }
+      return absolute
     }
   },
   methods: {
@@ -110,7 +129,7 @@ export default {
       let slug = `/${this.createSlug(item.name[ 'en' ])}`
       return `/${this.locale}/whats-new/${cat}${slug}/${id}`
     },
-    open: function (item) {
+    open: function (item, index) {
       this.loadedItem = null
       this.openItem = item
     },
@@ -185,7 +204,6 @@ export default {
     box-sizing: border-box;
     border-right: 1px solid #dcdcdc;
     border-top: 1px solid #dcdcdc;
-    position: relative;
     @media screen and (max-width: 1650px) {
       padding: 21px;
     }
@@ -202,32 +220,18 @@ export default {
     &:nth-child(3n + 3) {
       border-right: none;
     }
-    &:nth-child(3n + 1).open {
-      width: 100%;
-      .news-inner {
-        display: none;
-      }
-    }
-    &:nth-child(3n + 2).open {
-      width: 100%;
-      position: absolute;
-      z-index: 9;
-      background: #ffffff;
-      .news-inner {
-        display: none;
-      }
-    }
-    &:nth-child(3n + 3).open {
-      width: 100%;
-      position: absolute;
-      z-index: 9;
-      background: #ffffff;
-      .news-inner {
-        display: none;
-      }
+    &.hideNews {
+      display: none;
     }
     &.open {
-      padding: 22px 0;
+      padding: 22px 0 0;
+      width: 100%;
+      &:nth-child(4 + n) {
+        border-top: 1px solid #dcdcdc;
+      }
+      .news-inner {
+        display: none;
+      }
     }
   }
 }

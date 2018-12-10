@@ -73,11 +73,6 @@
                 <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
               </router-link>
             </div>
-            <transition name="fade">
-              <div class="search-wrapper" v-if="showSearch">
-                <search-container @close="toggleSearch()"/>
-              </div>
-            </transition>
           </li>
           <li>
             <language-switcher/>
@@ -90,11 +85,6 @@
                 <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
               </router-link>
             </div>
-            <transition name="fade">
-              <div class="search-wrapper" v-if="showSearch">
-                <search-container @close="toggleSearch()"/>
-              </div>
-            </transition>
           </li>
           <li>
             <language-switcher/>
@@ -102,6 +92,11 @@
         </ul>
       </div>
     </div>
+    <transition name="fade">
+      <div class="search-wrapper" v-if="showSearch">
+        <search-container @close="toggleSearch()"/>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -129,10 +124,32 @@ export default {
     HamburgerMenu,
     'hamburger-menu': HamburgerMenu
   },
+  watch: {
+    showSearch: function (value) {
+      if (value) {
+        document.addEventListener('keyup', (e) => {
+          if (e.key === 'Escape') {
+            this.closeSearch()
+          }
+        })
+      } else {
+        document.removeEventListener('keyup', this.closeSearch)
+      }
+    },
+    $route: function (to, from) {
+      if (to.name !== from.name && from.name) {
+        this.closeSearch()
+      }
+    }
+  },
   methods: {
     toggleSearch: function () {
+      this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
       this.showSearch = !this.showSearch
-      this.$store.commit('SET_NO_SCROLL', this.showSearch)
+    },
+    closeSearch: function () {
+      this.$store.commit('SET_NO_SCROLL', false)
+      this.showSearch = false
     },
     toggleActions: function () {
       this.showActions = !this.showActions
@@ -411,23 +428,22 @@ export default {
         }
       }
     }
+  }
+  .search-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    z-index: 999;
+    overflow-y: auto;
+    &.fade-leave-active {
+      animation: fadeOut .2s;
+    }
 
-    .search-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #fff;
-      z-index: 999;
-      overflow-y: auto;
-      &.fade-leave-active {
-        animation: fadeOut .2s;
-      }
-
-      &.fade-enter-active {
-        animation: fadeIn .2s;
-      }
+    &.fade-enter-active {
+      animation: fadeIn .2s;
     }
   }
 

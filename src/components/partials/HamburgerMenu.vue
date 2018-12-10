@@ -75,7 +75,7 @@
                 <p v-html="t('address_content')"></p>
               </div>
               <div class="additional-info-item">
-                <ul  v-if="$mq !== 'mobile'">
+                <ul v-if="$mq !== 'mobile'">
                   <li class="" v-for="(social, index) in $store.getters.socials" :key="index">
                     <a :href="social.link" target="_blank">
                       <font-awesome-icon :icon="{ prefix: 'fab', iconName: getIconName(social.name) }"/>
@@ -104,7 +104,6 @@
 <script>
 
 import DefaultIcon from './DefaultIcons'
-import SearchContainer from './SearchField'
 import LanguageSwitcher from './LanguageSwitcher'
 
 export default {
@@ -146,10 +145,9 @@ export default {
   watch: {
     showMenu: function (value) {
       if (value) {
-        let _this = this
-        document.addEventListener('keyup', function (e) {
+        document.addEventListener('keyup', (e) => {
           if (e.key === 'Escape') {
-            _this.close()
+            this.close()
           }
         })
       } else {
@@ -157,14 +155,13 @@ export default {
       }
     },
     $route: function (to, from) {
-      if (to !== from) {
+      if (to.name !== from.name && from.name) {
         this.close()
       }
     }
   },
   components: {
     LanguageSwitcher,
-    SearchContainer,
     DefaultIcon
   }
 }
@@ -385,17 +382,17 @@ export default {
           flex-wrap: wrap;
           margin: 108px 0 125px 0;
           padding-left: 55px;
-          @media screen and (max-width: 760px){
+          @media screen and (max-width: 760px) {
             flex-direction: column;
-            margin:0;
-            padding:16px 36px 60px;
+            margin: 0;
+            padding: 16px 36px 60px;
             background: #f9f9f9;
           }
           .additional-info-item {
             width: 33%;
             display: flex;
             flex-direction: column;
-            @media screen and (max-width: 760px){
+            @media screen and (max-width: 760px) {
               width: 100%;
             }
             h4 {
@@ -405,8 +402,8 @@ export default {
               color: #000;
               margin: 0;
               line-height: 1.25;
-              @media screen and (max-width: 760px){
-                margin:44px 0 13px;
+              @media screen and (max-width: 760px) {
+                margin: 44px 0 13px;
               }
             }
             p {
@@ -415,7 +412,7 @@ export default {
               color: #848484;
               opacity: 1;
               margin: auto 0 0;
-              @media screen and (max-width: 760px){
+              @media screen and (max-width: 760px) {
                 margin-bottom: 13px;
               }
             }
@@ -467,21 +464,21 @@ export default {
       max-width: 1655px;
       margin: 0 auto;
     }
-    .mobile-socials{
-      ul{
+    .mobile-socials {
+      ul {
         display: flex;
-        li{
+        li {
           flex: 1;
           border-right: 1px solid #dcdcdc;
           border-bottom: 1px solid #dcdcdc;
-          &:last-child{
+          &:last-child {
             border-right: none;
           }
-          a{
+          a {
             display: block;
             padding-top: 100%;
             position: relative;
-            svg{
+            svg {
               position: absolute;
               top: 50%;
               left: 50%;
@@ -492,10 +489,10 @@ export default {
         }
       }
     }
-    .language-switcher{
-      padding:20px;
-      border-bottom:1px solid #dcdcdc;
-      .lang-wrapper{
+    .language-switcher {
+      padding: 20px;
+      border-bottom: 1px solid #dcdcdc;
+      .lang-wrapper {
         text-align: center;
         font-size: 1.6rem;
         text-transform: uppercase;

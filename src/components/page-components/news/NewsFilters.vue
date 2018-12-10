@@ -31,6 +31,13 @@ export default {
       type: Object
     }
   },
+  mounted: function () {
+    if (!this.$store.getters.categories.length) {
+      this.$store.dispatch('getCategories').then((response) => {
+        console.log(response)
+      })
+    }
+  },
   data: () => {
     return {
       filters: {
@@ -50,7 +57,6 @@ export default {
   },
   computed: {
     category: function () {
-      console.log(this.$route.params.cat)
       return this.$route.params.cat
     }
   }
