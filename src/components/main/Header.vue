@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="header-right">
-        <ul v-if="$mq !== 'tablet' && $mq !== 'mobile'">
+        <ul v-if="$mq !== 'mobile'">
           <li>
             <router-link :to="`/${locale}/page/contact`">{{t('contact')}}</router-link>
           </li>
@@ -70,9 +70,9 @@
             </transition>
           </li>
           <li @click.prevent="toggleSearch()">
-            <router-link to="#" class="text-center">
+            <a class="text-center">
               <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
-            </router-link>
+            </a>
           </li>
           <li>
             <language-switcher/>
@@ -87,7 +87,32 @@
             </div>
           </li>
           <li>
-            <language-switcher/>
+            <a @click.stop.prevent="toggleActions()" v-if="$store.getters.user">
+              <img src="../../assets/images/icons/user.svg" width="11px" height="11px">
+            </a>
+            <router-link v-else :to="`/${locale}/login`">
+              <img src="../../assets/images/icons/user.svg" width="11px" height="11px">
+            </router-link>
+            <transition name="slideUp">
+              <div class="user-action-block mobile-version" v-if="showActions && $store.getters.user">
+                <ul>
+                  <li :class="{active: $store.getters.user ? $store.getters.user.hasNewNotification : false}"><span
+                    class="action-label"><router-link
+                    :to="`/${locale}/user/notifications`">{{t('notifications')}}</router-link></span>
+                  </li>
+                  <li><span class="action-label"><router-link
+                    :to="`/${locale}/user/subscribed`">{{t('subscribe_list')}}</router-link></span>
+                  </li>
+                  <li><span class="action-label"><router-link
+                    :to="`/${locale}/user/bookmarks`">{{t('bookmarks')}}</router-link></span>
+                  </li>
+                  <li><span class="action-label"><router-link
+                    :to="`/${locale}/user/settings`">{{t('settings')}}</router-link></span>
+                  </li>
+                  <li><span class="action-label" @click="logOut">{{t('log_out')}}</span></li>
+                </ul>
+              </div>
+            </transition>
           </li>
         </ul>
       </div>
@@ -137,7 +162,7 @@ export default {
       }
     },
     $route: function (to, from) {
-      if (to.name !== from.name && from.name) {
+      if (this.showSearch) {
         this.closeSearch()
       }
     }
@@ -314,6 +339,9 @@ export default {
       @media screen and (max-width: 760px) {
         width: 100px;
       }
+      @media screen and (max-width: 370px) {
+        left: 45%;
+      }
 
       .mall-logo {
         font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
@@ -362,8 +390,8 @@ export default {
                 filter: invert(1);
               }
             }
-            .language-switcher{
-              .lang-wrapper{
+            .language-switcher {
+              .lang-wrapper {
                 > a {
                   color: #fff;
                   img {
@@ -387,6 +415,10 @@ export default {
             cursor: pointer;
             z-index: 1;
             position: relative;
+            @media screen and (max-width: 1060px) {
+              padding: 23px 18px;
+              min-width: 0;
+            }
             @media screen and (max-width: 760px) {
               padding: 23px;
               min-width: 0;
@@ -417,6 +449,11 @@ export default {
             left: -42px;
             padding: 32px;
             box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
+            &.mobile-version {
+              right: 2px;
+              top: calc(100% - 5px);
+              left: auto;
+            }
             &.slideUp-enter-active {
               animation: subMenuEnter .4s;
             }

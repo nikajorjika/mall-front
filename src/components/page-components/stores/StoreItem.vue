@@ -1,7 +1,7 @@
 <template>
   <div class="store-item">
     <div class="store-wrapper">
-      <img :src="item.logoUrl" :alt="item.name[locale]">
+      <img :src="locale === 'ka' ? item['kaLogoUrl'] : item.logoUrl" :alt="item.name[locale]">
     </div>
     <div class="store-flip">
       <h3>{{item.name[locale]}}</h3>

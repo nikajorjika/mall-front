@@ -26,9 +26,43 @@
 import BlockHeaderStandard from '../components/partials/BlockHeader'
 import LoginForm from '../components/page-components/login/LoginForm'
 import ButtonStandard from '../components/partials/StandardButton'
+
 export default {
   name: 'login',
   components: { ButtonStandard, LoginForm, BlockHeaderStandard },
+  data: () => {
+    return {
+      isConnected: false,
+      user: {
+        name: '',
+        lastName: '',
+        email: '',
+        mobile: '',
+        year: {
+          val: ''
+        },
+        month: {
+          val: ''
+        },
+        day: {
+          val: ''
+        },
+        gender: {
+          val: ''
+        },
+        country: {
+          val: ''
+        },
+        mobileIndex: {
+          val: ''
+        },
+        city: {
+          val: ''
+        },
+        password: ''
+      }
+    }
+  },
   methods: {
     getFacebookIcon: function () {
       return require('../assets/images/icons/facebook.svg')
@@ -37,25 +71,25 @@ export default {
 }
 </script>
 <style lang="scss">
-#login{
-  .login-page-container{
+#login {
+  .login-page-container {
     margin-top: 153px;
-    .login-form-container{
-      width:90%;
+    .login-form-container {
+      width: 90%;
       max-width: 536px;
       margin: 0 auto;
     }
   }
-  .login-register-container{
-    margin: 133px  0  104px;
-    .register-buttons-container{
-      width:90%;
+  .login-register-container {
+    margin: 133px 0 104px;
+    .register-buttons-container {
+      width: 90%;
       max-width: 536px;
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      .register-button{
+      .register-button {
 
       }
     }

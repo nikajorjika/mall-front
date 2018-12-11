@@ -11,21 +11,32 @@
     </div>
     <loading-big v-show="loadingNews"/>
     <div class="new-list-outer">
-      <div class="single-news-container news-loaded" v-if="loadedItem">
-        <news-single :item="loadedItem" @close="close"/>
-      </div>
+      <transition name="fadeIn">
+        <div class="single-news-container news-loaded" v-if="loadedItem">
+          <news-single :item="loadedItem" v-if="$mq !== 'mobile'" @close="close"/>
+          <news-single-mobile :item="loadedItem" v-else @close="close"/>
+        </div>
+      </transition>
+
       <div class="news-list">
         <div class="news-list-item" v-for="(item, index) in $store.getters.events" :key="index"
              :class="{open: openItem === item, hideNews: absolute.indexOf(index) !== -1}" :id="`event-${index}`">
-          <div class="news-inner" @click="open(item, index)">
+          <div class="news-inner">
             <router-link :to="generateUrl(item)">
               <news-item :item="item" v-if="$mq !== 'mobile'"/>
               <event-item :event="item" v-else/>
             </router-link>
           </div>
-          <div class="single-news-container" v-if="openItem === item">
-            <news-single :item="item" @close="close"/>
-          </div>
+          <transition name="fadeIn">
+            <div class="single-news-container" v-if="openItem === item && $mq !== 'mobile'">
+              <news-single :item="item" @close="close"/>
+            </div>
+          </transition>
+          <transition name="fadeIn">
+            <div class="single-news-container" v-if="openItem === item && $mq === 'mobile'">
+              <news-single-mobile :item="item" @close="close"/>
+            </div>
+          </transition>
         </div>
       </div>
     </div>
@@ -41,12 +52,13 @@ import NewsItem from './NewsItem'
 import NewsSingle from './NewsSingle'
 import LoadingBig from '../../partials/LoadingBig'
 import EventItem from '../../partials/EventView'
+import NewsSingleMobile from './NewsSingleMobile'
 
 export default {
   name: 'news-list',
   mounted: function () {
     if (!this.$store.getters.events.length) this.fetchItems()
-    if (this.$route.params.id) {
+    if (this.$route.params.id && !this.openItem) {
       this.loadSingle()
     }
   },
@@ -56,6 +68,7 @@ export default {
     }
   },
   components: {
+    NewsSingleMobile,
     EventItem,
     LoadingBig,
     NewsSingle,
@@ -71,20 +84,26 @@ export default {
       loadingNews: false,
       loading: false,
       hasMore: true,
-      activeFilters: false
+      activeFilters: false,
+      openItem: null
+    }
+  },
+  watch: {
+    '$route.params.id': function (to, fr) {
+      console.log(to, fr)
+      const existing = this.$store.getters.events.find((element) => {
+        return element._id === this.$route.params.id
+      })
+      this.openItem = null
+      this.loadedItem = null
+      if (existing) {
+        this.openItem = existing
+      } else {
+        this.loadSingle()
+      }
     }
   },
   computed: {
-    openItem: {
-      get: function () {
-        return this.$store.getters.events.find((element) => {
-          return element._id === this.$route.params.id
-        })
-      },
-      set: function (value) {
-        return value
-      }
-    },
     absolute: function () {
       const index = this.$store.getters.events.indexOf(this.openItem)
       const absolute = []
@@ -135,7 +154,8 @@ export default {
       this.activeFilters = !this.activeFilters
     },
     close: function () {
-      this.openItem = this.loadedItem = null
+      this.loadedItem = null
+      this.openItem = null
     },
     fetchItems: function () {
       this.loadingNews = true
@@ -220,15 +240,25 @@ export default {
     }
     &.hideNews {
       display: none;
+      @media screen and (max-width: 760px) {
+        display: block;
+      }
     }
     &.open {
       padding: 22px 0 0;
       width: 100%;
+      @media screen and (max-width: 760px) {
+        display: block;
+        padding: 21px;
+      }
       &:nth-child(4 + n) {
         border-top: 1px solid #dcdcdc;
       }
       .news-inner {
         display: none;
+        @media screen and (max-width: 760px) {
+          display: block;
+        }
       }
     }
   }
@@ -257,6 +287,12 @@ export default {
 
 .single-news-container {
   border-bottom: solid 1px #dcdcdc;
+  &.fadeIn-leave-active {
+    animation: fadeOut .2s;
+  }
+  &.fadeIn-enter-active {
+    animation: fadeIn .2s;
+  }
   &.news-loaded {
     padding-top: 22px;
   }

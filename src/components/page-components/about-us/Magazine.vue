@@ -118,7 +118,7 @@ export default {
       .magazine-image-container {
         padding-top: 100%;
         position: relative;
-
+        border-bottom:1px solid #dcdcdc;
         img {
           position: absolute;
           height: 100%;

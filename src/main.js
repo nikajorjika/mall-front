@@ -6,6 +6,7 @@ import './registerServiceWorker'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import VeeValidate from 'vee-validate'
 import dictionary from './lang/messages/ka'
+import dictionaryEn from './lang/messages/en'
 import Notifications from 'vue-notification'
 import VueMq from 'vue-mq'
 import {
@@ -28,6 +29,9 @@ import Vuebar from 'vuebar'
 import VueAgile from 'vue-agile'
 import VueSimpleSVG from 'vue-simple-svg'
 import VueYouTubeEmbed from 'vue-youtube-embed'
+import AOS from 'aos'
+import 'aos/dist/aos.css'
+
 const SocialSharing = require('vue-social-sharing')
 
 Vue.use(VueYouTubeEmbed)
@@ -45,12 +49,13 @@ Vue.use(VueGoogleMaps, {
 Vue.use(VeeValidate, {
   locale: store.state.locale.locale,
   dictionary: {
-    ka: { attributes: dictionary.attributes, messages: dictionary.messages }
+    ka: { attributes: dictionary.attributes, messages: dictionary.messages },
+    en: { attributes: dictionaryEn.attributes, messages: dictionaryEn.messages }
   }
 })
 Vue.use(VueMq, {
   breakpoints: {
-    mobile: 760,
+    mobile: 761,
     tablet: 1060,
     laptop: 1366,
     desktop: Infinity
@@ -78,5 +83,8 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+  created: function () {
+    AOS.init()
+  }
 }).$mount('#app')

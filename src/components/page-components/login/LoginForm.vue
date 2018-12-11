@@ -17,10 +17,14 @@
       </div>
       <div class="login-buttons">
         <div class="login-button">
-          <button-standard type="submit" :text="t('next')"/>
+          <button-standard type="submit" @click="login" :text="t('next')"/>
         </div>
-        <div class="login-button">
-          <button-standard :text="t('login')" :icon="getFacebookIcon()" customColor="#4267b2" iconWidth="7.5" iconHeight="15"/>
+        <div class="login-button" @click.stop>
+          <form @submit.prevent="facebookLogin">
+            <button-standard :text="t('login')" @click="facebookLogin" :icon="getFacebookIcon()" customColor="#4267b2"
+                             iconWidth="7.5"
+                             iconHeight="15"/>
+          </form>
         </div>
       </div>
       <div class="forgot-password">
@@ -36,10 +40,11 @@
 <script>
 import ButtonStandard from '../../partials/StandardButton'
 import WhiteSpinner from '../../partials/LoadingSpinner'
+import facebookLogin from 'facebook-login-vuejs'
 
 export default {
   name: 'login-form',
-  components: { WhiteSpinner, ButtonStandard },
+  components: { WhiteSpinner, ButtonStandard, facebookLogin },
   props: {},
   data: function () {
     return {
@@ -49,7 +54,8 @@ export default {
         remember: false
       },
       loading: false,
-      returnedError: ''
+      returnedError: '',
+      FB: undefined
     }
   },
   mounted: function () {
@@ -76,6 +82,8 @@ export default {
   methods: {
     getFacebookIcon: function () {
       return require('../../../assets/images/icons/facebook.svg')
+    },
+    facebookLogin: function () {
     },
     login: function () {
       this.$validator.validateAll().then((status) => {

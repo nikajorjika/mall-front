@@ -54,8 +54,12 @@
                   <div class="search-store-item-container" v-for="(item, index2) in tab"
                        :key="index2">
                     <div class="search-item-wrapper" v-if="item">
-                      <store-item v-if="index === 'entities'" :item="item"/>
-                      <event-item v-else :event="item"/>
+                      <router-link :to="`/${locale}/store/${createSlug(item.name['en'])}/${item._id}`" v-if="index === 'entities'">
+                        <store-item :item="item"/>
+                      </router-link>
+                      <router-link :to="`/${locale}/whats-new/single/${createSlug(item.name['en'])}/${item._id}`" v-else>
+                        <event-item :event="item"/>
+                      </router-link>
                     </div>
                   </div>
                 </div>

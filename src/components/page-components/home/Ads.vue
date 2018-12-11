@@ -1,7 +1,7 @@
 <template>
   <div id="home-ads">
     <div class="col-2" v-for="(item, index) in $store.getters.homeAds" :key="index" v-if="index <= 1">
-      <event-home :item="item" :type="'mini'"/>
+      <event-home place="ads" :item="item" :type="'mini'"/>
     </div>
   </div>
 </template>

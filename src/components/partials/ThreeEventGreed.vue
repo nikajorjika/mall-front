@@ -2,7 +2,7 @@
   <div class="three-event-greed">
     <block-header-standard :title="this.title"/>
     <div class="flex-col-3">
-      <div class="event-item-outer" v-for="(event, index) in this.events" :key="index">
+      <div class="event-item-outer" data-aos="fade-up" v-for="(event, index) in this.events" :key="index">
         <router-link :to="`/${locale}/whats-new/single/${createSlug(event.name['en'])}/${event._id}`">
           <event-item :event="event"/>
         </router-link>

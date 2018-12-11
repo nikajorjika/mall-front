@@ -12,12 +12,17 @@
               <img :src="store.logoUrl" :alt="store.name[locale]">
             </div>
             <div class="subscribe-button-container">
-              <button class="subscribe-button" @click="subscribe(store._id)">
+              <button class="subscribe-button" :class="{alreadySubscribed: isSubscribed}" @click="subscribe(store._id)">
                 <span class="subscribe" v-if="!isSubscribed">
                   {{t('subscribe')}}
                 </span>
                 <span class="unsubscribe" v-else>
-                  {{t('unsubscribe')}}
+                  <span class="subscribed">
+                     <img src="../../../assets/images/icons/pwichka.svg" height="6" width="9"> <span>{{t('subscribed')}}</span>
+                  </span>
+                  <span class="hover">
+                    {{t('unsubscribe')}}
+                  </span>
                 </span>
               </button>
             </div>
@@ -147,7 +152,7 @@ export default {
   components: { ButtonStandard, SocialSharingNetwork, LoadingBig },
   mounted: function () {
     this.loadStore()
-    if (!this.$store.getters.subscribed.length) {
+    if (this.$store.getters.user && !this.$store.getters.subscribed.length) {
       this.$store.dispatch('getSubscribed').catch((error) => {
         console.error(error)
       })
@@ -165,7 +170,7 @@ export default {
         return false
       }
       const store = this.$store.getters.subscribed.filter(object => {
-        if (object._id === this.store._id) {
+        if (object && object._id === this.store._id) {
           return object
         }
       })
@@ -315,6 +320,10 @@ export default {
     width: 100%;
     max-width: 1640px;
     margin: 0 auto;
+    @media screen and (max-width: 1660px){
+      width: calc(100% - 40px);
+      margin: 0 20px;
+    }
     .store-details-content {
       display: flex;
       margin-top: 21px;
@@ -324,10 +333,12 @@ export default {
           height: 244px;
           width: 244px;
           background: white;
+          display: flex;
           border: 1px solid rgba(0, 0, 0, 0.5);
           img {
-            height: 100%;
-            width: 100%;
+            height: calc(100% - 100px);
+            width:  calc(100% - 100px);
+            margin: auto;
             object-fit: contain;
           }
         }
@@ -347,6 +358,26 @@ export default {
             color: #eead16;
             cursor: pointer;
             position: relative;
+            &.alreadySubscribed{
+              border: 1px solid #000000;
+              color: #000000;
+            }
+            .hover{
+              display: none;
+            }
+            .subscribed{
+              img{
+                margin-right: 5px;
+              }
+            }
+            &:hover {
+              .subscribed {
+                display: none;
+              }
+              .hover {
+                display: block;
+              }
+            }
             &:before {
               content: '';
               position: absolute;
@@ -364,6 +395,11 @@ export default {
               &:before {
                 height: 100%;
                 transition: height 0.3s;
+              }
+            }
+            &.alreadySubscribed{
+              &:before {
+                background: #000;
               }
             }
           }

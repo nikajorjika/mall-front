@@ -11,22 +11,22 @@
       <div class="field-container">
         <input type="text" id="contact-name" v-validate="'required'" name="name" autocomplete="off"
                v-model="contact.name">
-        <label for="contact-name">{{t('name')}}</label>
-        <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
+        <label for="contact-name" :class="{focus: contact.name}">{{t('name')}}</label>
+        <span v-show="errors.first('name')" class="error">{{ errors.first('name') }}</span>
       </div>
       <div class="field-container">
         <input type="text" id="contact-email" v-validate="'required|email'" autocomplete="off" name="email"
                v-model="contact.email">
-        <label for="contact-email">{{t('email')}}</label>
+        <label for="contact-email" :class="{focus: contact.email}">{{t('email')}}</label>
         <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
       </div>
       <div class="field-container">
         <input type="text" id="contact-company" name="company" autocomplete="off" v-model="contact.company">
-        <label for="contact-company">{{t('company')}}</label>
+        <label for="contact-company" :class="{focus: contact.company}">{{t('company')}}</label>
       </div>
       <div class="field-container">
         <input type="text" id="contact-phone" name="phone" autocomplete="off" v-model="contact.phone">
-        <label for="contact-phone">{{t('telephone')}}</label>
+        <label for="contact-phone" :class="{focus: contact.phone}">{{t('telephone')}}</label>
       </div>
       <div class="field-container">
         <textarea id="contact-message" :placeholder="t('your_message')" v-validate="'required'" autocomplete="off"
@@ -127,7 +127,7 @@ export default {
         border-bottom: solid 1px #848484;
         font-family: 'Muli Light', 'BPG Arial', sans-serif;
         width: 100%;
-        padding: 0 0 8px;
+        padding: 0 0 8px 8px;
         font-size: 1.2rem;
 
         &:focus {

@@ -11,86 +11,88 @@
             <!--<search-container class="hamburger-search"/>-->
           </div>
           <div class="right-container">
-            <div class="ham-logo-container" :class="{hideSmall: currentItem !== null}">
-              <router-link to="/">
-                <img class="logo" src="../../assets/images/icons/TM_LOGO.svg">
-              </router-link>
-            </div>
-            <div class="menu-container" :class="{hideSmall: currentItem !== null}">
-              <transition name="fadeIn">
-                <div class="list-wrapper" v-if="currentItem === null">
-                  <div class="list-container" v-for="(data, i) in $store.state.hamburgerData" v-bind:key="i">
-                    <h3 class="parent-title">
-                      <router-link class="title" :to="`/${locale}${data.url}`">
-                        {{data.name[locale]}}
-                      </router-link>
-                      <span v-if="data.children !== undefined && data.children !== null && data.children.length"
-                            class="open-children" @click="openChildren(data)"><span class="icon-container"><font-awesome-icon
-                        icon="caret-right"/></span></span>
-                    </h3>
-                  </div>
-                </div>
-              </transition>
-              <transition name="fadeSide">
-                <div class="child-list-wrapper" v-if="currentItem !== null">
-                  <div class="list-parent-title">
-                    <div class="back-icon-container" @click="closeChildren">
-                      <div class="back-icon-inner">
-                        <img src="../../assets/images/icons/arrow-left-dark.svg" alt="" height="15.5" width="8.5">
-                      </div>
-                    </div>
-                    <h4>{{currentItem.name[locale]}}</h4>
-                  </div>
-                  <div class="children-list">
-                    <ul>
-                      <li v-for="(child, index) in currentItem.children" :key="index"
-                          :class="{rightBorder: index % 2 === 0 }">
-                        <router-link :to="`/${locale}${currentItem.url}${child.url}`"
-                                     class="child-menu-name">
-                          {{child.name[locale]}}
+            <div class="right-inner-container">
+              <div class="ham-logo-container" :class="{hideSmall: currentItem !== null}">
+                <router-link to="/">
+                  <img class="logo" src="../../assets/images/icons/TM_LOGO.svg">
+                </router-link>
+              </div>
+              <div class="menu-container" :class="{hideSmall: currentItem !== null}">
+                <transition name="fadeIn">
+                  <div class="list-wrapper" v-if="currentItem === null">
+                    <div class="list-container" v-for="(data, i) in $store.state.hamburgerData" v-bind:key="i">
+                      <h3 class="parent-title">
+                        <router-link class="title" :to="`/${locale}${data.url}`">
+                          {{data.name[locale]}}
                         </router-link>
-                      </li>
-                    </ul>
+                        <span v-if="data.children !== undefined && data.children !== null && data.children.length"
+                              class="open-children" @click="openChildren(data)"><span class="icon-container"><font-awesome-icon
+                          icon="caret-right"/></span></span>
+                      </h3>
+                    </div>
                   </div>
-                </div>
-              </transition>
-            </div>
-            <language-switcher class="language-switcher" v-if="$mq === 'mobile' && currentItem === null"/>
-            <div class="mobile-socials" v-if="$mq === 'mobile' && currentItem === null">
-              <ul>
-                <li class="" v-for="(social, index) in $store.getters.socials" :key="index">
-                  <a :href="social.link" target="_blank">
-                    <font-awesome-icon :icon="{ prefix: 'fab', iconName: getIconName(social.name) }"/>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div class="hamburger-info-block">
-              <div class="additional-info-item">
-                <h4>{{t('working_hours')}}:</h4>
-                <p v-html="t('working_hours_content')"></p>
+                </transition>
+                <transition name="fadeSide">
+                  <div class="child-list-wrapper" v-if="currentItem !== null">
+                    <div class="list-parent-title">
+                      <div class="back-icon-container" @click="closeChildren">
+                        <div class="back-icon-inner">
+                          <img src="../../assets/images/icons/arrow-left-dark.svg" alt="" height="15.5" width="8.5">
+                        </div>
+                      </div>
+                      <h4>{{currentItem.name[locale]}}</h4>
+                    </div>
+                    <div class="children-list">
+                      <ul>
+                        <li v-for="(child, index) in currentItem.children" :key="index"
+                            :class="{rightBorder: index % 2 === 0 }">
+                          <router-link :to="`/${locale}${currentItem.url}${child.url}`"
+                                       class="child-menu-name">
+                            {{child.name[locale]}}
+                          </router-link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </transition>
               </div>
-              <div class="additional-info-item">
-                <h4>{{t('address')}}:</h4>
-                <p v-html="t('address_content')"></p>
-              </div>
-              <div class="additional-info-item">
-                <ul v-if="$mq !== 'mobile'">
+              <language-switcher class="language-switcher" v-if="$mq === 'mobile' && currentItem === null"/>
+              <div class="mobile-socials" v-if="$mq === 'mobile' && currentItem === null">
+                <ul>
                   <li class="" v-for="(social, index) in $store.getters.socials" :key="index">
                     <a :href="social.link" target="_blank">
                       <font-awesome-icon :icon="{ prefix: 'fab', iconName: getIconName(social.name) }"/>
                     </a>
                   </li>
                 </ul>
-                <div class="email-wrapper">
-                  <a href="mailto:info@tbilisimall.com">
-                    info@tbilisimall.com
-                  </a>
+              </div>
+              <div class="hamburger-info-block">
+                <div class="additional-info-item">
+                  <h4>{{t('working_hours')}}:</h4>
+                  <p v-html="t('working_hours_content')"></p>
                 </div>
-                <div class="phone-wrapper">
-                  <a href="tel:+995322505556">
-                    +995 322 505 556
-                  </a>
+                <div class="additional-info-item">
+                  <h4>{{t('address')}}:</h4>
+                  <p v-html="t('address_content')"></p>
+                </div>
+                <div class="additional-info-item">
+                  <ul v-if="$mq !== 'mobile'">
+                    <li class="" v-for="(social, index) in $store.getters.socials" :key="index">
+                      <a :href="social.link" target="_blank">
+                        <font-awesome-icon :icon="{ prefix: 'fab', iconName: getIconName(social.name) }"/>
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="email-wrapper">
+                    <a href="mailto:info@tbilisimall.com">
+                      info@tbilisimall.com
+                    </a>
+                  </div>
+                  <div class="phone-wrapper">
+                    <a href="tel:+995322505556">
+                      +995 322 505 556
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -155,7 +157,7 @@ export default {
       }
     },
     $route: function (to, from) {
-      if (to.name !== from.name && from.name) {
+      if (this.showMenu === true) {
         this.close()
       }
     }
@@ -221,8 +223,14 @@ export default {
       }
       .right-container {
         width: 100%;
-        overflow-y: auto;
         height: 100%;
+        overflow: hidden;
+        .right-inner-container{
+          overflow-y: auto;
+          height: 100%;
+          position: absolute;
+          width: calc(100% + 17px);
+        }
         .ham-logo-container {
           width: 155.8px;
           margin: 35.6px auto;

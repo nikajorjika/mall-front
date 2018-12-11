@@ -37,6 +37,7 @@ export default {
       width:100%;
       padding-top: 112%;
       position: relative;
+      border:1px solid #dcdcdc;
       @media screen and (max-width: 760px){
         padding-top: 114%;
       }

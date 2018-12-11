@@ -1,37 +1,43 @@
 <template>
   <div id="app" :class="$store.getters.noScroll? 'open': ''">
-    <div class="app-wrapper" ref="app">
+    <div class="app-wrapper" ref="app" v-if="hasAuth">
       <nav-bar/>
       <router-view/>
       <footer-component/>
-      <notifications group="notify" />
+      <notifications group="notify"/>
     </div>
   </div>
 </template>
 <script>
 import FooterComponent from './components/main/Footer'
 import NavBar from './components/main/Header'
+
 export default {
   components: {
     FooterComponent,
     NavBar
   },
+  data: () => {
+    return {
+      hasAuth: false
+    }
+  },
   beforeMount: function () {
     const sessionToken = sessionStorage.getItem('websiteAuthToken')
-    const _this = this
     if (sessionToken === null || sessionToken === '' || sessionToken === undefined || sessionToken === 'undefined') {
       this.$http.post(this.$store.state.apiUrls.websiteAuthURL, {
         username: this.$store.state.apiCredentials.username,
         password: this.$store.state.apiCredentials.password
-      }).then(function (response) {
+      }).then((response) => {
         sessionStorage.setItem('websiteAuthToken', response.data.token)
-        console.log(response)
-        _this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + response.data.token
-      }).catch(function (error) {
+        this.$http.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + response.data.token
+        this.hasAuth = true
+      }).catch((error) => {
         console.log(error)
       })
     } else {
-      _this.$http.defaults.headers.common['Authorization'] = 'Bearer ' + sessionToken
+      this.$http.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + sessionToken
+      this.hasAuth = true
     }
   }
 }

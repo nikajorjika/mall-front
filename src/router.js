@@ -180,7 +180,6 @@ const router = new Router({
   ]
 })
 router.beforeEach((to, from, next) => {
-  const sessionToken = sessionStorage.getItem('websiteAuthToken')
   let language = to.params.locale
   if (language) {
     const languages = store.getters.languages
@@ -194,21 +193,7 @@ router.beforeEach((to, from, next) => {
   if (aboutPages.indexOf(to.name) !== -1) {
     store.commit('SET_LOADING_STATE', { model: 'page', value: true })
   }
-  if (sessionToken === null || sessionToken === '' || sessionToken === undefined || sessionToken === 'undefined') {
-    Axios.post(store.state.apiUrls.websiteAuthURL, {
-      username: store.state.apiCredentials.username,
-      password: store.state.apiCredentials.password
-    }).then((response) => {
-      sessionStorage.setItem('websiteAuthToken', response.data.token)
-      Axios.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + response.data.token
-      next()
-    }).catch((error) => {
-      console.log(error)
-    })
-  } else {
-    Axios.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + sessionToken
-    next()
-  }
+  next()
 })
 
 export default router

@@ -1,27 +1,33 @@
 <template>
-  <div class="news-single" :id="item._id">
+  <div class="news-single-mobile" :id="item._id">
     <div class="single-wrapper">
-      <div class="half-col single-left">
+      <div class="close-button"  @click="closeEvent">
+        <router-link :to="closeUrl()" class="close-button-a" v-if="redirect">
+          <default-icon class="hamburger-close-button" :icon="`close`"/>
+        </router-link>
+        <a class="close-button-a" v-else>
+          <default-icon class="hamburger-close-button" :icon="`close`"/>
+        </a>
+      </div>
+      <div class="full-col">
         <div class="image-container">
           <img :src="item.photoUrl" :alt="item.name">
         </div>
       </div>
-      <div class="half-col single-right">
-        <div class="close-button">
-          <router-link :to="closeUrl()" class="close-button-a" v-if="redirect">
-            <default-icon class="hamburger-close-button" :icon="`close`" @click="closeEvent"/>
-          </router-link>
-          <a class="close-button-a" v-else>
-            <default-icon class="hamburger-close-button" :icon="`close`" @click="closeEvent"/>
-          </a>
-        </div>
-        <div class="bookmark">
-          <div @click="bookmark(item._id)">
-            <!--<font-awesome-icon icon="bookmark"/>-->
+      <div class="full-col">
+        <div class="bookmarks-promotions">
+          <div class="bookmark">
             <img src="../../../assets/images/icons/bookmark.svg" alt="Bookmark" v-show="!bookmarked.length">
             <img src="../../../assets/images/icons/bookmarked.svg" alt="Bookmark" v-show="bookmarked.length">
           </div>
+          <div class="promotion">
+            <div class="promotion-button">
+              <span>{{t('promotion')}}</span>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="full-col">
         <div class="title-container">
           <h2 class="title">{{item.name[locale]}}</h2>
           <h4 class="sub-title">
@@ -33,11 +39,6 @@
           </p>
         </div>
         <div class="socials-container">
-          <div class="promotion">
-            <div class="promotion-button">
-              <span>{{t('promotion')}}</span>
-            </div>
-          </div>
           <social-sharing :url="currentFullUrl"
                           class="share-inner"
                           :title="item.name[locale]"
@@ -79,7 +80,7 @@
 import DefaultIcon from '../../partials/DefaultIcons'
 
 export default {
-  name: 'news-single',
+  name: 'news-single-mobile',
   components: { DefaultIcon },
   props: {
     item: {
@@ -142,139 +143,143 @@ export default {
 }
 </script>
 <style lang="scss">
-.news-single {
+.news-single-mobile {
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  background-color: #fff;
   .single-wrapper {
     animation: fadeIn 1s;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
     padding-bottom: 32px;
-    .half-col {
-      width: calc(50% - 52px);
-      &.single-left {
-        margin: 0 22px 0 30px;
-        overflow: hidden;
-        @media screen and (max-width: 1236px){
-          width: 100%;
-        }
+    .close-button {
+      display: flex;
+      border-bottom: 1px solid #dcdcdc;
+      .close-button-a {
+        margin: auto;
+        padding: 22px 0;
       }
-      &.single-right {
-        margin: 0 30px 0 22px;
-        display: flex;
-        flex-direction: column;
-        min-width: 566px;
-        .close-button {
-          display: flex;
-          .close-button-a {
-            margin-left: auto;
-          }
-          .icon-container {
-            .icon-close-container {
-              width: 25.5px;
-              height: 25.5px;
-              .icon-close {
-                width: 25.5px;
-                height: 25.5px;
-                display: inline-block;
-                cursor: pointer;
-                &:after,
-                &:before {
-                  content: ' ';
-                  position: absolute;
-                  left: 12px;
-                  height: 31px;
-                  width: 1px;
-                  background-color: #000;
-                  top: -3px;
-                }
-              }
+      .icon-container {
+        .icon-close-container {
+          width: 13px;
+          height: 13px;
+          .icon-close {
+            width: 13px;
+            height: 13px;
+            display: inline-block;
+            cursor: pointer;
+            &:after,
+            &:before {
+              content: ' ';
+              position: absolute;
+              left: 6px;
+              height: 14px;
+              width: 1px;
+              background-color: #000;
+              top: -1px;
             }
           }
         }
+      }
+    }
+    .full-col {
+      width: 100%;
+      margin: 0;
+      .bookmarks-promotions {
+        display: flex;
+        background: #f9f9f9;
+        border-top: 1px solid #dcdcdc;
+        border-bottom: 1px solid #dcdcdc;
         .bookmark {
-          margin: 14px 0;
           font-size: 25px;
+          width: 100%;
+          padding: 22px 0;
           cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          border-right: 1px solid #dcdcdc;
           img {
             width: 18.4px;
             height: 25.9px;
+            margin: auto;
           }
         }
-        .title-container {
-          .title {
-            font-size: 2.4rem;
-            line-height: 1.25;
-            margin: 0;
-          }
-          .sub-title {
-            font-size: 1.2rem;
-            line-height: 1.25;
-            color: #dcdcdc;
-            margin: 4.6px 0 0 0;
+        .promotion {
+          display: flex;
+          width: 100%;
+          cursor: pointer;
+          padding: 22px 0;
+          .promotion-button {
+            margin: auto;
+            border: 1px solid #000;
+            padding: 4px 7px;
+            font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
+            text-transform: uppercase;
           }
         }
-        .description-container {
-          margin-top: 31px;
-          padding-top: 30%;
-          position: relative;
-          overflow-y: auto;
-          @media screen and (max-width: 1366px) {
-            padding-top: 50%;
-          }
-          p {
-            margin: 0 80px 0 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            color: #848484;
-            font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
-          }
+      }
+      .title-container {
+        padding: 0 36px;
+        margin-top: 28px;
+        .title {
+          font-size: 2.4rem;
+          line-height: 1.25;
+          margin: 0;
+        }
+        .sub-title {
+          font-size: 1.2rem;
+          line-height: 1.25;
+          color: #dcdcdc;
+          margin: 4.6px 0 0 0;
+        }
+      }
+      .description-container {
+        margin-top: 31px;
+        padding: 0 36px;
+        p {
+          margin-bottom: 40px;
+          color: #000000;
+          opacity: 1;
+          font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
         }
       }
       .image-container {
         position: relative;
         width: 100%;
-        height: 100%;
-        min-height: 650px;
+        height: auto;
         img {
           height: 100%;
           width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
           object-fit: cover;
+          display: block;
         }
       }
       .socials-container {
-        margin-top: auto;
         display: flex;
         padding-top: 25px;
         border-top: solid 1px #dcdcdc;
-        .promotion {
-          width: 115px;
-          border: 1px solid #000;
-          display: flex;
-          cursor: pointer;
-          .promotion-button {
-            margin: auto;
-            font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
-            text-transform: uppercase;
-          }
-        }
+        margin:0 36px;
         .socials-inner-container {
-          display: flex;
+          display: grid;
+          width: 100%;
+          grid-template-columns: 50% 50%;
+          grid-row-gap: 20px;
+          column-gap: 10px;
           margin-left: auto;
-          > span:last-child {
-            .social-item {
-              margin-right: 0;
-            }
-          }
           .social-item {
-            height: 32px;
-            width: 97px;
+            height: 100%;
+            width: 100%;
             border: 1px solid #000;
             margin-right: 12.8px;
             display: flex;
             cursor: pointer;
+            padding: 10px 0;
             .icon {
               width: 50%;
               font-size: 1.4rem;

@@ -1,12 +1,12 @@
 <template>
-  <button class="standard-button" @click="clicked" @mouseenter="iconColor = '#fff'" @mouseleave="iconColor = '#000'">
+  <div class="standard-button" @click="clicked" @mouseenter="iconColor = '#fff'" @mouseleave="iconColor = '#000'">
     <span class="animation-background" :style="`background-color: ${customColor}`">
     </span>
     <span class="icon" v-if="icon">
       <simple-svg :filepath="icon" :width="`${iconWidth}px`" :height="`${iconHeight}px`" :fill="iconColor"/>
     </span>
     <span class="text">{{text}}</span>
-  </button>
+  </div>
 </template>
 <script>
 export default {

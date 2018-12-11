@@ -4,7 +4,7 @@
       <agile :options="options" v-if="showSlider" :prevArrow="printPrevIcon()" :nextArrow="printNextIcon()">
         <div class="slide" v-for="(item, index) in this.$store.getters.sliderItems" :key="index">
           <div class="slide-container">
-            <event-home :item="item" :txtLimit="40"/>
+            <event-home place="slider" :item="item" :txtLimit="40"/>
           </div>
         </div>
       </agile>

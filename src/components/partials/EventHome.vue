@@ -2,7 +2,7 @@
   <div class="event-home" :class="this.type">
     <router-link :to="`${locale}/whats-new/single/${createSlug(item.name[locale])}/${item._id}`">
       <div class="image-background">
-        <img :src="item.photoUrl" :alt="item.name[locale]">
+        <img :src="image" :alt="item.name[locale]">
         <div class="event-item-content">
           <div class="event-type">
             <span>OFFER</span>
@@ -33,6 +33,10 @@ export default {
       type: String,
       default: ''
     },
+    place: {
+      type: String,
+      default: ''
+    },
     txtLimit: {
       type: Number,
       default: 80
@@ -43,9 +47,27 @@ export default {
       this.$emit('click')
     }
   },
+  data: function () {
+    return {
+      sliderUrl: 'photoForSliderUrl',
+      sliderMobileUrl: 'photoForSliderUrl',
+      adsUrl: 'photoForAdsUrl'
+    }
+  },
   computed: {
     shortDesc: function () {
       return this.item.description[ this.locale ].length > this.txtLimit ? `${this.item.description[ this.locale ].substr(0, parseInt(this.txtLimit))}...` : this.item.description[ this.locale ]
+    },
+    image: function () {
+      if (this.place === 'ads') {
+        return this.item[ `${this.adsUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.adsUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
+      } else {
+        if (this.$mq === 'mobile') {
+          return this.item[ `${this.sliderMobileUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.sliderMobileUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
+        } else {
+          return this.item[ `${this.sliderUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.sliderUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
+        }
+      }
     }
   }
 }
@@ -107,7 +129,7 @@ export default {
         left: 63px;
         width: calc(100% - 63px);
       }
-      @media screen and (max-width: 760px){
+      @media screen and (max-width: 760px) {
         bottom: 47px;
         left: 36px;
         width: calc(100% - 36px);

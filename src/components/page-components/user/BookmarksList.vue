@@ -40,7 +40,7 @@ export default {
           this.$notify({
             group: 'notify',
             type: 'success',
-            title: this.t('bookmarked_successfully')
+            title: this.t('bookmark_deleted_successfully')
           })
           this.$store.dispatch('getBookmarks').catch((error) => {
             console.error(error)
@@ -66,14 +66,18 @@ export default {
       border-bottom:1px solid #dcdcdc;
       &:last-child{
         border-bottom: none;
+        margin-bottom: 20px;
       }
     }
   }
   .news-wrapper{
-    width: 95%;
+    width: 100%;
     max-width: 1640px;
     margin: 0 auto;
     padding-top: 2px;
+    @media screen and (max-width: 970px){
+      margin: 0 auto;
+    }
   }
   .news-single{
     margin-top: 32px;
