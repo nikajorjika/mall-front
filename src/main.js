@@ -27,8 +27,10 @@ import './mixin/mixin'
 import Vuebar from 'vuebar'
 import VueAgile from 'vue-agile'
 import VueSimpleSVG from 'vue-simple-svg'
+import VueYouTubeEmbed from 'vue-youtube-embed'
 const SocialSharing = require('vue-social-sharing')
 
+Vue.use(VueYouTubeEmbed)
 Vue.use(SocialSharing)
 Vue.use(VueSimpleSVG)
 Vue.use(Vuebar)

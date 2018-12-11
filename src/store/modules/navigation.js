@@ -68,7 +68,7 @@ const navigation =
         {
           url: '/promotions',
           name: {
-            ka: 'პრომოუშენები',
+            ka: 'შეთავაზებები',
             en: 'promotions'
           }
         },
@@ -82,14 +82,14 @@ const navigation =
         {
           url: '/events',
           name: {
-            ka: 'ივენთები',
+            ka: 'ღონისძიებები',
             en: 'events'
           }
         },
         {
           url: '/news',
           name: {
-            ka: 'სიახლეები',
+            ka: 'ახალი ამბები',
             en: 'news'
           }
         }

@@ -1,8 +1,8 @@
 <template>
   <div class="media-page">
     <block-header-standard :title="title[locale]"/>
-    <media-filters/>
-    <media-list/>
+    <media-filters @filtered="filtered"/>
+    <media-list :filterBy="filter"/>
   </div>
 </template>
 <script>
@@ -19,7 +19,13 @@ export default {
       title: {
         en: 'Media',
         ka: 'მედია'
-      }
+      },
+      filter: 'all'
+    }
+  },
+  methods: {
+    filtered: function (value) {
+      this.filter = value
     }
   }
 }

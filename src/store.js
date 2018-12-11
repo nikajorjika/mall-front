@@ -279,7 +279,7 @@ export default new Vuex.Store({
       state.socials = payload
     },
     SET_STORE_LIST: (state, payload) => {
-      state.storesList = payload.data
+      state[payload.model] = payload.data
     }
   },
   actions: {

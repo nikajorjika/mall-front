@@ -95,7 +95,6 @@ export default {
   },
   computed: {
     bookmarked: function () {
-      console.log(this.item)
       return this.$store.getters.bookmarked.filter(object => {
         if (object) {
           return object._id === this.item._id

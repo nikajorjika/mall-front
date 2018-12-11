@@ -26,6 +26,11 @@ export default {
   components: {
     CustomSelect
   },
+  watch: {
+    '$route.params.cat': function (val) {
+      this.category = val
+    }
+  },
   props: {
     categories: {
       type: Object
@@ -33,9 +38,12 @@ export default {
   },
   mounted: function () {
     if (!this.$store.getters.categories.length) {
-      this.$store.dispatch('getCategories').then((response) => {
-        console.log(response)
+      this.$store.dispatch('getCategories').catch((error) => {
+        console.error(error)
       })
+    }
+    if (this.$route.params.cat) {
+      this.category = this.$route.params.cat
     }
   },
   data: () => {
@@ -45,7 +53,8 @@ export default {
         sort: null,
         floor: null,
         category: null
-      }
+      },
+      category: null
     }
   },
   methods: {
@@ -53,11 +62,6 @@ export default {
       if (selected.selected !== null) {
         this.filters[ selected.name ] = selected.selected.value
       }
-    }
-  },
-  computed: {
-    category: function () {
-      return this.$route.params.cat
     }
   }
 }

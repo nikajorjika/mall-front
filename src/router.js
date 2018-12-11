@@ -11,7 +11,6 @@ const router = new Router({
   base: process.env.BASE_URL,
   scrollBehavior: function (to, from, savedPosition) {
     const exception = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine' ]
-    console.log(to, from)
     if ((exception.indexOf(to.name) === -1 && exception.indexOf(from.name) === -1) && to.name !== from.name) {
       return { x: 0, y: 0 }
     }

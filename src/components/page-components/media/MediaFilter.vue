@@ -6,7 +6,7 @@
         icon="caret-down"/></span>
       </div>
       <ul v-if="activeFilters || $mq !== 'mobile'">
-        <li v-for="(item, index) in filters" :key="index" @click="activeFilter = item.value">
+        <li v-for="(item, index) in filters" :key="index" @click="toggleFilters(item.value)">
           <span :class="{active: activeFilter === item.value}">{{item.name[locale]}}</span>
         </li>
       </ul>
@@ -29,7 +29,7 @@ export default {
           value: 'TV/Video',
           name: {
             en: 'TV / VIDEO',
-            ka: 'ტელ / ვიდეო'
+            ka: 'ტვ / ვიდეო'
           }
         }, {
           value: 'Online/Print',
@@ -47,6 +47,12 @@ export default {
       ],
       activeFilter: 'all',
       activeFilters: false
+    }
+  },
+  methods: {
+    toggleFilters: function (value) {
+      this.activeFilter = value
+      this.$emit('filtered', value)
     }
   }
 }

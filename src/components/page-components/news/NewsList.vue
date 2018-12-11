@@ -44,13 +44,11 @@ import EventItem from '../../partials/EventView'
 
 export default {
   name: 'news-list',
-  watch: {
-    '$route.params.id': function () {
-      this.loadSingle()
-    }
-  },
   mounted: function () {
     if (!this.$store.getters.events.length) this.fetchItems()
+    if (this.$route.params.id) {
+      this.loadSingle()
+    }
   },
   props: {
     categories: {

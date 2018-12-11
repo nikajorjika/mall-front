@@ -48,31 +48,31 @@
             </a>
             <router-link v-else :to="`/${locale}/login`">{{t('my_mall')}}
             </router-link>
-            <div class="user-action-block" v-show="showActions && $store.getters.user">
-              <ul>
-                <li :class="{active: $store.getters.user ? $store.getters.user.hasNewNotification : false}"><span
-                  class="action-label"><router-link
-                  :to="`/${locale}/user/notifications`">{{t('notifications')}}</router-link></span>
-                </li>
-                <li><span class="action-label"><router-link
-                  :to="`/${locale}/user/subscribed`">{{t('subscribe_list')}}</router-link></span>
-                </li>
-                <li><span class="action-label"><router-link
-                  :to="`/${locale}/user/bookmarks`">{{t('bookmarks')}}</router-link></span>
-                </li>
-                <li><span class="action-label"><router-link
-                  :to="`/${locale}/user/settings`">{{t('settings')}}</router-link></span>
-                </li>
-                <li><span class="action-label" @click="logOut">{{t('log_out')}}</span></li>
-              </ul>
-            </div>
+            <transition name="slideUp">
+              <div class="user-action-block" v-if="showActions && $store.getters.user">
+                <ul>
+                  <li :class="{active: $store.getters.user ? $store.getters.user.hasNewNotification : false}"><span
+                    class="action-label"><router-link
+                    :to="`/${locale}/user/notifications`">{{t('notifications')}}</router-link></span>
+                  </li>
+                  <li><span class="action-label"><router-link
+                    :to="`/${locale}/user/subscribed`">{{t('subscribe_list')}}</router-link></span>
+                  </li>
+                  <li><span class="action-label"><router-link
+                    :to="`/${locale}/user/bookmarks`">{{t('bookmarks')}}</router-link></span>
+                  </li>
+                  <li><span class="action-label"><router-link
+                    :to="`/${locale}/user/settings`">{{t('settings')}}</router-link></span>
+                  </li>
+                  <li><span class="action-label" @click="logOut">{{t('log_out')}}</span></li>
+                </ul>
+              </div>
+            </transition>
           </li>
-          <li>
-            <div @click.prevent="toggleSearch()">
-              <router-link to="#" class="text-center">
-                <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
-              </router-link>
-            </div>
+          <li @click.prevent="toggleSearch()">
+            <router-link to="#" class="text-center">
+              <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
+            </router-link>
           </li>
           <li>
             <language-switcher/>
@@ -344,7 +344,40 @@ export default {
         > li {
           border-left: solid 1px #f1f1f1;
           position: relative;
-
+          &:before {
+            content: '';
+            height: 0;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            position: absolute;
+            background: #000;
+            transition: height 0.3s;
+          }
+          &:hover {
+            > a {
+              color: #fff;
+              img {
+                filter: invert(1);
+              }
+            }
+            .language-switcher{
+              .lang-wrapper{
+                > a {
+                  color: #fff;
+                  img {
+                    filter: invert(1);
+                  }
+                }
+              }
+            }
+            &:before {
+              height: 100%;
+              top: auto;
+              bottom: 0;
+            }
+          }
           a {
             padding: 35.5px 29px;
             min-width: 85px;
@@ -352,11 +385,12 @@ export default {
             display: flex;
             text-align: center;
             cursor: pointer;
+            z-index: 1;
+            position: relative;
             @media screen and (max-width: 760px) {
               padding: 23px;
               min-width: 0;
             }
-
             &.text-center {
               display: flex;
               text-align: center;
@@ -364,10 +398,6 @@ export default {
               img {
                 margin: auto;
               }
-            }
-
-            &:hover {
-              background: #f1f1f1;
             }
 
             img {
@@ -383,12 +413,17 @@ export default {
             position: absolute;
             background: #ffffff;
             z-index: 999;
-            top: 100%;
-            left: 50%;
-            transform: translate(-50%, -11px);
+            top: calc(100% - 11px);
+            left: -42px;
             padding: 32px;
             box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
+            &.slideUp-enter-active {
+              animation: subMenuEnter .4s;
+            }
 
+            &.slideUp-leave-active {
+              animation: subMenuLeave .2s;
+            }
             ul {
               li {
                 margin-bottom: 14px;

@@ -21,7 +21,7 @@
     <loading-big v-show="loadingStores"/>
     <div class="container" v-if="viewGrid ||  $mq === 'mobile'">
       <div class="store-list">
-        <div class="store-list-item" v-for="(item, index) in $store.getters.stores" :key="index">
+        <div class="store-list-item" v-for="(item, index) in $store.getters[model]" :key="index">
           <div class="store-inner">
             <router-link :to="`/${locale}/store/${createSlug(item.name['en'])}/${item._id}`">
               <store-item :item="item"/>
@@ -90,6 +90,7 @@
           </div>
         </div>
       </div>
+
       <!--<div class="loading-container">-->
       <!--<div class="loading-big"></div>-->
       <!--</div>-->
@@ -122,8 +123,8 @@ export default {
       this.fetchItems()
     }
     if (!this.$store.getters.categories.length) {
-      this.$store.dispatch('getCategories').then((response) => {
-        console.log(this.$store.getters.categories)
+      this.$store.dispatch('getCategories').catch((error) => {
+        console.error(error)
       })
     }
   },
@@ -133,6 +134,14 @@ export default {
     },
     grouped: {
       type: Object
+    },
+    model: {
+      type: String,
+      default: 'stores'
+    },
+    apiUrl: {
+      type: String,
+      default: 'storesAPI'
     },
     services: {
       type: Array,
@@ -251,8 +260,8 @@ export default {
     },
     sendRequest: function (setter) {
       this.$store.dispatch('fetchItems', {
-        model: 'stores',
-        api: this.$store.state.apiUrls.storesAPI(this.page, this.offset),
+        model: this.model,
+        api: this.$store.state.apiUrls[ this.apiUrl ](this.page, this.offset),
         setter: setter
       }).then((response) => {
         if (response.data.data.length < this.offset) this.hasMore = false
@@ -267,8 +276,8 @@ export default {
     },
     getStoreList: function () {
       this.$store.dispatch('fetchItems', {
-        model: 'storesList',
-        api: this.$store.state.apiUrls.storeList,
+        model: `${this.model}List`,
+        api: this.$store.state.apiUrls[ `${this.model}List` ],
         setter: 'SET_STORE_LIST'
       }).then(() => {
         this.listLoaded = true

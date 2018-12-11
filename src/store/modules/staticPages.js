@@ -25,7 +25,7 @@ const staticPages =
       url: '/page/how-to-get',
       name: {
         en: 'How to Get',
-        ka: 'როგორ მივიდე'
+        ka: 'როგორ მივიდეთ'
       }
     },
     {

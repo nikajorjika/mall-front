@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="button-container">
-      <a :href="item.linkUrl" target="_blank">
+      <a :href="item.sourceUrl" target="_blank">
         <span>{{t('full_page')}}</span>
         <img src="../../../assets/images/icons/left-arrow-subscribe.svg" alt="See full page">
       </a>
