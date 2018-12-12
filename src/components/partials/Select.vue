@@ -9,7 +9,7 @@
     <div class="selectable-items" v-if="open">
       <ul>
         <li class="placeholder">
-          <div class="item" @click="fireSelect(null)">{{placeholder[locale]}}</div>
+          <div class="item" v-if="selectedItem" @click="fireSelect(null)">{{placeholder[locale]}}</div>
         </li>
         <li v-for="(item, index) in items" v-bind:key="index">
           <div class="item" @click="fireSelect(item)" :class="{currentItem: item === selectedItem}">{{item[nameField][locale]}}</div>
@@ -85,7 +85,11 @@ export default {
     fireSelect: function (selected) {
       this.selectedItem = selected
       this.open = false
-      this.$emit('change', { selected: selected, name: this.name, value: selected[this.valueField] })
+      if(selected){
+        this.$emit('change', { selected: selected, name: this.name, value: selected[this.valueField] })
+      }else{
+        this.$emit('change', { selected: null, name: this.name, value: null })
+      }
     },
     toggleBody: function () {
       this.open = !this.open

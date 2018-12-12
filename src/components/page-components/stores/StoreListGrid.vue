@@ -30,12 +30,6 @@
                     </div>
                 </div>
             </div>
-            <div class="grid-footer-container" v-if="hasMore && !loadingStores">
-                <button v-show="loading" class="loading">{{t('loading')}}</button>
-                <button v-show="!loading" @click="this.loadMore">{{t('load_more')}}</button>
-            </div>
-            <div class="loading-placeholder" v-else>
-            </div>
         </div>
         <div class="store-list-view" v-else>
             <div class="alphabet-header">
@@ -93,10 +87,6 @@
                     </div>
                 </div>
             </div>
-
-            <!--<div class="loading-container">-->
-            <!--<div class="loading-big"></div>-->
-            <!--</div>-->
         </div>
     </div>
 </template>
@@ -121,7 +111,6 @@ export default {
     }
   },
   mounted: function () {
-    this.scroll()
     if (!this.$store.getters[`${this.model}List`].length) {
       this.getStoreList()
     }
@@ -290,10 +279,8 @@ export default {
   computed: {
     filteredItems: function () {
       let list = this.$store.getters[`${this.model}List`]
-      if (this.filters !== null) {
+      if (this.filters && list) {
         list = list.filter((item) => {
-          console.log(this.filters.category)
-          console.log(item.categoryId)
           let filterIndex = 1
           if (this.filters.category.length && this.filters.category.indexOf(item.categoryId) === -1) {
             filterIndex = 0
@@ -301,11 +288,17 @@ export default {
           if (this.filters.search.length && item.name.en.toLowerCase().indexOf(this.filters.search.toLowerCase()) === -1 && item.name.ka.toLowerCase().indexOf(this.filters.search.toLowerCase()) === -1) {
             filterIndex = 0
           }
-          if (this.filters.floor.length && item.name.en.toLowerCase().indexOf(this.filters.search.toLowerCase()) === -1 && item.name.ka.toLowerCase().indexOf(this.filters.search.toLowerCase()) === -1) {
+          if (this.filters.floors.length) {
             filterIndex = 0
           }
           return filterIndex
         })
+
+        if (this.filters.sort.length && this.filters.sort === 'asc') {
+          list.sort((a, b) => (a.name[this.locale].toLowerCase() > b.name[this.locale].toLowerCase() ) ? 1 : ((b.name[this.locale].toLowerCase() > a.name[this.locale].toLowerCase()) ? -1 : 0))
+        } else if (this.filters.sort.length && this.filters.sort === 'desc') {
+          list.sort((a, b) => (a.name[this.locale].toLowerCase() < b.name[this.locale].toLowerCase() ) ? 1 : ((b.name[this.locale].toLowerCase() < a.name[this.locale].toLowerCase()) ? -1 : 0))
+        }
       }
       return list
     },
