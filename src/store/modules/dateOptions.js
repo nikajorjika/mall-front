@@ -311,8 +311,8 @@ const dateOptions = {
   year: {
     options: function () {
       let years = []
-      let i = 1955
-      while (i >= 1955 && i <= 2018) {
+      let i = 2018
+      while (i <= 2018 && i >= 1955) {
         years.push({
           name: {
             ka: i,
@@ -320,7 +320,7 @@ const dateOptions = {
           },
           value: i
         })
-        i++
+        i--
       }
       return years
     }

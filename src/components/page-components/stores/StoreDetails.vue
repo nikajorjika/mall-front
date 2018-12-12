@@ -107,8 +107,7 @@
       </div>
       <div class="store-map-promotion">
         <div class="store-map-wrapper">
-          <div class="part-map">
-            <img src="https://placehold.it/1249x517">
+          <div class="part-map" id="part-map" ref="partMap">
           </div>
           <div class="part-promotions" v-if="storePromotions.length">
             <div class="slider-title">
@@ -351,7 +350,7 @@ export default {
             font-size: 1.6rem;
             font-weight: 300;
             text-align: center;
-            margin:0 0 22px 0;
+            margin: 0 0 22px 0;
             text-transform: uppercase;
             font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
           }
@@ -365,7 +364,7 @@ export default {
       .part-map {
         padding: 75px 39px 75px 26px;
         width: calc(100% - 430px);
-        img{
+        img {
           width: 100%;
         }
       }
@@ -388,7 +387,7 @@ export default {
     width: 100%;
     max-width: 1640px;
     margin: 0 auto;
-    padding-bottom:17px;
+    padding-bottom: 17px;
     @media screen and (max-width: 1660px) {
       width: calc(100% - 40px);
       margin: 0 20px;

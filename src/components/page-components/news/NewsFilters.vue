@@ -49,10 +49,12 @@ export default {
   data: () => {
     return {
       filters: {
-        brand: null,
-        sort: null,
-        floor: null,
-        category: null
+        includeEvent: true,
+        includeNewCol: true,
+        includeNews: true,
+        includeOffer: true,
+        brandIds: [],
+        floors: []
       },
       category: null
     }
@@ -61,6 +63,7 @@ export default {
     updateElement: function (selected) {
       if (selected.selected !== null) {
         this.filters[ selected.name ] = selected.selected.value
+        console.log(this.filters)
       }
     }
   }

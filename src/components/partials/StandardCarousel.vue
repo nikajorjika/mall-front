@@ -6,12 +6,15 @@
                 :navigationPrevLabel="this.printPrevIcon()" :perPageCustom="[[0, 1],[480, 2],[760, 3], [1024, 4]]" :navigationNextLabel="this.printNextIcon()">
         <slide v-for="item in items" v-bind:key="item._id">
           <div class="slide-container">
-            <img :src="item.logoUrl" :alt="item.name[locale]">
+            <router-link :to="`/${locale}/store/${createSlug(item.name['en'])}/${item._id}`">
+              <img :src="item.logoUrl" :alt="item.name[locale]">
+            </router-link>
           </div>
         </slide>
       </carousel>
     </div>
     <div class="carousel-small" v-else>
+
       <small-slider :items="$store.getters.stores" logoOption="logoUrl"/>
     </div>
   </div>
@@ -87,11 +90,12 @@ export default {
       border: solid 1px #dcdcdc;
       margin-right: 20px;
       img {
-        width: 100%;
-        height: 100%;
+        width: calc(100% - 100px);
+        height: calc(100% - 100px);
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         object-fit: contain;
         margin: auto;
       }

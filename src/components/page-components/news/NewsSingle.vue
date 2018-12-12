@@ -25,7 +25,7 @@
         <div class="title-container">
           <h2 class="title">{{item.name[locale]}}</h2>
           <h4 class="sub-title" v-if="store.length">
-            {{store[0].first().name[locale]}}
+            {{store[0].name[locale]}}
           </h4>
         </div>
         <div class="description-container">
@@ -69,8 +69,6 @@
               </div>
             </div>
           </social-sharing>
-          {{store}}
-
         </div>
       </div>
     </div>

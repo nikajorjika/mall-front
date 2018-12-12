@@ -5,7 +5,7 @@
         <img :src="image" :alt="item.name[locale]">
         <div class="event-item-content">
           <div class="event-type">
-            <span>OFFER</span>
+            <span>{{t(item.itemType)}}</span>
           </div>
           <div class="event-name">
             <h3>{{item.name[locale]}}</h3>
@@ -143,6 +143,7 @@ export default {
         text-align: left;
         color: #ffffff;
         line-height: 1.28;
+        text-transform: uppercase;
         @media screen and (max-width: 1650px) {
           font-size: 1.2rem;
         }

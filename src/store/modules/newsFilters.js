@@ -10,28 +10,28 @@ const newsFilters = {
           en: 'promotions',
           ka: 'სეილები'
         },
-        value: 'promotions'
+        value: 'includeOffer'
       },
       {
         name: {
           en: 'new collections',
           ka: 'შეთავაზებები'
         },
-        value: 'new-collections'
+        value: 'includeNewCol'
       },
       {
         name: {
           en: 'news',
           ka: 'ახალი კოლექციები'
         },
-        value: 'news'
+        value: 'includeNews'
       },
       {
         name: {
           en: 'events',
           ka: 'ივენთები'
         },
-        value: 'events'
+        value: 'includeEvent'
       }
     ]
   },

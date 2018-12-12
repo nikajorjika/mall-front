@@ -53,7 +53,7 @@ export default {
   name: 'home',
   data: function () {
     return {
-      storeCarousel: false
+      storeCarousel: true
     }
   },
   beforeMount: function () {
