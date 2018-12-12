@@ -79,6 +79,9 @@ export default {
             line-height: 1.29;
             color: #3a3838;
             margin: 28px 0;
+            &:hover{
+              color: #999;
+            }
             @media screen and (max-width: 1650px) {
               font-size: 1.2rem;
               margin: 17px 0;
