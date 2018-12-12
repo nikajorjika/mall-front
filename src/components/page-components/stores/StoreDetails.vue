@@ -18,7 +18,8 @@
                 </span>
                 <span class="unsubscribe" v-else>
                   <span class="subscribed">
-                     <img src="../../../assets/images/icons/pwichka.svg" height="6" width="9"> <span>{{t('subscribed')}}</span>
+                     <img src="../../../assets/images/icons/pwichka.svg" height="6"
+                          width="9"> <span>{{t('subscribed')}}</span>
                   </span>
                   <span class="hover">
                     {{t('unsubscribe')}}
@@ -81,7 +82,7 @@
             </div>
             <div class="contact-info">
               <ul>
-                <li>
+                <li v-if="store.phone">
                   <span class="icon store-phone">
                     <img src="../../../assets/images/icons/Phone.svg" alt="Phone icon">
                   </span>
@@ -89,7 +90,7 @@
                     {{formatPhoneNumber(store.phone)}}
                   </span>
                 </li>
-                <li>
+                <li v-if="store.websiteLink">
                   <span class="icon store-link">
                     <img src="../../../assets/images/icons/Web.svg" alt="Web icon">
                   </span>
@@ -101,6 +102,20 @@
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="store-map-promotion">
+        <div class="store-map-wrapper">
+          <div class="part-map">
+            <img src="https://placehold.it/1249x517">
+          </div>
+          <div class="part-promotions" v-if="storePromotions.length">
+            <div class="slider-title">
+              <h4>{{t('promotion')}}</h4>
+            </div>
+            <small-slider :items="storePromotions" logoOption="photoUrl" nameOption="name"
+                          descriptionOption="shortDescription"/>
           </div>
         </div>
       </div>
@@ -146,10 +161,11 @@
 import LoadingBig from '../../partials/LoadingBig'
 import SocialSharingNetwork from 'vue-social-sharing/src/social-sharing-network'
 import ButtonStandard from '../../partials/StandardButton'
+import SmallSlider from '../../partials/SmallSlider'
 
 export default {
   name: 'store-details',
-  components: { ButtonStandard, SocialSharingNetwork, LoadingBig },
+  components: { SmallSlider, ButtonStandard, SocialSharingNetwork, LoadingBig },
   mounted: function () {
     this.loadStore()
     if (this.$store.getters.user && !this.$store.getters.subscribed.length) {
@@ -157,11 +173,21 @@ export default {
         console.error(error)
       })
     }
+    if (this.$route.params.store) {
+      this.$http.get(this.$store.state.apiUrls.storePromotions(this.$route.params.store))
+        .then((response) => {
+          this.storePromotions = response.data.promotions
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    }
   },
   data: function () {
     return {
       store: null,
-      loading: false
+      loading: false,
+      storePromotions: []
     }
   },
   computed: {
@@ -239,6 +265,10 @@ export default {
   }
 }
 
+.small-slider .small-slider-container .slide {
+  margin-bottom: 12px;
+}
+
 .share-container {
   .share-inner {
     display: flex;
@@ -303,6 +333,44 @@ export default {
 }
 
 #store-details {
+  .store-map-promotion {
+    border-top: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+    .store-map-wrapper {
+      width: 95%;
+      margin: 0 auto;
+      max-width: 1640px;
+      display: flex;
+      .part-promotions {
+        width: 430px;
+        padding: 28px 16px 0;
+        border-left: 1px solid #dcdcdc;
+        border-right: 1px solid #dcdcdc;
+        .slider-title {
+          h4 {
+            font-size: 1.6rem;
+            font-weight: 300;
+            text-align: center;
+            margin:0 0 22px 0;
+            text-transform: uppercase;
+            font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
+          }
+        }
+        .small-slider .small-slider-container .slide img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .part-map {
+        padding: 75px 39px 75px 26px;
+        width: calc(100% - 430px);
+        img{
+          width: 100%;
+        }
+      }
+    }
+  }
   .store-details-cover {
     width: 100%;
     padding-top: 39.584%;
@@ -320,7 +388,8 @@ export default {
     width: 100%;
     max-width: 1640px;
     margin: 0 auto;
-    @media screen and (max-width: 1660px){
+    padding-bottom:17px;
+    @media screen and (max-width: 1660px) {
       width: calc(100% - 40px);
       margin: 0 20px;
     }
@@ -337,7 +406,7 @@ export default {
           border: 1px solid rgba(0, 0, 0, 0.5);
           img {
             height: calc(100% - 100px);
-            width:  calc(100% - 100px);
+            width: calc(100% - 100px);
             margin: auto;
             object-fit: contain;
           }
@@ -358,15 +427,15 @@ export default {
             color: #eead16;
             cursor: pointer;
             position: relative;
-            &.alreadySubscribed{
+            &.alreadySubscribed {
               border: 1px solid #000000;
               color: #000000;
             }
-            .hover{
+            .hover {
               display: none;
             }
-            .subscribed{
-              img{
+            .subscribed {
+              img {
                 margin-right: 5px;
               }
             }
@@ -397,7 +466,7 @@ export default {
                 transition: height 0.3s;
               }
             }
-            &.alreadySubscribed{
+            &.alreadySubscribed {
               &:before {
                 background: #000;
               }

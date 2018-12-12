@@ -90,7 +90,6 @@ export default {
   },
   watch: {
     '$route.params.id': function (to, fr) {
-      console.log(to, fr)
       const existing = this.$store.getters.events.find((element) => {
         return element._id === this.$route.params.id
       })

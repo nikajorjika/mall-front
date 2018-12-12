@@ -24,8 +24,8 @@
         </div>
         <div class="title-container">
           <h2 class="title">{{item.name[locale]}}</h2>
-          <h4 class="sub-title">
-            SUPER
+          <h4 class="sub-title" v-if="store.length">
+            {{store[0].first().name[locale]}}
           </h4>
         </div>
         <div class="description-container">
@@ -69,6 +69,8 @@
               </div>
             </div>
           </social-sharing>
+          {{store}}
+
         </div>
       </div>
     </div>
@@ -93,11 +95,29 @@ export default {
       default: true
     }
   },
+  mounted: function () {
+    if (!this.$store.getters.storesList.length) {
+      this.$store.dispatch('fetchItems', {
+        model: `storesList`,
+        api: this.$store.state.apiUrls[ `storesList` ],
+        setter: 'SET_STORE_LIST'
+      }).catch((error) => {
+        console.error(error)
+      })
+    }
+  },
   computed: {
     bookmarked: function () {
       return this.$store.getters.bookmarked.filter(object => {
         if (object) {
           return object._id === this.item._id
+        }
+      })
+    },
+    store: function () {
+      return this.$store.getters.storesList.filter(store => {
+        if (store._id === this.item.entityId) {
+          return true
         }
       })
     }
@@ -153,7 +173,7 @@ export default {
       &.single-left {
         margin: 0 22px 0 30px;
         overflow: hidden;
-        @media screen and (max-width: 1236px){
+        @media screen and (max-width: 1236px) {
           width: 100%;
         }
       }

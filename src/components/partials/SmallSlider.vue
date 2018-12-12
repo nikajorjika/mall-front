@@ -2,9 +2,17 @@
   <div class="small-slider">
     <div class="small-slider-container">
       <agile :options="options" :next-arrow="getArrow()" :prev-arrow="getArrow()">
-        <div class="slide" v-for="(item, index) in this.$store.getters.stores" :key="index">
+        <div class="slide" v-for="(item, index) in items" :key="index">
           <div class="small-slide-container">
-            <img :src="item.logoUrl" :alt="item.name[locale]">
+            <img :src="item[logoOption]" :alt="item.name[locale]">
+          </div>
+          <div class="content-container">
+            <div class="title-container" v-if="nameOption">
+                <h3>{{item[nameOption][locale]}}</h3>
+            </div>
+            <div class="description-container" v-if="descriptionOption">
+              <p v-html="item[descriptionOption][locale]"></p>
+            </div>
           </div>
         </div>
       </agile>
@@ -14,6 +22,22 @@
 <script>
 export default {
   name: 'small-slider',
+  props: {
+    items: {
+      type: Array
+    },
+    logoOption: {
+      type: String
+    },
+    descriptionOption: {
+      type: String,
+      default: ''
+    },
+    nameOption: {
+      type: String,
+      default: ''
+    }
+  },
   data: () => {
     return {
       options: {
@@ -36,9 +60,24 @@ export default {
 </script>
 <style lang="scss">
 .small-slider {
-  width: 216px;
+  width:100%;
   margin: 0 auto;
-
+  .title-container{
+    h3{
+      text-align: center;
+      font-size: 1.8rem;
+      margin: 0 0 12px 0;
+      font-family: 'Muli','BPG Arial','sans-serif';
+    }
+  }
+  .description-container{
+    p{
+      text-align: center;
+      font-size: 1.4rem;
+      margin:0 0 52px;
+      font-family: 'Muli Light','BPG Arial','sans-serif';
+    }
+  }
   .small-slider-container {
     .slide {
       border: 1px solid #dcdcdc;
@@ -64,7 +103,7 @@ export default {
         }
         .agile__dot {
           border-right: none;
-          margin:auto 2px;
+          margin: auto 2px;
           &:first-child {
             margin-left: auto;
           }

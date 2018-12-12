@@ -12,7 +12,7 @@
       </carousel>
     </div>
     <div class="carousel-small" v-else>
-      <small-slider/>
+      <small-slider :items="$store.getters.stores" logoOption="logoUrl"/>
     </div>
   </div>
 </template>
@@ -118,6 +118,10 @@ export default {
         height: 53.9px;
       }
     }
+  }
+  .carousel-small{
+    width: 216px;
+    margin: 0 auto;
   }
 }
 </style>

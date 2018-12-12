@@ -28,6 +28,7 @@ const apiUrls = {
   storesList: `https://smartfinders.herokuapp.com/api/v1/website/stores-list-view`,
   media: `https://smartfinders.herokuapp.com/api/v1/website/media`,
   entertainmentList: `https://smartfinders.herokuapp.com/api/v1/website/entertainment-items`,
+  storePromotions: (storeId) => `https://smartfinders.herokuapp.com/api/v1/website/store-promotions/${storeId}`,
   entertainment: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/entertainment-items/${page}/${offset}`,
   storesAPI: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/stores/${page}/${offset}`,
   eventsAPI: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/events/${page}/${offset}`,
