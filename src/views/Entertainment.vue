@@ -1,7 +1,7 @@
 <template>
   <div id="page-stores">
     <block-header-standard :title="this.title[locale]"/>
-    <store-list-grid :grouped="grouped" apiUrl="entertainment" model="entertainment" :categories="$store.getters.storeFilters"/>
+    <store-list-grid apiUrl="entertainment" model="entertainment" :categories="$store.getters.storeFilters"/>
   </div>
 </template>
 
@@ -29,11 +29,6 @@ export default {
     },
     fetchItems: function () {
       console.log('load more')
-    }
-  },
-  computed: {
-    grouped: function () {
-      return this.groupByAlphabet(this.$store.getters.entertainmentList)
     }
   }
 }

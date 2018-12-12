@@ -1,7 +1,7 @@
 <template>
   <div id="page-stores">
     <block-header-standard :title="this.title[locale]"/>
-    <store-list-grid :grouped="grouped" :categories="$store.getters.storeFilters"/>
+    <store-list-grid :categories="$store.getters.storeFilters"/>
   </div>
 </template>
 
@@ -22,11 +22,6 @@ export default {
   components: {
     StoreListGrid,
     BlockHeaderStandard
-  },
-  computed: {
-    grouped: function () {
-      return this.groupByAlphabet(this.$store.getters.storesList)
-    }
   }
 }
 </script>

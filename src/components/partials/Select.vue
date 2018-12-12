@@ -85,7 +85,7 @@ export default {
     fireSelect: function (selected) {
       this.selectedItem = selected
       this.open = false
-      this.$emit('change', { selected: selected, name: this.name })
+      this.$emit('change', { selected: selected, name: this.name, value: selected[this.valueField] })
     },
     toggleBody: function () {
       this.open = !this.open

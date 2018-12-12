@@ -2,18 +2,18 @@
   <div class="store-filters">
     <div class="filter-item">
       <custom-select :items="$store.getters.categories.subcategories" nameField="translates" valueField="_id"
-                     :placeholder="categories.categories.placeholder"/>
+                     :placeholder="categories.categories.placeholder" @change="invokeFilters" name="category"/>
     </div>
     <div class="filter-item search-item">
-      <filter-search/>
+      <filter-search @searched="invokeFilters"/>
     </div>
     <div class="filter-item">
       <custom-select :items="categories.floors.data"
-                     :placeholder="categories.floors.placeholder"/>
+                     :placeholder="categories.floors.placeholder" name="floors"/>
     </div>
     <div class="filter-item">
       <custom-select :items="categories.sort.data"
-                     :placeholder="categories.sort.placeholder"/>
+                     :placeholder="categories.sort.placeholder" name="sort"/>
     </div>
     <div class="grid-toggle" v-if="$mq !== 'mobile'">
       <div class="show-grid toggle-item" :class="grid ? 'active' : ''" @click="toggleView(true)">
@@ -50,13 +50,27 @@ export default {
         ka: 'კატეგორიები',
         en: 'CATEGORY'
       },
-      grid: true
+      grid: true,
+      filterData: {
+        category: [],
+        search: '',
+        floors:[],
+        sort: ''
+      }
     }
   },
   methods: {
     toggleView: function (view) {
       this.grid = view
       this.$emit('changeView', view)
+    },
+    invokeFilters: function (data) {
+      if(Array.isArray(this.filterData[data.name])){
+        this.filterData[data.name].push(data.value);
+      }else{
+        this.filterData[data.name] = data.value;
+      }
+      this.$emit('filtered',this.filterData)
     }
   }
 }

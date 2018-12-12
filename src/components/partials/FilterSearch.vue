@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     onChange: function () {
-      this.$emit('searched', this.searchText)
+      this.$emit('searched', {name: 'search', value: this.searchText})
     }
   }
 }

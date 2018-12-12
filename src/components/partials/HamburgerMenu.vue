@@ -210,11 +210,16 @@ export default {
     }
     .inner-content-container {
       display: flex;
-      max-width: 1366px;
+      min-width: 887px;
+      width: 71%;
       background: #ffff;
       z-index: 4;
       position: relative;
       height: 100%;
+      @media screen and (max-width: 887px) {
+        width: 100%;
+        min-width:100%;
+      }
       @media screen and (max-width: 760px) {
         flex-direction: column;
       }
@@ -225,6 +230,7 @@ export default {
         width: 100%;
         height: 100%;
         overflow: hidden;
+        position: relative;
         .right-inner-container{
           overflow-y: auto;
           height: 100%;

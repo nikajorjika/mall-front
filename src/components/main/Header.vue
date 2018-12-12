@@ -384,6 +384,7 @@ export default {
             transition: height 0.3s;
           }
           &:hover {
+            >div>a,
             > a {
               color: #fff;
               img {
