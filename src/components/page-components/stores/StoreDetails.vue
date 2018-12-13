@@ -227,6 +227,17 @@ export default {
             type: 'success',
             title: this.t('subscribed_successfully')
           })
+          if (!this.isSubscribed) {
+            this.$store.dispatch('showPopup', {
+              message: this.t('subscribed_successfully'),
+              icon: 'success'
+            })
+          } else {
+            this.$store.dispatch('showPopup', {
+              message: this.t('unsubscribed_successfully'),
+              icon: 'success'
+            })
+          }
           this.$store.dispatch('getSubscribed').catch((error) => {
             console.error(error)
           })

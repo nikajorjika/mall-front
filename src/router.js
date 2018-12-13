@@ -172,6 +172,18 @@ const router = new Router({
       component: () => import('./views/Login.vue')
     },
     {
+      path: '/:locale/password/recovery',
+      name: 'passwordRecovery',
+      props: true,
+      component: () => import('./views/PasswordReset.vue')
+    },
+    {
+      path: '/:locale/reset/password/:resetToken',
+      name: 'renewPassword',
+      props: true,
+      component: () => import('./views/RenewPassword.vue')
+    },
+    {
       path: '/:locale/register',
       name: 'registration',
       props: true,

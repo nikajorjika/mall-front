@@ -79,7 +79,12 @@ export default new Vuex.Store({
     categories: [],
     searchResult: [],
     searchFeatured: [],
-    sliderItems: []
+    sliderItems: [],
+    showPopup: false,
+    popup: {
+      icon: '',
+      message: ''
+    }
   },
   getters: {
     noScroll: (state) => {
@@ -90,6 +95,12 @@ export default new Vuex.Store({
     },
     searchResult: (state) => {
       return state.searchResult
+    },
+    showPopup: (state) => {
+      return state.showPopup
+    },
+    popup: (state) => {
+      return state.popup
     },
     navigation: (state) => {
       return state.navigation
@@ -287,6 +298,16 @@ export default new Vuex.Store({
     },
     SET_STORE_LIST: (state, payload) => {
       state[ payload.model ] = payload.data
+    },
+    SHOW_POPUP: (state, payload) => {
+      state.showPopup = true
+      state.popup.message = payload.message
+      state.popup.icon = payload.icon
+    },
+    HIDE_POPUP: (state) => {
+      state.showPopup = false
+      state.popup.message = ''
+      state.popup.icon = ''
     }
   },
   actions: {
@@ -663,6 +684,9 @@ export default new Vuex.Store({
           reject(error)
         })
       })
+    },
+    showPopup: function (context, payload) {
+      context.commit('SHOW_POPUP', payload)
     }
   }
 })

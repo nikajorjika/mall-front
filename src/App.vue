@@ -4,16 +4,19 @@
       <nav-bar/>
       <router-view/>
       <footer-component/>
-      <notifications group="notify"/>
+      <!--<notifications group="notify"/>-->
+      <custom-popup/>
     </div>
   </div>
 </template>
 <script>
 import FooterComponent from './components/main/Footer'
 import NavBar from './components/main/Header'
+import CustomPopup from './components/partials/Popup'
 
 export default {
   components: {
+    CustomPopup,
     FooterComponent,
     NavBar
   },

@@ -28,7 +28,9 @@
         </div>
       </div>
       <div class="forgot-password">
-        <p>{{t('forgot_password')}}</p>
+        <router-link :to="`/${locale}/password/recovery`">
+          <p>{{t('forgot_password')}}</p>
+        </router-link>
         <div class="remember-me">
           <input type="checkbox" v-model="user.remember" id="remember-me">
           <label for="remember-me">{{t('remember_me')}}</label>

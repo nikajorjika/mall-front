@@ -11,10 +11,10 @@
  * See https://goo.gl/2aRDsh
  */
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.2/workbox-sw.js");
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.85c8322b3b4584aace5bdbeb1a2e9372.js"
+  "/precache-manifest.88755189c0a744587d5244dfe72dca3e.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "mallweb"});

@@ -30,6 +30,8 @@ const apiUrls = {
   media: `https://smartfinders.herokuapp.com/api/v1/website/media`,
   entertainmentList: `https://smartfinders.herokuapp.com/api/v1/website/entertainment-items`,
   newsFilters: `https://smartfinders.herokuapp.com/api/v1/website/filter-items`,
+  sendToken: `https://smartfinders.herokuapp.com/api/v1/website/reset-token`,
+  sendNewPassword: `https://smartfinders.herokuapp.com/api/v1/website/reset-password`,
   featuredSearch: `https://smartfinders.herokuapp.com/api/v1/website/featured-search-items`,
   storePromotions: (storeId) => `https://smartfinders.herokuapp.com/api/v1/website/store-promotions/${storeId}`,
   entertainment: (page, offset) => `https://smartfinders.herokuapp.com/api/v1/website/entertainment-items/${page}/${offset}`,

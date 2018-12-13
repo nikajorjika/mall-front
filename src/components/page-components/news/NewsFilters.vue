@@ -1,7 +1,8 @@
 <template>
   <div class="news-filters">
     <div class="filter-item">
-      <custom-select :items="categories.categories.data" :placeholder="categories.categories.placeholder" :multiple="true"
+      <custom-select :items="categories.categories.data" :placeholder="categories.categories.placeholder"
+                     :multiple="true"
                      name="category" :value="category" @change="updateElement"/>
     </div>
     <div class="filter-item">
@@ -9,7 +10,8 @@
                      @change="updateElement" nameField="name" valueField="_id"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="categories.floors.data" name="floor" :placeholder="categories.floors.placeholder" :multiple="true"
+      <custom-select :items="categories.floors.data" name="floor" :placeholder="categories.floors.placeholder"
+                     :multiple="true"
                      @change="updateElement"/>
     </div>
     <div class="filter-item">
@@ -61,7 +63,7 @@ export default {
         page: 0,
         isUpcoming: false,
         isOngoing: false,
-        isArchive: false,
+        isArchive: false
       },
       category: null,
       listLoaded: false
@@ -70,38 +72,38 @@ export default {
   computed: {
     brands: function () {
       return this.$store.getters.storesList.filter((store) => {
-          return 1
+        return 1
       })
     }
   },
   methods: {
     updateElement: function (selected) {
       if (selected.selected.length || selected.selected !== null) {
-        if(selected.name === 'category') {
+        if (selected.name === 'category') {
           this.filters.includeEvent = this.filters.includeNewCol = this.filters.includeNews = this.filters.includeOffer = false
           selected.selected.forEach(item => {
-            this.filters[item.value] = true
+            this.filters[ item.value ] = true
           })
         }
-        if(selected.name === 'brand') {
+        if (selected.name === 'brand') {
           this.filters.brandIds = []
           selected.selected.forEach(item => {
-            if(this.filters.brandIds.indexOf(item[selected.value]) === -1){
-              this.filters.brandIds.push(item[selected.value])
+            if (this.filters.brandIds.indexOf(item[ selected.value ]) === -1) {
+              this.filters.brandIds.push(item[ selected.value ])
             }
           })
         }
-        if(selected.name === 'floor') {
+        if (selected.name === 'floor') {
           this.filters.floors = []
           selected.selected.forEach(item => {
-            if(this.filters.floors.indexOf(item.value) === -1){
+            if (this.filters.floors.indexOf(item.value) === -1) {
               this.filters.floors.push(item.value)
             }
           })
         }
-        if(selected.name === 'sort') {
+        if (selected.name === 'sort') {
           this.filters.isOngoing = this.filters.isArchive = this.filters.isUpcoming = false
-          this.filters[selected.selected.value] = true
+          this.filters[ selected.selected.value ] = true
         }
       }
       this.loadFilteredNews()
