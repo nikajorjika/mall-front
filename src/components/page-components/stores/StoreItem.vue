@@ -1,7 +1,10 @@
 <template>
-  <div class="store-item">
+  <div class="store-item" data-aos="fade-up" >
     <div class="store-wrapper">
-      <img :src="locale === 'ka' ? item['kaLogoUrl'] : item.logoUrl" :alt="item.name[locale]">
+      <v-lazy-image
+        :src="locale === 'ka' ? item['kaLogoUrl'] : item.logoUrl"
+        :alt="item.name[locale]"
+      ></v-lazy-image>
     </div>
     <div class="store-flip">
       <h3>{{item.name[locale]}}</h3>

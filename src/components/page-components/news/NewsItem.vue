@@ -1,7 +1,10 @@
 <template>
   <div class="news-item">
     <div class="news-wrapper" v-if="!isOpen">
-      <img :src="item.photoUrl" :alt="item.name">
+      <v-lazy-image
+        :src="item.photoUrl"
+        :alt="item.name[locale]"
+      ></v-lazy-image>
     </div>
   </div>
 </template>
