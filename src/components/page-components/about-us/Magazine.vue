@@ -102,6 +102,7 @@ export default {
   padding-right: 2px;
   .magazines-container {
     display: flex;
+    flex-wrap: wrap;
     @media screen and (max-width: 550px){
       flex-direction: column;
       padding: 0 36px;
@@ -110,6 +111,9 @@ export default {
       width: calc(50% - 15.5px);
       margin-right: 15.5px;
       border: 1px solid #dcdcdc;
+      &:nth-child(n + 3){
+        margin-top:15px;
+      }
       @media screen and (max-width: 550px){
         width: 100%;
         margin-bottom: 15px;

@@ -208,6 +208,7 @@ export default {
           letter-spacing: normal;
           color: #dcdcdc;
           transition: all .1s;
+          border-top: 1px solid transparent;
           &:hover {
             background: #f9f9f9;
             color: #000;
@@ -215,6 +216,7 @@ export default {
           &.currentItem{
             color: #ffffff;
             background: #000;
+            border-top: 1px solid rgba(220, 220, 220, 0.51);
           }
         }
         &.placeholder {

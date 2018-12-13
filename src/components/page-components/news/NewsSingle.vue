@@ -33,11 +33,6 @@
           </p>
         </div>
         <div class="socials-container">
-          <div class="promotion">
-            <div class="promotion-button">
-              <span>{{t('promotion')}}</span>
-            </div>
-          </div>
           <social-sharing :url="currentFullUrl"
                           class="share-inner"
                           :title="item.name[locale]"
@@ -168,18 +163,23 @@ export default {
     padding-bottom: 32px;
     .half-col {
       width: calc(50% - 52px);
+      @media screen and (max-width: 1025px){
+        width: calc(50% - 20px);
+      }
       &.single-left {
         margin: 0 22px 0 30px;
         overflow: hidden;
-        @media screen and (max-width: 1236px) {
-          width: 100%;
+        @media screen and (max-width: 1025px){
+          margin: 0 10px;
         }
       }
       &.single-right {
         margin: 0 30px 0 22px;
         display: flex;
+        @media screen and (max-width: 1025px){
+          margin: 0 10px;
+        }
         flex-direction: column;
-        min-width: 566px;
         .close-button {
           display: flex;
           .close-button-a {
@@ -294,6 +294,14 @@ export default {
             display: flex;
             cursor: pointer;
             position: relative;
+            @media screen and (max-width: 940px){
+                width: 38px;
+            }
+            .icon{
+              @media screen and (max-width: 940px){
+                width:100%;
+              }
+            }
             &:before{
               content: '';
               height:0;
@@ -319,16 +327,23 @@ export default {
               }
             }
             .icon {
-              width: 50%;
+              width: 40%;
               font-size: 1.4rem;
               display: flex;
               z-index: 1;
+                @media screen and (max-width: 940px){
+                    width: 100%;
+                }
               svg {
                 margin: auto;
               }
             }
             .label {
               margin: auto 0;
+
+                @media screen and (max-width: 940px){
+                    display: none;
+                }
             }
           }
         }

@@ -25,13 +25,13 @@
       <three-event-greed :title="t('news')" route="news" apiModel="frontNews"
                          :api="$store.state.apiUrls.newsApi" :events="$store.getters.frontNews"/>
     </section>
-    <section class="stores">
+    <section class="stores" data-aos="fade-up">
       <standard-carousel v-if="storeCarousel" :items="$store.getters.stores" :perPage="4" :title="'STORES'"/>
     </section>
-    <section class="how-to-get">
+    <section class="how-to-get" data-aos="fade-up">
       <how-to-get/>
     </section>
-    <section class="socials">
+    <section class="socials" data-aos="fade-up">
       <social-list-big/>
     </section>
   </div>

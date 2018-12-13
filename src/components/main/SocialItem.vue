@@ -43,14 +43,34 @@ export default {
     background-color: #ffffff;
     display: flex;
     transition: all 0.1s;
+    position: relative;
+    &:before{
+      height:0;
+      width: 100%;
+      bottom:0;
+      background: #000;
+      content: '';
+      position: absolute;
+      z-index: 0;
+      transition: height 0.3s;
+    }
     &:hover {
-      background-color: #eaeaea;
+      &:before{
+        height:100%;
+      }
+      .social-logo-container{
+        color: #ffffff;
+      }
+      .social-text-container{
+        color: #ffffff;
+      }
     }
     .social-logo-container {
       font-size: 2rem;
       border-right: solid 1px #dcdcdc;
       display: flex;
       width: 62px;
+      z-index: 2;
       @media screen and (max-width: 1650px) {
         font-size: 1.3rem;
       }
@@ -68,6 +88,7 @@ export default {
       padding: 20px 0;
       width: 100%;
       text-align: center;
+      z-index: 2;
       @media screen and (max-width: 1650px) {
         font-size: .8rem;
         padding: 15px 0;
