@@ -227,84 +227,84 @@ const dateOptions = {
           ka: 'იან',
           en: 'Jan'
         },
-        value: '1'
+        value: '0'
       },
       {
         name: {
           ka: 'თებ',
           en: 'Feb'
         },
-        value: '2'
+        value: '1'
       },
       {
         name: {
           ka: 'მარ',
           en: 'Mar'
         },
-        value: '3'
+        value: '2'
       },
       {
         name: {
           ka: 'აპრ',
           en: 'Apr'
         },
-        value: '4'
+        value: '3'
       },
       {
         name: {
           ka: 'მაი',
           en: 'May'
         },
-        value: '5'
+        value: '4'
       },
       {
         name: {
           ka: 'ივნ',
           en: 'Jun'
         },
-        value: '6'
+        value: '5'
       },
       {
         name: {
           ka: 'ივლ',
           en: 'Jul'
         },
-        value: '7'
+        value: '6'
       },
       {
         name: {
           ka: 'აგვ',
           en: 'Aug'
         },
-        value: '8'
+        value: '7'
       },
       {
         name: {
           ka: 'სექ',
           en: 'Sep'
         },
-        value: '9'
+        value: '8'
       },
       {
         name: {
           ka: 'ოქტ',
           en: 'Oct'
         },
-        value: '10'
+        value: '9'
       },
       {
         name: {
           ka: 'ნოე',
           en: 'Nov'
         },
-        value: '11'
+        value: '10'
       },
       {
         name: {
           ka: 'დეკ',
           en: 'Dec'
         },
-        value: '12'
+        value: '11'
       }
     ]
   },

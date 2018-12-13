@@ -12,7 +12,10 @@
           <div class="item" v-if="selectedItem" @click="fireSelect(null)">{{placeholder[locale]}}</div>
         </li>
         <li v-for="(item, index) in items" v-bind:key="index">
-          <div class="item" @click="fireSelect(item)" :class="{currentItem: item === selectedItem || openItems.indexOf(item) !== -1}">{{item[nameField][locale]}}</div>
+          <div class="item" @click="fireSelect(item)"
+               :class="{currentItem: item === selectedItem || openItems.indexOf(item) !== -1}">
+            {{item[nameField][locale]}}
+          </div>
         </li>
       </ul>
     </div>
@@ -88,10 +91,10 @@ export default {
   },
   methods: {
     fireSelect: function (selected) {
-      if(this.multiple){
-        if(this.openItems.indexOf(selected) === -1){
+      if (this.multiple) {
+        if (this.openItems.indexOf(selected) === -1) {
           this.openItems.push(selected)
-        }else{
+        } else {
           this.openItems.splice(this.openItems.indexOf(selected), 1)
         }
         if (selected) {
@@ -99,11 +102,15 @@ export default {
         } else {
           this.$emit('change', { selected: null, name: this.name, value: null })
         }
-      }else{
+      } else {
         this.selectedItem = selected
         this.open = false
         if (this.selectedItem) {
-          this.$emit('change', { selected: this.selectedItem, name: this.name, value: this.selectedItem[this.valueField] })
+          this.$emit('change', {
+            selected: this.selectedItem,
+            name: this.name,
+            value: this.selectedItem[ this.valueField ]
+          })
         } else {
           this.$emit('change', { selected: null, name: this.name, value: null })
         }
@@ -131,17 +138,17 @@ export default {
     border: 1px solid rgba(220, 220, 220, 0.51);
     background-color: #ffffff;
     cursor: pointer;
-    &.open{
+    &.open {
       border: 1px solid #000000;
       border-bottom: none;
       position: relative;
-      &:before{
+      &:before {
         content: '';
         width: 88%;
         height: 1px;
         background: #dcdcdc;
         position: absolute;
-        bottom:0;
+        bottom: 0;
         left: 50%;
         transform: translateX(-50%);
       }
@@ -213,7 +220,7 @@ export default {
             background: #f9f9f9;
             color: #000;
           }
-          &.currentItem{
+          &.currentItem {
             color: #ffffff;
             background: #000;
             border-top: 1px solid rgba(220, 220, 220, 0.51);

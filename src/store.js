@@ -4,7 +4,6 @@ import Axios from 'axios/index'
 import messages from './lang/lang'
 import navigation from './store/modules/navigation'
 import hamburgerData from './store/modules/hamburgerData'
-import events from './store/modules/events'
 import googleMap from './store/modules/map'
 import pageData from './store/modules/pageData'
 import footerData from './store/modules/footerData'
@@ -506,11 +505,23 @@ export default new Vuex.Store({
           email: email,
           token: token
         }
-        Axios.get(`${url}/${credentials.email}`, credentials).then(function (response) {
+        Axios.get(`${url}/${credentials.email}`, {
+          data: credentials
+        }).then(function (response) {
           if (!response) {
             resolve('RECORD NOT FOUND')
           } else {
             resolve(response)
+            response.data.token = token
+            let remember = false
+            if (localStorage.getItem('user')) {
+              remember = true
+            }
+            context.commit('SET_USER', {
+              token: token,
+              user: response.data.user,
+              remember: remember
+            })
           }
         }).catch(function (error) {
           reject(error)

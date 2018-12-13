@@ -10,10 +10,19 @@
         <label for="login-username" :class="{focus: focusedUsername }">{{t('username_placeholder')}}</label>
         <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
       </div>
-      <div class="field-container">
+      <div class="field-container margin-bottom-small">
         <input type="password" id="login-password" v-validate="'required'" name="password" v-model="user.password">
         <label for="login-password" :class="{focus: focusedPassword }">{{t('password_placeholder')}}</label>
         <span v-show="errors.first('password')" class="error">{{ errors.first('password') }}</span>
+      </div>
+      <div class="forgot-password">
+        <router-link :to="`/${locale}/password/recovery`">
+          <p>{{t('forgot_password')}}</p>
+        </router-link>
+        <div class="remember-me">
+          <input type="checkbox" v-model="user.remember" id="remember-me">
+          <label for="remember-me">{{t('remember_me')}}</label>
+        </div>
       </div>
       <div class="login-buttons">
         <div class="login-button">
@@ -25,15 +34,6 @@
                              iconWidth="7.5"
                              iconHeight="15"/>
           </form>
-        </div>
-      </div>
-      <div class="forgot-password">
-        <router-link :to="`/${locale}/password/recovery`">
-          <p>{{t('forgot_password')}}</p>
-        </router-link>
-        <div class="remember-me">
-          <input type="checkbox" v-model="user.remember" id="remember-me">
-          <label for="remember-me">{{t('remember_me')}}</label>
         </div>
       </div>
     </form>
@@ -122,6 +122,9 @@ export default {
   .field-container {
     position: relative;
     margin-bottom: 42px;
+    &.margin-bottom-small{
+      margin-bottom: 10px;
+    }
     label {
       font-family: 'Muli Light', 'BPG Arial', sans-serif;
       font-size: 1.2rem;
@@ -160,6 +163,7 @@ export default {
     margin-bottom: 12.6px;
   }
   .forgot-password {
+    margin-bottom:20px;
     p {
       font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
       font-size: 1.4rem;

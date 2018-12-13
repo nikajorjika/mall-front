@@ -1,4 +1,3 @@
-
 const messages = {
   en: {
     statics: {
@@ -86,6 +85,7 @@ const messages = {
       about_mall: 'about mall',
       about_us: 'about us',
       download: 'download',
+      updated_successfully: 'successfully updated',
       guest_service: 'guest service',
       news: 'news',
       information: 'information',
@@ -98,6 +98,11 @@ const messages = {
       working_hours: 'working hours',
       working_hours_content: 'Everyday: from - 10:00 to 22:00',
       address: 'address',
+      newPassword: 'new password',
+      repeatNewPassword: 'confirm new password',
+      changePassword: 'change password',
+      change: 'change',
+      save: 'save',
       address_content: '16 km Agmashenebeli Alley, <br> 0131 Tbilisi, Georgia',
       subscribe_list_stores: 'subscribed list',
       see_the_list_below: 'See the list of shops below:',
@@ -133,6 +138,7 @@ const messages = {
       newcollections: 'ახალი კოლექციები',
       next: 'შემდეგი',
       information: 'ინფორმაცია',
+      updated_successfully: 'წარმატებით განახლდა',
       password_successfully_recovered: 'პაროლი წარმატებით შეიცვალა',
       subscribed_to_newsletter: 'თქვენ წარმატებით გამოიწერეთ ჩვენი ვებ-გვერდი',
       first_name_placeholder: 'სახელი',
@@ -200,6 +206,11 @@ const messages = {
       promotions: 'შეთავაზებები',
       joinNow: 'შემოგვიერთდი',
       working_hours: 'სამუშაო საათები',
+      newPassword: 'ახალი პაროლი',
+      repeatNewPassword: 'გაიმეორეთ პაროლი',
+      changePassword: 'პაროლის შეცვლა',
+      change: 'შეცვლა',
+      save: 'შენახვა',
       working_hours_content: 'ყოველ დღე: 10:00-დან 22:00-მდე',
       address: 'მისამართი',
       address_content: '16 კმ აღმაშენებლის გამზირი, <br> 0131 თბილისი, საქართველო',

@@ -285,19 +285,18 @@ export default {
   methods: {
     register: function () {
       if (this.validateForm()) {
-        const _this = this
         this.$validator.validateAll().then((result) => {
           if (result) {
             // here we submit form
-            _this.loading = true
-            _this.$store.dispatch('register', _this.user).then(function () {
-              _this.loading = false
+            this.loading = true
+            this.$store.dispatch('register', this.user).then(() => {
+              this.loading = false
               this.$router.push({ name: 'home', params: { locale: this.locale } })
             }).catch((error) => {
               if (error.response.data) {
-                _this.returnedError = error.response.data.status
+                this.returnedError = error.response.data.status
               }
-              _this.loading = false
+              this.loading = false
             })
           }
         }).catch((error) => {
