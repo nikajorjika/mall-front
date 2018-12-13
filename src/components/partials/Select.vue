@@ -170,7 +170,7 @@ export default {
     left: 0;
     width: 100%;
     z-index: 999;
-    max-height: 186px;
+    max-height: 200px;
     overflow: hidden;
     ul {
       max-height: 186px;

@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div id="nav" :class="{fixed: sticky}">
     <div class="header-wrapper">
       <div class="header-left">
         <hamburger-menu/>
@@ -137,11 +137,18 @@ export default {
     return {
       showActions: false,
       showChild: null,
-      showSearch: false
+      scrollY: 0,
+      showSearch: false,
+      sticky: false
     }
   },
   created: function () {
     document.addEventListener('click', this.documentClick)
+  },
+  mounted: function () {
+    window.addEventListener('scroll', (event) => {
+      this.scrollY = Math.round(window.scrollY);
+    });
   },
   components: {
     SearchContainer,
@@ -165,6 +172,9 @@ export default {
       if (this.showSearch) {
         this.closeSearch()
       }
+    },
+    scrollY: function (newValue){
+      this.sticky = newValue > 85
     }
   },
   methods: {
@@ -201,14 +211,24 @@ export default {
 
 <style lang="scss">
 #nav {
-  background-color: #ffffff;
   border-top: solid 1px #f1f1f1;
-  border-bottom: solid 1px #f1f1f1;
-
+  &.fixed{
+    padding-top: 84px;
+    .header-wrapper{
+      position: fixed;
+      animation: slideDown 0.3s;
+      top: 0;
+      left:0;
+      width:100%;
+      z-index: 4;
+      background-color: #ffffff;
+    }
+  }
   .header-wrapper {
     display: flex;
     flex-wrap: wrap;
     position: relative;
+    border-bottom: solid 1px #f1f1f1;
 
     .header-left {
       display: flex;
