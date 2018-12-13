@@ -116,30 +116,30 @@ const newsFilters = {
   },
   sort: {
     placeholder: {
-      en: 'floors',
-      ka: 'სართული'
+      en: 'sort',
+      ka: 'სორტირება'
     },
     data: [
       {
         name: {
-          ka: '1 სართული',
-          en: '1st floor'
+          ka: 'მოახლოებული',
+          en: 'upcoming'
         },
-        value: '1st-floor'
+        value: 'isUpcoming'
       },
       {
         name: {
-          ka: '2 სართული',
-          en: '2nd floor'
+          ka: 'მიმდინარე',
+          en: 'ongoing'
         },
-        value: '2nd-floor'
+        value: 'isOngoing'
       },
       {
         name: {
-          ka: '3 სართული',
-          en: '3rd floor'
+          ka: 'არქივი',
+          en: 'archive'
         },
-        value: '3rd-floor'
+        value: 'isArchive'
       }
     ]
   }

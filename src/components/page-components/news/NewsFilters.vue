@@ -5,7 +5,7 @@
                      name="category" :value="category" @change="updateElement"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="brands" name="brand" :placeholder="categories.brands.placeholder"
+      <custom-select :items="brands" name="brand" :placeholder="categories.brands.placeholder" :multiple="true"
                      @change="updateElement" nameField="name" valueField="_id"/>
     </div>
     <div class="filter-item">
@@ -57,15 +57,20 @@ export default {
         includeNews: true,
         includeOffer: true,
         brandIds: [],
-        floors: []
+        floors: [],
+        page: 0,
+        isUpcoming: false,
+        isOngoing: false,
+        isArchive: false,
       },
-      category: null
+      category: null,
+      listLoaded: false
     }
   },
   computed: {
     brands: function () {
       return this.$store.getters.storesList.filter((store) => {
-          return store.activities.events !== 0 || store.activities.newCollections !== 0 || store.activities.news !== 0 || store.activities.offers !== 0
+          return 1
       })
     }
   },
@@ -78,6 +83,14 @@ export default {
             this.filters[item.value] = true
           })
         }
+        if(selected.name === 'brand') {
+          this.filters.brandIds = []
+          selected.selected.forEach(item => {
+            if(this.filters.brandIds.indexOf(item[selected.value]) === -1){
+              this.filters.brandIds.push(item[selected.value])
+            }
+          })
+        }
         if(selected.name === 'floor') {
           this.filters.floors = []
           selected.selected.forEach(item => {
@@ -86,8 +99,12 @@ export default {
             }
           })
         }
-        console.log(this.filters)
+        if(selected.name === 'sort') {
+          this.filters.isOngoing = this.filters.isArchive = this.filters.isUpcoming = false
+          this.filters[selected.selected.value] = true
+        }
       }
+      this.loadFilteredNews()
     },
     getStoreList: function () {
       this.$store.dispatch('fetchItems', {
@@ -96,6 +113,17 @@ export default {
         setter: 'SET_STORE_LIST'
       }).then(() => {
         this.listLoaded = true
+      }).catch((error) => {
+        console.error(error)
+      })
+    },
+    loadFilteredNews: function () {
+      this.$store.dispatch('loadFiltered', {
+        model: 'events',
+        api: this.$store.state.apiUrls.newsFilters,
+        setter: 'INITIAL_LOAD'
+      }).then((response) => {
+        console.log(response)
       }).catch((error) => {
         console.error(error)
       })

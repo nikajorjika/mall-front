@@ -38,7 +38,7 @@ export default new Vuex.Store({
     locale: localStorage.getItem('locale') ? localStorage.getItem('locale') : 'en',
     navigation: navigation,
     hamburgerData: hamburgerData,
-    events: events,
+    events: [],
     frontPromotions: [],
     frontEvents: [],
     frontNewCollections: [],
@@ -161,7 +161,7 @@ export default new Vuex.Store({
       return state.footer.footerMenus
     },
     message: (state, index) => {
-      return state.messages[index]
+      return state.messages[ index ]
     },
     storeFilters: (state) => {
       return state.storeFilters
@@ -226,21 +226,21 @@ export default new Vuex.Store({
     LOAD_MORE: (state, payload) => {
       const model = payload.model
       payload.data.forEach(function (element) {
-        state[model].push(element)
+        state[ model ].push(element)
       })
     },
     SET_PAGE: (state, payload) => {
       const model = payload.model
-      state[model] = payload.data
+      state[ model ] = payload.data
     },
     SET_FEATURED_SEARCH: (state, payload) => {
       state.searchFeatured = payload
     },
     INITIAL_LOAD: (state, payload) => {
-      state[payload.model] = payload.data
+      state[ payload.model ] = payload.data
     },
     SET_LOADING_STATE: (state, payload) => {
-      state.loading[payload.model] = payload.value
+      state.loading[ payload.model ] = payload.value
     },
     SET_USER: (state, payload) => {
       state.user = payload.user
@@ -286,7 +286,7 @@ export default new Vuex.Store({
       state.socials = payload
     },
     SET_STORE_LIST: (state, payload) => {
-      state[payload.model] = payload.data
+      state[ payload.model ] = payload.data
     }
   },
   actions: {
@@ -296,10 +296,10 @@ export default new Vuex.Store({
         const model = request.model
         const page = request.page === undefined ? 0 : request.page
         const offset = request.offset === undefined ? 1 : request.offset
-        context.commit('SET_LOADING_STATE', {model: model, value: true})
+        context.commit('SET_LOADING_STATE', { model: model, value: true })
         Axios.get(`${url}/${page}/${offset}`).then(function (response) {
-          context.commit('LOAD_MORE', {model: model, data: response.data.data})
-          context.commit('SET_LOADING_STATE', {model: model, value: false})
+          context.commit('LOAD_MORE', { model: model, data: response.data.data })
+          context.commit('SET_LOADING_STATE', { model: model, value: false })
           if (response.data.data.length < offset) {
             resolve('NOT_ENOUGH_RECORDS')
           } else {
@@ -308,7 +308,7 @@ export default new Vuex.Store({
         }).catch(function (error) {
           console.error(error)
           reject(error)
-          context.commit('SET_LOADING_STATE', {model: model, value: false})
+          context.commit('SET_LOADING_STATE', { model: model, value: false })
         })
       })
     },
@@ -318,10 +318,10 @@ export default new Vuex.Store({
         const model = request.model
         const page = request.page === undefined ? 0 : request.page
         const offset = request.offset === undefined ? 1 : request.offset
-        context.commit('SET_LOADING_STATE', {model: model, value: true})
+        context.commit('SET_LOADING_STATE', { model: model, value: true })
         Axios.get(`${url}/${page}/${offset}`).then(function (response) {
-          context.commit('LOAD_MORE', {model: model, data: response.data.data})
-          context.commit('SET_LOADING_STATE', {model: model, value: false})
+          context.commit('LOAD_MORE', { model: model, data: response.data.data })
+          context.commit('SET_LOADING_STATE', { model: model, value: false })
           if (response.data.data.length < offset) {
             resolve('NOT_ENOUGH_RECORDS')
           } else {
@@ -330,7 +330,7 @@ export default new Vuex.Store({
         }).catch(function (error) {
           console.error(error)
           reject(error)
-          context.commit('SET_LOADING_STATE', {model: model, value: false})
+          context.commit('SET_LOADING_STATE', { model: model, value: false })
         })
       })
     },
@@ -356,7 +356,7 @@ export default new Vuex.Store({
             return item._id === request
           })
           if (store.length) {
-            resolve(store[0])
+            resolve(store[ 0 ])
           } else {
             context.dispatch('loadSingle', {
               id: request,
@@ -377,7 +377,21 @@ export default new Vuex.Store({
             resolve('RECORD NOT FOUND')
           } else {
             resolve(response)
-            context.commit(request.setter, {data: response.data.data, model: request.model})
+            context.commit(request.setter, { data: response.data.data, model: request.model })
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
+      })
+    },
+    loadFiltered: function (context, request) {
+      return new Promise((resolve, reject) => {
+        Axios.post(request.api).then(function (response) {
+          if (response.data.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+            context.commit(request.setter, { data: response.data.data, model: request.model })
           }
         }).catch(function (error) {
           reject(error)
@@ -464,7 +478,7 @@ export default new Vuex.Store({
         })
       })
     },
-    getUser: function (context, {token, email}) {
+    getUser: function (context, { token, email }) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.getUserAPI
         const credentials = {
@@ -490,7 +504,7 @@ export default new Vuex.Store({
     },
     search: function (context, keyword) {
       return new Promise((resolve) => {
-        Axios.post(context.state.apiUrls.search, {name: keyword}).then((response) => {
+        Axios.post(context.state.apiUrls.search, { name: keyword }).then((response) => {
           console.log(response.data)
           context.commit('SET_SEARCH_RESULT', response.data.data)
           resolve(response.data)
@@ -551,7 +565,7 @@ export default new Vuex.Store({
     subscribeNewsletter: function (context, request) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.newsletter
-        Axios.post(`${url}`, {email: request.email}).then(function (response) {
+        Axios.post(`${url}`, { email: request.email }).then(function (response) {
           if (response.data.length) {
             resolve('RECORD NOT FOUND')
           } else {
@@ -569,8 +583,8 @@ export default new Vuex.Store({
           if (!response.data.aboutPage.length) {
             resolve('RECORD NOT FOUND')
           } else {
-            context.commit('SET_PAGE', {model: payload.model, data: response.data.aboutPage})
-            context.commit('SET_LOADING_STATE', {model: 'page', value: false})
+            context.commit('SET_PAGE', { model: payload.model, data: response.data.aboutPage })
+            context.commit('SET_LOADING_STATE', { model: 'page', value: false })
             resolve(response.data.aboutPage)
           }
         }).catch(function (error) {
@@ -609,7 +623,7 @@ export default new Vuex.Store({
     },
     getBookmarks: function (context) {
       return new Promise((resolve, reject) => {
-        Axios.post(context.state.apiUrls.getBookmarked, {userToken: context.getters.user.token}).then(function (response) {
+        Axios.post(context.state.apiUrls.getBookmarked, { userToken: context.getters.user.token }).then(function (response) {
           if (!response.data.bookmarkedItems.length) {
             resolve('RECORD NOT FOUND')
           } else {
@@ -623,7 +637,7 @@ export default new Vuex.Store({
     },
     getNotifications: function (context) {
       return new Promise((resolve, reject) => {
-        Axios.post(context.state.apiUrls.notifications, {userToken: context.getters.user.token}).then(function (response) {
+        Axios.post(context.state.apiUrls.notifications, { userToken: context.getters.user.token }).then(function (response) {
           console.log(response)
           if (!response.data.bookmarkedItems.length) {
             resolve('RECORD NOT FOUND')
@@ -638,7 +652,7 @@ export default new Vuex.Store({
     },
     getSubscribed: function (context) {
       return new Promise((resolve, reject) => {
-        Axios.post(context.state.apiUrls.getSubscribed, {userToken: context.getters.user.token}).then(function (response) {
+        Axios.post(context.state.apiUrls.getSubscribed, { userToken: context.getters.user.token }).then(function (response) {
           if (!response.data.subscribedStores.length) {
             resolve('RECORD NOT FOUND')
           } else {
