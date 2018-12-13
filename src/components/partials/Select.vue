@@ -12,7 +12,7 @@
           <div class="item" v-if="selectedItem" @click="fireSelect(null)">{{placeholder[locale]}}</div>
         </li>
         <li v-for="(item, index) in items" v-bind:key="index">
-          <div class="item" @click="fireSelect(item)" :class="{currentItem: item === selectedItem}">{{item[nameField][locale]}}</div>
+          <div class="item" @click="fireSelect(item)" :class="{currentItem: item === selectedItem || openItems.indexOf(item) !== -1}">{{item[nameField][locale]}}</div>
         </li>
       </ul>
     </div>
@@ -40,6 +40,10 @@ export default {
       default: function () {
         return []
       }
+    },
+    multiple: {
+      type: Boolean,
+      default: false
     },
     placeholder: {
       type: Object,
@@ -78,17 +82,31 @@ export default {
   data: function () {
     return {
       selectedItem: null,
-      open: false
+      open: false,
+      openItems: []
     }
   },
   methods: {
     fireSelect: function (selected) {
-      this.selectedItem = selected
-      this.open = false
-      if (selected) {
-        this.$emit('change', { selected: selected, name: this.name, value: selected[this.valueField] })
-      } else {
-        this.$emit('change', { selected: null, name: this.name, value: null })
+      if(this.multiple){
+        if(this.openItems.indexOf(selected) === -1){
+          this.openItems.push(selected)
+        }else{
+          this.openItems.splice(this.openItems.indexOf(selected), 1)
+        }
+        if (selected) {
+          this.$emit('change', { selected: this.openItems, name: this.name, value: this.valueField })
+        } else {
+          this.$emit('change', { selected: null, name: this.name, value: null })
+        }
+      }else{
+        this.selectedItem = selected
+        this.open = false
+        if (this.selectedItem) {
+          this.$emit('change', { selected: this.selectedItem, name: this.name, value: this.selectedItem[this.valueField] })
+        } else {
+          this.$emit('change', { selected: null, name: this.name, value: null })
+        }
       }
     },
     toggleBody: function () {

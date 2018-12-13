@@ -29,6 +29,7 @@ export default {
     font-size: 1.6rem;
     line-height: 1.25;
     color: #000;
+    text-align: justify;
     @media screen and (max-width: 550px) {
       font-size: 1.3rem;
     }
