@@ -20,7 +20,7 @@
         <div class="inner-container form-open" @click.stop>
           <div class="text-part">
             <input type="text" v-validate="'required|email'" :placeholder="t('enter_your_email')" name="email"
-                   class="input">
+                   class="input" v-model="email">
           </div>
           <div class="btn-part">
             <button @click="subscribe">
@@ -38,7 +38,8 @@ export default {
   data: () => {
     return {
       showForm: false,
-      errorMessage: null
+      errorMessage: null,
+      email: ''
     }
   },
   created: function () {
@@ -51,7 +52,16 @@ export default {
     subscribe: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-
+          this.$store.dispatch('subscribeNewsletter', {email: this.email}).then((response) => {
+            this.$notify({
+              group: 'notify',
+              type: 'success',
+              title: this.t('Success'),
+              text: this.t('subscribed_to_newsletter')
+            })
+          }).catch(error => {
+            console.error(error)
+          })
         } else {
           console.log('notify')
           this.$notify({

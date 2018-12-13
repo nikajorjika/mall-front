@@ -78,6 +78,7 @@ export default new Vuex.Store({
     homeAds: [],
     categories: [],
     searchResult: [],
+    searchFeatured: [],
     sliderItems: []
   },
   getters: {
@@ -160,7 +161,7 @@ export default new Vuex.Store({
       return state.footer.footerMenus
     },
     message: (state, index) => {
-      return state.messages[ index ]
+      return state.messages[index]
     },
     storeFilters: (state) => {
       return state.storeFilters
@@ -198,6 +199,9 @@ export default new Vuex.Store({
     giftStoresList: (state) => {
       return state.giftStoresList
     },
+    searchFeatured: (state) => {
+      return state.searchFeatured
+    },
     loading: (state) => {
       return state.loading
     }
@@ -222,18 +226,21 @@ export default new Vuex.Store({
     LOAD_MORE: (state, payload) => {
       const model = payload.model
       payload.data.forEach(function (element) {
-        state[ model ].push(element)
+        state[model].push(element)
       })
     },
     SET_PAGE: (state, payload) => {
       const model = payload.model
-      state[ model ] = payload.data
+      state[model] = payload.data
+    },
+    SET_FEATURED_SEARCH: (state, payload) => {
+      state.searchFeatured = payload
     },
     INITIAL_LOAD: (state, payload) => {
-      state[ payload.model ] = payload.data
+      state[payload.model] = payload.data
     },
     SET_LOADING_STATE: (state, payload) => {
-      state.loading[ payload.model ] = payload.value
+      state.loading[payload.model] = payload.value
     },
     SET_USER: (state, payload) => {
       state.user = payload.user
@@ -289,22 +296,20 @@ export default new Vuex.Store({
         const model = request.model
         const page = request.page === undefined ? 0 : request.page
         const offset = request.offset === undefined ? 1 : request.offset
-        context.commit('SET_LOADING_STATE', { model: model, value: true })
-        Axios.get(`${url}/${page}/${offset}`)
-          .then(function (response) {
-            context.commit('LOAD_MORE', { model: model, data: response.data.data })
-            context.commit('SET_LOADING_STATE', { model: model, value: false })
-            if (response.data.data.length < offset) {
-              resolve('NOT_ENOUGH_RECORDS')
-            } else {
-              resolve(response.data.data)
-            }
-          })
-          .catch(function (error) {
-            console.error(error)
-            reject(error)
-            context.commit('SET_LOADING_STATE', { model: model, value: false })
-          })
+        context.commit('SET_LOADING_STATE', {model: model, value: true})
+        Axios.get(`${url}/${page}/${offset}`).then(function (response) {
+          context.commit('LOAD_MORE', {model: model, data: response.data.data})
+          context.commit('SET_LOADING_STATE', {model: model, value: false})
+          if (response.data.data.length < offset) {
+            resolve('NOT_ENOUGH_RECORDS')
+          } else {
+            resolve(response.data.data)
+          }
+        }).catch(function (error) {
+          console.error(error)
+          reject(error)
+          context.commit('SET_LOADING_STATE', {model: model, value: false})
+        })
       })
     },
     loadStoreList: function (context, request) {
@@ -313,39 +318,35 @@ export default new Vuex.Store({
         const model = request.model
         const page = request.page === undefined ? 0 : request.page
         const offset = request.offset === undefined ? 1 : request.offset
-        context.commit('SET_LOADING_STATE', { model: model, value: true })
-        Axios.get(`${url}/${page}/${offset}`)
-          .then(function (response) {
-            context.commit('LOAD_MORE', { model: model, data: response.data.data })
-            context.commit('SET_LOADING_STATE', { model: model, value: false })
-            if (response.data.data.length < offset) {
-              resolve('NOT_ENOUGH_RECORDS')
-            } else {
-              resolve(response.data.data)
-            }
-          })
-          .catch(function (error) {
-            console.error(error)
-            reject(error)
-            context.commit('SET_LOADING_STATE', { model: model, value: false })
-          })
+        context.commit('SET_LOADING_STATE', {model: model, value: true})
+        Axios.get(`${url}/${page}/${offset}`).then(function (response) {
+          context.commit('LOAD_MORE', {model: model, data: response.data.data})
+          context.commit('SET_LOADING_STATE', {model: model, value: false})
+          if (response.data.data.length < offset) {
+            resolve('NOT_ENOUGH_RECORDS')
+          } else {
+            resolve(response.data.data)
+          }
+        }).catch(function (error) {
+          console.error(error)
+          reject(error)
+          context.commit('SET_LOADING_STATE', {model: model, value: false})
+        })
       })
     },
     loadSingle: function (context, request) {
       return new Promise((resolve, reject) => {
         const id = request.id
-        Axios.get(context.state.apiUrls.singleItemUrl(id))
-          .then(function (response) {
-            if (!response.data) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              resolve(response.data)
-            }
-          })
-          .catch(function (error) {
-            console.error(error)
-            reject(error)
-          })
+        Axios.get(context.state.apiUrls.singleItemUrl(id)).then(function (response) {
+          if (!response.data) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response.data)
+          }
+        }).catch(function (error) {
+          console.error(error)
+          reject(error)
+        })
       })
     },
     findStore: function (context, request) {
@@ -355,7 +356,7 @@ export default new Vuex.Store({
             return item._id === request
           })
           if (store.length) {
-            resolve(store[ 0 ])
+            resolve(store[0])
           } else {
             context.dispatch('loadSingle', {
               id: request,
@@ -371,34 +372,30 @@ export default new Vuex.Store({
     },
     fetchItems: function (context, request) {
       return new Promise((resolve, reject) => {
-        Axios.get(request.api)
-          .then(function (response) {
-            if (response.data.length) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              resolve(response)
-              context.commit(request.setter, { data: response.data.data, model: request.model })
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.get(request.api).then(function (response) {
+          if (response.data.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+            context.commit(request.setter, {data: response.data.data, model: request.model})
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     getCategories: function (context) {
       return new Promise((resolve, reject) => {
-        Axios.get(context.state.apiUrls.categories)
-          .then(function (response) {
-            if (response.data.length) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              resolve(response)
-              context.commit('SET_CATEGORIES', response.data.data)
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.get(context.state.apiUrls.categories).then(function (response) {
+          if (response.data.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+            context.commit('SET_CATEGORIES', response.data.data)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     login: function (context, credentials) {
@@ -409,31 +406,29 @@ export default new Vuex.Store({
           password: credentials.password,
           remember: credentials.remember
         }
-        Axios.post(`${url}`, user)
-          .then(function (response) {
-            if (!response) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              resolve(response)
-              if (response.data.token) {
-                response.data.user.token = response.data.token
-                context.commit('SET_USER', {
-                  token: response.data.token,
-                  user: response.data.user,
-                  remember: user.remember
-                })
-                context.dispatch('getSubscribed').catch((error) => {
-                  console.error(error)
-                })
-                context.dispatch('getBookmarks').catch((error) => {
-                  console.error(error)
-                })
-              }
+        Axios.post(`${url}`, user).then(function (response) {
+          if (!response) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+            if (response.data.token) {
+              response.data.user.token = response.data.token
+              context.commit('SET_USER', {
+                token: response.data.token,
+                user: response.data.user,
+                remember: user.remember
+              })
+              context.dispatch('getSubscribed').catch((error) => {
+                console.error(error)
+              })
+              context.dispatch('getBookmarks').catch((error) => {
+                console.error(error)
+              })
             }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     register: function (context, payload) {
@@ -450,45 +445,41 @@ export default new Vuex.Store({
           city: payload.city.val,
           password: payload.password
         }
-        Axios.post(`${url}`, user)
-          .then(function (response) {
-            if (!response) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              resolve(response)
-              if (response.data.token) {
-                response.data.user.token = response.data.token
-                context.commit('SET_USER', {
-                  token: response.data.token,
-                  user: response.data.user,
-                  remember: user.remember
-                })
-              }
+        Axios.post(`${url}`, user).then(function (response) {
+          if (!response) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+            if (response.data.token) {
+              response.data.user.token = response.data.token
+              context.commit('SET_USER', {
+                token: response.data.token,
+                user: response.data.user,
+                remember: user.remember
+              })
             }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
-    getUser: function (context, { token, email }) {
+    getUser: function (context, {token, email}) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.getUserAPI
         const credentials = {
           email: email,
           token: token
         }
-        Axios.get(`${url}/${credentials.email}`, credentials)
-          .then(function (response) {
-            if (!response) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              resolve(response)
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.get(`${url}/${credentials.email}`, credentials).then(function (response) {
+          if (!response) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     logout: function (context) {
@@ -499,152 +490,164 @@ export default new Vuex.Store({
     },
     search: function (context, keyword) {
       return new Promise((resolve) => {
-        Axios.post(context.state.apiUrls.search, { name: keyword })
-          .then((response) => {
-            console.log(response.data)
-            context.commit('SET_SEARCH_RESULT', response.data.data)
-            resolve(response.data)
-          })
-          .catch(error => {
-            console.error(error)
-          })
+        Axios.post(context.state.apiUrls.search, {name: keyword}).then((response) => {
+          console.log(response.data)
+          context.commit('SET_SEARCH_RESULT', response.data.data)
+          resolve(response.data)
+        }).catch(error => {
+          console.error(error)
+        })
       })
     },
     getSliderItems: function (context) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.getSliderItems
-        Axios.get(`${url}`)
-          .then(function (response) {
-            if (response.data.length) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              resolve(response)
-              context.commit('SET_SLIDER_ITEMS', response.data.data)
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.get(`${url}`).then(function (response) {
+          if (response.data.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+            context.commit('SET_SLIDER_ITEMS', response.data.data)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     getAdsItems: function (context) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.getAds
-        Axios.get(`${url}`)
-          .then(function (response) {
-            if (response.data.length) {
-              resolve('RECORD NOT FOUND')
+        Axios.get(`${url}`).then(function (response) {
+          if (response.data.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+            if (response.data.status === 'success') {
+              context.commit('SET_HOME_ADS', response.data.data)
             } else {
-              resolve(response)
-              if (response.data.status === 'success') {
-                context.commit('SET_HOME_ADS', response.data.data)
-              } else {
-                resolve('RECORD NOT FOUND')
-              }
+              resolve('RECORD NOT FOUND')
             }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
+      })
+    },
+    getSearchFeatured: function (context) {
+      return new Promise((resolve, reject) => {
+        const url = context.state.apiUrls.featuredSearch
+        Axios.get(`${url}`).then(function (response) {
+          if (response.data.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+            context.commit('SET_FEATURED_SEARCH', response.data.data)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
+      })
+    },
+    subscribeNewsletter: function (context, request) {
+      return new Promise((resolve, reject) => {
+        const url = context.state.apiUrls.newsletter
+        Axios.post(`${url}`, {email: request.email}).then(function (response) {
+          if (response.data.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response)
+            context.commit('SET_FEATURED_SEARCH', response.data.data)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     getAboutPage: function (context, payload) {
       return new Promise((resolve, reject) => {
-        Axios.get(payload.url)
-          .then(function (response) {
-            if (!response.data.aboutPage.length) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              context.commit('SET_PAGE', { model: payload.model, data: response.data.aboutPage })
-              context.commit('SET_LOADING_STATE', { model: 'page', value: false })
-              resolve(response.data.aboutPage)
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.get(payload.url).then(function (response) {
+          if (!response.data.aboutPage.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            context.commit('SET_PAGE', {model: payload.model, data: response.data.aboutPage})
+            context.commit('SET_LOADING_STATE', {model: 'page', value: false})
+            resolve(response.data.aboutPage)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     getSocials: function (context) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.socials
-        Axios.get(url)
-          .then(function (response) {
-            if (!response.data.data.length) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              context.commit('SET_SOCIALS', response.data.data)
-              resolve(response.data)
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.get(url).then(function (response) {
+          if (!response.data.data.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            context.commit('SET_SOCIALS', response.data.data)
+            resolve(response.data)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     getTeam: function (context) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.team
-        Axios.get(url)
-          .then(function (response) {
-            if (!response.data.data.length) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              resolve(response.data.data)
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.get(url).then(function (response) {
+          if (!response.data.data.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            resolve(response.data.data)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     getBookmarks: function (context) {
       return new Promise((resolve, reject) => {
-        Axios.post(context.state.apiUrls.getBookmarked, { userToken: context.getters.user.token })
-          .then(function (response) {
-            if (!response.data.bookmarkedItems.length) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              context.commit('SET_USER_BOOKMARKS', response.data.bookmarkedItems)
-              resolve(response.data)
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.post(context.state.apiUrls.getBookmarked, {userToken: context.getters.user.token}).then(function (response) {
+          if (!response.data.bookmarkedItems.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            context.commit('SET_USER_BOOKMARKS', response.data.bookmarkedItems)
+            resolve(response.data)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     getNotifications: function (context) {
       return new Promise((resolve, reject) => {
-        Axios.post(context.state.apiUrls.notifications, { userToken: context.getters.user.token })
-          .then(function (response) {
-            console.log(response)
-            if (!response.data.bookmarkedItems.length) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              context.commit('SET_USER_NOTIFICATIONS', response.data.bookmarkedItems)
-              resolve(response.data)
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.post(context.state.apiUrls.notifications, {userToken: context.getters.user.token}).then(function (response) {
+          console.log(response)
+          if (!response.data.bookmarkedItems.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            context.commit('SET_USER_NOTIFICATIONS', response.data.bookmarkedItems)
+            resolve(response.data)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     },
     getSubscribed: function (context) {
       return new Promise((resolve, reject) => {
-        Axios.post(context.state.apiUrls.getSubscribed, { userToken: context.getters.user.token })
-          .then(function (response) {
-            if (!response.data.subscribedStores.length) {
-              resolve('RECORD NOT FOUND')
-            } else {
-              context.commit('SET_USER_SUBSCRIPTIONS', response.data.subscribedStores)
-              resolve(response.data)
-            }
-          })
-          .catch(function (error) {
-            reject(error)
-          })
+        Axios.post(context.state.apiUrls.getSubscribed, {userToken: context.getters.user.token}).then(function (response) {
+          if (!response.data.subscribedStores.length) {
+            resolve('RECORD NOT FOUND')
+          } else {
+            context.commit('SET_USER_SUBSCRIPTIONS', response.data.subscribedStores)
+            resolve(response.data)
+          }
+        }).catch(function (error) {
+          reject(error)
+        })
       })
     }
   }

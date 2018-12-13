@@ -31,9 +31,10 @@ import VueSimpleSVG from 'vue-simple-svg'
 import VueYouTubeEmbed from 'vue-youtube-embed'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
-
+import { VLazyImagePlugin } from 'v-lazy-image'
 const SocialSharing = require('vue-social-sharing')
 
+Vue.use(VLazyImagePlugin)
 Vue.use(VueYouTubeEmbed)
 Vue.use(SocialSharing)
 Vue.use(VueSimpleSVG)

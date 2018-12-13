@@ -85,9 +85,9 @@ export default {
     fireSelect: function (selected) {
       this.selectedItem = selected
       this.open = false
-      if(selected){
+      if (selected) {
         this.$emit('change', { selected: selected, name: this.name, value: selected[this.valueField] })
-      }else{
+      } else {
         this.$emit('change', { selected: null, name: this.name, value: null })
       }
     },

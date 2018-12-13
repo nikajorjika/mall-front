@@ -232,7 +232,7 @@ export default {
         }
         .description-container {
           margin-top: 31px;
-          padding-top: 30%;
+          height: 460px;
           position: relative;
           overflow-y: auto;
           @media screen and (max-width: 1366px) {
