@@ -45,9 +45,10 @@ export default new Vuex.Store({
     contactPage: null,
     stores: [],
     storesList: [],
+    servicesList: [],
+    entertainmentList: [],
     giftStoresList: [],
     entertainment: [],
-    entertainmentList: [],
     messages: messages,
     apiUrls: apiUrls,
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : (sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null),
@@ -158,6 +159,9 @@ export default new Vuex.Store({
     },
     entertainmentList: (state) => {
       return state.entertainmentList
+    },
+    servicesList: (state) => {
+      return state.servicesList
     },
     googleMap: (state) => {
       return state.googleMap
@@ -479,7 +483,7 @@ export default new Vuex.Store({
           surname: payload.lastName,
           email: payload.email,
           mobile: `${payload.mobileIndex.val}${payload.mobile}`,
-          birthDate: `${payload.day.val}/${payload.month.val}/${payload.year.val}`,
+          birthDate: `${payload.year.val}/${payload.month.val}/${payload.day.val}`,
           sex: payload.gender.val,
           country: payload.country.val,
           city: payload.city.val,

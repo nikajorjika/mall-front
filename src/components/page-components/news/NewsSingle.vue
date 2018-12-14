@@ -242,6 +242,7 @@ export default {
             margin: 0 80px 0 0;
             position: absolute;
             top: 0;
+            text-align: justify;
             left: 0;
             color: #848484;
             font-family: 'Muli Light', 'BPG Arial', 'sans-serif';

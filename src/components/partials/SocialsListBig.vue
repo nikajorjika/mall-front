@@ -1,6 +1,6 @@
 <template>
   <div class="socials-container-big">
-    <block-header-standard :title="this.title"/>
+    <block-header-standard :title="title[locale]"/>
     <div class="socials-container-outer">
       <div class="socials-container">
         <div class="social" v-for="(item, index) in $store.getters.socials" v-bind:key="index">
@@ -23,7 +23,10 @@ export default {
   },
   data: function () {
     return {
-      title: 'SOCIALS'
+      title: {
+        en: 'socials',
+        ka: 'ბმულები'
+      }
     }
   }
 }

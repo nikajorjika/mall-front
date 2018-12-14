@@ -49,7 +49,7 @@ export default {
     if (!this.$store.getters[ `storesList` ].length) {
       this.getStoreList()
     }
-    if (this.$route.params.cat) {
+    if (this.$route.params.cat && this.categoryInUrl.hasOwnProperty(this.$route.params.cat)) {
       this.category = this.categoryInUrl[ this.$route.params.cat ]
     }
   },

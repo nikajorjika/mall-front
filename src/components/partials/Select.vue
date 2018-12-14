@@ -40,9 +40,8 @@ export default {
       if (value === '' || value === null) {
         this.fireSelect(null)
       } else {
-        console.log(this.items)
         for (let i = 0; i < this.items.length; i++) {
-          if (this.items[ i ].value === this.value) {
+          if (this.items[ i ][this.valueField].toString() === this.value.toString()) {
             this.fireSelect(this.items[ i ], true)
           }
         }

@@ -121,7 +121,8 @@ export default {
       padding: 0 36px;
     }
     .additional-info-item {
-      width: 376px;
+      max-width: 376px;
+      width: 100%;
       margin-right: 12px;
       h4 {
         font-size: 2.4rem;

@@ -116,11 +116,6 @@ export default {
     if (!this.$store.getters[ `${this.model}List` ].length) {
       this.getStoreList()
     }
-    if (!this.$store.getters.categories.length) {
-      this.$store.dispatch('getCategories').catch((error) => {
-        console.error(error)
-      })
-    }
   },
   props: {
     categories: {

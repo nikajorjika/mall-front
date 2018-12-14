@@ -39,43 +39,29 @@
         <div class="field-wrapper">
           <label>{{t('birth_date_placeholder')}}*</label>
           <div class="combo-fields">
-            <input type="hidden" name="day" v-validate="'required'" v-model="birthDate.day">
             <custom-select class="b-date-field" :items="updateObject.day.options"
-                           :selectedDefault="day"
+                           :value="birthDate.day"
                            :placeholder="updateObject.day.placeholder"
                            name="day"
                            @change="onSelectAction"/>
-            <input type="hidden" name="month" v-validate="'required'" v-model="birthDate.month">
             <custom-select class="b-date-field" :items="updateObject.month.options"
-                           :selectedDefault="month"
+                           :value="birthDate.month"
                            :placeholder="updateObject.month.placeholder"
                            name="month"
                            @change="onSelectAction"/>
-            <input type="hidden" name="year" v-validate="'required'" v-model="birthDate.year">
             <custom-select class="b-date-field" :items="updateObject.year.options"
-                           :selectedDefault="year"
+                           :value="birthDate.year"
                            :placeholder="updateObject.year.placeholder"
                            name="year"
                            @change="onSelectAction"/>
-          </div>
-          <div v-if="errors.first('day')">
-            <div v-show="errors.first('day')" class="error">{{ errors.first('settings.day') }}</div>
-          </div>
-          <div v-else-if="errors.first('month')">
-            <div v-show="errors.first('month')" class="error">{{ errors.first('settings.month') }}</div>
-          </div>
-          <div v-else-if="errors.first('year')">
-            <div v-show="errors.first('year')" class="error">{{ errors.first('settings.year') }}</div>
           </div>
         </div>
         <div class="field-wrapper">
           <label>{{t('gender_placeholder')}}*</label>
           <div class="combo-fields columns">
-            <input type="hidden" name="gender" v-validate="'required'" v-model="user.sex">
             <custom-select class="gender-field" :items="updateObject.gender.options" name="gender"
-                           :selectedDefault="gender"
+                           :value="birthDate.gender"
                            :placeholder="updateObject.gender.placeholder" @change="onSelectAction"/>
-            <div v-show="errors.first('settings.gender')" class="error">{{ errors.first('settings.gender') }}</div>
           </div>
         </div>
       </div>
@@ -83,21 +69,17 @@
         <div class="field-wrapper">
           <label>{{t('country_placeholder')}}*</label>
           <div class="combo-fields columns">
-            <input type="hidden" name="country" v-validate="'required'" v-model="updateObject.country.val">
             <custom-select class="country-field" name="country" :items="updateObject.country.options"
-                           :selectedDefault="updateObject.country.options[0]"
+                           :value="birthDate.country"
                            :placeholder="updateObject.country.placeholder" @change="onSelectAction"/>
-            <div v-show="errors.first('settings.country')" class="error">{{ errors.first('settings.country') }}</div>
           </div>
         </div>
         <div class="field-wrapper">
           <label>{{t('city_placeholder')}}*</label>
           <div class="combo-fields columns">
-            <input type="hidden" name="city" v-validate="'required'" v-model="updateObject.city.val">
             <custom-select class="city-field" name="city" :items="updateObject.city.options"
-                           :selectedDefault="updateObject.city.options[0]"
+                           :value="birthDate.city"
                            :placeholder="updateObject.city.placeholder" @change="onSelectAction"/>
-            <div v-show="errors.first('settings.city')" class="error">{{ errors.first('settings.city') }}</div>
           </div>
         </div>
       </div>
@@ -156,6 +138,18 @@ import BlockHeaderStandard from '../../partials/BlockHeader'
 export default {
   name: 'settings-form',
   components: { BlockHeaderStandard, WhiteSpinner, ButtonStandard, CustomSelect },
+  mounted: function () {
+    if (this.$store.getters.user) {
+      const date = new Date(this.user.birthDate)
+      this.birthDate.day = date.getDate().toString()
+      this.birthDate.month = date.getMonth().toString()
+      this.birthDate.year = date.getFullYear().toString()
+      this.birthDate.gender = this.user.sex
+      this.birthDate.city = this.user.city
+      this.birthDate.country = this.user.country
+      console.log(this.birthDate)
+    }
+  },
   data: function () {
     return {
       user: this.$store.getters.user,
@@ -266,13 +260,17 @@ export default {
       birthDate: {
         day: '',
         month: '',
-        year: ''
+        year: '',
+        country: '',
+        gender: '',
+        city: ''
       }
     }
   },
   methods: {
     updateSettings: function () {
       if (this.validateForm()) {
+        console.log(this.user)
         this.$validator.validateAll('settings').then((result) => {
           if (result) {
             // here we submit form
@@ -309,9 +307,12 @@ export default {
         this.$validator.validateAll('changePassword').then((result) => {
           if (result) {
             this.loading = true
-            this.$store.dispatch('register', this.user).then(() => {
+            this.$store.dispatch('updatePassword', this.user).then(() => {
+              this.$store.dispatch('showPopup', {
+                message: this.t('changed'),
+                icon: 'success'
+              })
               this.loading = false
-              this.$router.push({ name: 'home', params: { locale: this.locale } })
             }).catch((error) => {
               if (error.response.data) {
                 this.returnedError = error.response.data.status
@@ -342,65 +343,6 @@ export default {
           this.birthDate[ value.name ].val = ''
         }
       }
-    }
-  },
-  computed: {
-    day: function () {
-      const date = new Date(this.user.birthDate)
-      const tmp = date.getDate().toString()
-      const result = this.updateObject.day.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[ 0 ] : ''
-    },
-    month: function () {
-      const date = new Date(this.user.birthDate)
-      const tmp = date.getMonth().toString()
-      const result = this.updateObject.month.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[ 0 ] : ''
-    },
-    year: function () {
-      const date = new Date(this.user.birthDate)
-      const tmp = date.getFullYear().toString()
-      const result = this.updateObject.year.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[ 0 ] : ''
-    },
-    gender: function () {
-      const tmp = this.user.sex
-      const result = this.updateObject.gender.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[ 0 ] : ''
-    },
-    city: function () {
-      const tmp = this.user.sex
-      const result = this.updateObject.city.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[ 0 ] : ''
-    },
-    country: function () {
-      const tmp = this.user.sex
-      const result = this.updateObject.country.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[ 0 ] : ''
     }
   }
 }

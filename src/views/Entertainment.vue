@@ -1,7 +1,7 @@
 <template>
   <div id="page-stores">
     <block-header-standard :title="this.title[locale]"/>
-    <store-list-grid apiUrl="entertainment" model="entertainment" :categories="$store.getters.storeFilters"/>
+    <store-list-grid apiUrl="entertainment" model="entertainment" :categories="$store.getters.storeFilters" :categoryId="['5b9d3c7762973c001fd2c69a']"/>
   </div>
 </template>
 

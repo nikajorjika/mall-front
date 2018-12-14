@@ -14,7 +14,28 @@
               </router-link>
               <transition name="slideUp">
                 <div v-if="item.children !== undefined && showChild === item" class="drop">
-                  <ul :class="{twoCol: item.children.length > 10 }">
+                  <ul :class="{twoCol: item.children.length > 10 }" v-if="item.url === '/stores'">
+                    <li v-for="(child, i) in filteredCategories('stores')" v-bind:key="i">
+                      <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
+                        {{child.translates[locale]}}
+                      </router-link>
+                    </li>
+                  </ul>
+                  <ul :class="{twoCol: item.children.length > 10 }" v-else-if="item.url === '/entertainment'">
+                    <li v-for="(child, i) in filteredCategories('entertainment')" v-bind:key="i">
+                      <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
+                        {{child.translates[locale]}}
+                      </router-link>
+                    </li>
+                  </ul>
+                  <ul :class="{twoCol: item.children.length > 10 }" v-else-if="item.url === '/services'">
+                    <li v-for="(child, i) in filteredCategories('services')" v-bind:key="i">
+                      <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
+                        {{child.translates[locale]}}
+                      </router-link>
+                    </li>
+                  </ul>
+                  <ul :class="{twoCol: item.children.length > 10 }" v-else>
                     <li v-for="(child, i) in item.children" v-bind:key="i">
                       <router-link :to="`/${locale}${item.url}${child.url}`">
                         {{child.name[locale]}}
@@ -139,16 +160,24 @@ export default {
       showChild: null,
       scrollY: 0,
       showSearch: false,
-      sticky: false
+      sticky: false,
+      stores: ['5b9d3c1f62973c001fd2c698', '5b9d3c6062973c001fd2c699'],
+      entertainment: ['5b9d3c7762973c001fd2c69a'],
+      services: ['5b9d3c8c62973c001fd2c69b']
     }
   },
   created: function () {
     document.addEventListener('click', this.documentClick)
   },
   mounted: function () {
+    if (!this.$store.getters.categories.length) {
+      this.$store.dispatch('getCategories').catch((error) => {
+        console.error(error)
+      })
+    }
     window.addEventListener('scroll', (event) => {
-      this.scrollY = Math.round(window.scrollY);
-    });
+      this.scrollY = Math.round(window.scrollY)
+    })
   },
   components: {
     SearchContainer,
@@ -173,11 +202,22 @@ export default {
         this.closeSearch()
       }
     },
-    scrollY: function (newValue){
+    scrollY: function (newValue) {
       this.sticky = newValue > 85
     }
   },
   methods: {
+    filteredCategories: function (model) {
+      if (this.$store.getters.categories.hasOwnProperty('subcategories')) {
+        return this.$store.getters.categories.subcategories.filter(item => {
+          if (this[model].indexOf(item.categoryId) !== -1) {
+            return true
+          }
+        })
+      } else {
+        return []
+      }
+    },
     toggleSearch: function () {
       this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
       this.showSearch = !this.showSearch
@@ -212,14 +252,14 @@ export default {
 <style lang="scss">
 #nav {
   border-top: solid 1px #f1f1f1;
-  &.fixed{
+  &.fixed {
     padding-top: 84px;
-    .header-wrapper{
+    .header-wrapper {
       position: fixed;
       animation: slideDown 0.3s;
       top: 0;
-      left:0;
-      width:100%;
+      left: 0;
+      width: 100%;
       z-index: 4;
       background-color: #ffffff;
     }
@@ -285,12 +325,12 @@ export default {
             padding: 24px 0;
 
             &.twoCol {
-              width: 472px;
+              width: 520px;
               display: flex;
               flex-wrap: wrap;
 
               li {
-                width: 236px;
+                width: 260px;
                 margin-right: 0;
               }
             }
@@ -404,7 +444,7 @@ export default {
             transition: height 0.3s;
           }
           &:hover {
-            >div>a,
+            > div > a,
             > a {
               color: #fff;
               img {

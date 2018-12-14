@@ -141,10 +141,16 @@ const router = new Router({
       component: () => import('./views/News.vue')
     },
     {
-      path: '/:locale/entertainment',
+      path: '/:locale/entertainment/:cat?',
       name: 'entertainment',
       props: true,
       component: () => import('./views/Entertainment.vue')
+    },
+    {
+      path: '/:locale/services/:cat?',
+      name: 'services',
+      props: true,
+      component: () => import('./views/Services.vue')
     },
     {
       path: '/:locale/user/notifications',

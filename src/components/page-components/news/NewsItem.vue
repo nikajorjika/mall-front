@@ -45,14 +45,14 @@ export default {
     overflow: hidden;
     &:hover{
       img{
-        transform: scale(1);
+        transform: scale(1.1);
       }
     }
     img {
       transition: all 0.3s;
       width: 100%;
       height: 100%;
-      transform: scale(1.1);
+      transform: scale(1);
       position: absolute;
       top: 0;
       left: 0;
