@@ -157,8 +157,8 @@
       </div>
       <div class="store-map-promotion">
         <div class="store-map-wrapper">
-          <div class="part-map" id="part-map" ref="partMap">
-            <div id="pi-widget" style="height:517px">
+          <div class="part-map" id="part-map">
+            <div id="pi-widget" style="height:517px" ref="partMap">
             </div>
             <mall-map-js :x="store.x" :y="store.y" :zone="store.zone" :storeName="store.name.en"/>
           </div>
