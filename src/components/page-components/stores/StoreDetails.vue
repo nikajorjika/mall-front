@@ -7,7 +7,7 @@
       </div>
       <div class="store-details-body">
         <div class="store-details-content">
-          <div class="logo-part-wrapper">
+          <div class="logo-part-wrapper" v-if="$mq !== 'mobile'">
             <div class="logo-container">
               <img :src="store.logoUrl" :alt="store.name[locale]">
             </div>
@@ -45,6 +45,27 @@
                 </div>
                 <div class="title-container">
                   <h1 class="title">{{store.name[locale]}}</h1>
+                </div>
+                <div class="logo-part-wrapper" v-if="$mq === 'mobile'">
+                  <div class="logo-container">
+                    <img :src="store.logoUrl" :alt="store.name[locale]">
+                  </div>
+                  <div class="subscribe-button-container">
+                    <button class="subscribe-button" :class="{alreadySubscribed: isSubscribed}" @click="subscribe(store._id)">
+                <span class="subscribe" v-if="!isSubscribed">
+                  {{t('subscribe')}}
+                </span>
+                      <span class="unsubscribe" v-else>
+                  <span class="subscribed">
+                     <img src="../../../assets/images/icons/pwichka.svg" height="6"
+                          width="9"> <span>{{t('subscribed')}}</span>
+                  </span>
+                  <span class="hover">
+                    {{t('unsubscribe')}}
+                  </span>
+                </span>
+                    </button>
+                  </div>
                 </div>
                 <div class="p-container">
                   <p v-html="formatP(store.description[locale])"></p>
@@ -102,12 +123,44 @@
                 </li>
               </ul>
             </div>
+            <div class="content-socials bottom">
+              <div class="socials-wrapper">
+                <div class="socials-title">
+                  <h4>{{t('socials')}}</h4>
+                </div>
+                <ul>
+                  <li>
+                    <a :href="store.socials.facebook" target="_blank">
+                      <img src="../../../assets/images/icons/facebook.svg" height="15">
+                    </a>
+                  </li>
+                  <li>
+                    <a :href="store.socials.twitter" target="_blank">
+                      <img src="../../../assets/images/icons/twitter.svg" height="12">
+                    </a>
+                  </li>
+                  <li>
+                    <a :href="store.socials.youtube" target="_blank">
+                      <img src="../../../assets/images/icons/youtube.svg" height="10">
+                    </a>
+                  </li>
+                  <li>
+                    <a :href="store.socials.pinterest" target="_blank">
+                      <img src="../../../assets/images/icons/pinterest.svg" height="15">
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="store-map-promotion">
         <div class="store-map-wrapper">
           <div class="part-map" id="part-map" ref="partMap">
+            <div id="pi-widget" style="height:517px">
+            </div>
+            <mall-map-js :x="store.x" :y="store.y" :zone="store.zone" :storeName="store.name.en"/>
           </div>
           <div class="part-promotions" v-if="storePromotions.length">
             <div class="slider-title">
@@ -161,10 +214,11 @@ import LoadingBig from '../../partials/LoadingBig'
 import SocialSharingNetwork from 'vue-social-sharing/src/social-sharing-network'
 import ButtonStandard from '../../partials/StandardButton'
 import SmallSlider from '../../partials/SmallSlider'
+import MallMapJs from '../../partials/MallMapJs'
 
 export default {
   name: 'store-details',
-  components: { SmallSlider, ButtonStandard, SocialSharingNetwork, LoadingBig },
+  components: { MallMapJs, SmallSlider, ButtonStandard, SocialSharingNetwork, LoadingBig },
   mounted: function () {
     this.loadStore()
     if (this.$store.getters.user && !this.$store.getters.subscribed.length) {
@@ -261,6 +315,9 @@ export default {
 <style lang="scss">
 .breadcrumb {
   display: flex;
+  @media screen and (max-width: 760px){
+    justify-content: center;
+  }
   .breadcrumb-item {
     font-size: 1.1rem;
     line-height: 1.27;
@@ -283,14 +340,16 @@ export default {
   .share-inner {
     display: flex;
     justify-content: center;
-    padding: 25px 0;
+    padding: 5px 0;
     border-top: 1px solid #dcdcdc;
+    flex-wrap: wrap;
+
     .share-button {
       border: 1px solid #dcdcdc;
       display: flex;
       background: transparent;
       width: 293px;
-      margin: 0 5px;
+      margin: 20px 5px 10px;
       padding: 0;
       cursor: pointer;
       position: relative;
@@ -351,11 +410,26 @@ export default {
       margin: 0 auto;
       max-width: 1640px;
       display: flex;
+      @media screen and (max-width: 927px){
+        flex-direction: column;
+      }
+      @media screen and (max-width: 760px){
+        width:100%;
+      }
       .part-promotions {
         width: 430px;
         padding: 28px 16px 0;
         border-left: 1px solid #dcdcdc;
         border-right: 1px solid #dcdcdc;
+        @media screen and (max-width: 927px){
+          margin: 0 auto;
+          padding-top: 25px;
+          border: none;
+        }
+        @media screen and (max-width: 600px){
+          width: calc(100% - 72px);
+          padding:0;
+        }
         .slider-title {
           h4 {
             font-size: 1.6rem;
@@ -375,8 +449,9 @@ export default {
       .part-map {
         padding: 75px 39px 75px 26px;
         width: calc(100% - 430px);
-        img {
+        @media screen and (max-width: 927px){
           width: 100%;
+          padding: 36px 0;
         }
       }
     }
@@ -403,22 +478,40 @@ export default {
       width: calc(100% - 40px);
       margin: 0 20px;
     }
+    @media screen and (max-width: 760px) {
+      width: 100%;
+      margin: 0;
+      padding:0;
+    }
     .store-details-content {
       display: flex;
       margin-top: 21px;
       .logo-part-wrapper {
         margin-right: 52px;
+        @media screen and (max-width: 760px) {
+          width: 145px;
+          margin: 0 auto;
+        }
         .logo-container {
           height: 244px;
           width: 244px;
           background: white;
           display: flex;
           border: 1px solid rgba(0, 0, 0, 0.5);
+          @media screen and (max-width: 760px) {
+            width: 145px;
+            height: 145px;
+            margin: 0 auto;
+          }
           img {
             height: calc(100% - 100px);
             width: calc(100% - 100px);
             margin: auto;
             object-fit: contain;
+            @media screen and (max-width: 760px) {
+              height: calc(100% - 35px);
+              width: calc(100% - 35px);
+            }
           }
         }
         .subscribe-button-container {
@@ -486,11 +579,19 @@ export default {
       }
       .content-wrapper {
         width: calc(100% - 296px);
+        @media screen and (max-width: 760px){
+          max-width: 100%;
+          width: 100%;
+        }
         .content {
           display: flex;
           .content-main {
             width: 90%;
             max-width: 1050px;
+            @media screen and (max-width: 760px){
+              max-width: 100%;
+              width: 100%;
+            }
             .title-container {
               .title {
                 font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
@@ -499,9 +600,17 @@ export default {
                 font-weight: 600;
                 line-height: 1.26;
                 text-transform: uppercase;
+                @media screen and (max-width: 760px){
+                  text-align: center;
+                  border-bottom: 1px solid #dcdcdc;
+                  padding-bottom:30px;
+                }
               }
             }
             .p-container {
+              @media screen and (max-width: 760px){
+                padding: 0 36px;
+              }
               p {
                 font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
                 font-size: 1.8rem;
@@ -509,34 +618,6 @@ export default {
                 line-height: 1.28;
                 color: #000;
                 opacity: 1;
-              }
-            }
-          }
-          .content-socials {
-            width: 12%;
-            max-width: 122px;
-            display: flex;
-            margin-left: auto;
-            border-left: 1px solid #dcdcdc;
-            border-right: 1px solid #dcdcdc;
-            flex-direction: column;
-            .socials-wrapper {
-              margin: auto;
-              .socials-title {
-                h4 {
-                  font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
-                  font-size: 1.4rem;
-                  font-weight: 300;
-                  text-transform: uppercase;
-                  line-height: 1.29;
-                  margin: 0;
-                }
-              }
-              ul {
-                li {
-                  margin: 19px 0;
-                  text-align: center;
-                }
               }
             }
           }
@@ -549,12 +630,23 @@ export default {
             padding: 21px 0 17px;
             border-top: solid 1px #dcdcdc;
             display: flex;
+            @media screen and (max-width: 1100px) {
+              width: 100%;
+            }
+            @media screen and (max-width: 760px){
+              padding: 20px 36px;
+              flex-wrap: wrap;
+              justify-content: space-between;
+            }
             li {
               display: flex;
               margin-right: 54px;
               font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
               font-size: 1.4rem;
               line-height: 1.29;
+              @media screen and (max-width: 760px){
+                margin: 12px 0;
+              }
               > span {
                 margin: auto 0;
               }
@@ -580,6 +672,62 @@ export default {
                   }
                 }
               }
+            }
+          }
+        }
+      }
+    }
+    .content-socials {
+      width: 12%;
+      max-width: 122px;
+      display: flex;
+      margin-left: auto;
+      border-left: 1px solid #dcdcdc;
+      border-right: 1px solid #dcdcdc;
+      flex-direction: column;
+      @media screen and (max-width: 1100px) {
+        display: none;
+      }
+      &.bottom {
+        display: none;
+        @media screen and (max-width: 1100px) {
+          display: block;
+          width: 100%;
+          max-width: 100%;
+          border: none;
+        }
+      }
+      .socials-wrapper {
+        margin: auto;
+        @media screen and (max-width: 1100px) {
+          display: flex;
+          padding: 12px 0;
+          border-top: 1px solid #dcdcdc;
+        }
+        @media screen and (max-width: 760px) {
+          padding: 20px 36px;
+        }
+        .socials-title {
+          h4 {
+            font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
+            font-size: 1.4rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            line-height: 1.29;
+            margin: 0;
+          }
+        }
+        ul {
+          @media screen and (max-width: 1100px) {
+            display: flex;
+            justify-content: space-around;
+            flex: 1;
+          }
+          li {
+            margin: 19px 0;
+            text-align: center;
+            @media screen and (max-width: 1100px) {
+              margin: auto 0;
             }
           }
         }

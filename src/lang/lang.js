@@ -199,6 +199,7 @@ const messages = {
       mallTaxi: 'მოლის ტაქსი',
       tbilisi_mall_taxi: 'მოლის ტაქსი',
       mall_map: 'მოლის რუქა',
+      mallMap: 'მოლის რუქა',
       about_mall: 'მოლის შესახებ',
       guest_service: 'მომსახურებები',
       about_us: 'ჩვენს შესახებ',

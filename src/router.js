@@ -48,6 +48,12 @@ const router = new Router({
           component: () => import('./components/page-components/about-us/Marketing.vue')
         },
         {
+          path: 'mall-map',
+          name: 'mallMap',
+          props: true,
+          component: () => import('./components/page-components/about-us/TbilisiMallMap.vue')
+        },
+        {
           path: 'leasing',
           name: 'leasing',
           props: true,
