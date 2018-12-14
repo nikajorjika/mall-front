@@ -326,9 +326,16 @@ export default {
 <style lang="scss">
 #registration-form {
   position: relative;
+  @media screen and (max-width: 650px){
+    width: calc(100% - 24px);
+    margin: 0 auto;
+  }
   .field-container {
     display: flex;
     width: 100%;
+    @media screen and (max-width: 515px){
+      flex-direction: column;
+    }
     &.columns {
       flex-direction: column;
     }
@@ -340,6 +347,10 @@ export default {
       margin-right: 16px;
       display: flex;
       flex-direction: column;
+      @media screen and (max-width: 515px){
+        width: calc(100% - 32px);
+        margin:0 auto;
+      }
       label {
         margin: 15px 0 6px;
         font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
@@ -379,15 +390,22 @@ export default {
         }
         input {
           flex: 3;
+          width: 100%;
         }
       }
       &:last-child {
         margin-right: 0;
+        @media screen and (max-width: 515px){
+          margin:0 auto;
+        }
       }
     }
     .terms-set {
       display: flex;
       margin: 6px 0;
+      @media screen and (max-width: 515px){
+        margin-left: 16px;
+      }
       input {
         margin-left: 0;
       }
@@ -404,6 +422,9 @@ export default {
     .register-button-container {
       margin: 41px 0 107px 0;
       text-align: center;
+      @media screen and (max-width: 515px){
+        margin: 41px auto 107px auto;
+      }
     }
   }
   .error {

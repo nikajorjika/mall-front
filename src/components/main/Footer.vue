@@ -168,7 +168,19 @@ export default {
       padding: 0;
     }
   }
-
+  @media screen and (max-width: 760px) {
+    .item-wrapper {
+      font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 1.29;
+      color: #3a3838;
+      text-transform: capitalize;
+      &:hover {
+        color: #999;
+      }
+    }
+  }
   .menus-wrapper {
     display: flex;
     width: 85%;

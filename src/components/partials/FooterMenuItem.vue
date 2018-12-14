@@ -79,6 +79,7 @@ export default {
             line-height: 1.29;
             color: #3a3838;
             margin: 28px 0;
+            text-transform: capitalize;
             &:hover{
               color: #999;
             }

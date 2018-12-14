@@ -28,6 +28,8 @@ const apiUrls = {
   getBookmarked: 'https://smartfinders.herokuapp.com/api/v1/website/bookmarked-items-list',
   storesList: `https://smartfinders.herokuapp.com/api/v1/website/stores-list-view`,
   media: `https://smartfinders.herokuapp.com/api/v1/website/media`,
+  contactPage: `https://smartfinders.herokuapp.com/api/v1/website/about-page/5bdb52156155da077b01cd77`,
+  contactSend: `https://smartfinders.herokuapp.com/api/v1/website/contact`,
   entertainmentList: `https://smartfinders.herokuapp.com/api/v1/website/entertainment-items`,
   newsFilters: `https://smartfinders.herokuapp.com/api/v1/website/filter-items`,
   sendToken: `https://smartfinders.herokuapp.com/api/v1/website/reset-token`,

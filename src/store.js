@@ -42,6 +42,7 @@ export default new Vuex.Store({
     frontEvents: [],
     frontNewCollections: [],
     frontNews: [],
+    contactPage: null,
     stores: [],
     storesList: [],
     giftStoresList: [],
@@ -100,6 +101,9 @@ export default new Vuex.Store({
     },
     popup: (state) => {
       return state.popup
+    },
+    contactPage: (state) => {
+      return state.contactPage
     },
     navigation: (state) => {
       return state.navigation
@@ -397,7 +401,9 @@ export default new Vuex.Store({
             resolve('RECORD NOT FOUND')
           } else {
             resolve(response)
-            context.commit(request.setter, { data: response.data.data, model: request.model })
+            if (request.hasOwnProperty('model')) {
+              context.commit(request.setter, { data: response.data.data, model: request.model })
+            }
           }
         }).catch(function (error) {
           reject(error)
@@ -406,7 +412,7 @@ export default new Vuex.Store({
     },
     loadFiltered: function (context, request) {
       return new Promise((resolve, reject) => {
-        Axios.post(request.api).then(function (response) {
+        Axios.post(request.api, request.filters).then(function (response) {
           if (response.data.length) {
             resolve('RECORD NOT FOUND')
           } else {

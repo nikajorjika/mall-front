@@ -160,7 +160,13 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 12.6px;
+    @media screen and (max-width: 579px){
+      flex-direction: column;
+      margin: 0 12px auto;
+    }
+    .login-button{
+      margin-bottom: 12.6px;
+    }
   }
   .forgot-password {
     margin-bottom:20px;

@@ -89,8 +89,10 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      .register-button {
-
+      .register-button{
+        @media screen and (max-width: 579px){
+          margin: 0 auto 12px ;
+        }
       }
     }
   }

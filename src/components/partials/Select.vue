@@ -1,10 +1,21 @@
 <template>
   <div class="custom-select" ref="dropdownMenu">
     <div class="selected-item" @click="toggleBody" :class="{open: open}">
+      <div v-if="multiple">
+      <span class="selected multiple" v-if="openItems.length"><span class="non-breakable "
+                                                                    v-for="(selected, index) in openItems" :key="index">
+        {{selected[nameField][locale]}} {{index !== openItems.length - 1 ? ',' : ''}}
+      </span> <font-awesome-icon
+        icon="caret-down"/></span>
+        <span class="placeholder" v-if="!openItems.length"><span class="non-breakable">{{placeholder[locale]}}</span> <font-awesome-icon
+          icon="caret-down"/></span>
+      </div>
+      <div v-else>
       <span class="selected" v-if="selectedItem"><span class="non-breakable">{{selectedItem[nameField][locale]}}</span> <font-awesome-icon
         icon="caret-down"/></span>
-      <span class="placeholder" v-if="!selectedItem"><span class="non-breakable">{{placeholder[locale]}}</span> <font-awesome-icon
-        icon="caret-down"/></span>
+        <span class="placeholder" v-if="!selectedItem"><span class="non-breakable">{{placeholder[locale]}}</span> <font-awesome-icon
+          icon="caret-down"/></span>
+      </div>
     </div>
     <div class="selectable-items" v-if="open">
       <ul>
@@ -29,9 +40,10 @@ export default {
       if (value === '' || value === null) {
         this.fireSelect(null)
       } else {
+        console.log(this.items)
         for (let i = 0; i < this.items.length; i++) {
           if (this.items[ i ].value === this.value) {
-            this.fireSelect(this.items[ i ])
+            this.fireSelect(this.items[ i ], true)
           }
         }
       }
@@ -90,8 +102,11 @@ export default {
     }
   },
   methods: {
-    fireSelect: function (selected) {
+    fireSelect: function (selected, initial) {
       if (this.multiple) {
+        if (initial) {
+          this.openItems = []
+        }
         if (this.openItems.indexOf(selected) === -1) {
           this.openItems.push(selected)
         } else {
@@ -169,6 +184,17 @@ export default {
       color: #000;
       display: flex;
       justify-content: space-between;
+      &.multiple {
+        overflow: hidden;
+        white-space: nowrap;
+        justify-content: left;
+        .non-breakable {
+          margin-right: 6px;
+        }
+        .fa-caret-down {
+          margin-left: auto;
+        }
+      }
       @media screen and (max-width: 1650px) {
         font-size: 0.9rem;
       }

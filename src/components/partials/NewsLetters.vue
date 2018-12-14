@@ -2,7 +2,9 @@
   <div class="newsletter-subscribe">
     <div class="subscribe-container">
       <div class="logo-part">
-        <img src="../../assets/images/icons/tb_mall_logo_black.svg" alt="st">
+        <router-link :to="`/${locale}`">
+          <img src="../../assets/images/icons/tb_mall_logo_black.svg" alt="st">
+        </router-link>
       </div>
       <div class="subscribe-part" :class="{open: showForm}">
         <div class="inner-container form-closed" @click.stop="showForm = !showForm">

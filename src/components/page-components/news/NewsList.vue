@@ -40,10 +40,6 @@
         </div>
       </div>
     </div>
-    <div class="grid-footer-container" v-if="hasMore">
-      <button v-show="loading" class="loading">{{t('loading')}}</button>
-      <button v-show="!loading" @click="loadMore">{{t('load_more')}}</button>
-    </div>
   </div>
 </template>
 <script>
@@ -57,7 +53,6 @@ import NewsSingleMobile from './NewsSingleMobile'
 export default {
   name: 'news-list',
   mounted: function () {
-    if (!this.$store.getters.events.length) this.fetchItems()
     if (this.$route.params.id && !this.openItem) {
       this.loadSingle()
     }
@@ -155,28 +150,6 @@ export default {
     close: function () {
       this.loadedItem = null
       this.openItem = null
-    },
-    fetchItems: function () {
-      this.loadingNews = true
-      this.sendRequest('INITIAL_LOAD')
-    },
-    loadMore: function () {
-      this.page++
-      this.loading = true
-      this.sendRequest('LOAD_MORE')
-    },
-    sendRequest: function (setter) {
-      this.$store.dispatch('fetchItems', {
-        model: 'events',
-        api: this.$store.state.apiUrls.eventsAPI(this.page, this.offset),
-        setter: setter
-      }).then((response) => {
-        if (response.data.data.length < this.offset) this.hasMore = false
-        this.loading = false
-        this.loadingNews = false
-      }).catch((error) => {
-        console.error(error)
-      })
     }
   }
 }

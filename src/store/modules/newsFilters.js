@@ -8,30 +8,30 @@ const newsFilters = {
       {
         name: {
           en: 'promotions',
-          ka: 'სეილები'
+          ka: 'შეთავაზებები'
         },
         value: 'includeOffer'
       },
       {
         name: {
           en: 'new collections',
-          ka: 'შეთავაზებები'
+          ka: 'ახალი კოლექციები'
         },
         value: 'includeNewCol'
       },
       {
         name: {
-          en: 'news',
-          ka: 'ახალი კოლექციები'
+          en: 'events',
+          ka: 'ღონისძიებები'
         },
-        value: 'includeNews'
+        value: 'includeEvent'
       },
       {
         name: {
-          en: 'events',
-          ka: 'ივენთები'
+          en: 'news',
+          ka: 'ახალი ამბები'
         },
-        value: 'includeEvent'
+        value: 'includeNews'
       }
     ]
   },
@@ -39,30 +39,7 @@ const newsFilters = {
     placeholder: {
       en: 'brands',
       ka: 'ბრენდები'
-    },
-    data: [
-      {
-        name: {
-          en: 'zara',
-          ka: 'ზარა'
-        },
-        value: 'zara'
-      },
-      {
-        name: {
-          en: 'zara2',
-          ka: 'ზარა2'
-        },
-        value: 'zara2'
-      },
-      {
-        name: {
-          en: 'zara3',
-          ka: 'ზარა3'
-        },
-        value: 'zara3'
-      }
-    ]
+    }
   },
   floors: {
     placeholder: {

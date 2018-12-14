@@ -19,7 +19,6 @@ export default {
     pi('domain', 'https://api-phoenix.pointinside.com')
     pi('venue', 'cad463e95dd631d8856b1f4223bf3477')
     if (this.search) {
-      console.log(window.pointinside)
       pi('search', this.search)
     }
     let js
@@ -27,13 +26,6 @@ export default {
     js = document.createElement('script')
     js.src = 'https://web-cdn.pointinside.com/embedded/piwidget.js'
     pjs.parentNode.insertBefore(js, pjs)
-  },
-  beforeDestroy: function () {
-  },
-  watch: {
-    'storeName': function (value) {
-      console.log(value)
-    }
   },
   computed: {
     search: function () {

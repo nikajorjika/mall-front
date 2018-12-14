@@ -63,9 +63,11 @@
                        :key="index">
                     <div v-if="value !== undefined" class="item-wrapper">
                       <div class="item-column name">
+                        <router-link :to="`/${locale}/store/${createSlug(value.name['en'])}/${value._id}`">
                         <span class="name-inner">
                           {{value.name[locale]}}
                         </span>
+                        </router-link>
                       </div>
                       <div class="item-column tags">
                                                 <span class="tag" v-for="(tag, index) in value.tags" :key="index"><span
@@ -340,6 +342,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .store-list-grid {
+  .store-list-view{
+    @media screen and (max-width: 1683px) {
+      padding: 0 36px;
+    }
+  }
   .filters-outer {
     @media screen and (max-width: 760px) {
       padding: 0;
@@ -527,12 +534,19 @@ export default {
         font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
         text-transform: uppercase;
         padding: 48px 0 48px 36px;
+        @media screen and (max-width: 1060px){
+          padding-left: 0;
+          width: 9%;
+        }
       }
 
       .items-container {
         width: 83%;
         position: relative;
 
+        @media screen and (max-width: 1060px){
+          width: 92%;
+        }
         &:after {
           content: '';
           position: absolute;
@@ -573,7 +587,6 @@ export default {
               margin-top: 14px;
               width: 21.3%;
               padding-right: 12px;
-
               .tag {
                 font-family: 'Muli', 'BPG Arial', 'sans-serif';
                 text-transform: capitalize;
