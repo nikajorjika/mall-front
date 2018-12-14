@@ -33,6 +33,7 @@ const apiUrls = {
   contactPage: `https://smartfinders.herokuapp.com/api/v1/website/about-page/5bdb52156155da077b01cd77`,
   contactSend: `https://smartfinders.herokuapp.com/api/v1/website/contact`,
   newsFilters: `https://smartfinders.herokuapp.com/api/v1/website/filter-items`,
+  changePassword: `https://smartfinders.herokuapp.com/api/v1/website/change-password`,
   sendToken: `https://smartfinders.herokuapp.com/api/v1/website/reset-token`,
   updateUser: `https://smartfinders.herokuapp.com/api/v1/website/user-info-update`,
   sendNewPassword: `https://smartfinders.herokuapp.com/api/v1/website/reset-password`,

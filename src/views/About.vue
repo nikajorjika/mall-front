@@ -11,7 +11,7 @@
         </div>
         <router-view></router-view>
       </div>
-      <div class="menu-container" v-if="$mq !== 'mobile'">
+      <div class="menu-container">
         <about-us-menu :items="this.aboutMenu" active=''/>
       </div>
       <div class="our-team" v-if="$route.name === 'about'">
@@ -107,10 +107,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
     margin: 97px 0 57.5px;
+    @media screen and (max-width: 760px) {
+      flex-direction: column;
+      margin-top: 0;
+    }
     .page-block-container {
       width: calc(100% - 260px);
       box-sizing: border-box;
       position: relative;
+      @media screen and (max-width: 760px) {
+        order: 2;
+      }
       @media screen and (max-width: 1456px) {
         padding-left: 12px;
       }
@@ -127,9 +134,16 @@ export default {
     }
     .menu-container {
       width: 260px;
+      @media screen and (max-width: 760px) {
+        order: 1;
+        width:100%;
+      }
     }
     .our-team {
       width: 100%;
+      @media screen and (max-width: 760px) {
+        order: 3;
+      }
     }
   }
 }

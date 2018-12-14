@@ -101,7 +101,7 @@
           <label for="current-password">{{t('reg_password_placeholder')}}*</label>
           <input type="password" id="current-password" v-validate="'required'" name="password"
                  ref="password"
-                 v-model="user.password">
+                 v-model="password.oldPassword">
           <span v-show="errors.first('changePassword.password')" class="error">{{ errors.first('changePassword.password') }}</span>
         </div>
       </div>
@@ -110,13 +110,13 @@
           <label for="registration-password">{{t('newPassword')}}*</label>
           <input type="password" id="registration-password" v-validate="'required'" name="newPassword"
                  ref="newPassword"
-                 v-model="user.newPassword">
+                 v-model="password.newPassword">
           <span v-show="errors.first('changePassword.newPassword')" class="error">{{ errors.first('changePassword.newPassword') }}</span>
         </div>
         <div class="field-wrapper">
           <label for="registration-repeat-password">{{t('repeatNewPassword')}}*</label>
           <input v-validate="'confirmed:newPassword'" name="password_confirmation" type="password"
-                 id="registration-repeat-password" v-model="user.repeatPassword">
+                 id="registration-repeat-password" v-model="password.confirmPassword">
           <span v-show="errors.first('changePassword.password_confirmation')"
                 class="error">{{ errors.first('changePassword.password_confirmation') }}</span>
         </div>
@@ -153,6 +153,11 @@ export default {
   data: function () {
     return {
       user: this.$store.getters.user,
+      password: {
+        newPassword: '',
+        confirmPassword: '',
+        oldPassword:''
+      },
       updateObject: {
         name: this.$store.getters.user.name,
         surname: this.$store.getters.user.surname,
@@ -293,6 +298,7 @@ export default {
               })
               this.loading = false
             }).catch((error) => {
+              this.loading = false
               console.error(error)
             })
           }
@@ -307,17 +313,20 @@ export default {
         this.$validator.validateAll('changePassword').then((result) => {
           if (result) {
             this.loading = true
-            this.$store.dispatch('updatePassword', this.user).then(() => {
+            this.$http.post(this.$store.state.apiUrls.changePassword, {
+              token: this.user.token,
+              newPassword: this.password.newPassword,
+              oldPassword: this.password.oldPassword
+            }).then((response) => {
               this.$store.dispatch('showPopup', {
-                message: this.t('changed'),
+                message: this.t('password_updated'),
                 icon: 'success'
               })
               this.loading = false
-            }).catch((error) => {
-              if (error.response.data) {
-                this.returnedError = error.response.data.status
-              }
+              this.password.oldPassword = this.password.confirmPassword = this.password.newPassword = ''
+            }).then(error => {
               this.loading = false
+              console.error(error)
             })
           }
         }).catch((error) => {
