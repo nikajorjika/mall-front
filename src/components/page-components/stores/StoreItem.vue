@@ -1,5 +1,5 @@
 <template>
-  <div class="store-item" data-aos="fade-up" >
+  <div class="store-item" :data-aos="animation">
     <div class="store-wrapper">
       <v-lazy-image
         :src="locale === 'ka' ? item['kaLogoUrl'] : item.logoUrl"
@@ -24,6 +24,10 @@ export default {
           name: ''
         }
       }
+    },
+    animation: {
+      type: String,
+      default: 'fade-up'
     }
   }
 }
@@ -43,13 +47,13 @@ export default {
       max-width: calc(100% - 100px);
       object-fit: contain;
       object-position: center;
-      @media screen and (max-width: 1500px){
+      @media screen and (max-width: 1500px) {
         max-height: calc(100% - 50px);
         max-width: calc(100% - 50px);
       }
     }
   }
-  .store-flip{
+  .store-flip {
     position: absolute;
     opacity: 0;
     top: 0;
@@ -59,11 +63,11 @@ export default {
     background: #f9f9f9;
     display: flex;
     transition: opacity 0.3s;
-    &:hover{
+    &:hover {
       opacity: 1;
     }
-    h3{
-      margin:auto;
+    h3 {
+      margin: auto;
       font-size: 18px;
       text-transform: uppercase;
       line-height: 1.28;

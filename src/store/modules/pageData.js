@@ -69,10 +69,10 @@ const pageData = {
       name: 'mall_map',
       url: '/about-us/mall-map'
     },
-    {
-      name: 'tbilisi_mall_taxi',
-      url: '/about-us/tbilisi-mall-taxi'
-    },
+    // {
+    //   name: 'tbilisi_mall_taxi',
+    //   url: '/about-us/tbilisi-mall-taxi'
+    // },
     {
       name: 'gift_card',
       url: '/about-us/gift-card'

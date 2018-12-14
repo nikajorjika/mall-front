@@ -31,7 +31,21 @@ export default {
   },
   methods: {
     deleteEvent: function (id) {
-      console.log('delete id')
+      this.$http.post(this.$store.state.apiUrls.subscribe, {
+        userToken: this.$store.getters.user.token,
+        storeId: id
+      }).then(() => {
+        this.$store.dispatch('getSubscribed').then(() => {
+          console.log('success')
+        }).catch((error) => {
+          console.log(error)
+        })
+        this.$notify({
+          group: 'notify',
+          type: 'success',
+          title: this.t('subscribed_successfully')
+        })
+      })
     }
   }
 }
@@ -46,15 +60,15 @@ export default {
       width: calc(25% - 20px);
       margin: 20px 10px;
       display: flex;
-      @media screen and (max-width: 864px){
+      @media screen and (max-width: 864px) {
         width: calc(33.33% - 10px);
         margin: 5px;
       }
-      @media screen and (max-width: 480px){
+      @media screen and (max-width: 480px) {
         width: calc(50% - 10px);
         margin: 5px;
       }
-      @media screen and (max-width: 400px){
+      @media screen and (max-width: 400px) {
         width: calc(100% - 10px);
         margin: 5px;
       }

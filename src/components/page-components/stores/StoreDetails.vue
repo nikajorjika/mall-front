@@ -51,7 +51,8 @@
                     <img :src="store.logoUrl" :alt="store.name[locale]">
                   </div>
                   <div class="subscribe-button-container">
-                    <button class="subscribe-button" :class="{alreadySubscribed: isSubscribed}" @click="subscribe(store._id)">
+                    <button class="subscribe-button" :class="{alreadySubscribed: isSubscribed}"
+                            @click="subscribe(store._id)">
                 <span class="subscribe" v-if="!isSubscribed">
                   {{t('subscribe')}}
                 </span>
@@ -270,7 +271,7 @@ export default {
     subscribe: function (id) {
       const user = this.$store.getters.user
       if (!user) {
-        this.$router.push({ name: 'login' })
+        this.$router.push({ name: 'login', params: { locale: this.locale } })
       } else {
         this.$http.post(this.$store.state.apiUrls.subscribe, {
           userToken: user.token,
@@ -315,7 +316,7 @@ export default {
 <style lang="scss">
 .breadcrumb {
   display: flex;
-  @media screen and (max-width: 760px){
+  @media screen and (max-width: 760px) {
     justify-content: center;
   }
   .breadcrumb-item {
@@ -410,25 +411,25 @@ export default {
       margin: 0 auto;
       max-width: 1640px;
       display: flex;
-      @media screen and (max-width: 927px){
+      @media screen and (max-width: 927px) {
         flex-direction: column;
       }
-      @media screen and (max-width: 760px){
-        width:100%;
+      @media screen and (max-width: 760px) {
+        width: 100%;
       }
       .part-promotions {
         width: 430px;
         padding: 28px 16px 0;
         border-left: 1px solid #dcdcdc;
         border-right: 1px solid #dcdcdc;
-        @media screen and (max-width: 927px){
+        @media screen and (max-width: 927px) {
           margin: 0 auto;
           padding-top: 25px;
           border: none;
         }
-        @media screen and (max-width: 600px){
+        @media screen and (max-width: 600px) {
           width: calc(100% - 72px);
-          padding:0;
+          padding: 0;
         }
         .slider-title {
           h4 {
@@ -449,7 +450,7 @@ export default {
       .part-map {
         padding: 75px 39px 75px 26px;
         width: calc(100% - 430px);
-        @media screen and (max-width: 927px){
+        @media screen and (max-width: 927px) {
           width: 100%;
           padding: 36px 0;
         }
@@ -481,7 +482,7 @@ export default {
     @media screen and (max-width: 760px) {
       width: 100%;
       margin: 0;
-      padding:0;
+      padding: 0;
     }
     .store-details-content {
       display: flex;
@@ -579,7 +580,7 @@ export default {
       }
       .content-wrapper {
         width: calc(100% - 296px);
-        @media screen and (max-width: 760px){
+        @media screen and (max-width: 760px) {
           max-width: 100%;
           width: 100%;
         }
@@ -588,7 +589,7 @@ export default {
           .content-main {
             width: 90%;
             max-width: 1050px;
-            @media screen and (max-width: 760px){
+            @media screen and (max-width: 760px) {
               max-width: 100%;
               width: 100%;
             }
@@ -600,15 +601,15 @@ export default {
                 font-weight: 600;
                 line-height: 1.26;
                 text-transform: uppercase;
-                @media screen and (max-width: 760px){
+                @media screen and (max-width: 760px) {
                   text-align: center;
                   border-bottom: 1px solid #dcdcdc;
-                  padding-bottom:30px;
+                  padding-bottom: 30px;
                 }
               }
             }
             .p-container {
-              @media screen and (max-width: 760px){
+              @media screen and (max-width: 760px) {
                 padding: 0 36px;
               }
               p {
@@ -633,7 +634,7 @@ export default {
             @media screen and (max-width: 1100px) {
               width: 100%;
             }
-            @media screen and (max-width: 760px){
+            @media screen and (max-width: 760px) {
               padding: 20px 36px;
               flex-wrap: wrap;
               justify-content: space-between;
@@ -644,7 +645,7 @@ export default {
               font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
               font-size: 1.4rem;
               line-height: 1.29;
-              @media screen and (max-width: 760px){
+              @media screen and (max-width: 760px) {
                 margin: 12px 0;
               }
               > span {
