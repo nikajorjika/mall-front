@@ -44,7 +44,7 @@ Vue.use(Notifications)
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAcuJoeoWXCUeGGDIW8EWcunpDmjqWeZ9g',
-    libraries: 'places'
+    libraries: 'places,drawing'
   }
 })
 Vue.use(VeeValidate, {
