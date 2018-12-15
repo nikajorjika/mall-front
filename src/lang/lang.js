@@ -78,6 +78,7 @@ const messages = {
       AboutCompany: 'About Company',
       Contact: 'contact',
       HowToGet: 'how to get',
+      featured_search: 'featured search',
       magazine: 'magazine',
       tbilisi_mall_magazine: 'Tbilisi Mall Magazine',
       gift_card: 'gift card',

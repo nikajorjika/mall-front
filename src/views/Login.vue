@@ -3,7 +3,7 @@
     <div class="login-page-container">
       <block-header-standard :title="t('login')"/>
       <div class="login-form-container">
-        <login-form/>
+        <login-form @facebook="facebookLogin"/>
       </div>
       <div class="login-register-container">
         <block-header-standard :title="t('not_registered_q')"/>
@@ -14,7 +14,7 @@
             </router-link>
           </div>
           <div class="register-button">
-            <button-standard :text="t('sign_up')" :icon="getFacebookIcon()" customColor="#4267b2"/>
+            <button-standard :text="t('sign_up')" @click="facebookLogin" :icon="getFacebookIcon()" customColor="#4267b2"/>
           </div>
         </div>
       </div>
@@ -66,6 +66,33 @@ export default {
   methods: {
     getFacebookIcon: function () {
       return require('../assets/images/icons/facebook.svg')
+    },
+    facebookLogin: function () {
+      // eslint-disable-next-line
+      FB.login(this.checkLoginState, { scope: 'email' })
+    },
+    checkLoginState: function (response) {
+      if (response.status === 'connected') {
+        // eslint-disable-next-line
+        FB.api('/me', { fields: 'name,email,gender,birthday' }, (profile) => {
+          console.log(profile)
+          const user = {}
+          const name = profile.name.split(' ')
+          user.email = profile.email
+          user.facebookId = profile.id
+          user.name = name[ 0 ]
+          user.surname = name.length > 1 ? name[ 1 ] : ''
+          this.$store.dispatch('register', user).then((response) => {
+            console.log(response)
+          }).catch(error => {
+            console.error(error)
+          })
+        })
+      } else if (response.status === 'not_authorized') {
+        console.error('You are not authorized in facebook')
+      } else {
+        console.error('You need to login into facebook')
+      }
     }
   }
 }

@@ -140,10 +140,10 @@ export default {
   components: { BlockHeaderStandard, WhiteSpinner, ButtonStandard, CustomSelect },
   mounted: function () {
     if (this.$store.getters.user) {
-      const date = new Date(this.user.birthDate)
-      this.birthDate.day = date.getDate().toString()
-      this.birthDate.month = date.getMonth().toString()
-      this.birthDate.year = date.getFullYear().toString()
+      const date = this.user.birthDate.split('/')
+      this.birthDate.day = date[ 2 ]
+      this.birthDate.month = date[ 1 ]
+      this.birthDate.year = date[ 0 ]
       this.birthDate.gender = this.user.sex
       this.birthDate.city = this.user.city
       this.birthDate.country = this.user.country
@@ -156,7 +156,7 @@ export default {
       password: {
         newPassword: '',
         confirmPassword: '',
-        oldPassword:''
+        oldPassword: ''
       },
       updateObject: {
         name: this.$store.getters.user.name,
@@ -275,16 +275,20 @@ export default {
   methods: {
     updateSettings: function () {
       if (this.validateForm()) {
-        console.log(this.user)
         this.$validator.validateAll('settings').then((result) => {
           if (result) {
             // here we submit form
-            this.user.birthDate = [ this.birthDate.year, this.birthDate.month, this.birthDate.day ].join('/')
-            this.user.sex = this.updateObject.gender.val
-            this.user.city = this.updateObject.city.val
-            this.user.country = this.updateObject.country.val
             this.loading = true
-            this.$http.post(this.$store.state.apiUrls.updateUser, this.user).then((response) => {
+            this.$http.post(this.$store.state.apiUrls.updateUser, {
+              name: this.updateObject.name,
+              surname: this.updateObject.surname,
+              mobile: this.updateObject.mobile,
+              birthDate: [ this.birthDate.year, this.birthDate.month, this.birthDate.day ].join('/'),
+              city: this.updateObject.city.val,
+              country: this.updateObject.country.val,
+              sex: this.updateObject.gender.val,
+              token: this.user.token
+            }).then((response) => {
               this.$store.dispatch('getUser', { token: this.user.token, email: this.user.email })
                 .then((response) => {
                   console.log(response)
@@ -340,15 +344,11 @@ export default {
     },
     onSelectAction: function (value) {
       if (value.selected) {
-        if (this.updateObject.hasOwnProperty(value.name) && this.updateObject[ value.name ].hasOwnProperty('val')) {
-          this.updateObject[ value.name ].val = value.selected.value
-        } else if (this.birthDate.hasOwnProperty(value.name) && this.birthDate[ value.name ].hasOwnProperty('val')) {
-          this.birthDate[ value.name ] = value.selected.value
+        if (this.birthDate.hasOwnProperty(value.name)) {
+          this.birthDate[ value.name ] = value.selected.value.toString()
         }
       } else {
-        if (this.updateObject.hasOwnProperty(value.name) && this.updateObject[ value.name ].hasOwnProperty('val')) {
-          this.updateObject[ value.name ].val = ''
-        } else if (this.birthDate.hasOwnProperty(value.name) && this.birthDate[ value.name ].hasOwnProperty('val')) {
+        if (this.birthDate.hasOwnProperty(value.name)) {
           this.birthDate[ value.name ].val = ''
         }
       }

@@ -478,16 +478,21 @@ export default new Vuex.Store({
     register: function (context, payload) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.registerAPI
-        const user = {
-          name: payload.name,
-          surname: payload.lastName,
-          email: payload.email,
-          mobile: `${payload.mobileIndex.val}${payload.mobile}`,
-          birthDate: `${payload.year.val}/${payload.month.val}/${payload.day.val}`,
-          sex: payload.gender.val,
-          country: payload.country.val,
-          city: payload.city.val,
-          password: payload.password
+        let user
+        if (payload.facebookId) {
+          user = payload
+        } else {
+          user = {
+            name: payload.name,
+            surname: payload.lastName,
+            email: payload.email,
+            mobile: `${payload.mobileIndex.val}${payload.mobile}`,
+            birthDate: `${payload.year.val}/${payload.month.val}/${payload.day.val}`,
+            sex: payload.gender.val,
+            country: payload.country.val,
+            city: payload.city.val,
+            password: payload.password
+          }
         }
         Axios.post(`${url}`, user).then(function (response) {
           if (!response) {
@@ -527,6 +532,7 @@ export default new Vuex.Store({
             if (localStorage.getItem('user')) {
               remember = true
             }
+            response.data.user.token = token
             context.commit('SET_USER', {
               token: token,
               user: response.data.user,

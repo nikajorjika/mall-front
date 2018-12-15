@@ -21,7 +21,7 @@ const apiUrls = {
   giftStores: 'https://smartfinders.herokuapp.com/api/v1/website/stores-with-gift-card',
   subscribe: 'https://smartfinders.herokuapp.com/api/v1/website/subscribe-to-store',
   newsletter: 'https://smartfinders.herokuapp.com/api/v1/website/subscription',
-  notifications: 'https://smartfinders.herokuapp.com/api/v1/website/subscribe-to-store',
+  notifications: 'https://smartfinders.herokuapp.com/api/v1/website/user-notification-items',
   getSubscribed: 'https://smartfinders.herokuapp.com/api/v1/website/subscribed-stores-list',
   bookmark: 'https://smartfinders.herokuapp.com/api/v1/website/bookmark-item',
   search: 'https://smartfinders.herokuapp.com/api/v1/website/search',

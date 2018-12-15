@@ -86,6 +86,7 @@ export default {
       return require('../../../assets/images/icons/facebook.svg')
     },
     facebookLogin: function () {
+      this.$emit('facebook')
     },
     login: function () {
       this.$validator.validateAll().then((status) => {
@@ -122,7 +123,7 @@ export default {
   .field-container {
     position: relative;
     margin-bottom: 42px;
-    &.margin-bottom-small{
+    &.margin-bottom-small {
       margin-bottom: 10px;
     }
     label {
@@ -160,16 +161,16 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    @media screen and (max-width: 579px){
+    @media screen and (max-width: 579px) {
       flex-direction: column;
       margin: 0 12px auto;
     }
-    .login-button{
+    .login-button {
       margin-bottom: 12.6px;
     }
   }
   .forgot-password {
-    margin-bottom:20px;
+    margin-bottom: 20px;
     p {
       font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
       font-size: 1.4rem;

@@ -87,5 +87,28 @@ new Vue({
   render: h => h(App),
   created: function () {
     AOS.init()
+    window.fbAsyncInit = function () {
+      // eslint-disable-next-line
+      FB.init({
+        appId: '917084738680946',
+        autoLogAppEvents: true,
+        xfbml: true,
+        version: 'v2.10'
+      })
+      // eslint-disable-next-line
+      FB.AppEvents.logPageView()
+    };
+
+    (function (d, s, id) {
+      let js
+      let fjs = d.getElementsByTagName(s)[ 0 ]
+      if (d.getElementById(id)) {
+        return
+      }
+      js = d.createElement(s)
+      js.id = id
+      js.src = '//connect.facebook.net/en_US/sdk.js'
+      fjs.parentNode.insertBefore(js, fjs)
+    }(document, 'script', 'facebook-jssdk'))
   }
 }).$mount('#app')
