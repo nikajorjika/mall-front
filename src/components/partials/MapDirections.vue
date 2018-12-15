@@ -127,14 +127,14 @@ export default {
               ka: 'სამარშუტო ტაქსი 117',
               en: 'Mini bus 117'
             }
-          },
-          {
-            value: 'hTwentyOneBus',
-            name: {
-              ka: 'ავტობუსი 121',
-              en: 'Bus 121'
-            }
           }
+          // {
+          //   value: 'hTwentyOneBus',
+          //   name: {
+          //     ka: 'ავტობუსი 121',
+          //     en: 'Bus 121'
+          //   }
+          // }
         ]
       },
       selectedPath: ''

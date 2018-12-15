@@ -21,13 +21,13 @@ const navigation =
             ka: 'მოლის რუქა'
           }
         },
-        {
-          url: '/tbilisi-mall-taxi',
-          name: {
-            en: 'tbilisi mall taxi',
-            ka: 'თბილისი მოლის ტაქსი'
-          }
-        },
+        // {
+        //   url: '/tbilisi-mall-taxi',
+        //   name: {
+        //     en: 'tbilisi mall taxi',
+        //     ka: 'თბილისი მოლის ტაქსი'
+        //   }
+        // },
         {
           url: '/gift-card',
           name: {
