@@ -1,5 +1,6 @@
 <template>
   <div id="app" :class="$store.getters.noScroll? 'open': ''">
+    <page-loading/>
     <div class="app-wrapper" ref="app" v-if="hasAuth">
       <nav-bar/>
       <router-view/>
@@ -13,9 +14,11 @@
 import FooterComponent from './components/main/Footer'
 import NavBar from './components/main/Header'
 import CustomPopup from './components/partials/Popup'
+import PageLoading from './components/partials/PageLoading'
 
 export default {
   components: {
+    PageLoading,
     CustomPopup,
     FooterComponent,
     NavBar

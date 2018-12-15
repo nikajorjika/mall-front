@@ -8,6 +8,7 @@ Vue.mixin({
       return messages[ store.getters.locale.locale ][ 'statics' ][ index ] ? messages[ store.getters.locale.locale ][ 'statics' ][ index ] : index
     },
     parseYoutube: function (url) {
+      // eslint-disable-next-line
       const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
       const match = url.match(regExp)
       return (match && match[ 7 ].length === 11) ? match[ 7 ] : false
@@ -71,6 +72,10 @@ Vue.mixin({
     },
     formatUrl: function (url) {
       return url.replace(/^(?:http(s)?:\/\/)?([\S.-])/, 'https://$2')
+    },
+    parsePageData: function (text) {
+      text = text.replace(/&amp;/gi, '&')
+      return JSON.parse(text)
     },
     getIconName: (index) => {
       const icons = {

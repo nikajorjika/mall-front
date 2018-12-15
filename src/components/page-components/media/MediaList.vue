@@ -1,7 +1,8 @@
 <template>
   <div class="media-list-component">
     <div class="media-list-container">
-      <div class="list-item" v-for="(media, index) in this.$store.getters.media" :key="index" v-if="filterBy === media.category || filterBy === 'all'">
+      <div class="list-item" v-for="(media, index) in this.$store.getters.media" :key="index"
+           v-if="filterBy === media.category || filterBy === 'all'">
         <media-print v-if="media.category === 'Online/Print'" :item="media"/>
         <media-video :item="media" v-else/>
       </div>
@@ -24,6 +25,8 @@ export default {
   mounted: function () {
     if (!this.$store.getters.media.length) {
       this.fetchItems()
+    } else {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
     }
   },
   methods: {
@@ -32,8 +35,8 @@ export default {
         model: 'media',
         api: this.$store.state.apiUrls.media,
         setter: 'INITIAL_LOAD'
-      }).then((response) => {
-        console.log(response)
+      }).then(() => {
+        this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
       }).catch(error => {
         console.log(error)
       })

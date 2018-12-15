@@ -6,10 +6,21 @@
         icon="caret-down"/></span>
       </div>
       <div class="container filters-inner" v-if="activeFilters || $mq !== 'mobile'">
-        <news-filters :categories="categories"/>
+        <news-filters :categories="categories" @loaded="loading = false"/>
       </div>
     </div>
-    <loading-big v-show="loadingNews"/>
+    <div v-if="loading">
+      <div class="new-list-outer">
+        <div class="news-list">
+          <div class="news-list-item" v-for="(item,index) in [1,1,1,1,1,1]" :key="index">
+            <div class="news-inner">
+              <news-item :loading="true" v-if="$mq !== 'mobile'"/>
+              <event-item :loading="true" v-else/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="new-list-outer">
       <transition name="fadeIn">
         <div class="single-news-container news-loaded" v-if="loadedItem">
@@ -56,6 +67,9 @@ export default {
     if (this.$route.params.id && !this.openItem) {
       this.loadSingle()
     }
+    if (this.$store.getters.events.length) {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    }
   },
   props: {
     categories: {
@@ -77,7 +91,7 @@ export default {
       model: 'events',
       loadedItem: null,
       loadingNews: false,
-      loading: false,
+      loading: true,
       hasMore: true,
       activeFilters: false,
       openItem: null

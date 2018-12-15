@@ -40,9 +40,11 @@ export default {
     if (!this.$store.getters.sliderItems.length) {
       this.$store.dispatch('getSliderItems').then(() => {
         this.showSlider = true
+        this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
       })
     } else {
       this.showSlider = true
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
     }
   },
   methods: {

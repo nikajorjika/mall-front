@@ -32,7 +32,7 @@ export default new Vuex.Store({
     loading: {
       stores: false,
       events: false,
-      page: false
+      page: true
     },
     locale: localStorage.getItem('locale') ? localStorage.getItem('locale') : 'en',
     navigation: navigation,

@@ -30,6 +30,9 @@ import ButtonStandard from '../components/partials/StandardButton'
 export default {
   name: 'login',
   components: { ButtonStandard, LoginForm, BlockHeaderStandard },
+  mounted: function () {
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+  },
   data: () => {
     return {
       isConnected: false,

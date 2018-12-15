@@ -1,12 +1,12 @@
 <template>
   <div class="store-item" :data-aos="animation">
-    <div class="store-wrapper">
-      <v-lazy-image
+    <div class="store-wrapper" :class="{loading: loading}">
+      <v-lazy-image v-if="!loading"
         :src="locale === 'ka' ? item['kaLogoUrl'] : item.logoUrl"
         :alt="item.name[locale]"
       ></v-lazy-image>
     </div>
-    <div class="store-flip">
+    <div class="store-flip"  v-if="!loading">
       <h3>{{item.name[locale]}}</h3>
     </div>
   </div>
@@ -28,6 +28,10 @@ export default {
     animation: {
       type: String,
       default: 'fade-up'
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   }
 }
@@ -41,6 +45,9 @@ export default {
     display: flex;
     width: 100%;
     height: 100%;
+    &.loading{
+      background: #f9f9f9;
+    }
     img {
       margin: auto;
       max-height: calc(100% - 100px);

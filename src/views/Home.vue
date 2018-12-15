@@ -58,6 +58,7 @@ export default {
   },
   beforeMount: function () {
     if (!this.$store.getters.stores.length) this.sendRequest('INITIAL_LOAD')
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: true })
   },
   components: {
     HomeAds,

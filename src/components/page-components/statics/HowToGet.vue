@@ -10,6 +10,9 @@
 import MapWithDirections from '../../partials/MapDirections'
 import AboutTitle from '../about-us/AboutPageTitle'
 export default {
-  components: { AboutTitle, MapWithDirections }
+  components: { AboutTitle, MapWithDirections },
+  mounted: function () {
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+  }
 }
 </script>

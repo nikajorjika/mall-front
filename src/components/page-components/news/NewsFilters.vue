@@ -44,7 +44,11 @@ export default {
         console.error(error)
       })
     }
-    if (!this.$store.getters.events.length) this.fetchItems()
+    if (!this.$store.getters.events.length) {
+      this.fetchItems()
+    } else {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    }
 
     if (!this.$store.getters[ `storesList` ].length) {
       this.getStoreList()
@@ -126,6 +130,7 @@ export default {
         setter: 'SET_STORE_LIST'
       }).then(() => {
         this.listLoaded = true
+        this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
       }).catch((error) => {
         console.error(error)
       })
@@ -147,8 +152,8 @@ export default {
         api: this.$store.state.apiUrls.newsFilters,
         setter: setter,
         filters: this.filters
-      }).then((response) => {
-        console.log(response)
+      }).then(() => {
+        this.$emit('loaded')
       }).catch((error) => {
         console.error(error)
       })

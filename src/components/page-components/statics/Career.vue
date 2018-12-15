@@ -24,22 +24,14 @@ export default {
   },
   data: () => {
     return {
-      title: 'Career',
-      model: 'career',
-      content: 'If you are interested in work opportunities, here you can find current job openings at Tbilisi Mall (Rakeen Uptown Development). To find out positions available at individual stores, please contact the store directly for further information.\n \n WHY TO WORK WITH US?',
-      jobOffers: 'Below you will find the current job openings at Tbilisi Mall. Please keep checking back for future career opportunity updates.'
+      model: 'career'
     }
   },
   computed: {
-    locale: function () {
-      return this.locale
-    },
     pageDataContent: function () {
-      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][ 0 ].data) : ''
+      return this.$store.getters[ this.model ] ? this.parsePageData(this.$store.getters[ this.model ][ 0 ].data) : ''
     },
     pageTitle: function () {
-      console.log(this.pageDataContent)
-
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
     },
     pageDescription: function () {
@@ -79,16 +71,16 @@ export default {
 }
 </script>
 <style lang="scss">
-.service-list{
+.service-list {
   padding-left: 8px;
 }
 </style>
 
 <style lang="scss" scoped>
-.list-title{
-  h3{
+.list-title {
+  h3 {
     font-size: 1.6rem;
-    font-family: 'Muli Bold','BPG Nino Mtavruli', 'sans-serif';
+    font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
     font-weight: bold;
   }
 }

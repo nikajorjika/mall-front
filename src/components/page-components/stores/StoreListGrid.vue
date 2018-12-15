@@ -19,7 +19,17 @@
                        @changeView="changeView"/>
       </div>
     </div>
-    <loading-big v-show="loadingStores"/>
+    <div v-if="loading && (viewGrid || $mq === 'mobile')">
+      <div class="container">
+        <div class="store-list">
+          <div class="store-list-item" v-for="(item,index) in [1,1,1,1,1,1,1,1]" :key="index">
+            <div class="store-inner">
+              <store-item :loading="true"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container" v-if="viewGrid ||  $mq === 'mobile'">
       <div class="store-list">
         <div class="store-list-item" v-for="(item, index) in filteredItems" :key="index">
@@ -114,7 +124,10 @@ export default {
   },
   mounted: function () {
     if (!this.$store.getters[ `${this.model}List` ].length) {
+      this.loading = true
       this.getStoreList()
+    } else {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
     }
   },
   props: {
@@ -260,6 +273,7 @@ export default {
         if (response.data.data.length < this.offset) this.hasMore = false
         this.loading = false
         this.loadingStores = false
+        this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
         if (response.data.data.length) {
           this.requestSent = false
         }
@@ -274,6 +288,8 @@ export default {
         setter: 'SET_STORE_LIST'
       }).then(() => {
         this.listLoaded = true
+        this.loading = false
+        this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
       }).catch((error) => {
         console.error(error)
       })
@@ -337,7 +353,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .store-list-grid {
-  .store-list-view{
+  .store-list-view {
     @media screen and (max-width: 1683px) {
       padding: 0 36px;
     }
@@ -529,7 +545,7 @@ export default {
         font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
         text-transform: uppercase;
         padding: 48px 0 48px 36px;
-        @media screen and (max-width: 1060px){
+        @media screen and (max-width: 1060px) {
           padding-left: 0;
           width: 9%;
         }
@@ -539,7 +555,7 @@ export default {
         width: 83%;
         position: relative;
 
-        @media screen and (max-width: 1060px){
+        @media screen and (max-width: 1060px) {
           width: 92%;
         }
         &:after {
