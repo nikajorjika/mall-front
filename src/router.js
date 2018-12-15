@@ -123,6 +123,12 @@ const router = new Router({
       component: () => import('./views/Stores.vue')
     },
     {
+      path: '/choose/santa',
+      name: 'promoPage',
+      props: true,
+      component: () => import('./views/PromoPage.vue')
+    },
+    {
       path: '/:locale/media',
       name: 'Media',
       props: true,

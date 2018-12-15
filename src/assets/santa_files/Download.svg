@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49.664 68.05">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <g id="Download" transform="translate(-92.436 -7.13)">
+    <path id="left-arrow" class="cls-1" d="M18.637.6a2.025,2.025,0,0,1,2.879,2.85l-14.6,14.6H55.087a2.028,2.028,0,0,1,2.044,2.015,2.052,2.052,0,0,1-2.044,2.044H6.918l14.6,14.569a2.066,2.066,0,0,1,0,2.879,2.017,2.017,0,0,1-2.879,0L.584,21.5a2.031,2.031,0,0,1,0-2.85Z" transform="translate(98.442 64.261) rotate(-90)"/>
+    <line id="Line_301" data-name="Line 301" class="cls-2" x2="46.664" transform="translate(93.936 73.68)"/>
+  </g>
+</svg>
