@@ -51,11 +51,46 @@
           </div>
           <div class="col col-second">
             <div class="imgs">
-              <img src="../assets/santa_files/santas-marxili.png" alt="marxili" class="on-hover marxili">
+              <img src="../assets/santa_files/winda.png" alt="tomara" class="on-hover winda">
               <img src="../assets/santa_files/tomara-sachuqrebit.png" alt="tomara" class="on-hover sachuqrebi">
+              <img src="../assets/santa_files/santas-marxili.png" alt="marxili" class="on-hover marxili">
               <img src="../assets/santa_files/santa.png" alt="Santa claus" class="main-image">
             </div>
           </div>
+        </div>
+        <div class="make-choice-button">
+          <img src="../assets/santa_files/left-arrow.png" >
+          <img src="../assets/santa_files/left-arrow.png" class="reverse">
+          <button>
+            გააკეთე არჩევანი
+          </button>
+        </div>
+      </section>
+      <section class="third-page">
+        <div class="icon-snowflake very-big" style="right:0; bottom: 106px;"></div>
+        <div class="icon-snowflake big" style="bottom: 48px;"></div>
+        <div class="icon-snowflake medium" style="right: 85%; top: 37%;"></div>
+        <div class="icon-snowflake small" style="bottom: 8%; left: 64%;"></div>
+        <div class="babu-card"></div>
+        <div class="santa-card"></div>
+        <div class="section-separator">
+          <div class="circle"></div>
+          <div class="line"></div>
+          <div class="circle"></div>
+          <div class="line"></div>
+          <div class="circle"></div>
+        </div>
+        <div class="content">
+          <p>
+            იმისთვის რომ მოიგოთ <span>200 ლარიანი ვაუჩერი</span>, გააკეთეთ შენაძენი თბილისი მოლის ტერიტორიაზე არსებულ ნებისმიერ სავაჭრო ობიექტში, იმავე დღეს მოიტანეთ სალაროს ქვითარი თბილისი მოლის მეორე სართულზე ვაიკიკის ატრიუმში მოწყობილ ხმის მიცემის პუნქტთან, დაგვიტოვოთ თქვენი მონაცემები და ჩვენ დღის ბოლოს გამოვავლენთ ყველაზე დიდი ღირებულების ქვითრის მფლობელს, რომელიც  თბილისი მოლის 200 ლარიანი სასაჩუქრე ბარათით დაჯილდოვდება.
+          </p>
+        </div>
+        <div class="section-separator">
+          <div class="circle"></div>
+          <div class="line"></div>
+          <div class="circle"></div>
+          <div class="line"></div>
+          <div class="circle"></div>
         </div>
       </section>
     </div>
@@ -95,6 +130,28 @@ export default {
     z-index: 3;
     width: 20%;
     height: 73%;
+  }
+  .babu-card{
+    position: absolute;
+    background-size: 100%;
+    z-index: 3;
+    width: 436px;
+    height: 460px;
+    background: url(../assets/santa_files/15X6-Santa-vs-babu-OOH_0009_Group-3.png) no-repeat;
+    background-size: contain;
+    bottom: 14%;
+    left: -93px;
+  }
+  .santa-card{
+    position: absolute;
+    background-size: 100%;
+    z-index: 3;
+    width: 504px;
+    height: 542px;
+    background: url(../assets/santa_files/15X6-Santa-vs-babu-OOH_0010_Group-2.png) no-repeat 36px -10px;
+    background-size: 138% auto;
+    top:0;
+    right: 0;
   }
   .icon-snowflake {
     background: url(../assets/santa_files/snowflake.png) no-repeat;
@@ -240,7 +297,7 @@ export default {
   .second-page {
     position: relative;
     z-index: 999999;
-    padding-top: 213px;
+    padding-top: 110px;
     .santa-vs-babu {
       text-align: center;
       position: absolute;
@@ -257,9 +314,13 @@ export default {
           margin-right: auto;
           .imgs{
             position: relative;
+            height: 900px;
+            display: flex;
+            overflow: hidden;
             .main-image{
-              width: 45%;
+              width: auto;
               z-index: 2;
+              height: 100%;
               position: relative;
               transform: translateX(-10px);
             }
@@ -311,8 +372,9 @@ export default {
             display: flex;
             overflow: hidden;
             .main-image{
-              width: 45%;
+              width: auto;
               z-index: 2;
+              height: 100%;
               position: relative;
               transform: translateX(10px);
               margin-left: auto;
@@ -321,17 +383,23 @@ export default {
               position: absolute;
               z-index: 1;
               transition: transform 0.3s;
+              &.winda{
+                width: 488px;
+                top: -106px;
+                right: 0;
+                transform: translate(100%, 100%);
+              }
               &.sachuqrebi{
                 width: 767px;
-                top: 52px;
-                right: -45px;
-                transform: translate(100%, -100%);
+                bottom: 132px;
+                left: 213px;
+                transform: translate(100%, 100%);
               }
               &.marxili{
                 width: 826px;
-                bottom: 52px;
-                right: -45px;
-                transform: translate(100%, -100%);
+                bottom: -72px;
+                right: -115px;
+                transform: rotate(10deg) translate(100%, -100%);
               }
             }
             img{
@@ -340,13 +408,88 @@ export default {
             }
             &:hover{
               .sachuqrebi{
-                transform: translate(0);
+                transform:translate(0);
               }
               .marxili{
+                transform:rotate(10deg)  translate(0);
+              }
+              .winda{
                 transform: translate(0);
               }
             }
           }
+        }
+      }
+    }
+    .make-choice-button{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      img{
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 99%;
+        transform: translateY(-50%);
+        z-index: 2;
+        &.reverse{
+          right: 99%;
+          left: auto;
+          transform: rotate(180deg) translateY(50%);
+        }
+      }
+      button{
+        background: #ed1c24;
+        border: 3px solid #b40209;
+        border-radius: 17px;
+        padding: 22px 44px 28px;
+        width: 100%;
+        z-index: 3;
+        color: #ffffff;
+        position: relative;
+        font-size: 47px;
+        outline: none;
+        font-family: "DejaVu Sans Bold", sans-serif;
+      }
+    }
+  }
+  .section-separator{
+    width: 1110px;
+    display: flex;
+    margin:  0 auto;
+    .circle{
+      border-radius: 50%;
+      height: 23px;
+      max-width:23px;
+      flex:1;
+      margin: 0 21px;
+      border: 3px solid #ffffff;
+    }
+    .line {
+      flex: 1;
+      margin: auto;
+      border-top: 3px solid #fff;
+    }
+  }
+  .third-page{
+    position: relative;
+    z-index: 999999;
+    padding-top: 113px;
+    .content{
+      margin:303px auto;
+      width: 95%;
+      max-width:1111px;
+      p{
+        font-family: 'BPG Mrgvlovani','sans-serif';
+        font-size: 23px;
+        line-height: 1.96;
+        color: #fff;
+        opacity: 1;
+        text-align: center;
+        span{
+          font-size: 41px;
+          color: #ffb300;
         }
       }
     }
