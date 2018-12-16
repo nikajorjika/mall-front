@@ -102,9 +102,9 @@
         <ul v-else>
           <li>
             <div @click.prevent="toggleSearch()">
-              <router-link to="#" class="text-center">
+              <a class="text-center">
                 <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
-              </router-link>
+              </a>
             </div>
           </li>
           <li>

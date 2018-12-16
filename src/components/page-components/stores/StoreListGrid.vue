@@ -7,7 +7,8 @@
             <div class="search-icon">
               <img src="../../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
             </div>
-            <input type="text" class="search-input" :placeholder="t('store_mobile_search')">
+            <input type="text" class="search-input" @input="filterSearch" v-model="$store.state.storeSearch"
+                   :placeholder="t('store_mobile_search')">
           </div>
           <div class="filter-toggle-part" @click="activeFilters = !activeFilters">
             <h2>{{t('filter')}}</h2> <span class="filter-icon" :class="{open: activeFilters}"><font-awesome-icon
@@ -293,6 +294,18 @@ export default {
       }).catch((error) => {
         console.error(error)
       })
+    },
+    filterSearch: function () {
+      if (this.filters) {
+        this.filters.search = this.$store.getters.storeSearch
+      } else {
+        this.filters = {
+          category: [],
+          search: this.$store.getters.storeSearch,
+          floors: [],
+          sort: ''
+        }
+      }
     }
   },
   computed: {

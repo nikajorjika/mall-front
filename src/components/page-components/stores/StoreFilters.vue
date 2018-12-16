@@ -51,7 +51,7 @@ export default {
     '$route.params.cat': function (val) {
       let result = this.filteredCats.filter(obj => this.createSlug(obj.translates.en) === val)
       console.log(result)
-      this.selectedCat = result.length ? result[0]._id : ''
+      this.selectedCat = result.length ? result[ 0 ]._id : ''
     }
   },
   mounted: function () {
@@ -59,7 +59,7 @@ export default {
       this.$store.dispatch('getCategories').then((response) => {
         if (this.$route.params.cat) {
           let result = this.filteredCats.filter(obj => this.createSlug(obj.translates.en) === this.$route.params.cat)
-          this.selectedCat = result.length ? result[0]._id : ''
+          this.selectedCat = result.length ? result[ 0 ]._id : ''
         }
       }).catch((error) => {
         console.error(error)
@@ -92,7 +92,7 @@ export default {
       selectedCat: '',
       filterData: {
         category: [],
-        search: '',
+        search: this.$store.getters.storeSearch,
         floors: [],
         sort: ''
       }
@@ -101,7 +101,7 @@ export default {
   computed: {
     cateValue: function () {
       let result = this.filteredCats.filter(obj => this.createSlug(obj.translates.en) === this.$route.params.cat)
-      return result.length ? result[0] : ''
+      return result.length ? result[ 0 ] : ''
     }
   },
   methods: {

@@ -8,7 +8,9 @@ export default {
     storeName: ''
   },
   mounted: function () {
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
     window.pointinside = []
+
     function pi () {
       window.pointinside.push(arguments)
     }

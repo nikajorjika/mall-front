@@ -12,7 +12,7 @@ import MallMapJs from '../../partials/MallMapJs'
 import AboutTitle from './AboutPageTitle'
 export default {
   name: 'tbilisi-mall-map',
-  components: { AboutTitle, MallMapJs }
+  components: { AboutTitle, MallMapJs },
 }
 </script>
 <style lang="scss" scoped>

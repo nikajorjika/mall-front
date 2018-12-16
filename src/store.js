@@ -71,6 +71,7 @@ export default new Vuex.Store({
     notifications: [],
     socials: [],
     media: [],
+    storeSearch: '',
     pageData: pageData,
     footer: footerData,
     staticPages: staticPages,
@@ -222,6 +223,9 @@ export default new Vuex.Store({
     },
     loading: (state) => {
       return state.loading
+    },
+    storeSearch: (state) => {
+      return state.storeSearch
     }
   },
   mutations: {
