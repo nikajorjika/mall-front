@@ -199,14 +199,16 @@ const hamburgerData = [
     name: {
       en: 'entertainment',
       ka: 'გართობა'
-    }
+    },
+    children: true
   },
   {
     url: '/services',
     name: {
       en: 'services',
       ka: 'სერვისები'
-    }
+    },
+    children: true
   }
 ]
 

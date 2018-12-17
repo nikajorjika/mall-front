@@ -34,6 +34,22 @@ Vue.mixin({
       }
       return user
     },
+    getFilteredCategories: function (model) {
+      const models = {
+        stores: [ '5b9d3c1f62973c001fd2c698', '5b9d3c6062973c001fd2c699' ],
+        entertainment: [ '5b9d3c7762973c001fd2c69a' ],
+        services: [ '5b9d3c8c62973c001fd2c69b' ]
+      }
+      if (this.$store.getters.categories.hasOwnProperty('subcategories')) {
+        return this.$store.getters.categories.subcategories.filter(item => {
+          if (models[ model ].indexOf(item.categoryId) !== -1) {
+            return true
+          }
+        })
+      } else {
+        return []
+      }
+    },
     copyUrl: function (id) {
       this.$refs.CurrentUrl.select()
       let copyInput = document.querySelector(`#${id}`)

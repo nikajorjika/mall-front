@@ -161,9 +161,9 @@ export default {
       scrollY: 0,
       showSearch: false,
       sticky: false,
-      stores: ['5b9d3c1f62973c001fd2c698', '5b9d3c6062973c001fd2c699'],
-      entertainment: ['5b9d3c7762973c001fd2c69a'],
-      services: ['5b9d3c8c62973c001fd2c69b']
+      stores: [ '5b9d3c1f62973c001fd2c698', '5b9d3c6062973c001fd2c699' ],
+      entertainment: [ '5b9d3c7762973c001fd2c69a' ],
+      services: [ '5b9d3c8c62973c001fd2c69b' ]
     }
   },
   created: function () {
@@ -207,17 +207,6 @@ export default {
     }
   },
   methods: {
-    filteredCategories: function (model) {
-      if (this.$store.getters.categories.hasOwnProperty('subcategories')) {
-        return this.$store.getters.categories.subcategories.filter(item => {
-          if (this[model].indexOf(item.categoryId) !== -1) {
-            return true
-          }
-        })
-      } else {
-        return []
-      }
-    },
     toggleSearch: function () {
       this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
       this.showSearch = !this.showSearch
@@ -252,8 +241,10 @@ export default {
 <style lang="scss">
 #nav {
   border-top: solid 1px #f1f1f1;
+
   &.fixed {
     padding-top: 84px;
+
     .header-wrapper {
       position: fixed;
       animation: slideDown 0.3s;
@@ -264,6 +255,7 @@ export default {
       background-color: #ffffff;
     }
   }
+
   .header-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -432,6 +424,7 @@ export default {
         > li {
           border-left: solid 1px #f1f1f1;
           position: relative;
+
           &:before {
             content: '';
             height: 0;
@@ -443,30 +436,36 @@ export default {
             background: #000;
             transition: height 0.3s;
           }
+
           &:hover {
             > div > a,
             > a {
               color: #fff;
+
               img {
                 filter: invert(1);
               }
             }
+
             .language-switcher {
               .lang-wrapper {
                 > a {
                   color: #fff;
+
                   img {
                     filter: invert(1);
                   }
                 }
               }
             }
+
             &:before {
               height: 100%;
               top: auto;
               bottom: 0;
             }
           }
+
           a {
             padding: 35.5px 29px;
             min-width: 85px;
@@ -484,6 +483,7 @@ export default {
               padding: 23px;
               min-width: 0;
             }
+
             &.text-center {
               display: flex;
               text-align: center;
@@ -510,11 +510,13 @@ export default {
             left: -42px;
             padding: 32px;
             box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
+
             &.mobile-version {
               right: 2px;
               top: calc(100% - 5px);
               left: auto;
             }
+
             &.slideUp-enter-active {
               animation: subMenuEnter .4s;
             }
@@ -522,6 +524,7 @@ export default {
             &.slideUp-leave-active {
               animation: subMenuLeave .2s;
             }
+
             ul {
               li {
                 margin-bottom: 14px;
@@ -562,6 +565,7 @@ export default {
       }
     }
   }
+
   .search-wrapper {
     position: fixed;
     top: 0;
@@ -571,6 +575,7 @@ export default {
     background: #fff;
     z-index: 999;
     overflow-y: auto;
+
     &.fade-leave-active {
       animation: fadeOut .2s;
     }
@@ -590,11 +595,17 @@ export default {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    @media screen and (max-width: 1520px) {
+    @media screen and (max-width: 1350px) {
       display: none;
     }
 
     > li {
+      @media screen and (max-width: 1550px) {
+        &:last-child {
+          display: none;
+        }
+      }
+
       a {
         padding: 35.5px 18px;
         display: inline-block;

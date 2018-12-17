@@ -50,7 +50,7 @@ export default {
   data: function () {
     return {
       sliderUrl: 'photoForSliderUrl',
-      sliderMobileUrl: 'photoForSliderUrl',
+      sliderMobileUrl: 'photoForMobileSliderUrl',
       adsUrl: 'photoForAdsUrl'
     }
   },
@@ -59,14 +59,17 @@ export default {
       return this.item.description[ this.locale ].length > this.txtLimit ? `${this.item.description[ this.locale ].substr(0, parseInt(this.txtLimit))}...` : this.item.description[ this.locale ]
     },
     image: function () {
+      console.log(this.item)
       if (this.place === 'ads') {
         return this.item[ `${this.adsUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.adsUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
-      } else {
+      } else if (this.place === 'slider') {
         if (this.$mq === 'mobile') {
           return this.item[ `${this.sliderMobileUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.sliderMobileUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
         } else {
           return this.item[ `${this.sliderUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.sliderUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
         }
+      } else {
+        return this.item[ `photoUrl` ] ? this.item[ `photoUrl` ] : this.item.photoUrl
       }
     }
   }
@@ -76,37 +79,28 @@ export default {
 <style lang="scss" scoped>
 .event-home {
   width: 100%;
+
   &.mini {
     .image-background {
       width: 100%;
       position: relative;
       overflow: hidden;
-      padding-top: 71.7%;
       img {
-        height: 100%;
-        left: 50%;
-        top: 50%;
-        display: block;
-        position: absolute;
-        transform: translate(-50%, -50%);
+        width: 100%;
+        height: auto;
       }
     }
   }
+
   .image-background {
     width: 100%;
-    position: relative;
-    height: 859px;
-    @media screen and (max-width: 1650px) {
-      height: 546px;
-    }
+    height: auto;
+
     img {
       width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      position: absolute;
-      object-fit: cover;
+      height: auto;
     }
+
     &:before {
       content: '';
       position: absolute;
@@ -118,6 +112,7 @@ export default {
       background-image: linear-gradient(to bottom right, transparent, #111211);
       opacity: .6;
     }
+
     .event-item-content {
       position: absolute;
       bottom: 77px;
@@ -134,6 +129,7 @@ export default {
         left: 36px;
         width: calc(100% - 36px);
       }
+
       .event-type {
         font-size: 1.8rem;
         font-weight: 300;
@@ -151,6 +147,7 @@ export default {
           font-size: 1rem;
         }
       }
+
       .event-name {
         h3 {
           position: relative;
@@ -168,6 +165,7 @@ export default {
             font-size: 2.4rem;
             padding: 6.1px 0 6.4px;
           }
+
           &:after {
             content: '';
             position: absolute;
@@ -180,6 +178,7 @@ export default {
           }
         }
       }
+
       .event-description {
         p {
           font-size: 2.4rem;

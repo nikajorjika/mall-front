@@ -22,10 +22,10 @@
                   <div class="list-wrapper" v-if="currentItem === null">
                     <div class="list-container" v-for="(data, i) in $store.state.hamburgerData" v-bind:key="i">
                       <h3 class="parent-title">
-                        <router-link class="title" :to="`/${locale}${data.url}`">
+                        <a class="title" @click="openChildren(data)">
                           {{data.name[locale]}}
-                        </router-link>
-                        <span v-if="data.children !== undefined && data.children !== null && data.children.length"
+                        </a>
+                        <span v-if="data.children"
                               class="open-children" @click="openChildren(data)"><span class="icon-container"><font-awesome-icon
                           icon="caret-right"/></span></span>
                       </h3>
@@ -43,12 +43,64 @@
                       <h4>{{currentItem.name[locale]}}</h4>
                     </div>
                     <div class="children-list">
-                      <ul>
-                        <li v-for="(child, index) in currentItem.children" :key="index"
+                      <ul v-if="currentItem.url === '/stores'">
+                        <li v-for="(child, index) in getFilteredCategories('stores')" :key="index * 1">
+                          <router-link :to="`/${locale}${currentItem.url}/${createSlug(child.translates.en)}`"
+                                       class="child-menu-name">
+                            {{child.translates[locale]}}
+                          </router-link>
+                        </li>
+                        <li class="view-all">
+                          <router-link :to="`/${locale}${currentItem.url}`"
+                                       class="child-menu-name">
+                            <span>{{t('viewAll')}}</span>
+                            <span><img src="../../assets/images/icons/left-arrow-subscribe.svg" alt="arrow left"></span>
+                          </router-link>
+                        </li>
+                      </ul>
+                      <ul v-else-if="currentItem.url === '/entertainment'">
+                        <li v-for="(child, index) in getFilteredCategories('entertainment')" :key="index * 10">
+                          <router-link :to="`/${locale}${currentItem.url}/${createSlug(child.translates.en)}`"
+                                       class="child-menu-name">
+                            {{child.translates[locale]}}
+                          </router-link>
+                        </li>
+                        <li class="view-all">
+                          <router-link :to="`/${locale}${currentItem.url}`"
+                                       class="child-menu-name">
+                            <span>{{t('viewAll')}}</span>
+                            <span><img src="../../assets/images/icons/left-arrow-subscribe.svg" alt="arrow left"></span>
+                          </router-link>
+                        </li>
+                      </ul>
+                      <ul v-else-if="currentItem.url === '/services'">
+                        <li v-for="(child, index) in getFilteredCategories('services')" :key="index * 100">
+                          <router-link :to="`/${locale}${currentItem.url}/${createSlug(child.translates.en)}`"
+                                       class="child-menu-name">
+                            {{child.translates[locale]}}
+                          </router-link>
+                        </li>
+                        <li class="view-all">
+                          <router-link :to="`/${locale}${currentItem.url}`"
+                                       class="child-menu-name">
+                            <span>{{t('viewAll')}}</span>
+                            <span><img src="../../assets/images/icons/left-arrow-subscribe.svg" alt="arrow left"></span>
+                          </router-link>
+                        </li>
+                      </ul>
+                      <ul v-else>
+                        <li v-for="(child, index) in currentItem.children" :key="index * 1000"
                             :class="{rightBorder: index % 2 === 0 }">
                           <router-link :to="`/${locale}${currentItem.url}${child.url}`"
                                        class="child-menu-name">
                             {{child.name[locale]}}
+                          </router-link>
+                        </li>
+                        <li class="view-all">
+                          <router-link :to="`/${locale}${currentItem.url}`"
+                                       class="child-menu-name">
+                            <span>{{t('viewAll')}}</span>
+                            <span><img src="../../assets/images/icons/left-arrow-subscribe.svg" alt="arrow left"></span>
                           </router-link>
                         </li>
                       </ul>
@@ -370,6 +422,18 @@ export default {
                     @media screen and (max-width: 760px) {
                       padding: 36px 10px 36px 36px;
                       font-size: 1.1rem;
+                    }
+                  }
+                  &.view-all{
+                    a{
+                      display: flex;
+                      span:last-of-type{
+                        margin-left: auto;
+                        img{
+                          width: 20.2px;
+                          height: 9.7px;
+                        }
+                      }
                     }
                   }
                   &:nth-child(1) {

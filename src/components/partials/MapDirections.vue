@@ -57,7 +57,7 @@ export default {
             }
           }
           this.paths = pathArrayObject
-        }, 500)
+        }, 1000)
       }
     })
   },
