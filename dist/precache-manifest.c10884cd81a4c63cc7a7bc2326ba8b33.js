@@ -332,12 +332,12 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
   },
   {
-    "revision": "384116da039ef8abea5018168066cc65",
-    "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
-  },
-  {
     "revision": "46c81231570d7d80bd9f068d09cf5bfe",
     "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
+  },
+  {
+    "revision": "384116da039ef8abea5018168066cc65",
+    "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
   },
   {
     "revision": "43da48aa6dc57965423388f2210bf30d",
@@ -392,10 +392,6 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
   },
   {
-    "revision": "26ec7406f51c5efb79ecc2885a5b887c",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
-  },
-  {
     "revision": "6530709ce0aadf3283db6512a8fcabec",
     "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
   },
@@ -406,6 +402,10 @@ self.__precacheManifest = [
   {
     "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
     "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
+  },
+  {
+    "revision": "26ec7406f51c5efb79ecc2885a5b887c",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
   },
   {
     "revision": "9c57740b6f314b7db24f8cddde741770",
@@ -512,7 +512,7 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "149e6e9aeeba6f454ced0f69612dc70c",
+    "revision": "e886621329f6f962c9b9a5b958f46051",
     "url": "/index.html"
   },
   {
