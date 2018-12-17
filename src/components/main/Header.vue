@@ -15,21 +15,21 @@
               <transition name="slideUp">
                 <div v-if="item.children !== undefined && showChild === item" class="drop">
                   <ul :class="{twoCol: item.children.length > 10 }" v-if="item.url === '/stores'">
-                    <li v-for="(child, i) in filteredCategories('stores')" v-bind:key="i">
+                    <li v-for="(child, i) in getFilteredCategories('stores')" v-bind:key="i">
                       <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
                         {{child.translates[locale]}}
                       </router-link>
                     </li>
                   </ul>
                   <ul :class="{twoCol: item.children.length > 10 }" v-else-if="item.url === '/entertainment'">
-                    <li v-for="(child, i) in filteredCategories('entertainment')" v-bind:key="i">
+                    <li v-for="(child, i) in getFilteredCategories('entertainment')" v-bind:key="i">
                       <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
                         {{child.translates[locale]}}
                       </router-link>
                     </li>
                   </ul>
                   <ul :class="{twoCol: item.children.length > 10 }" v-else-if="item.url === '/services'">
-                    <li v-for="(child, i) in filteredCategories('services')" v-bind:key="i">
+                    <li v-for="(child, i) in getFilteredCategories('services')" v-bind:key="i">
                       <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
                         {{child.translates[locale]}}
                       </router-link>
