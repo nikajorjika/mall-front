@@ -316,28 +316,12 @@ self.__precacheManifest = [
     "url": "/img/Snow-5.64dcd1af.png"
   },
   {
-    "revision": "ee6e2db834dda657126ed592cf28b7f6",
-    "url": "/fonts/dejavu-sans-bold-webfont.ee6e2db8.eot"
-  },
-  {
-    "revision": "ebfdf1b00a4788026b3a2734fbd51653",
-    "url": "/fonts/dejavu-sans-bold-webfont.ebfdf1b0.woff2"
-  },
-  {
-    "revision": "7108cda0993d9ddaffdc934c5de66fd1",
-    "url": "/fonts/dejavu-sans-bold-webfont.7108cda0.woff"
-  },
-  {
     "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
     "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
   },
   {
     "revision": "46c81231570d7d80bd9f068d09cf5bfe",
     "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
-  },
-  {
-    "revision": "384116da039ef8abea5018168066cc65",
-    "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
   },
   {
     "revision": "43da48aa6dc57965423388f2210bf30d",
@@ -350,6 +334,22 @@ self.__precacheManifest = [
   {
     "revision": "0616ae663c60044fd17f5a421adfa1f0",
     "url": "/img/bpg-mrgvlovani-webfont.0616ae66.svg"
+  },
+  {
+    "revision": "ee6e2db834dda657126ed592cf28b7f6",
+    "url": "/fonts/dejavu-sans-bold-webfont.ee6e2db8.eot"
+  },
+  {
+    "revision": "ebfdf1b00a4788026b3a2734fbd51653",
+    "url": "/fonts/dejavu-sans-bold-webfont.ebfdf1b0.woff2"
+  },
+  {
+    "revision": "7108cda0993d9ddaffdc934c5de66fd1",
+    "url": "/fonts/dejavu-sans-bold-webfont.7108cda0.woff"
+  },
+  {
+    "revision": "384116da039ef8abea5018168066cc65",
+    "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
   },
   {
     "revision": "b1f3060866fb51a93362187f405b4537",
@@ -380,32 +380,12 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
   },
   {
-    "revision": "6e5b1494e933ba58cdb6e80876634552",
-    "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
-  },
-  {
-    "revision": "a8b935b9fab81016cc4b241faf9a2260",
-    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
-  },
-  {
-    "revision": "e1412bac33d65a665ecb4a78c4588cbd",
-    "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
-  },
-  {
-    "revision": "6530709ce0aadf3283db6512a8fcabec",
-    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
-  },
-  {
-    "revision": "88a37bc21733e2fef7deba65d7271bed",
-    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
+    "revision": "26ec7406f51c5efb79ecc2885a5b887c",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
   },
   {
     "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
     "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
-  },
-  {
-    "revision": "26ec7406f51c5efb79ecc2885a5b887c",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
   },
   {
     "revision": "9c57740b6f314b7db24f8cddde741770",
@@ -418,6 +398,26 @@ self.__precacheManifest = [
   {
     "revision": "97a80250cdafef79da7329c445faeaa6",
     "url": "/img/bpg-nino-mtavruli-webfont.97a80250.svg"
+  },
+  {
+    "revision": "6e5b1494e933ba58cdb6e80876634552",
+    "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
+  },
+  {
+    "revision": "a8b935b9fab81016cc4b241faf9a2260",
+    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
+  },
+  {
+    "revision": "e1412bac33d65a665ecb4a78c4588cbd",
+    "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
+  },
+  {
+    "revision": "88a37bc21733e2fef7deba65d7271bed",
+    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
+  },
+  {
+    "revision": "6530709ce0aadf3283db6512a8fcabec",
+    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
   },
   {
     "revision": "61f91995f99c69f2edba28f7d609383b",
@@ -512,7 +512,7 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "e886621329f6f962c9b9a5b958f46051",
+    "revision": "49be210f8a5f99e67d79256addb22235",
     "url": "/index.html"
   },
   {
