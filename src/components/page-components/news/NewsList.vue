@@ -60,6 +60,7 @@ import NewsSingle from './NewsSingle'
 import LoadingBig from '../../partials/LoadingBig'
 import EventItem from '../../partials/EventView'
 import NewsSingleMobile from './NewsSingleMobile'
+import metas from '../../../lang/meta/metas'
 
 export default {
   name: 'news-list',
@@ -69,6 +70,34 @@ export default {
     }
     if (this.$store.getters.events.length) {
       this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    }
+  },
+  metaInfo: function () {
+    if (this.loadedItem || this.openItem) {
+      return {
+        title: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading',
+        titleTemplate: '%s  | TbilisiMall.com',
+        meta: [
+          {
+            name: 'description',
+            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'
+          },
+          {
+            property: 'og:title',
+            content: `${this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'} | TbilisiMall.com`
+          },
+          {
+            property: 'og:description',
+            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'
+          },
+          {
+            property: 'og:image',
+            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'
+          }
+        ]
+      }
+    } else {
+      return metas.defaultMetas
     }
   },
   props: {
@@ -96,6 +125,21 @@ export default {
       activeFilters: false,
       openItem: null
     }
+  },
+  metaData: function () {
+    let name = 'loading...'
+    let description = 'loading...'
+    let logoUrl = 'loading...'
+    if (this.loadedItem) {
+      name = this.loadedItem.name[ this.locale ]
+      description = this.loadedItem.description[ this.locale ]
+      logoUrl = this.loadedItem.photoUrl
+    } else if (this.openItem) {
+      name = this.openItem.name[ this.locale ]
+      description = this.openItem.description[ this.locale ]
+      logoUrl = this.openItem.photoUrl
+    }
+    return metas.customPageMeta(name, description, logoUrl)
   },
   watch: {
     '$route.params.id': function (to, fr) {

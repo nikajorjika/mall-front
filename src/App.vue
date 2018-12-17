@@ -15,6 +15,7 @@ import FooterComponent from './components/main/Footer'
 import NavBar from './components/main/Header'
 import CustomPopup from './components/partials/Popup'
 import PageLoading from './components/partials/PageLoading'
+import metas from './lang/meta/metas'
 
 export default {
   components: {
@@ -22,6 +23,9 @@ export default {
     CustomPopup,
     FooterComponent,
     NavBar
+  },
+  metaInfo: function () {
+    return metas.defaultMetas[this.locale]
   },
   data: () => {
     return {

@@ -30,7 +30,9 @@ export default {
   },
   watch: {
     '$route.params.cat': function (val) {
-      this.category = this.categoryInUrl[ val ]
+      if (val && val !== 'single') {
+        this.category = this.categoryInUrl[ val ]
+      }
     }
   },
   props: {
@@ -90,7 +92,7 @@ export default {
   },
   methods: {
     updateElement: function (selected) {
-      if (selected.selected.length || selected.selected !== null) {
+      if (selected.selected) {
         if (selected.name === 'category') {
           this.filters.includeEvent = this.filters.includeNewCol = this.filters.includeNews = this.filters.includeOffer = false
           selected.selected.forEach(item => {

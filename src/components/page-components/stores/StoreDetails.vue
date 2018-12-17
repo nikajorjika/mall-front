@@ -216,10 +216,14 @@ import SocialSharingNetwork from 'vue-social-sharing/src/social-sharing-network'
 import ButtonStandard from '../../partials/StandardButton'
 import SmallSlider from '../../partials/SmallSlider'
 import MallMapJs from '../../partials/MallMapJs'
+import metas from '../../../lang/meta/metas'
 
 export default {
   name: 'store-details',
   components: { MallMapJs, SmallSlider, ButtonStandard, SocialSharingNetwork, LoadingBig },
+  metaInfo: function () {
+    return this.metaData
+  },
   mounted: function () {
     this.loadStore()
     if (this.$store.getters.user && !this.$store.getters.subscribed.length) {
@@ -245,6 +249,12 @@ export default {
     }
   },
   computed: {
+    metaData: function () {
+      let name = this.store ? this.store.name[ this.locale ] : 'loading'
+      let description = this.store ? this.store.description[ this.locale ] : 'loading'
+      let logoUrl = this.store ? this.store.logoUrl : 'loading'
+      return metas.customPageMeta(name, description, logoUrl)
+    },
     isSubscribed: function () {
       if (!this.$store.getters.user) {
         return false

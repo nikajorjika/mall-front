@@ -136,8 +136,8 @@ export default {
         },
         {
           name: {
-            en: 'info@tbilisimall.com',
-            ka: 'info@tbilisimall.com'
+            en: '<span class="no-capitalize">info@tbilisimall.com</span>',
+            ka: '<span class="no-capitalize">info@tbilisimall.com</span>'
           },
           url: ''
         },
