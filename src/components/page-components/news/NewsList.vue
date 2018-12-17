@@ -70,6 +70,7 @@ export default {
     }
     if (this.$store.getters.events.length) {
       this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+      this.loading = false
     }
   },
   metaInfo: function () {
@@ -150,6 +151,7 @@ export default {
       this.loadedItem = null
       if (existing) {
         this.openItem = existing
+        this.loading = false
       } else {
         this.loadSingle()
       }
@@ -183,6 +185,7 @@ export default {
           .then((response) => {
             if (response.status === 'success') {
               this.loadedItem = response.data
+              this.loading = false
             } else {
               console.error('Something went wrong')
             }

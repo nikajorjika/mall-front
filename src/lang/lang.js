@@ -148,7 +148,7 @@ const messages = {
       newCollections: 'ახალი კოლექციები',
       newcollections: 'ახალი კოლექციები',
       next: 'შემდეგი',
-      type_here: 'ჩაწერეთ საძოებო სიტყვა',
+      type_here: 'ჩაწერეთ საძიებო სიტყვა',
       information: 'ინფორმაცია',
       featured_search: 'შეთავაზებები',
       updated_successfully: 'წარმატებით განახლდა',
