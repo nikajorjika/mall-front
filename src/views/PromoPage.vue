@@ -24,7 +24,7 @@
               მიეცით ხმა თქვენს რჩეულს და დასაჩუქრდით!</p>
           </div>
           <div class="santas">
-            <img src="https://placehold.it/431x709" alt="Santa Or Tovlis babua">
+            <img src="../assets/santa_files/santa-and-babu-2.png" alt="Santa Or Tovlis babua">
           </div>
           <div class="scroll-down-button">
             <button>
@@ -74,11 +74,7 @@
         <div class="babu-card"></div>
         <div class="santa-card"></div>
         <div class="section-separator">
-          <div class="circle"></div>
-          <div class="line"></div>
-          <div class="circle"></div>
-          <div class="line"></div>
-          <div class="circle"></div>
+          <img src="../assets/santa_files/separator.png">
         </div>
         <div class="content">
           <p>
@@ -86,11 +82,7 @@
           </p>
         </div>
         <div class="section-separator">
-          <div class="circle"></div>
-          <div class="line"></div>
-          <div class="circle"></div>
-          <div class="line"></div>
-          <div class="circle"></div>
+          <img src="../assets/santa_files/separator.png">
         </div>
       </section>
     </div>
@@ -327,24 +319,27 @@ export default {
             .on-hover{
               position: absolute;
               z-index: 1;
-              transition: transform 0.3s;
+              transition: opacity 0.5s;
               &.churchxela{
                 width:470px;
                 top: -11%;
                 bottom: 36%;
-                transform: rotate(-90deg) translate(-100%, -100%);
+                opacity: 0;
+                transform: rotate(-90deg);
               }
               &.chichilaki{
                 width: 756px;
                 bottom: 19%;
                 left: -41px;
-                transform: rotate(7deg) translate(-100%, 100%);
+                opacity: 0;
+                transform: rotate(7deg);
               }
               &.xurjini{
                 width: 538px;
                 bottom: 7%;
                 left: -41px;
-                transform: rotate(7deg) translate(-200%, -100%);
+                opacity: 0;
+                transform: rotate(7deg);
               }
             }
             img{
@@ -353,13 +348,16 @@ export default {
             }
             &:hover{
               .churchxela{
-                transform: rotate(-90deg) translate(0);
+                opacity: 1;
+                transform: rotate(-90deg);
               }
               .chichilaki{
-                transform: rotate(7deg) translate(0);
+                opacity: 1;
+                transform: rotate(7deg);
               }
               .xurjini{
-                transform: rotate(7deg) translate(0);
+                opacity: 1;
+                transform: rotate(7deg);
               }
             }
           }
@@ -382,24 +380,25 @@ export default {
             .on-hover{
               position: absolute;
               z-index: 1;
-              transition: transform 0.3s;
+              transition: opacity 0.5s;
               &.winda{
                 width: 488px;
                 top: -106px;
                 right: 0;
-                transform: translate(100%, 100%);
+                opacity: 0;
               }
               &.sachuqrebi{
                 width: 767px;
                 bottom: 132px;
                 left: 213px;
-                transform: translate(100%, 100%);
+                opacity: 0;
               }
               &.marxili{
                 width: 826px;
                 bottom: -72px;
                 right: -115px;
-                transform: rotate(10deg) translate(100%, -100%);
+                opacity: 0;
+                transform: rotate(10deg)
               }
             }
             img{
@@ -408,13 +407,14 @@ export default {
             }
             &:hover{
               .sachuqrebi{
-                transform:translate(0);
+                opacity: 1;
               }
               .marxili{
-                transform:rotate(10deg)  translate(0);
+                opacity: 1;
+                transform:rotate(10deg);
               }
               .winda{
-                transform: translate(0);
+                opacity: 1;
               }
             }
           }
@@ -458,18 +458,11 @@ export default {
     width: 1110px;
     display: flex;
     margin:  0 auto;
-    .circle{
-      border-radius: 50%;
-      height: 23px;
-      max-width:23px;
-      flex:1;
-      margin: 0 21px;
-      border: 3px solid #ffffff;
-    }
-    .line {
-      flex: 1;
-      margin: auto;
-      border-top: 3px solid #fff;
+    img{
+      display: block;
+      width:auto;
+      max-width:100%;
+      margin: 0 auto;
     }
   }
   .third-page{
