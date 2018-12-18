@@ -35,7 +35,9 @@ import { VLazyImagePlugin } from 'v-lazy-image'
 import Meta from 'vue-meta'
 
 const SocialSharing = require('vue-social-sharing')
+const VueScrollTo = require('vue-scrollto');
 
+Vue.use(VueScrollTo)
 Vue.use(Meta, {
   tagIDKeyName: 'vmid'
 })
