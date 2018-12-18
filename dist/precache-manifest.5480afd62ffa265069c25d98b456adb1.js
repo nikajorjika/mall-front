@@ -328,12 +328,12 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
   },
   {
-    "revision": "26ec7406f51c5efb79ecc2885a5b887c",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
-  },
-  {
     "revision": "9c57740b6f314b7db24f8cddde741770",
     "url": "/fonts/bpg-nino-mtavruli-webfont.9c57740b.woff"
+  },
+  {
+    "revision": "26ec7406f51c5efb79ecc2885a5b887c",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
   },
   {
     "revision": "afcdb491132664da5cc93fae552e72be",
@@ -464,12 +464,12 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-mrgvlovani-webfont.ea21e39e.ttf"
   },
   {
-    "revision": "ee6e2db834dda657126ed592cf28b7f6",
-    "url": "/fonts/dejavu-sans-bold-webfont.ee6e2db8.eot"
-  },
-  {
     "revision": "ebfdf1b00a4788026b3a2734fbd51653",
     "url": "/fonts/dejavu-sans-bold-webfont.ebfdf1b0.woff2"
+  },
+  {
+    "revision": "ee6e2db834dda657126ed592cf28b7f6",
+    "url": "/fonts/dejavu-sans-bold-webfont.ee6e2db8.eot"
   },
   {
     "revision": "0616ae663c60044fd17f5a421adfa1f0",
@@ -512,19 +512,19 @@ self.__precacheManifest = [
     "url": "/img/search.b590222e.svg"
   },
   {
-    "revision": "624c36b025a31eff5098fe407732457a",
+    "revision": "3ebc6cda160fc249b5d94c8ad78f5156",
     "url": "/index.html"
   },
   {
-    "revision": "56426d215548bb0ba4d07804d95ca026",
-    "url": "/img/logo.png"
+    "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
+    "url": "/robots.txt"
   },
   {
     "revision": "7a5b9e88c6049bf7dfde37fe8f3f3f17",
     "url": "/img/logo.svg"
   },
   {
-    "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
-    "url": "/robots.txt"
+    "revision": "56426d215548bb0ba4d07804d95ca026",
+    "url": "/img/logo.png"
   }
 ];
