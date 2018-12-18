@@ -173,10 +173,7 @@
         </div>
       </div>
       <div class="share-container">
-        <social-sharing :url="currentFullUrl"
-                        class="share-inner"
-                        :title="store.name[locale]"
-                        :description="store.description[locale]"
+        <social-sharing class="share-inner"
                         :hashtags="formatFilters"
                         inline-template>
           <div>
