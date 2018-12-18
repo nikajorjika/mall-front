@@ -84,7 +84,9 @@ export default {
           user.facebookId = profile.id
           user.name = name[ 0 ]
           user.surname = name.length > 1 ? name[ 1 ] : ''
-          this.$store.dispatch('register', user).catch(error => {
+          this.$store.dispatch('register', user).then(() => {
+            this.$router.push({ name: 'home', params: { locale: this.locale } })
+          }).catch(error => {
             console.error(error)
           })
         })

@@ -6,12 +6,12 @@
         <div class="error"><span>{{returnedError}}</span></div>
       </div>
       <div class="field-container">
-        <input type="text" id="login-username" v-validate="'required|email'" name="email" v-model="user.email">
+        <input type="text" id="login-username" v-validate="'required|email'" name="email" v-model="user.email" tabindex="1">
         <label for="login-username" :class="{focus: focusedUsername }">{{t('username_placeholder')}}</label>
         <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
       </div>
       <div class="field-container margin-bottom-small">
-        <input type="password" id="login-password" v-validate="'required'" name="password" v-model="user.password">
+        <input type="password" id="login-password" v-validate="'required'" name="password" v-model="user.password" tabindex="2">
         <label for="login-password" :class="{focus: focusedPassword }">{{t('password_placeholder')}}</label>
         <span v-show="errors.first('password')" class="error">{{ errors.first('password') }}</span>
       </div>
@@ -20,13 +20,14 @@
           <p>{{t('forgot_password')}}</p>
         </router-link>
         <div class="remember-me">
-          <input type="checkbox" v-model="user.remember" id="remember-me">
+          <input type="checkbox" v-model="user.remember" id="remember-me" tabindex="3">
           <label for="remember-me">{{t('remember_me')}}</label>
         </div>
       </div>
       <div class="login-buttons">
         <div class="login-button">
-          <button-standard type="submit" @click="login" :text="t('next')"/>
+          <input type="submit" class="submit">
+          <button-standard type="submit" @click="login" :text="t('next')" tabindex="4"/>
         </div>
         <div class="login-button" @click.stop>
           <form @submit.prevent="facebookLogin">
@@ -161,6 +162,9 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    .submit{
+      display: none;
+    }
     @media screen and (max-width: 579px) {
       flex-direction: column;
       margin: 0 12px auto;
