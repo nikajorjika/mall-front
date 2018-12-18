@@ -150,7 +150,7 @@ const messages = {
       next: 'შემდეგი',
       type_here: 'ჩაწერეთ საძიებო სიტყვა',
       information: 'ინფორმაცია',
-      featured_search: 'შეთავაზებები',
+      featured_search: 'რჩეული ძებნა',
       updated_successfully: 'წარმატებით განახლდა',
       password_successfully_recovered: 'პაროლი წარმატებით შეიცვალა',
       subscribed_to_newsletter: 'თქვენ წარმატებით გამოიწერეთ ჩვენი ვებ-გვერდი',

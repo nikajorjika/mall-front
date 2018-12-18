@@ -4,7 +4,7 @@
       <div class="field-set">
         <label class="search-icon-container"><img src="../../assets/images/icons/search.svg" height="14.1px"
                                                   width="13.6px"></label>
-        <input type="text" class="search-field" v-model="search" :placeholder='`"${t("type_here")}"`' @input="startCount">
+        <input type="text" class="search-field" v-model="search" :placeholder='`${t("type_here")}`' @input="startCount">
         <label class="search-icon-container close-icon" @click="closeSearch"><img
           src="../../assets/images/icons/close.svg" height="12.4px"
           width="12.4px"></label>
