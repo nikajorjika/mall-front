@@ -22,14 +22,6 @@ export default {
   components: {
     StoreListGrid,
     BlockHeaderStandard
-  },
-  methods: {
-    loadMoreButton: function () {
-      console.log('load more')
-    },
-    fetchItems: function () {
-      console.log('load more')
-    }
   }
 }
 </script>

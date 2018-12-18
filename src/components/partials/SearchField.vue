@@ -109,7 +109,7 @@ export default {
   mounted: function () {
     if (!this.$store.getters.searchFeatured.length) {
       this.$store.dispatch('getSearchFeatured').then((error) => {
-        console.log(error)
+        console.error(error)
       })
     }
   },

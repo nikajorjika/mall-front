@@ -78,16 +78,13 @@ export default {
       if (response.status === 'connected') {
         // eslint-disable-next-line
         FB.api('/me', { fields: 'name,email,gender,birthday' }, (profile) => {
-          console.log(profile)
           const user = {}
           const name = profile.name.split(' ')
           user.email = profile.email
           user.facebookId = profile.id
           user.name = name[ 0 ]
           user.surname = name.length > 1 ? name[ 1 ] : ''
-          this.$store.dispatch('register', user).then((response) => {
-            console.log(response)
-          }).catch(error => {
+          this.$store.dispatch('register', user).catch(error => {
             console.error(error)
           })
         })

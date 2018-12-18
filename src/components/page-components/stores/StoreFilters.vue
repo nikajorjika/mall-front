@@ -50,7 +50,6 @@ export default {
   watch: {
     '$route.params.cat': function (val) {
       let result = this.filteredCats.filter(obj => this.createSlug(obj.translates.en) === val)
-      console.log(result)
       this.selectedCat = result.length ? result[ 0 ]._id : ''
     }
   },

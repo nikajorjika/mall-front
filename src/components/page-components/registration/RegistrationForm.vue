@@ -300,7 +300,7 @@ export default {
             })
           }
         }).catch((error) => {
-          console.log(error)
+          console.error(error)
         })
       }
       // this.$refs.RegistrationForm.submit()

@@ -78,7 +78,6 @@ export default {
         api: this.$store.state.apiUrls.storesAPI(0, 12),
         setter: setter
       }).then((response) => {
-        console.log(response.message)
         this.storeCarousel = true
       }).catch((error) => {
         console.error(error)

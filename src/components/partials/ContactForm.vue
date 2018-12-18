@@ -117,7 +117,6 @@ export default {
       this.$validator.validateAll().then((result) => {
         if (result) {
           this.$http.post(this.$store.state.apiUrls.contactSend, this.contact).then((response) => {
-            console.log(response)
             this.$store.dispatch('showPopup', {
               icon: 'success',
               message: this.t('sent')

@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     loadMoreButton: function () {
-      console.log('load more')
     }
   }
 }

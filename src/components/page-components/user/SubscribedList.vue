@@ -22,10 +22,8 @@ export default {
       this.$router.push({ name: 'login' })
     }
     if (!this.$store.getters.subscribed.length) {
-      this.$store.dispatch('getSubscribed').then(() => {
-        console.log('success')
-      }).catch((error) => {
-        console.log(error)
+      this.$store.dispatch('getSubscribed').catch((error) => {
+        console.error(error)
       })
     }
   },
@@ -35,10 +33,8 @@ export default {
         userToken: this.$store.getters.user.token,
         storeId: id
       }).then(() => {
-        this.$store.dispatch('getSubscribed').then(() => {
-          console.log('success')
-        }).catch((error) => {
-          console.log(error)
+        this.$store.dispatch('getSubscribed').catch((error) => {
+          console.error(error)
         })
         this.$notify({
           group: 'notify',

@@ -59,7 +59,6 @@ export default {
       return this.item.description[ this.locale ].length > this.txtLimit ? `${this.item.description[ this.locale ].substr(0, parseInt(this.txtLimit))}...` : this.item.description[ this.locale ]
     },
     image: function () {
-      console.log(this.item)
       if (this.place === 'ads') {
         return this.item[ `${this.adsUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.adsUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
       } else if (this.place === 'slider') {

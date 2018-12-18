@@ -15,10 +15,8 @@ export default {
       this.$router.push({ name: 'login' })
     }
     if (!this.$store.getters.bookmarked.length) {
-      this.$store.dispatch('getNotifications').then(() => {
-        console.log('success')
-      }).catch((error) => {
-        console.log(error)
+      this.$store.dispatch('getNotifications').catch((error) => {
+        console.error(error)
       })
     }
   },

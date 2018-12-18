@@ -65,7 +65,6 @@ export default {
             console.error(error)
           })
         } else {
-          console.log('notify')
           this.$notify({
             group: 'notify',
             type: 'error',
@@ -74,7 +73,7 @@ export default {
           })
         }
       }).catch((error) => {
-        console.log(error)
+        console.error(error)
       })
     },
     documentClick: function () {

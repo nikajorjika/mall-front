@@ -43,7 +43,7 @@ export default {
         this.$http.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + response.data.token
         this.hasAuth = true
       }).catch((error) => {
-        console.log(error)
+        console.error(error)
       })
     } else {
       this.$http.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + sessionToken

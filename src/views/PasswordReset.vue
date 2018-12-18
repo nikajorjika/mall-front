@@ -32,7 +32,6 @@ export default {
         if (status) {
           this.$http.post(this.$store.state.apiUrls.sendToken, { email: this.email })
             .then((response) => {
-              console.log(response)
               this.$store.dispatch('showPopup', {
                 message: this.t('sent'),
                 icon: 'success'

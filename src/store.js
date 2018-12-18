@@ -557,7 +557,6 @@ export default new Vuex.Store({
     search: function (context, keyword) {
       return new Promise((resolve) => {
         Axios.post(context.state.apiUrls.search, { name: keyword }).then((response) => {
-          console.log(response.data)
           context.commit('SET_SEARCH_RESULT', response.data.data)
           resolve(response.data)
         }).catch(error => {
@@ -690,7 +689,6 @@ export default new Vuex.Store({
     getNotifications: function (context) {
       return new Promise((resolve, reject) => {
         Axios.post(context.state.apiUrls.notifications, { userToken: context.getters.user.token }).then(function (response) {
-          console.log(response)
           if (!response.data.bookmarkedItems.length) {
             resolve('RECORD NOT FOUND')
           } else {

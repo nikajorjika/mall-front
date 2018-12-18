@@ -20,10 +20,8 @@ export default {
       this.$router.push({ name: 'login' })
     }
     if (!this.$store.getters.bookmarked.length) {
-      this.$store.dispatch('getBookmarks').then(() => {
-        console.log('success')
-      }).catch((error) => {
-        console.log(error)
+      this.$store.dispatch('getBookmarks').catch((error) => {
+        console.error(error)
       })
     }
   },

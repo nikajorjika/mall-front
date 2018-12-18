@@ -147,7 +147,6 @@ export default {
       this.birthDate.gender = this.user.sex
       this.birthDate.city = this.user.city
       this.birthDate.country = this.user.country
-      console.log(this.birthDate)
     }
   },
   data: function () {
@@ -290,9 +289,6 @@ export default {
               token: this.user.token
             }).then((response) => {
               this.$store.dispatch('getUser', { token: this.user.token, email: this.user.email })
-                .then((response) => {
-                  console.log(response)
-                })
                 .catch((error) => {
                   console.error(error)
                 })
@@ -307,7 +303,7 @@ export default {
             })
           }
         }).catch((error) => {
-          console.log(error)
+          console.error(error)
         })
       }
       // this.$refs.RegistrationForm.submit()
@@ -334,7 +330,7 @@ export default {
             })
           }
         }).catch((error) => {
-          console.log(error)
+          console.error(error)
         })
       }
       // this.$refs.RegistrationForm.submit()

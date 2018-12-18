@@ -69,7 +69,6 @@ export default {
       } else if (index === 2) {
         this.next()
       }
-      console.log(index)
     },
     next () {
       const first = this.slides.shift()

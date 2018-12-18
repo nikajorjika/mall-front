@@ -189,9 +189,7 @@ export default {
       this.$store.commit('SET_NO_SCROLL', false)
     },
     getSocials: function () {
-      this.$store.dispatch('getSocials').then(function (response) {
-        // console.log(response.data)
-      }).catch(function (error) {
+      this.$store.dispatch('getSocials').catch(function (error) {
         console.error(error.message)
       })
     }

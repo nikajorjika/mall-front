@@ -38,7 +38,7 @@ export default {
       }).then(() => {
         this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
       }).catch(error => {
-        console.log(error)
+        console.error(error)
       })
     }
   }

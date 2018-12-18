@@ -49,7 +49,7 @@ export default {
         url: this.$store.state.apiUrls.contactPage,
         model: this.model
       }).then((response) => {
-      }).catch((error) => console.log(error))
+      }).catch((error) => console.error(error))
     }
   },
   computed: {
