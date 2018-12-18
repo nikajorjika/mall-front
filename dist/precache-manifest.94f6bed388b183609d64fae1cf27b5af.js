@@ -328,12 +328,12 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
   },
   {
-    "revision": "9c57740b6f314b7db24f8cddde741770",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.9c57740b.woff"
-  },
-  {
     "revision": "26ec7406f51c5efb79ecc2885a5b887c",
     "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
+  },
+  {
+    "revision": "9c57740b6f314b7db24f8cddde741770",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.9c57740b.woff"
   },
   {
     "revision": "afcdb491132664da5cc93fae552e72be",
@@ -512,8 +512,12 @@ self.__precacheManifest = [
     "url": "/img/search.b590222e.svg"
   },
   {
-    "revision": "3ebc6cda160fc249b5d94c8ad78f5156",
+    "revision": "db672924f6a2391aceb9f7b39905319e",
     "url": "/index.html"
+  },
+  {
+    "revision": "56426d215548bb0ba4d07804d95ca026",
+    "url": "/img/logo.png"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
@@ -524,7 +528,7 @@ self.__precacheManifest = [
     "url": "/img/logo.svg"
   },
   {
-    "revision": "56426d215548bb0ba4d07804d95ca026",
-    "url": "/img/logo.png"
+    "revision": "4c91026884f697732fd6b96aa71a9349",
+    "url": "/img/meta-logo.png"
   }
 ];
