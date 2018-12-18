@@ -36,7 +36,9 @@ import Meta from 'vue-meta'
 
 const SocialSharing = require('vue-social-sharing')
 
-Vue.use(Meta)
+Vue.use(Meta, {
+  tagIDKeyName: 'vmid'
+})
 Vue.use(VLazyImagePlugin)
 Vue.use(VueYouTubeEmbed)
 Vue.use(SocialSharing)

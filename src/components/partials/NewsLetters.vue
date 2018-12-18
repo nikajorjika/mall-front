@@ -54,7 +54,7 @@ export default {
     subscribe: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.$store.dispatch('subscribeNewsletter', {email: this.email}).then((response) => {
+          this.$store.dispatch('subscribeNewsletter', { email: this.email }).then((response) => {
             this.$notify({
               group: 'notify',
               type: 'success',
@@ -86,6 +86,7 @@ export default {
 <style scoped lang="scss">
 .newsletter-subscribe {
   border-top: 1px solid #dcdcdc;
+
   .subscribe-container {
     display: flex;
     width: 85%;
@@ -94,6 +95,7 @@ export default {
     @media screen and (max-width: 925px) {
       width: 100%;
     }
+
     .logo-part {
       padding: 16px 26px;
       height: 52px;
@@ -110,19 +112,23 @@ export default {
         border-left: none;
       }
     }
-    .subscribe-part{
-      width:100%;
+
+    .subscribe-part {
+      width: 100%;
       display: flex;
       overflow: hidden;
       position: relative;
-      &.open{
+
+      &.open {
         .form-open {
           transition: transform .2s;
           transform: translateY(0);
         }
       }
+
       .text-part {
         margin: auto auto auto 32px;
+
         p {
           font-family: "Muli Light", 'BPG Arial', "sans-serif";
           font-size: 1.6rem;
@@ -138,6 +144,7 @@ export default {
           }
         }
       }
+
       .btn-part {
         button {
           height: 100%;
@@ -155,29 +162,34 @@ export default {
             font-size: 1.1rem;
             padding: 0 24px;
           }
+
           &:hover {
             background: #eaeaea;
           }
         }
       }
     }
+
     .inner-container {
       display: flex;
       width: 100%;
     }
+
     .form-open {
       position: absolute;
       height: 100%;
-      width:100%;
-      top:0;
+      width: 100%;
+      top: 0;
       left: 0;
       transition: transform .2s;
       transform: translateY(102%);
+
       .text-part {
         margin: 0;
         background-color: #000000;
         height: 100%;
         width: 100%;
+
         .input {
           height: 100%;
           width: 100%;
@@ -191,12 +203,14 @@ export default {
           }
         }
       }
+
       .btn-part {
         button {
           background: #000000;
           color: #ffffff;
           white-space: nowrap;
           border-left: 1px solid #848484;
+
           &:hover {
             background: rgb(44, 44, 44);
           }

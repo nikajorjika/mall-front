@@ -81,19 +81,23 @@ export default {
         meta: [
           {
             name: 'description',
-            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'
+            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading',
+            vid: 'description'
           },
           {
             property: 'og:title',
-            content: `${this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'} | TbilisiMall.com`
+            content: `${this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'} | TbilisiMall.com`,
+            vid: 'og:title'
           },
           {
             property: 'og:description',
-            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'
+            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading',
+            vid: 'og:description'
           },
           {
             property: 'og:image',
-            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'
+            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading',
+            vid: 'og:image'
           }
         ]
       }

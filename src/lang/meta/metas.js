@@ -56,15 +56,18 @@ const metaTags = {
         },
         {
           property: 'og:title',
-          content: `${name} | TbilisiMall.com`
+          content: `${name} | TbilisiMall.com`,
+          vid: 'og:title'
         },
         {
           property: 'og:description',
-          content: description
+          content: description,
+          vid: 'og:description'
         },
         {
           property: 'og:image',
-          content: img
+          content: img,
+          vid: 'og:image'
         }
       ]
     }
