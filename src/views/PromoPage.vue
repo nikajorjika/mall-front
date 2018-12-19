@@ -3,10 +3,10 @@
     <div class="page-wrapper">
       <section class="first-page">
         <div class="header">
-          <div class="logo-container">
+          <div class="logo-container clickable" @click="goHome">
             <img src="../assets/santa_files/Logo.png" alt="TM Logo">
           </div>
-          <div class="santa-vs-babu">
+          <div class="santa-vs-babu clickable" @click="goHome">
             <img src="../assets/santa_files/VS.png" alt="SANTA VS TOVLIS BABU">
           </div>
         </div>
@@ -37,7 +37,7 @@
         </div>
       </section>
       <section class="second-page" id="second-page">
-        <div class="santa-vs-babu">
+        <div class="santa-vs-babu clickable" @click="goHome">
           <img src="../assets/santa_files/VS.png" alt="SANTA VS TOVLIS BABU">
         </div>
         <div class="cols">
@@ -100,7 +100,7 @@
         </a>
       </section>
       <section class="footer">
-        <div class="logo-footer">
+        <div class="logo-footer clickable" @click="goHome">
           <img src="../assets/santa_files/Promo_web_2_0005_Logo.png" alt="TBMall">
         </div>
         <h6>მისამართი</h6>
@@ -133,6 +133,9 @@ export default {
         this.voted = true
         this.choice = choice
       }
+    },
+    goHome: function () {
+      this.$router.push({ name: 'home', params: { locale: this.locale } })
     }
   },
   computed: {
@@ -157,6 +160,9 @@ export default {
   top: 0;
   bottom: 0;
   overflow-y: auto;
+  .clickable{
+    cursor: pointer;
+  }
   .icon-candy {
     background: url(../assets/santa_files/Candy.png) no-repeat;
     position: absolute;
@@ -415,6 +421,7 @@ export default {
     padding-top: 110px;
     .santa-vs-babu {
       text-align: center;
+      z-index: 9;
       position: absolute;
       top: 213px;
       left: 50%;

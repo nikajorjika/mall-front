@@ -20,13 +20,13 @@ const hamburgerData = [
           ka: 'მოლის რუქა'
         }
       },
-      {
-        url: '/mall-taxi',
-        name: {
-          en: 'tbilisi mall taxi',
-          ka: 'თბილისი მოლის ტაქსი'
-        }
-      },
+      // {
+      //   url: '/mall-taxi',
+      //   name: {
+      //     en: 'tbilisi mall taxi',
+      //     ka: 'თბილისი მოლის ტაქსი'
+      //   }
+      // },
       {
         url: '/gift-card',
         name: {

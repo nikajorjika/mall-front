@@ -6,12 +6,14 @@
         <div class="error"><span>{{returnedError}}</span></div>
       </div>
       <div class="field-container">
-        <input type="text" id="login-username" v-validate="'required|email'" name="email" v-model="user.email" tabindex="1">
+        <input type="text" id="login-username" v-validate="'required|email'" name="email" v-model="user.email"
+               tabindex="1">
         <label for="login-username" :class="{focus: focusedUsername }">{{t('username_placeholder')}}</label>
         <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
       </div>
       <div class="field-container margin-bottom-small">
-        <input type="password" id="login-password" v-validate="'required'" name="password" v-model="user.password" tabindex="2">
+        <input type="password" id="login-password" v-validate="'required'" name="password" v-model="user.password"
+               tabindex="2">
         <label for="login-password" :class="{focus: focusedPassword }">{{t('password_placeholder')}}</label>
         <span v-show="errors.first('password')" class="error">{{ errors.first('password') }}</span>
       </div>
@@ -97,7 +99,11 @@ export default {
           this.returnedError = ''
           this.$store.dispatch('login', this.user).then(() => {
             this.loading = false
-            this.$router.push({ name: 'home', params: { locale: this.locale } })
+            if (this.$route.query && this.$route.query.hasOwnProperty('redirect')) {
+              this.$router.push({ path: this.$route.query.redirect })
+            } else {
+              this.$router.push({ name: 'home', params: { locale: this.locale } })
+            }
           }).catch((error) => {
             if (error.response && error.response.data) {
               this.returnedError = error.response.data.status
@@ -162,7 +168,7 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    .submit{
+    .submit {
       display: none;
     }
     @media screen and (max-width: 579px) {

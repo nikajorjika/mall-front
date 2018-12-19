@@ -107,6 +107,35 @@ Vue.mixin({
     },
     formatP: function (content) {
       return `<p>${content.replace(/\n/g, '<br />')}</p>`
+    },
+    initFacebook: function () {
+      return new Promise((resolve) => {
+        window.fbAsyncInit = () => {
+          // eslint-disable-next-line
+          FB.init({
+            appId: '917084738680946',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v2.10'
+          })
+          this.$store.commit('SET_FB_STATUS', true)
+          // eslint-disable-next-line
+          FB.AppEvents.logPageView()
+          resolve(true)
+        };
+
+        (function (d, s, id) {
+          let js
+          let fjs = d.getElementsByTagName(s)[ 0 ]
+          if (d.getElementById(id)) {
+            return
+          }
+          js = d.createElement(s)
+          js.id = id
+          js.src = '//connect.facebook.net/en_US/sdk.js'
+          fjs.parentNode.insertBefore(js, fjs)
+        }(document, 'script', 'facebook-jssdk'))
+      })
     }
   },
   computed: {

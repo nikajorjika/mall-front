@@ -1,7 +1,8 @@
 <template>
   <div class="store-filters">
     <div class="filter-item">
-      <custom-select :items="filteredCats" nameField="translates" valueField="_id" :value="selectedCat"
+      <custom-select :items="filteredCats" nameField="translates" valueField="_id" :value="selectedCat" :multiple="true"
+                     value-field="_id"
                      :placeholder="categories.categories.placeholder" @change="invokeFilters" name="category"/>
     </div>
     <div class="filter-item search-item">
@@ -111,7 +112,12 @@ export default {
     invokeFilters: function (data) {
       if (Array.isArray(this.filterData[ data.name ])) {
         if (data.value) {
-          this.filterData[ data.name ].push(data.value)
+          this.filterData[ data.name ] = []
+          data.selected.forEach((item) => {
+            if (this.filterData[ data.name ].indexOf(item[ data.value ]) === -1) {
+              this.filterData[ data.name ].push(item[ data.value ])
+            }
+          })
         } else {
           this.filterData[ data.name ] = []
         }
@@ -122,6 +128,7 @@ export default {
           this.filterData[ data.name ] = ''
         }
       }
+      console.log(this.filterData)
       this.$emit('filtered', this.filterData)
     }
   }

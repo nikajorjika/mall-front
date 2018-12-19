@@ -1,5 +1,5 @@
 <template>
-  <div class="staff-carousel">
+  <div class="staff-carousel" v-if="$store.getters.team.length">
     <div class="title-container">
       <h3>{{this.title}}</h3>
     </div>
@@ -43,12 +43,6 @@ export default {
     title: {
       type: String,
       default: 'OUR TEAM'
-    },
-    staff: {
-      type: Array,
-      default: function () {
-        return []
-      }
     },
     perPage: {
       type: Number,

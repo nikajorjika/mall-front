@@ -223,13 +223,16 @@ export default {
   },
   mounted: function () {
     this.loadStore()
-    if (FB) {
-      FB.XFBML.parse()
-    } else {
-      window.setTimeout(() => {
+    if (!this.$store.getters.fbLoaded) {
+      this.initFacebook().then(() => {
+        // eslint-disable-next-line
         FB.XFBML.parse()
-      }, 1000)
+      })
+    } else {
+      // eslint-disable-next-line
+      FB.XFBML.parse()
     }
+
     if (this.$store.getters.user && !this.$store.getters.subscribed.length) {
       this.$store.dispatch('getSubscribed').catch((error) => {
         console.error(error)
@@ -285,7 +288,7 @@ export default {
     subscribe: function (id) {
       const user = this.$store.getters.user
       if (!user) {
-        this.$router.push({ name: 'login', params: { locale: this.locale } })
+        this.$router.push({ name: 'login', params: { locale: this.locale }, query: { redirect: this.$route.fullPath } })
       } else {
         this.$http.post(this.$store.state.apiUrls.subscribe, {
           userToken: user.token,

@@ -40,6 +40,7 @@ export default new Vuex.Store({
     events: [],
     frontPromotions: [],
     frontEvents: [],
+    fbLoaded: false,
     frontNewCollections: [],
     frontNews: [],
     contactPage: null,
@@ -226,12 +227,18 @@ export default new Vuex.Store({
     },
     storeSearch: (state) => {
       return state.storeSearch
+    },
+    fbLoaded: (state) => {
+      return state.storeSearch
     }
   },
   mutations: {
     SET_LOCALE: (state, locale) => {
       state.locale = locale
       localStorage.setItem('locale', locale)
+    },
+    SET_FB_STATUS: (state, value) => {
+      state.fbLoaded = value
     },
     SET_NO_SCROLL: (state, newValue) => {
       state.noScroll = newValue

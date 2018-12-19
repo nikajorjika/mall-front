@@ -25,7 +25,9 @@
         <div class="title-container">
           <h2 class="title">{{item.name[locale]}}</h2>
           <h4 class="sub-title" v-if="store.length">
-            {{store[0].name[locale]}}
+            <router-link :to="`/${locale}/store/${createSlug(store[0].name['en'])}/${store[0]._id}`">
+              {{store[0].name[locale]}}
+            </router-link>
           </h4>
         </div>
         <div class="description-container">
@@ -126,7 +128,7 @@ export default {
     bookmark: function (id) {
       const user = this.$store.getters.user
       if (!user) {
-        this.$router.push({ name: 'login' })
+        this.$router.push({ name: 'login', params: { locale: this.locale }, query: { redirect: this.$route.fullPath } })
       } else {
         this.$http.post(this.$store.state.apiUrls.bookmark, {
           userToken: user.token,
@@ -257,9 +259,6 @@ export default {
         img {
           height: 100%;
           width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
           object-fit: cover;
         }
       }

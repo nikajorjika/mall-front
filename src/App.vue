@@ -64,6 +64,7 @@ export default {
   &.open {
     overflow-y: hidden;
     height: 100vh;
+    padding-right: 17px;
   }
 }
 

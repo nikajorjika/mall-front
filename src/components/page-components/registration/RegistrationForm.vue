@@ -164,12 +164,6 @@ export default {
                 en: 'GEO +995'
               },
               value: '+995'
-            }, {
-              name: {
-                ka: 'რუს +007',
-                en: 'RUS +007'
-              },
-              value: '+007'
             }
           ],
           placeholder: {
@@ -194,6 +188,30 @@ export default {
                 en: 'Batumi'
               },
               value: 'batumi'
+            }, {
+              name: {
+                ka: 'ქუთაისი',
+                en: 'Kutaisi'
+              },
+              value: 'kutaisi'
+            }, {
+              name: {
+                ka: 'ზუგდიდი',
+                en: 'Zugdidi'
+              },
+              value: 'zugdidi'
+            }, {
+              name: {
+                ka: 'ბათუმი',
+                en: 'Telavi'
+              },
+              value: 'telavi'
+            }, {
+              name: {
+                ka: 'მესტია',
+                en: 'Mestia'
+              },
+              value: 'mestia'
             }
           ],
           placeholder: {
@@ -211,12 +229,6 @@ export default {
                 en: 'Georgia'
               },
               value: 'georgia'
-            }, {
-              name: {
-                ka: 'რუსეთი',
-                en: 'Russia'
-              },
-              value: 'russia'
             }
           ],
           placeholder: {

@@ -14,7 +14,8 @@
             </router-link>
           </div>
           <div class="register-button">
-            <button-standard :text="t('sign_up')" @click="facebookLogin" :icon="getFacebookIcon()" customColor="#4267b2"/>
+            <button-standard :text="t('sign_up')" @click="facebookLogin" :icon="getFacebookIcon()"
+                             customColor="#4267b2"/>
           </div>
         </div>
       </div>
@@ -32,6 +33,11 @@ export default {
   components: { ButtonStandard, LoginForm, BlockHeaderStandard },
   mounted: function () {
     this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    if (!this.$store.getters.fbLoaded) {
+      this.initFacebook().then(() => {
+        console.log('FB Loaded')
+      })
+    }
   },
   data: () => {
     return {
@@ -118,9 +124,9 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      .register-button{
-        @media screen and (max-width: 579px){
-          margin: 0 auto 12px ;
+      .register-button {
+        @media screen and (max-width: 579px) {
+          margin: 0 auto 12px;
         }
       }
     }

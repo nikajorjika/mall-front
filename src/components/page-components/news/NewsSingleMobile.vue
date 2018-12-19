@@ -1,7 +1,7 @@
 <template>
   <div class="news-single-mobile" :id="item._id">
     <div class="single-wrapper">
-      <div class="close-button"  @click="closeEvent">
+      <div class="close-button" @click="closeEvent">
         <router-link :to="closeUrl()" class="close-button-a" v-if="redirect">
           <default-icon class="hamburger-close-button" :icon="`close`"/>
         </router-link>
@@ -16,7 +16,7 @@
       </div>
       <div class="full-col">
         <div class="bookmarks-promotions">
-          <div class="bookmark">
+          <div class="bookmark" @click="bookmark(item._id)">
             <img src="../../../assets/images/icons/bookmark.svg" alt="Bookmark" v-show="!bookmarked.length">
             <img src="../../../assets/images/icons/bookmarked.svg" alt="Bookmark" v-show="bookmarked.length">
           </div>
@@ -30,8 +30,10 @@
       <div class="full-col">
         <div class="title-container">
           <h2 class="title">{{item.name[locale]}}</h2>
-          <h4 class="sub-title">
-            SUPER
+          <h4 class="sub-title" v-if="store.length">
+            <router-link :to="`/${locale}/store/${createSlug(store[0].name['en'])}/${store[0]._id}`">
+              {{store[0].name[locale]}}
+            </router-link>
           </h4>
         </div>
         <div class="description-container">
@@ -94,11 +96,29 @@ export default {
       default: true
     }
   },
+  mounted: function () {
+    if (!this.$store.getters.storesList.length) {
+      this.$store.dispatch('fetchItems', {
+        model: `storesList`,
+        api: this.$store.state.apiUrls[ `storesList` ],
+        setter: 'SET_STORE_LIST'
+      }).catch((error) => {
+        console.error(error)
+      })
+    }
+  },
   computed: {
     bookmarked: function () {
       return this.$store.getters.bookmarked.filter(object => {
         if (object) {
           return object._id === this.item._id
+        }
+      })
+    },
+    store: function () {
+      return this.$store.getters.storesList.filter(store => {
+        if (store._id === this.item.entityId) {
+          return true
         }
       })
     }
@@ -114,7 +134,7 @@ export default {
     bookmark: function (id) {
       const user = this.$store.getters.user
       if (!user) {
-        this.$router.push({ name: 'login' })
+        this.$router.push({ name: 'login', params: { locale: this.locale }, query: { redirect: this.$route.fullPath } })
       } else {
         this.$http.post(this.$store.state.apiUrls.bookmark, {
           userToken: user.token,
@@ -264,7 +284,7 @@ export default {
         display: flex;
         padding-top: 25px;
         border-top: solid 1px #dcdcdc;
-        margin:0 36px;
+        margin: 0 36px;
         .socials-inner-container {
           display: grid;
           width: 100%;

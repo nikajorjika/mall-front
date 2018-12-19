@@ -46,6 +46,13 @@ export default {
   .content-container{
     .content-ul{
       .content-li{
+        a{
+          .item-wrapper{
+            &:hover{
+              color: #999;
+            }
+          }
+        }
         .item-wrapper{
           font-family: 'Muli Light','BPG Arial', 'sans-serif';
           font-size: 1.4rem;

@@ -42,8 +42,11 @@
                       </router-link>
                     </li>
                   </ul>
-                  <div class="drop-image">
-                    <img src="../../assets/images/statics/tbm.jpg" alt="Tbilisi mall">
+                  <div class="drop-image" v-if="index % 2 === 1">
+                    <img src="../../assets/images/statics/04.jpg" alt="Tbilisi mall">
+                  </div>
+                  <div class="drop-image" v-else>
+                    <img src="../../assets/images/statics/tbilisimall4.jpg" alt="Tbilisi mall">
                   </div>
                 </div>
               </transition>

@@ -16,7 +16,7 @@
       </div>
       <div class="our-team" v-if="$route.name === 'about'">
         <div class="horizontal-line gray"></div>
-        <staff-carousel :title="t('our_team')" :staff="this.staff"/>
+        <staff-carousel :title="t('our_team')"/>
       </div>
     </section>
   </div>
@@ -39,8 +39,7 @@ export default {
   },
   data: function () {
     return {
-      aboutMenu: this.$store.state.pageData.aboutUsMenu,
-      staff: this.$store.state.pageData.aboutUs.staff
+      aboutMenu: this.$store.state.pageData.aboutUsMenu
     }
   },
   props: {

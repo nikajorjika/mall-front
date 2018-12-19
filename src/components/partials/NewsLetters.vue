@@ -95,7 +95,9 @@ export default {
     @media screen and (max-width: 925px) {
       width: 100%;
     }
-
+    .form-closed{
+      cursor: pointer;
+    }
     .logo-part {
       padding: 16px 26px;
       height: 52px;
