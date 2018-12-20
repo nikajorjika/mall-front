@@ -5,7 +5,7 @@
         <h2>{{t('filter')}}</h2> <span class="filter-icon" :class="{open: activeFilters}"><font-awesome-icon
         icon="caret-down"/></span>
       </div>
-      <div class="container filters-inner" v-if="activeFilters || $mq !== 'mobile'">
+      <div class="container filters-inner" v-show="activeFilters || $mq !== 'mobile'">
         <news-filters :categories="categories" @loaded="loading = false"/>
       </div>
     </div>
@@ -68,8 +68,8 @@ export default {
     if (this.$route.params.id && !this.openItem) {
       this.loadSingle()
     }
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
     if (this.$store.getters.events.length) {
-      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
       this.loading = false
     }
   },

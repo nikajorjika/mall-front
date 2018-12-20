@@ -33,7 +33,7 @@
     </div>
     <div class="container" v-if="viewGrid ||  $mq === 'mobile'">
       <div class="store-list">
-        <div class="store-list-item" v-for="(item, index) in filteredItems" :key="index">
+        <div class="store-list-item" v-for="(item, index) in filteredItems" :key="index" v-if="item.name.en.toLowerCase() !== 'tbilisi mall'">
           <div class="store-inner">
             <router-link :to="`/${locale}/store/${createSlug(item.name['en'])}/${item._id}`">
               <store-item :item="item"/>

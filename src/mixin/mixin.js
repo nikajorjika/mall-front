@@ -136,11 +136,33 @@ Vue.mixin({
           fjs.parentNode.insertBefore(js, fjs)
         }(document, 'script', 'facebook-jssdk'))
       })
+    },
+    shareOverrideOGMeta: function (overrideLink, overrideTitle, overrideDescription, overrideImage) {
+      // eslint-disable-next-line
+      FB.ui(
+        {
+          method: 'share_open_graph',
+          action_type: 'og.likes',
+          action_properties: JSON.stringify({
+            object: {
+              'og:url': overrideLink,
+              'og:title': overrideTitle,
+              'og:description': overrideDescription,
+              'og:image': overrideImage
+            }
+          })
+        },
+        (response) => {
+          // Action after response
+        })
     }
   },
   computed: {
     locale: function () {
       return this.$store.getters.locale.locale
+    },
+    url: function () {
+      return window.location.href
     },
     currentFullUrl: function () {
       return window.location.href

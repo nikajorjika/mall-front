@@ -173,36 +173,35 @@
         </div>
       </div>
       <div class="share-container">
-        <social-sharing class="share-inner"
-                        :hashtags="formatFilters"
-                        inline-template>
-          <div>
-            <network network="facebook">
-              <button class="share-button">
+        <div class="share-inner">
+          <button class="share-button" @click="shareOnFacebook">
                 <span class="icon-container">
                   <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/>
                 </span>
-                <span>{{t('share_on_facebook')}}</span>
-              </button>
-            </network>
-            <network network="twitter">
-              <button class="share-button">
+            <span>{{t('share_on_facebook')}}</span>
+          </button>
+          <social-sharing :hashtags="formatFilters"
+                          inline-template>
+            <div class="share-tl">
+              <network network="twitter">
+                <button class="share-button">
                 <span class="icon-container">
                   <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/>
                 </span>
-                <span>{{t('share_on_twitter')}}</span>
-              </button>
-            </network>
-            <network network="linkedin">
-              <button class="share-button">
+                  <span>{{t('share_on_twitter')}}</span>
+                </button>
+              </network>
+              <network network="linkedin">
+                <button class="share-button">
                 <span class="icon-container">
                   <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/>
                 </span>
-                <span>{{t('share_on_linkedin')}}</span>
-              </button>
-            </network>
-          </div>
-        </social-sharing>
+                  <span>{{t('share_on_linkedin')}}</span>
+                </button>
+              </network>
+            </div>
+          </social-sharing>
+        </div>
       </div>
     </div>
   </div>
@@ -278,6 +277,9 @@ export default {
     }
   },
   methods: {
+    shareOnFacebook: function () {
+      this.shareOverrideOGMeta(window.location.href, this.store.name[ this.locale ], this.store.description[ this.locale ], this.store.logoUrl)
+    },
     loadStore: function () {
       this.loading = true
       this.$store.dispatch('findStore', this.$route.params.store).then((response) => {
@@ -357,73 +359,77 @@ export default {
 }
 
 .share-container {
+  .share-button {
+    border: 1px solid #dcdcdc;
+    display: flex;
+    background: transparent;
+    width: 293px;
+    margin: 20px 5px 10px;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+
+    &:before {
+      content: '';
+      height: 0;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      position: absolute;
+      background: #000;
+      z-index: 0;
+      transition: height .3s;
+    }
+
+    &:hover {
+      &:before {
+        height: 100%;
+      }
+
+      span {
+        &:first-child {
+          svg {
+            filter: invert(1);
+          }
+        }
+
+        &:last-child {
+          color: #ffffff;
+        }
+      }
+    }
+
+    span {
+      margin: auto 0;
+      z-index: 1;
+
+      &:first-child {
+        width: 46px;
+        padding: 15px 0;
+        border-right: 1px solid #dcdcdc;
+        font-size: 1.5rem;
+      }
+
+      &:last-child {
+        width: 100%;
+        margin: auto;
+        font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
+        font-size: 12px;
+        line-height: 1.25;
+        text-transform: uppercase;
+      }
+    }
+  }
   .share-inner {
     display: flex;
     justify-content: center;
     padding: 5px 0;
     border-top: 1px solid #dcdcdc;
     flex-wrap: wrap;
-
-    .share-button {
-      border: 1px solid #dcdcdc;
+    .share-tl{
       display: flex;
-      background: transparent;
-      width: 293px;
-      margin: 20px 5px 10px;
-      padding: 0;
-      cursor: pointer;
-      position: relative;
-
-      &:before {
-        content: '';
-        height: 0;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-        position: absolute;
-        background: #000;
-        z-index: 0;
-        transition: height .3s;
-      }
-
-      &:hover {
-        &:before {
-          height: 100%;
-        }
-
-        span {
-          &:first-child {
-            svg {
-              filter: invert(1);
-            }
-          }
-
-          &:last-child {
-            color: #ffffff;
-          }
-        }
-      }
-
-      span {
-        margin: auto 0;
-        z-index: 1;
-
-        &:first-child {
-          width: 46px;
-          padding: 15px 0;
-          border-right: 1px solid #dcdcdc;
-          font-size: 1.5rem;
-        }
-
-        &:last-child {
-          width: 100%;
-          margin: auto;
-          font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
-          font-size: 12px;
-          line-height: 1.25;
-          text-transform: uppercase;
-        }
-      }
+      flex-wrap: wrap;
+      justify-content: center;
     }
   }
 }

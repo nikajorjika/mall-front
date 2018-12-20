@@ -1,6 +1,6 @@
 <template>
   <div class="news-single-mobile" :id="item._id">
-    <div class="single-wrapper">
+    <div class="single-wrapper" v-if="item">
       <div class="close-button" @click="closeEvent">
         <router-link :to="closeUrl()" class="close-button-a" v-if="redirect">
           <default-icon class="hamburger-close-button" :icon="`close`"/>
@@ -41,37 +41,28 @@
           </p>
         </div>
         <div class="socials-container">
-          <social-sharing :url="currentFullUrl"
-                          class="share-inner"
-                          :title="item.name[locale]"
-                          :description="item.description[locale]"
-                          inline-template>
-            <div class="socials-inner-container">
-              <network network="facebook">
-                <div class="social-item">
-                  <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/></span>
-                  <span class="label">share</span>
-                </div>
-              </network>
-              <network network="twitter">
-                <div class="social-item">
-                  <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/></span>
-                  <span class="label">tweet</span>
-                </div>
-              </network>
-              <network network="linkedin">
-                <div class="social-item">
-                  <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/></span>
-                  <span class="label">share</span>
-                </div>
-              </network>
-              <div class="social-item" @click="copyUrl('news-item-current-url')">
-                <input id="news-item-current-url" :value="currentFullUrl" type="hidden">
-                <span class="icon"><font-awesome-icon icon="link"/></span>
-                <span class="label">{{t('copyLink')}}</span>
-              </div>
+          <div class="socials-inner-container">
+            <div class="social-item" @click="shareOnFacebook(item)">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/></span>
+              <span class="label">share</span>
             </div>
-          </social-sharing>
+            <a class="social-item" :href="`https://twitter.com/intent/tweet?text=${item.name[locale]}&url=${url}`"
+               target="_blank">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/></span>
+              <span class="label">tweet</span>
+            </a>
+            <a class="social-item"
+               :href="`https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${item.name[locale]}e&summary=${item.description[locale]}`"
+               target="_blank">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/></span>
+              <span class="label">share</span>
+            </a>
+            <div class="social-item" @click="copyUrl('news-item-current-url')">
+              <input id="news-item-current-url" :value="currentFullUrl" type="hidden">
+              <span class="icon"><font-awesome-icon icon="link"/></span>
+              <span class="label">{{t('copyLink')}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -124,6 +115,9 @@ export default {
     }
   },
   methods: {
+    shareOnFacebook: function (item) {
+      this.shareOverrideOGMeta(window.location.href, item.name[this.locale], item.description[this.locale], item.photoUrl)
+    },
     closeEvent: function () {
       this.$emit('close')
     },

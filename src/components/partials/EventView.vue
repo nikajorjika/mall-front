@@ -1,6 +1,6 @@
 <template>
   <div class="event-item">
-    <div class="wrapper">
+    <div class="wrapper" v-if="event">
       <div class="img-wrapper">
         <v-lazy-image
           :src="event.photoUrl"
@@ -22,6 +22,9 @@
 <script>
 export default {
   name: 'event-item',
+  mounted: function () {
+    console.log(this.event)
+  },
   props: {
     event: {
       type: Object,
