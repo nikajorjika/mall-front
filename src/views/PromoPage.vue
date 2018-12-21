@@ -124,14 +124,23 @@ export default {
   data: () => {
     return {
       voted: false,
-      choice: ''
+      choice: '',
+      choiceObject: {
+        santa: false,
+        babu: false
+      }
     }
   },
   methods: {
     choose: function (choice) {
       if (!this.voted) {
-        this.voted = true
-        this.choice = choice
+        if (this.choiceObject.hasOwnProperty(choice)) {
+          this.choiceObject[ choice ] = true
+          this.$http.post(this.$store.state.apiUrls.vote, this.choiceObject).then(() => {
+            this.voted = true
+            this.choice = choice
+          }).catch(error => console.error(error))
+        }
       }
     },
     goHome: function () {
@@ -160,7 +169,7 @@ export default {
   top: 0;
   bottom: 0;
   overflow-y: auto;
-  .clickable{
+  .clickable {
     cursor: pointer;
   }
   .icon-candy {
@@ -741,7 +750,7 @@ export default {
     transform: translateX(-50%);
     padding: 125px 64px;
     opacity: 1;
-    &.fade-enter-active{
+    &.fade-enter-active {
       animation: fadeIn 0.3s;
     }
     @media screen and (max-width: 1600px) {

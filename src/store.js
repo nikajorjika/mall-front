@@ -38,6 +38,7 @@ export default new Vuex.Store({
     navigation: navigation,
     hamburgerData: hamburgerData,
     events: [],
+    showPromo: true,
     frontPromotions: [],
     frontEvents: [],
     fbLoaded: false,
@@ -95,6 +96,9 @@ export default new Vuex.Store({
     },
     alphabet: (state) => {
       return state.alphabet
+    },
+    showPromo: (state) => {
+      return state.showPromo
     },
     searchResult: (state) => {
       return state.searchResult
@@ -242,6 +246,9 @@ export default new Vuex.Store({
     },
     SET_NO_SCROLL: (state, newValue) => {
       state.noScroll = newValue
+    },
+    SET_PROMO_STATUS: (state, newValue) => {
+      state.showPromo = newValue
     },
     SET_CATEGORIES: (state, newValue) => {
       state.categories = newValue

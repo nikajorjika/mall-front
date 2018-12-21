@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <section class="slider-section">
+      <promo-pointer/>
       <div class="slider">
         <!--<event-home/>-->
         <home-slider/>
@@ -48,6 +49,7 @@ import HowToGet from '../components/partials/HowToGet'
 import SocialListBig from '../components/partials/SocialsListBig'
 import HomeSlider from '../components/page-components/home/HomeSlider'
 import HomeAds from '../components/page-components/home/Ads'
+import PromoPointer from '../components/partials/PromoPointer'
 
 export default {
   name: 'home',
@@ -61,6 +63,7 @@ export default {
     this.$store.commit('SET_LOADING_STATE', { model: 'page', value: true })
   },
   components: {
+    PromoPointer,
     HomeAds,
     HomeSlider,
     SocialListBig,

@@ -1,19 +1,27 @@
 self.__precacheManifest = [
   {
     "revision": "6142689db073f3cbf1a2",
-    "url": "/css/chunk-vendors.d2d5825e.css"
+    "url": "/js/chunk-vendors.e5733973.js"
   },
   {
     "revision": "b6216d61c03e6ce0c9aea6ca7808f7ca",
     "url": "/robots.txt"
   },
   {
-    "revision": "6142689db073f3cbf1a2",
-    "url": "/js/chunk-vendors.e5733973.js"
+    "revision": "03ef14fc3f33a671eb2e34bf9e3d1369",
+    "url": "/img/close.03ef14fc.svg"
   },
   {
     "revision": "71e730c9abd96dd9713d",
     "url": "/css/chunk-09f95f47.b9d0138e.css"
+  },
+  {
+    "revision": "2b997d8ecf3f0c2e3373",
+    "url": "/css/chunk-126a84dd.e6d81afb.css"
+  },
+  {
+    "revision": "2b997d8ecf3f0c2e3373",
+    "url": "/js/chunk-126a84dd.ad233745.js"
   },
   {
     "revision": "494816c3b9068c0eaa76",
@@ -176,11 +184,11 @@ self.__precacheManifest = [
     "url": "/js/chunk-71a4b11b.72914b83.js"
   },
   {
-    "revision": "e792e05b85a8a8e596e0",
-    "url": "/css/chunk-736f705a.5809156c.css"
+    "revision": "8e267e72735e2a265aba",
+    "url": "/css/chunk-736f705a.ffc6d442.css"
   },
   {
-    "revision": "e792e05b85a8a8e596e0",
+    "revision": "8e267e72735e2a265aba",
     "url": "/js/chunk-736f705a.b0dcdfb6.js"
   },
   {
@@ -190,14 +198,6 @@ self.__precacheManifest = [
   {
     "revision": "58cf01c85f037e3fe77c",
     "url": "/js/chunk-7878f1a2.1209df4d.js"
-  },
-  {
-    "revision": "2f7df79c4c2f382fe13d",
-    "url": "/css/chunk-afee2d70.0ea6baae.css"
-  },
-  {
-    "revision": "2f7df79c4c2f382fe13d",
-    "url": "/js/chunk-afee2d70.21665298.js"
   },
   {
     "revision": "e8a39dd4c404cc45fa91",
@@ -264,16 +264,16 @@ self.__precacheManifest = [
     "url": "/js/chunk-ff4afb54.416f976a.js"
   },
   {
-    "revision": "9d388c2e819db5677da1",
-    "url": "/js/app.a616276f.js"
+    "revision": "6142689db073f3cbf1a2",
+    "url": "/css/chunk-vendors.d2d5825e.css"
+  },
+  {
+    "revision": "3a06b5b74306abedb461",
+    "url": "/js/app.796f1ce4.js"
   },
   {
     "revision": "71e730c9abd96dd9713d",
     "url": "/js/chunk-09f95f47.33f1f4d3.js"
-  },
-  {
-    "revision": "03ef14fc3f33a671eb2e34bf9e3d1369",
-    "url": "/img/close.03ef14fc.svg"
   },
   {
     "revision": "5ca35232ab160b39cd4628dd41526779",
@@ -282,6 +282,66 @@ self.__precacheManifest = [
   {
     "revision": "7a34e88f1519783654dee7950d047200",
     "url": "/img/Web.7a34e88f.svg"
+  },
+  {
+    "revision": "c52492763a1b376377271fe3330f4c77",
+    "url": "/img/Candy.c5249276.png"
+  },
+  {
+    "revision": "ab1744690f5f1da6e53207429d595003",
+    "url": "/img/15X6-Santa-vs-babu-OOH_0009_Group-3.ab174469.png"
+  },
+  {
+    "revision": "d37ceadfab05492fefa49938394c2f9c",
+    "url": "/img/Footer_bg.d37ceadf.svg"
+  },
+  {
+    "revision": "64dcd1afc1aa2561b55cdd7492bb4607",
+    "url": "/img/Snow-5.64dcd1af.png"
+  },
+  {
+    "revision": "c4827b8fb3d5fa51f8d6234750b50d69",
+    "url": "/img/15X6-Santa-vs-babu-OOH_0010_Group-2.c4827b8f.png"
+  },
+  {
+    "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
+    "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
+  },
+  {
+    "revision": "46c81231570d7d80bd9f068d09cf5bfe",
+    "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
+  },
+  {
+    "revision": "43da48aa6dc57965423388f2210bf30d",
+    "url": "/fonts/bpg-mrgvlovani-webfont.43da48aa.woff"
+  },
+  {
+    "revision": "ea21e39e6fa33639f0bff8cae9c7e481",
+    "url": "/fonts/bpg-mrgvlovani-webfont.ea21e39e.ttf"
+  },
+  {
+    "revision": "0616ae663c60044fd17f5a421adfa1f0",
+    "url": "/img/bpg-mrgvlovani-webfont.0616ae66.svg"
+  },
+  {
+    "revision": "ee6e2db834dda657126ed592cf28b7f6",
+    "url": "/fonts/dejavu-sans-bold-webfont.ee6e2db8.eot"
+  },
+  {
+    "revision": "ebfdf1b00a4788026b3a2734fbd51653",
+    "url": "/fonts/dejavu-sans-bold-webfont.ebfdf1b0.woff2"
+  },
+  {
+    "revision": "7108cda0993d9ddaffdc934c5de66fd1",
+    "url": "/fonts/dejavu-sans-bold-webfont.7108cda0.woff"
+  },
+  {
+    "revision": "384116da039ef8abea5018168066cc65",
+    "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
+  },
+  {
+    "revision": "b1f3060866fb51a93362187f405b4537",
+    "url": "/img/dejavu-sans-bold-webfont.b1f30608.svg"
   },
   {
     "revision": "dbb36c52cc61bbc49d93cb29b5e2a617",
@@ -308,24 +368,36 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-SemiBold.e1c83f94.ttf"
   },
   {
+    "revision": "49f89e34d03233b1f27788f75df7a40a",
+    "url": "/fonts/OpenSans-ExtraBold.49f89e34.ttf"
+  },
+  {
     "revision": "f5331cb6372b6c0d8baf2dd7e200498c",
     "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
   },
   {
-    "revision": "49f89e34d03233b1f27788f75df7a40a",
-    "url": "/fonts/OpenSans-ExtraBold.49f89e34.ttf"
+    "revision": "a8b935b9fab81016cc4b241faf9a2260",
+    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
+  },
+  {
+    "revision": "6530709ce0aadf3283db6512a8fcabec",
+    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
   },
   {
     "revision": "26ec7406f51c5efb79ecc2885a5b887c",
     "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
   },
   {
-    "revision": "9c57740b6f314b7db24f8cddde741770",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.9c57740b.woff"
-  },
-  {
     "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
     "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
+  },
+  {
+    "revision": "88a37bc21733e2fef7deba65d7271bed",
+    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
+  },
+  {
+    "revision": "9c57740b6f314b7db24f8cddde741770",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.9c57740b.woff"
   },
   {
     "revision": "afcdb491132664da5cc93fae552e72be",
@@ -340,20 +412,8 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
   },
   {
-    "revision": "a8b935b9fab81016cc4b241faf9a2260",
-    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
-  },
-  {
     "revision": "e1412bac33d65a665ecb4a78c4588cbd",
     "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
-  },
-  {
-    "revision": "6530709ce0aadf3283db6512a8fcabec",
-    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
-  },
-  {
-    "revision": "88a37bc21733e2fef7deba65d7271bed",
-    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
   },
   {
     "revision": "61f91995f99c69f2edba28f7d609383b",
@@ -412,6 +472,10 @@ self.__precacheManifest = [
     "url": "/img/arrow-left-dark.60c4abc1.svg"
   },
   {
+    "revision": "89a55afa23c5bcdac67f5fa458b3f56e",
+    "url": "/img/promo-pointer.89a55afa.png"
+  },
+  {
     "revision": "99508fdde34a93abaf824338e329f637",
     "url": "/img/carret-down.99508fdd.svg"
   },
@@ -430,66 +494,6 @@ self.__precacheManifest = [
   {
     "revision": "0883c14b747dd9c7d8beeef1836d4f51",
     "url": "/img/arrow-right-2.0883c14b.svg"
-  },
-  {
-    "revision": "c52492763a1b376377271fe3330f4c77",
-    "url": "/img/Candy.c5249276.png"
-  },
-  {
-    "revision": "ab1744690f5f1da6e53207429d595003",
-    "url": "/img/15X6-Santa-vs-babu-OOH_0009_Group-3.ab174469.png"
-  },
-  {
-    "revision": "c4827b8fb3d5fa51f8d6234750b50d69",
-    "url": "/img/15X6-Santa-vs-babu-OOH_0010_Group-2.c4827b8f.png"
-  },
-  {
-    "revision": "64dcd1afc1aa2561b55cdd7492bb4607",
-    "url": "/img/Snow-5.64dcd1af.png"
-  },
-  {
-    "revision": "d37ceadfab05492fefa49938394c2f9c",
-    "url": "/img/Footer_bg.d37ceadf.svg"
-  },
-  {
-    "revision": "ee6e2db834dda657126ed592cf28b7f6",
-    "url": "/fonts/dejavu-sans-bold-webfont.ee6e2db8.eot"
-  },
-  {
-    "revision": "ebfdf1b00a4788026b3a2734fbd51653",
-    "url": "/fonts/dejavu-sans-bold-webfont.ebfdf1b0.woff2"
-  },
-  {
-    "revision": "7108cda0993d9ddaffdc934c5de66fd1",
-    "url": "/fonts/dejavu-sans-bold-webfont.7108cda0.woff"
-  },
-  {
-    "revision": "384116da039ef8abea5018168066cc65",
-    "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
-  },
-  {
-    "revision": "b1f3060866fb51a93362187f405b4537",
-    "url": "/img/dejavu-sans-bold-webfont.b1f30608.svg"
-  },
-  {
-    "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
-    "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
-  },
-  {
-    "revision": "46c81231570d7d80bd9f068d09cf5bfe",
-    "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
-  },
-  {
-    "revision": "43da48aa6dc57965423388f2210bf30d",
-    "url": "/fonts/bpg-mrgvlovani-webfont.43da48aa.woff"
-  },
-  {
-    "revision": "ea21e39e6fa33639f0bff8cae9c7e481",
-    "url": "/fonts/bpg-mrgvlovani-webfont.ea21e39e.ttf"
-  },
-  {
-    "revision": "0616ae663c60044fd17f5a421adfa1f0",
-    "url": "/img/bpg-mrgvlovani-webfont.0616ae66.svg"
   },
   {
     "revision": "681696dcc232ad677db7dfb2383b361c",
@@ -512,7 +516,7 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "3ec14110e5cb0d48a82ebd4a973b1023",
+    "revision": "6e2bfc63e5b78dbf10b05b911aa9037e",
     "url": "/index.html"
   },
   {
@@ -520,15 +524,15 @@ self.__precacheManifest = [
     "url": "/img/logo.png"
   },
   {
-    "revision": "4c91026884f697732fd6b96aa71a9349",
-    "url": "/img/meta-logo.png"
-  },
-  {
     "revision": "97b2b1f258f047fa27a7f8c2131192f9",
     "url": "/img/logo.svg"
   },
   {
-    "revision": "9d388c2e819db5677da1",
-    "url": "/css/app.76742402.css"
+    "revision": "4c91026884f697732fd6b96aa71a9349",
+    "url": "/img/meta-logo.png"
+  },
+  {
+    "revision": "3a06b5b74306abedb461",
+    "url": "/css/app.b0bead38.css"
   }
 ];

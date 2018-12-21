@@ -18,6 +18,7 @@ const apiUrls = {
   guestService: 'https://smartfinders.herokuapp.com/api/v1/website/about-page/5bdb52156155da077b01cd74',
   magazine: 'https://smartfinders.herokuapp.com/api/v1/website/magazines',
   team: 'https://smartfinders.herokuapp.com/api/v1/website/team-members',
+  vote: 'https://smartfinders.herokuapp.com/api/v1/website/vote',
   giftStores: 'https://smartfinders.herokuapp.com/api/v1/website/stores-with-gift-card',
   subscribe: 'https://smartfinders.herokuapp.com/api/v1/website/subscribe-to-store',
   newsletter: 'https://smartfinders.herokuapp.com/api/v1/website/subscription',
