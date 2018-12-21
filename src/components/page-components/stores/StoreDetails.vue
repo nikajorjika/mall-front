@@ -2,8 +2,8 @@
   <div id="store-details">
     <loading-big v-show="loading"/>
     <div class="store-details-container" v-if="store">
-      <div class="store-details-cover">
-        <img :src="store.photoUrl" :alt="store.name">
+      <div class="store-details-cover" v-if="store.photoUrl">
+        <img :src="store.photoUrl" :alt="store.name[locale]">
       </div>
       <div class="store-details-body">
         <div class="store-details-content">
@@ -238,13 +238,7 @@ export default {
       })
     }
     if (this.$route.params.store) {
-      this.$http.get(this.$store.state.apiUrls.storePromotions(this.$route.params.store))
-        .then((response) => {
-          this.storePromotions = response.data.promotions
-        })
-        .catch((error) => {
-          console.error(error)
-        })
+      this.getPromotions()
     }
   },
   data: function () {
@@ -252,6 +246,12 @@ export default {
       store: null,
       loading: false,
       storePromotions: []
+    }
+  },
+  watch: {
+    $route: function () {
+      this.loadStore()
+      this.getPromotions()
     }
   },
   computed: {
@@ -278,11 +278,22 @@ export default {
   },
   methods: {
     shareOnFacebook: function () {
-      this.shareOverrideOGMeta(window.location.href, this.store.name[ this.locale ], this.store.description[ this.locale ], this.store.logoUrl)
+      this.shareOverrideOGMeta(this.currentUrl, this.store.name[ this.locale ], this.store.description[ this.locale ], this.store.logoUrl)
+    },
+    getPromotions: function () {
+      this.$http.get(this.$store.state.apiUrls.storePromotions(this.$route.params.store))
+        .then((response) => {
+          this.storePromotions = response.data.promotions
+        })
+        .catch((error) => {
+          console.error(error)
+        })
     },
     loadStore: function () {
       this.loading = true
+      this.store = null
       this.$store.dispatch('findStore', this.$route.params.store).then((response) => {
+        console.log(response)
         this.store = response
         this.loading = false
       })
@@ -426,7 +437,7 @@ export default {
     padding: 5px 0;
     border-top: 1px solid #dcdcdc;
     flex-wrap: wrap;
-    .share-tl{
+    .share-tl {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;

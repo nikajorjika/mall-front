@@ -144,12 +144,12 @@ self.__precacheManifest = [
     "url": "/js/chunk-5a3dee48.6443a2ea.js"
   },
   {
-    "revision": "12dc1656589d9cc7a9b9",
+    "revision": "18b7fe7e8c89bc6bf744",
     "url": "/css/chunk-61e07572.aec80b8b.css"
   },
   {
-    "revision": "12dc1656589d9cc7a9b9",
-    "url": "/js/chunk-61e07572.b808f6ca.js"
+    "revision": "18b7fe7e8c89bc6bf744",
+    "url": "/js/chunk-61e07572.94033830.js"
   },
   {
     "revision": "703faaa1d9275de1e1b6",
@@ -168,12 +168,12 @@ self.__precacheManifest = [
     "url": "/js/chunk-64f10d8a.01d9289a.js"
   },
   {
-    "revision": "1e30e93d00b63f660b0a",
-    "url": "/css/chunk-71a4b11b.d04075d6.css"
+    "revision": "8c3bb5cbdf5e537665e2",
+    "url": "/css/chunk-71a4b11b.f7214f16.css"
   },
   {
-    "revision": "1e30e93d00b63f660b0a",
-    "url": "/js/chunk-71a4b11b.5ed5bd4e.js"
+    "revision": "8c3bb5cbdf5e537665e2",
+    "url": "/js/chunk-71a4b11b.72914b83.js"
   },
   {
     "revision": "e792e05b85a8a8e596e0",
@@ -224,12 +224,12 @@ self.__precacheManifest = [
     "url": "/js/chunk-c3c868a4.435e64c6.js"
   },
   {
-    "revision": "cc9fa18360adf5a666ed",
-    "url": "/css/chunk-cf89c312.89c0947f.css"
+    "revision": "c83cf039ba266f023e23",
+    "url": "/css/chunk-cf89c312.200e0d10.css"
   },
   {
-    "revision": "cc9fa18360adf5a666ed",
-    "url": "/js/chunk-cf89c312.95303692.js"
+    "revision": "c83cf039ba266f023e23",
+    "url": "/js/chunk-cf89c312.bf45680b.js"
   },
   {
     "revision": "da2b6ef17788b727c35c",
@@ -248,12 +248,12 @@ self.__precacheManifest = [
     "url": "/js/chunk-dbff1266.d28af08f.js"
   },
   {
-    "revision": "85f3a17bb3624ef7dac2",
+    "revision": "989c21cb2b2b22051916",
     "url": "/css/chunk-ef376104.7d68bada.css"
   },
   {
-    "revision": "85f3a17bb3624ef7dac2",
-    "url": "/js/chunk-ef376104.d733ccda.js"
+    "revision": "989c21cb2b2b22051916",
+    "url": "/js/chunk-ef376104.4d985486.js"
   },
   {
     "revision": "f9a9414fcbe996e8e3b6",
@@ -264,8 +264,8 @@ self.__precacheManifest = [
     "url": "/js/chunk-ff4afb54.416f976a.js"
   },
   {
-    "revision": "5049ddc2ba474fcc01f3",
-    "url": "/js/app.403bfbe7.js"
+    "revision": "9d388c2e819db5677da1",
+    "url": "/js/app.a616276f.js"
   },
   {
     "revision": "71e730c9abd96dd9713d",
@@ -304,28 +304,28 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-Light.9ff12f69.ttf"
   },
   {
-    "revision": "49f89e34d03233b1f27788f75df7a40a",
-    "url": "/fonts/OpenSans-ExtraBold.49f89e34.ttf"
+    "revision": "e1c83f9474e0cc1d84a13c6d1ddf3ca5",
+    "url": "/fonts/OpenSans-SemiBold.e1c83f94.ttf"
   },
   {
     "revision": "f5331cb6372b6c0d8baf2dd7e200498c",
     "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
   },
   {
-    "revision": "e1c83f9474e0cc1d84a13c6d1ddf3ca5",
-    "url": "/fonts/OpenSans-SemiBold.e1c83f94.ttf"
+    "revision": "49f89e34d03233b1f27788f75df7a40a",
+    "url": "/fonts/OpenSans-ExtraBold.49f89e34.ttf"
   },
   {
     "revision": "26ec7406f51c5efb79ecc2885a5b887c",
     "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
   },
   {
-    "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
-  },
-  {
     "revision": "9c57740b6f314b7db24f8cddde741770",
     "url": "/fonts/bpg-nino-mtavruli-webfont.9c57740b.woff"
+  },
+  {
+    "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
   },
   {
     "revision": "afcdb491132664da5cc93fae552e72be",
@@ -336,12 +336,12 @@ self.__precacheManifest = [
     "url": "/img/bpg-nino-mtavruli-webfont.97a80250.svg"
   },
   {
-    "revision": "a8b935b9fab81016cc4b241faf9a2260",
-    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
-  },
-  {
     "revision": "6e5b1494e933ba58cdb6e80876634552",
     "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
+  },
+  {
+    "revision": "a8b935b9fab81016cc4b241faf9a2260",
+    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
   },
   {
     "revision": "e1412bac33d65a665ecb4a78c4588cbd",
@@ -436,16 +436,16 @@ self.__precacheManifest = [
     "url": "/img/Candy.c5249276.png"
   },
   {
-    "revision": "64dcd1afc1aa2561b55cdd7492bb4607",
-    "url": "/img/Snow-5.64dcd1af.png"
-  },
-  {
     "revision": "ab1744690f5f1da6e53207429d595003",
     "url": "/img/15X6-Santa-vs-babu-OOH_0009_Group-3.ab174469.png"
   },
   {
     "revision": "c4827b8fb3d5fa51f8d6234750b50d69",
     "url": "/img/15X6-Santa-vs-babu-OOH_0010_Group-2.c4827b8f.png"
+  },
+  {
+    "revision": "64dcd1afc1aa2561b55cdd7492bb4607",
+    "url": "/img/Snow-5.64dcd1af.png"
   },
   {
     "revision": "d37ceadfab05492fefa49938394c2f9c",
@@ -468,6 +468,10 @@ self.__precacheManifest = [
     "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
   },
   {
+    "revision": "b1f3060866fb51a93362187f405b4537",
+    "url": "/img/dejavu-sans-bold-webfont.b1f30608.svg"
+  },
+  {
     "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
     "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
   },
@@ -478,10 +482,6 @@ self.__precacheManifest = [
   {
     "revision": "43da48aa6dc57965423388f2210bf30d",
     "url": "/fonts/bpg-mrgvlovani-webfont.43da48aa.woff"
-  },
-  {
-    "revision": "b1f3060866fb51a93362187f405b4537",
-    "url": "/img/dejavu-sans-bold-webfont.b1f30608.svg"
   },
   {
     "revision": "ea21e39e6fa33639f0bff8cae9c7e481",
@@ -512,7 +512,7 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "21f82f4a5d443492c45fc1d056f57623",
+    "revision": "3ec14110e5cb0d48a82ebd4a973b1023",
     "url": "/index.html"
   },
   {
@@ -520,15 +520,15 @@ self.__precacheManifest = [
     "url": "/img/logo.png"
   },
   {
-    "revision": "97b2b1f258f047fa27a7f8c2131192f9",
-    "url": "/img/logo.svg"
-  },
-  {
     "revision": "4c91026884f697732fd6b96aa71a9349",
     "url": "/img/meta-logo.png"
   },
   {
-    "revision": "5049ddc2ba474fcc01f3",
-    "url": "/css/app.2df0c62f.css"
+    "revision": "97b2b1f258f047fa27a7f8c2131192f9",
+    "url": "/img/logo.svg"
+  },
+  {
+    "revision": "9d388c2e819db5677da1",
+    "url": "/css/app.76742402.css"
   }
 ];

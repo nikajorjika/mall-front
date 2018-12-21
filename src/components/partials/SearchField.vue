@@ -16,12 +16,18 @@
         <div class="search-ads-block">
           <div class="ads-single" v-if="$store.getters.searchFeatured.length">
             <div class="img-container">
-              <img :src="$store.getters.searchFeatured[0].photoUrl"
-                   :alt="$store.getters.searchFeatured[0].name[locale]">
+              <router-link @click.native="isSameUrl($store.getters.searchFeatured[0]._id)"
+                           :to="`/${locale}/whats-new/single/${createSlug($store.getters.searchFeatured[0].name['en'])}/${$store.getters.searchFeatured[0]._id}`">
+                <img :src="$store.getters.searchFeatured[0].photoUrl"
+                     :alt="$store.getters.searchFeatured[0].name[locale]">
+              </router-link>
             </div>
             <div class="content-container">
               <div class="title">
-                <h3>{{$store.getters.searchFeatured[0].name[locale]}}</h3>
+                <router-link @click.native="isSameUrl($store.getters.searchFeatured[0]._id)"
+                             :to="`/${locale}/whats-new/single/${createSlug($store.getters.searchFeatured[0].name['en'])}/${$store.getters.searchFeatured[0]._id}`">
+                  <h3>{{$store.getters.searchFeatured[0].name[locale]}}</h3>
+                </router-link>
               </div>
               <div class="description">
                 <p>
@@ -37,7 +43,10 @@
           <div class="ads-news">
             <div class="ads-news-item" v-for="(news, index) in $store.getters.searchFeatured" :key="index"
                  v-if="index > 0">
-              <event-item :event="news"/>
+              <router-link @click.native="isSameUrl(news._id)"
+                           :to="`/${locale}/whats-new/single/${createSlug(news.name['en'])}/${news._id}`">
+                <event-item :event="news"/>
+              </router-link>
             </div>
           </div>
         </div>
@@ -69,14 +78,14 @@
                   <div class="search-store-item-container" v-for="(item, index2) in tab"
                        :key="index2">
                     <div class="search-item-wrapper" v-if="item">
-                      <router-link
-                        :to="`/${locale}/store/${createSlug(item.name['en'])}/${item._id}`"
-                        v-if="index === 'entities'">
+                      <router-link @click.native="isSameUrl(item._id)"
+                                   :to="`/${locale}/store/${createSlug(item.name['en'])}/${item._id}`"
+                                   v-if="index === 'entities'">
                         <store-item :item="item" animation=""/>
                       </router-link>
-                      <router-link
-                        :to="`/${locale}/whats-new/single/${createSlug(item.name['en'])}/${item._id}`"
-                        v-else>
+                      <router-link @click.native="isSameUrl(item._id)"
+                                   :to="`/${locale}/whats-new/single/${createSlug(item.name['en'])}/${item._id}`"
+                                   v-else>
                         <event-item :event="item"/>
                       </router-link>
                     </div>
@@ -108,7 +117,7 @@ export default {
   },
   mounted: function () {
     if (!this.$store.getters.searchFeatured.length) {
-      this.$store.dispatch('getSearchFeatured').then((error) => {
+      this.$store.dispatch('getSearchFeatured').catch((error) => {
         console.error(error)
       })
     }
@@ -129,6 +138,13 @@ export default {
     closeSearch: function () {
       this.search = ''
       this.$emit('close')
+    },
+    isSameUrl: function (id) {
+      if ((this.$route.params.hasOwnProperty('store') && this.$route.params.store === id) || (this.$route.params.hasOwnProperty('id') && this.$route.params.id === id)) {
+        this.$emit('close')
+        return true
+      }
+      return false
     },
     startCount: function () {
       this.timeout = window.setTimeout(() => {

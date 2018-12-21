@@ -1,5 +1,5 @@
 <template>
-  <div class="news-single" :id="item._id">
+  <div class="news-single" :id="`event_${item._id}`" ref="singleEvent">
     <div class="single-wrapper">
       <div class="half-col single-left">
         <div class="image-container">
@@ -40,13 +40,14 @@
               <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/></span>
               <span class="label">share</span>
             </div>
-            <a class="social-item" :href="`https://twitter.com/intent/tweet?text=${item.name[locale]}&url=${url}`"
+            <a class="social-item"
+               :href="`https://twitter.com/intent/tweet?text=${item.name[locale]}&url=${currentUrl}`"
                target="_blank">
               <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/></span>
               <span class="label">tweet</span>
             </a>
             <a class="social-item"
-               :href="`https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${item.name[locale]}e&summary=${item.description[locale]}`"
+               :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=${item.name[locale]}e&summary=${item.description[locale]}`"
                target="_blank">
               <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/></span>
               <span class="label">share</span>
@@ -82,6 +83,21 @@ export default {
     }
   },
   mounted: function () {
+    const VueScrollTo = require('vue-scrollto')
+
+    const options = {
+      easing: 'ease-in',
+      force: true,
+      offset: -100,
+      cancelable: true,
+      x: false,
+      y: true
+    }
+    console.log(this.$refs.singleEvent)
+    window.setTimeout(() => {
+      VueScrollTo.scrollTo(`#event_${this.item._id}`, 500, options)
+    }, 300)
+
     if (!this.$store.getters.storesList.length) {
       this.$store.dispatch('fetchItems', {
         model: `storesList`,
@@ -110,7 +126,7 @@ export default {
   },
   methods: {
     shareOnFacebook: function (item) {
-      this.shareOverrideOGMeta(window.location.href, item.name[this.locale], item.description[this.locale], item.photoUrl)
+      this.shareOverrideOGMeta(this.currentUrl, item.name[ this.locale ], item.description[ this.locale ], item.photoUrl)
     },
     closeEvent: function () {
       this.$emit('close')
@@ -157,7 +173,7 @@ export default {
     overflow: hidden;
     display: flex;
     padding-bottom: 32px;
-    .share-inner{
+    .share-inner {
       display: flex;
     }
     .half-col {
@@ -245,7 +261,7 @@ export default {
             left: 0;
             color: #848484;
             font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
-            @media screen and (max-width: 1250px){
+            @media screen and (max-width: 1250px) {
               margin-right: 5px;
             }
           }

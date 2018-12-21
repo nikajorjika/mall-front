@@ -685,7 +685,12 @@ export default new Vuex.Store({
           if (!response.data.bookmarkedItems.length) {
             resolve('RECORD NOT FOUND')
           } else {
-            context.commit('SET_USER_BOOKMARKS', response.data.bookmarkedItems)
+            if (response.data.hasOwnProperty('bookmarkedItems')) {
+              let bookmarks = response.data.bookmarkedItems.filter((item) => {
+                return item
+              })
+              context.commit('SET_USER_BOOKMARKS', bookmarks)
+            }
             resolve(response.data)
           }
         }).catch(function (error) {
@@ -713,7 +718,12 @@ export default new Vuex.Store({
           if (!response.data.subscribedStores.length) {
             resolve('RECORD NOT FOUND')
           } else {
-            context.commit('SET_USER_SUBSCRIPTIONS', response.data.subscribedStores)
+            if (response.data.hasOwnProperty('subscribedStores')) {
+              let subscribed = response.data.subscribedStores.filter((item) => {
+                return item
+              })
+              context.commit('SET_USER_SUBSCRIPTIONS', subscribed)
+            }
             resolve(response.data)
           }
         }).catch(function (error) {

@@ -161,7 +161,7 @@ Vue.mixin({
     locale: function () {
       return this.$store.getters.locale.locale
     },
-    url: function () {
+    currentUrl: function () {
       return window.location.href
     },
     currentFullUrl: function () {
