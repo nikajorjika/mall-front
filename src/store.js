@@ -708,12 +708,26 @@ export default new Vuex.Store({
     getNotifications: function (context) {
       return new Promise((resolve, reject) => {
         Axios.post(context.state.apiUrls.notifications, { userToken: context.getters.user.token }).then(function (response) {
-          if (!response.data.bookmarkedItems.length) {
+          console.log(response)
+          if (!response.data.data.length) {
             resolve('RECORD NOT FOUND')
           } else {
-            context.commit('SET_USER_NOTIFICATIONS', response.data.bookmarkedItems)
+            context.commit('SET_USER_NOTIFICATIONS', response.data.data)
             resolve(response.data)
           }
+        }).catch(function (error) {
+          reject(error)
+        })
+      })
+    },
+    clearNotifications: function (context) {
+      return new Promise((resolve, reject) => {
+        Axios.post(context.state.apiUrls.clearNotifications, { userToken: context.getters.user.token }).then(function (response) {
+          context.dispatch('getUser', {
+            token: context.getters.user.token,
+            email: context.getters.user.email
+          }).catch(error => console.error(error))
+          resolve(response.data)
         }).catch(function (error) {
           reject(error)
         })

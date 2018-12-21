@@ -19,6 +19,7 @@ const apiUrls = {
   magazine: 'https://smartfinders.herokuapp.com/api/v1/website/magazines',
   team: 'https://smartfinders.herokuapp.com/api/v1/website/team-members',
   vote: 'https://smartfinders.herokuapp.com/api/v1/website/vote',
+  clearNotifications: 'https://smartfinders.herokuapp.com/api/v1/website/clear-notification',
   giftStores: 'https://smartfinders.herokuapp.com/api/v1/website/stores-with-gift-card',
   subscribe: 'https://smartfinders.herokuapp.com/api/v1/website/subscribe-to-store',
   newsletter: 'https://smartfinders.herokuapp.com/api/v1/website/subscription',
