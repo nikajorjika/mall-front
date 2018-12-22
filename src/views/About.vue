@@ -12,7 +12,7 @@
         <router-view></router-view>
       </div>
       <div class="menu-container">
-        <about-us-menu :items="this.aboutMenu" active=''/>
+        <about-us-menu :items="$store.state.pageData.aboutUs.aboutUsMenu" active=''/>
       </div>
       <div class="our-team" v-if="$route.name === 'about'">
         <div class="horizontal-line gray"></div>
@@ -36,11 +36,6 @@ export default {
     StaffCarousel,
     AboutUsMenu,
     PageBlock
-  },
-  data: function () {
-    return {
-      aboutMenu: this.$store.state.pageData.aboutUsMenu
-    }
   },
   props: {
     page: {
@@ -135,7 +130,7 @@ export default {
       width: 260px;
       @media screen and (max-width: 760px) {
         order: 1;
-        width:100%;
+        width: 100%;
       }
     }
     .our-team {
