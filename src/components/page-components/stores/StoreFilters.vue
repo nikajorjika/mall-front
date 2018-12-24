@@ -9,7 +9,7 @@
       <filter-search @searched="invokeFilters"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="categories.floors.data"
+      <custom-select :items="categories.floors.data" :multiple="true"
                      :placeholder="categories.floors.placeholder" name="floors" @change="invokeFilters"/>
     </div>
     <div class="filter-item">
@@ -110,6 +110,7 @@ export default {
       this.$emit('changeView', view)
     },
     invokeFilters: function (data) {
+      console.log(data)
       if (Array.isArray(this.filterData[ data.name ])) {
         if (data.value) {
           this.filterData[ data.name ] = []

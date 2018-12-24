@@ -75,13 +75,6 @@ export default {
           },
           {
             name: {
-              en: 'management',
-              ka: 'მენეჯმენტი'
-            },
-            value: 'info@tbilisimall.com'
-          },
-          {
-            name: {
               en: 'client service',
               ka: 'კლიენტთა მომსახურება'
             },
@@ -92,7 +85,7 @@ export default {
               en: 'marketing',
               ka: 'მარკეტინგი'
             },
-            value: 'info@tbilisimall.com'
+            value: 'marketing@tbilisimall.com'
           },
           {
             name: {
@@ -150,9 +143,11 @@ export default {
       opacity: 1;
     }
   }
+
   .error {
     color: red;
   }
+
   .form-container {
     display: flex;
     flex-direction: column;
@@ -203,14 +198,17 @@ export default {
 
         &:focus {
           outline: none;
+
           + label {
             transform: translateY(-130%);
           }
         }
       }
+
       .checkbox-label {
         padding-left: 22px;
       }
+
       textarea {
         padding: 8px 10px;
         width: 100%;
@@ -220,6 +218,7 @@ export default {
         text-transform: capitalize;
       }
     }
+
     .contact-send-button {
       border: 1px solid rgba(0, 0, 0, 0.66);
       font-family: 'Muli', 'BPG Nino Mtavruli', sans-serif;
@@ -230,6 +229,7 @@ export default {
       background: #f9f9f9;
       position: relative;
       cursor: pointer;
+
       &:before {
         content: '';
         height: 0;
@@ -241,24 +241,29 @@ export default {
         background: #000;
         transition: height 0.3s;
       }
+
       &:hover {
         &:before {
           height: 100%;
           transition: height 0.3s;
         }
+
         span {
           color: #ffffff;
         }
+
         img {
           filter: invert(1);
         }
       }
+
       img {
         width: 17.5px;
         height: 12.3px;
         margin: auto auto auto 16px;
         z-index: 2;
       }
+
       span {
         margin-left: auto;
         text-transform: capitalize;

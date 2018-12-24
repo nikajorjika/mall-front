@@ -325,8 +325,13 @@ export default {
           if (this.filters.search.length && item.name.en.toLowerCase().indexOf(this.filters.search.toLowerCase()) === -1 && item.name.ka.toLowerCase().indexOf(this.filters.search.toLowerCase()) === -1) {
             filterIndex = 0
           }
-          if (this.filters.floors.length) {
-            filterIndex = 0
+          if (this.filters.floors.length && item.name.en.toLowerCase().indexOf(this.filters.floors)) {
+            let intersection = item.floors.filter(floor => {
+              return this.filters.floors.indexOf(floor) !== -1
+            })
+            if (!intersection.length) {
+              filterIndex = 0
+            }
           }
           return filterIndex
         })

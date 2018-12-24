@@ -61,13 +61,13 @@ const newsFilters = {
         },
         value: '-1'
       },
-      {
-        name: {
-          ka: '0 სართული',
-          en: '0 floor'
-        },
-        value: '0'
-      },
+      // {
+      //   name: {
+      //     ka: '0 სართული',
+      //     en: '0 floor'
+      //   },
+      //   value: '0'
+      // },
       {
         name: {
           ka: '1 სართული',

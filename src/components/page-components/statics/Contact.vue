@@ -65,10 +65,18 @@ export default {
     boxes: function () {
       const result = []
       if (this.pageDataContent) {
-        result.push(this.pageDataContent[ `${this.locale}Box1` ])
-        result.push(this.pageDataContent[ `${this.locale}Box2` ])
-        result.push(this.pageDataContent[ `${this.locale}Box3` ])
-        result.push(this.pageDataContent[ `${this.locale}Box4` ])
+        if (this.pageDataContent[ `${this.locale}Box1` ] && this.pageDataContent[ `${this.locale}Box1` ].length) {
+          result.push(this.pageDataContent[ `${this.locale}Box1` ])
+        }
+        if (this.pageDataContent[ `${this.locale}Box2` ] && this.pageDataContent[ `${this.locale}Box2` ].length) {
+          result.push(this.pageDataContent[ `${this.locale}Box2` ])
+        }
+        if (this.pageDataContent[ `${this.locale}Box3` ] && this.pageDataContent[ `${this.locale}Box3` ].length) {
+          result.push(this.pageDataContent[ `${this.locale}Box3` ])
+        }
+        if (this.pageDataContent[ `${this.locale}Box4` ] && this.pageDataContent[ `${this.locale}Box4` ].length) {
+          result.push(this.pageDataContent[ `${this.locale}Box4` ])
+        }
       }
       return result
     }
@@ -85,6 +93,7 @@ export default {
     @media screen and (max-width: 760px) {
       padding: 0;
     }
+
     .parts-wrapper {
       display: flex;
       @media screen and (max-width: 760px) {
@@ -99,6 +108,7 @@ export default {
       width: 100%;
       border-right: none;
     }
+
     &.part-left {
       padding-right: 154px;
       flex: 1;
@@ -112,6 +122,7 @@ export default {
         padding: 0;
       }
     }
+
     &.part-right {
       width: 398px;
       padding: 0 30px;
@@ -123,6 +134,7 @@ export default {
         padding: 0;
         border-top: 1px solid #dcdcdc;
       }
+
       .contact-form-container {
         margin-top: 135px;
         @media screen and (max-width: 760px) {
@@ -144,6 +156,7 @@ export default {
     @media screen and (max-width: 550px) {
       padding: 0 36px;
     }
+
     .list-item {
       width: calc(50% - 8px);
       background-color: #f9f9f9;
@@ -160,6 +173,7 @@ export default {
         width: 100%;
         margin: 0;
       }
+
       &:nth-child(2n + 2) {
         margin-right: 0;
       }
