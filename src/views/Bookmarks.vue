@@ -20,6 +20,11 @@ export default {
   components: { BookmarksListComponent, BlockHeaderStandard },
   mounted: function () {
     this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    if (!this.$store.getters.bookmarked.length) {
+      this.$store.dispatch('getBookmarks').catch((error) => {
+        console.error(error)
+      })
+    }
   }
 }
 </script>

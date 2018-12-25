@@ -1,6 +1,6 @@
 <template>
   <div class="promo-pointer" v-if="$store.getters.showPromo" @click="goToPromo">
-    <div class="close-promo" @click="close">
+    <div class="close-promo" @click.stop="close">
     <span class="icon-close-container">
       <span class="icon-close">
       </span>

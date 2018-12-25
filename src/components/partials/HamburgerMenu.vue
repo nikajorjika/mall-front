@@ -541,6 +541,7 @@ export default {
       margin: 0 auto;
     }
     .mobile-socials {
+      padding-right: 17px;
       ul {
         display: flex;
         li {

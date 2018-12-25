@@ -19,11 +19,6 @@ export default {
     if (!this.$store.getters.user) {
       this.$router.push({ name: 'login' })
     }
-    if (!this.$store.getters.bookmarked.length) {
-      this.$store.dispatch('getBookmarks').catch((error) => {
-        console.error(error)
-      })
-    }
   },
   methods: {
     bookmark: function (id) {

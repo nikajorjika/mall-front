@@ -3,7 +3,7 @@ const hamburgerData = [
     url: '/about-us',
     name: {
       en: 'about us',
-      ka: 'ჩვენს შესახებ'
+      ka: 'ჩვენ შესახებ'
     },
     children: [
       {
@@ -27,13 +27,6 @@ const hamburgerData = [
       //     ka: 'თბილისი მოლის ტაქსი'
       //   }
       // },
-      {
-        url: '/gift-card',
-        name: {
-          en: 'gift card',
-          ka: 'მომსახურება'
-        }
-      },
       {
         url: '/marketing',
         name: {

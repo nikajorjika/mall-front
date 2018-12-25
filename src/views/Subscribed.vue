@@ -20,6 +20,12 @@ export default {
   components: { SubscribedListComponent, BlockHeaderStandard },
   mounted: function () {
     this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+
+    if (!this.$store.getters.subscribed.length) {
+      this.$store.dispatch('getSubscribed').catch((error) => {
+        console.error(error)
+      })
+    }
   }
 }
 </script>

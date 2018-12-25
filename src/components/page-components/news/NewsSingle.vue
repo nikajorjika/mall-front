@@ -93,11 +93,11 @@ export default {
       x: false,
       y: true
     }
-    console.log(this.$refs.singleEvent)
-    window.setTimeout(() => {
-      VueScrollTo.scrollTo(`#event_${this.item._id}`, 500, options)
-    }, 300)
-
+    if (this.redirect) {
+      window.setTimeout(() => {
+        VueScrollTo.scrollTo(`#event_${this.item._id}`, 500, options)
+      }, 300)
+    }
     if (!this.$store.getters.storesList.length) {
       this.$store.dispatch('fetchItems', {
         model: `storesList`,

@@ -238,7 +238,7 @@ const messages = {
       no_bookmarks: 'თქვენ არ გაქვთ შენახული სიახლეები',
       no_subscriptions: 'თქვენ არ გაქვთ გამოწერილი მაღაზიები',
       no_notifications: 'თქვენ არ გაქვთ შეტყობინებები',
-      about_us: 'ჩვენს შესახებ',
+      about_us: 'ჩვენ შესახებ',
       download: 'გადმოწერა',
       promotions: 'შეთავაზებები',
       joinNow: 'შემოგვიერთდი',

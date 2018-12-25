@@ -99,7 +99,7 @@ export default {
               en: 'public relations',
               ka: 'საზოგადოებასთან ურთიერთობა'
             },
-            value: 'leasing@tbilisimall.com'
+            value: 'marketing@tbilisimall.com'
           }
         ]
       }

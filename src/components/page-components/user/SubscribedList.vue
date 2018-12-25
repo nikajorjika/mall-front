@@ -3,7 +3,9 @@
     <ul>
       <li v-for="(store, index) in $store.getters.subscribed" :key="index">
         <div class="img-container">
-          <img :src="store.logoUrl" :alt="store.name[locale]">
+          <router-link :to="`/${locale}/store/${createSlug(store.name['en'])}/${store._id}`">
+            <img :src="store.logoUrl" :alt="store.name[locale]">
+          </router-link>
         </div>
         <div class="close-container" @click="deleteEvent(store._id)">
           <div class="close-button">
@@ -20,11 +22,6 @@ export default {
   mounted: function () {
     if (!this.$store.getters.user) {
       this.$router.push({ name: 'login' })
-    }
-    if (!this.$store.getters.subscribed.length) {
-      this.$store.dispatch('getSubscribed').catch((error) => {
-        console.error(error)
-      })
     }
   },
   methods: {
