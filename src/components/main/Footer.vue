@@ -16,7 +16,7 @@
             <footer-menu-item :title="t('information')" :items="$store.state.staticPages"/>
           </div>
           <div class="menu-item">
-            <footer-socials-item :title="t('socials')" :items="$store.state.socials"/>
+            <footer-socials-item :title="t('social')" :items="$store.state.socials"/>
           </div>
           <div class="menu-item">
             <footer-menu-item :title="t('working_hours')" :items="hours"/>

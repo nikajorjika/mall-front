@@ -11,6 +11,10 @@
         <h4>{{carrefourTitle}}</h4>
         <p v-html="carrefourWorkingHours"></p>
       </div>
+      <div class="additional-info-item">
+        <h4>{{kaveaTitle}}</h4>
+        <p v-html="kaveaWorkingHours"></p>
+      </div>
     </div>
   </div>
 </template>
@@ -74,6 +78,12 @@ export default {
     },
     carrefourWorkingHours: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'CarrefourWorkingHours' ] : ''
+    },
+    kaveaTitle: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'KaveaTitle' ] : ''
+    },
+    kaveaWorkingHours: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'KaveaWorkingHours' ] : ''
     }
   },
   methods: {

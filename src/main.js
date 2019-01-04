@@ -20,7 +20,7 @@ import {
   faLink,
   faBookmark
 } from '@fortawesome/free-solid-svg-icons'
-import { faFacebookF, faTwitter, faYoutube, faPinterest, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookF, faInstagram, faTwitter, faYoutube, faPinterest, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Axios from 'axios'
 import * as VueGoogleMaps from 'vue2-google-maps'
@@ -78,6 +78,7 @@ library.add(faAngleLeft)
 library.add(faBookmark)
 library.add(faAngleRight)
 library.add(faFacebookF)
+library.add(faInstagram)
 library.add(faTwitter)
 library.add(faLink)
 library.add(faYoutube)

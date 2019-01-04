@@ -1,7 +1,6 @@
 <template>
   <div id="home">
     <section class="slider-section">
-      <promo-pointer/>
       <div class="slider">
         <!--<event-home/>-->
         <home-slider/>

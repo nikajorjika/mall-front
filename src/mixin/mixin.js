@@ -98,6 +98,7 @@ Vue.mixin({
     getIconName: (index) => {
       const icons = {
         'Twitter': 'twitter',
+        'Instagram': 'instagram',
         'Facebook': 'facebook-f',
         'Pinterest': 'pinterest',
         'LinkedIn': 'linkedin-in',

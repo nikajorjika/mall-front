@@ -12,7 +12,7 @@ const router = new Router({
     // const exception = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine' ]
     // if ((exception.indexOf(to.name) === -1 && exception.indexOf(from.name) === -1) && to.name !== from.name) {
     // }
-      return { x: 0, y: 0 }
+    return { x: 0, y: 0 }
   },
   routes: [
     {
@@ -219,7 +219,7 @@ router.beforeEach((to, from, next) => {
     })
   }
   const aboutPages = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine' ]
-  if (aboutPages.indexOf(to.name) !== -1) {
+  if (aboutPages.indexOf(to.name) !== -1 && to.name !== from.name) {
     store.commit('SET_LOADING_STATE', { model: 'page', value: true })
   }
   next()

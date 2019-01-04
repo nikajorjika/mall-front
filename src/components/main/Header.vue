@@ -42,12 +42,6 @@
                       </router-link>
                     </li>
                   </ul>
-                  <div class="drop-image" v-if="index % 2 === 1">
-                    <img src="../../assets/images/statics/04.jpg" alt="Tbilisi mall">
-                  </div>
-                  <div class="drop-image" v-else>
-                    <img src="../../assets/images/statics/tbilisimall4.jpg" alt="Tbilisi mall">
-                  </div>
                 </div>
               </transition>
             </div>
@@ -305,7 +299,6 @@ export default {
           top: calc(100% - 11px);
           box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
           display: flex;
-          padding-right: 182px;
 
           &.slideUp-enter-active {
             animation: subMenuEnter .4s;

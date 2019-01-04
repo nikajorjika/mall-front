@@ -35,6 +35,13 @@ const hamburgerData = [
         }
       },
       {
+        url: '/gift-card',
+        name: {
+          en: 'Gift Card',
+          ka: 'სასაჩუქრე ბარათი'
+        }
+      },
+      {
         url: '/leasing',
         name: {
           en: 'leasing',
