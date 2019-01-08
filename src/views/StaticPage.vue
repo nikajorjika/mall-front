@@ -62,7 +62,7 @@ export default {
 </script>
 <style lang="scss">
 .static-page-container {
-  margin: 96px auto 300px;
+  margin: 47px auto 300px;
   @media screen and (max-width: 760px) {
     margin: 96px auto 100px;
   }

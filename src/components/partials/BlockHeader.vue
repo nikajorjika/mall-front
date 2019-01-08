@@ -18,7 +18,7 @@ export default {
 <style lang="scss" scoped>
 .block-header-standard{
   h2{
-    margin:72px 0;
+    margin:47px 0;
     text-align: center;
     font-size: 4rem;
     font-weight: 300;

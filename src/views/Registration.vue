@@ -26,7 +26,7 @@ export default {
 <style lang="scss">
 #registration {
   .registration-page-container {
-    margin-top: 153px;
+    margin-top: 80px;
     .registration-form-container {
       width: 100%;
       max-width: 616px;

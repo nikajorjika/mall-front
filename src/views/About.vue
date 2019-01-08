@@ -100,7 +100,7 @@ export default {
   .about-outer-container {
     display: flex;
     flex-wrap: wrap;
-    margin: 97px 0 57.5px;
+    margin: 47px 0 57.5px;
     @media screen and (max-width: 760px) {
       flex-direction: column;
       margin-top: 0;

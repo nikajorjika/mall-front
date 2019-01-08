@@ -50,7 +50,7 @@
       </div>
       <div class="header-center">
         <div class="mall-logo">
-          <router-link to="/">
+          <router-link :to="{name: 'home', params: {locale: locale }}">
             <img class="logo" src="../../assets/images/icons/TM_LOGO.svg" alt="Tbilisi Mall Logo">
           </router-link>
         </div>

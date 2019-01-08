@@ -75,7 +75,7 @@
               <div class="content-socials">
                 <div class="socials-wrapper">
                   <div class="socials-title">
-                    <h4>{{t('socials')}}</h4>
+                    <h4>{{t('social')}}</h4>
                   </div>
                   <ul>
                     <li v-if="store.socials.facebook.length">

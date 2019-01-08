@@ -108,7 +108,7 @@ export default {
 <style lang="scss">
 #login {
   .login-page-container {
-    margin-top: 153px;
+    margin-top: 80px;
     .login-form-container {
       width: 90%;
       max-width: 536px;

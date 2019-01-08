@@ -6,7 +6,7 @@
           <custom-select :placeholder="optionOne.placeholder" :items="optionOne.options" @change="selectPath"/>
         </div>
         <div class="selects-container">
-          <custom-select :placeholder="categoriesPlaceholder" :items="categories"/>
+          <custom-select :placeholder="categoriesPlaceholder" :items="categories" @change="choseDirection"/>
         </div>
       </div>
       <div class="map-wrapper">
@@ -59,6 +59,10 @@ export default {
           this.paths = pathArrayObject
         }, 1000)
       }
+      // eslint-disable-next-line
+      this.directionsService = new google.maps.DirectionsService
+      // eslint-disable-next-line
+      this.directionsDisplay = new google.maps.DirectionsRenderer
     })
   },
   data: function () {
@@ -71,17 +75,38 @@ export default {
       categories: [
         {
           name: {
-            en: 'category 1',
-            ka: 'კატეგორია 1'
+            en: 'Sheraton Metechi Palace',
+            ka: 'შერატონ მეტეხი პალასი'
           },
-          value: 'cat-1'
+          value: { lat: 41.6886451, lng: 44.8230995 }
         },
         {
           name: {
-            en: 'category 1',
-            ka: 'კატეგორია 1'
+            en: 'Courtyard Marriott',
+            ka: 'ქორთიარდ მერიოტი'
           },
-          value: 'cat-1'
+          value: { lat: 41.6933143, lng: 44.7987356 }
+        },
+        {
+          name: {
+            en: 'Tbilisi Marriott',
+            ka: 'თბილისი მერიოტი'
+          },
+          value: { lat: 41.699054, lng: 44.7960959 }
+        },
+        {
+          name: {
+            en: 'Radisson Blu Iveria',
+            ka: 'რედისონ ბლუ ივერია'
+          },
+          value: { lat: 41.7038141, lng: 44.7915997 }
+        },
+        {
+          name: {
+            en: 'Holiday Inn',
+            ka: 'ჰოლიდეი ინნ'
+          },
+          value: { lat: 41.7193334, lng: 44.7755694 }
         }
       ],
       paths: {},
@@ -137,7 +162,9 @@ export default {
           // }
         ]
       },
-      selectedPath: ''
+      selectedPath: '',
+      directionsService: null,
+      directionsDisplay: null
     }
   },
   computed: {
@@ -151,6 +178,28 @@ export default {
   methods: {
     selectPath: function (selected) {
       this.selectedPath = selected.value
+    },
+    choseDirection: function (selected) {
+      this.drawDirections(selected.value)
+    },
+    drawDirections: function (object) {
+      this.directionsDisplay.setMap(this.$refs.mapRef.$mapObject)
+      if (object) {
+        this.directionsService.route({
+          origin: object,
+          destination: this.position,
+          travelMode: 'DRIVING'
+        }, (response, status) => {
+          if (status === 'OK') {
+            console.log(response)
+            this.directionsDisplay.setDirections(response)
+          } else {
+            window.alert('Directions request failed due to ' + status)
+          }
+        })
+      } else {
+        this.directionsDisplay.setDirections({ routes: [] })
+      }
     }
   }
 }
