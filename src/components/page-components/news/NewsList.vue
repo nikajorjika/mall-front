@@ -257,8 +257,8 @@ export default {
     width: 33.33%;
     padding: 32px 30px;
     box-sizing: border-box;
-    border-right: 1px solid #dcdcdc;
-    border-top: 1px solid #dcdcdc;
+    /*border-right: 1px solid #dcdcdc;*/
+    /*border-top: 1px solid #dcdcdc;*/
     @media screen and (max-width: 1650px) {
       padding: 21px;
     }

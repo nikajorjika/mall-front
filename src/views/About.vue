@@ -1,6 +1,6 @@
 <template>
   <div class="about-page container">
-    <section class="about-us about-outer-container">
+    <section class="about-us about-outer-container" :class="$route.name">
       <div class="page-block-container" :class="{loading: $store.getters.loading.page}">
         <div class="breadcrumb">
           <ul>
@@ -106,7 +106,7 @@ export default {
       margin-top: 0;
     }
     .page-block-container {
-      width: calc(100% - 260px);
+      flex: 1;
       box-sizing: border-box;
       position: relative;
       @media screen and (max-width: 760px) {
@@ -124,6 +124,11 @@ export default {
       p {
         color: #000;
         opacity: 1;
+      }
+    }
+    &.mallMap{
+      .menu-container{
+        display: none;
       }
     }
     .menu-container {

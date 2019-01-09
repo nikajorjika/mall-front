@@ -587,7 +587,6 @@ export default {
 
   .navigation-menu {
     border-left: solid 1px #f1f1f1;
-    border-right: solid 1px #f1f1f1;
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
