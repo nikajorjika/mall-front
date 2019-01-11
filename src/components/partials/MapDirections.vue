@@ -69,8 +69,8 @@ export default {
     return {
       googleMap: this.$store.getters.googleMap,
       categoriesPlaceholder: {
-        ka: 'კატეგორიები',
-        en: 'CATEGORY'
+        ka: 'სხვადასხვა მიმართულებები',
+        en: 'Directions From'
       },
       categories: [
         {
