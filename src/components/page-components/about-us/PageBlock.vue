@@ -2,6 +2,7 @@
   <div class="page-block">
     <about-title :title="pageTitle"/>
     <about-content :content="pageDescription"/>
+    <h3 class="working-hours-title">{{t('working_hours')}}:</h3>
     <div class="additional-info">
       <div class="additional-info-item">
         <h4>{{workingHoursTitle}}</h4>
@@ -12,8 +13,8 @@
         <p v-html="carrefourWorkingHours"></p>
       </div>
       <div class="additional-info-item">
-        <h4>{{kaveaTitle}}</h4>
-        <p v-html="kaveaWorkingHours"></p>
+        <h4>{{caveaTitle}}</h4>
+        <p v-html="caveaWorkingHours"></p>
       </div>
     </div>
   </div>
@@ -79,11 +80,11 @@ export default {
     carrefourWorkingHours: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'CarrefourWorkingHours' ] : ''
     },
-    kaveaTitle: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'KaveaTitle' ] : ''
+    caveaTitle: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'CaveaTitle' ] : ''
     },
-    kaveaWorkingHours: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'KaveaWorkingHours' ] : ''
+    caveaWorkingHours: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'CaveaWorkingHours' ] : ''
     }
   },
   methods: {
@@ -100,8 +101,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page-block {
-  .additional-info {
+  .working-hours-title{
     margin-top: 85px;
+    text-transform: uppercase;
+    font-size: 2.6rem;
+  }
+  .additional-info {
     margin-bottom: 74.5px;
     display: flex;
     @media screen and (max-width: 550px) {
@@ -116,7 +121,7 @@ export default {
       width: 100%;
       margin-right: 12px;
       h4 {
-        font-size: 2.4rem;
+        font-size: 2.1rem;
         margin: 21px 0;
       }
       p {

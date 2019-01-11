@@ -576,7 +576,7 @@ export default {
           margin-top: 10px;
 
           .subscribe-button {
-            border: 1px solid #eead16;
+            border: 1px solid #000;
             font-family: 'Muli', 'BPG Arial', 'sans-serif';
             width: 100%;
             padding: 12px 0 16px 0;
@@ -585,7 +585,7 @@ export default {
             text-transform: capitalize;
             line-height: 1.23;
             text-align: center;
-            color: #eead16;
+            color: #000;
             cursor: pointer;
             position: relative;
 
@@ -619,7 +619,7 @@ export default {
               position: absolute;
               height: 0;
               width: 100%;
-              background: #eead16;
+              background: #000;
               z-index: -1;
               bottom: 0;
               left: 0;

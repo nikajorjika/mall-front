@@ -5,7 +5,7 @@
         <div class="alphabet-item" v-for="(value, index) in $store.getters.alphabet[locale]"
              :key="index">
             <span @click="filterList(value)"
-                  :class="{active: grouped[value.toUpperCase()] !== undefined && grouped[value.toUpperCase()].length !== 0 }">{{value}}
+                  :class="{active: grouped[value.toLowerCase()] !== undefined && grouped[value.toLowerCase()].length !== 0 }">{{value}}
             </span>
         </div>
       </div>
@@ -13,13 +13,13 @@
     <div class="store-list-container">
       <div class="store-list-wrapper">
         <div class="alphabetic-container" v-for="letter in currentAlphabetFilter" :key="letter">
-          <div class="alphabetic-container-inner" v-if="grouped[letter.toUpperCase()]">
+          <div class="alphabetic-container-inner" v-if="grouped[letter.toLowerCase()]">
             <div class="alphabet-wrapper">
               <div class="alphabet-item">
                 {{letter}}
               </div>
               <div class="items-container">
-                <div class="item" v-for="(value, index) in grouped[letter.toUpperCase()]" :key="index">
+                <div class="item" v-for="(value, index) in grouped[letter.toLowerCase()]" :key="index">
                   <div v-if="value !== undefined" class="item-wrapper">
                     <span class="name">
                       {{value.name[locale]}}
