@@ -153,10 +153,10 @@ export default {
           border-radius: 0;
           border: none;
           border-top: 1px solid #dcdcdc;
-          padding: 22px 0 25px 0;
+          padding: 7px 0;
           background-color: transparent;
           font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
-          font-size: 2.4rem;
+          font-size: 1.8rem;
           text-transform: uppercase;
           display: flex;
           justify-content: center;

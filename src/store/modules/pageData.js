@@ -26,6 +26,11 @@ const pageData = {
         url: '/about-us/gift-card'
       },
       {
+        id: 7,
+        name: 'magazine',
+        url: '/about-us/magazine'
+      },
+      {
         id: 5,
         name: 'marketing',
         url: '/about-us/marketing'
@@ -34,11 +39,6 @@ const pageData = {
         id: 6,
         name: 'leasing',
         url: '/about-us/leasing'
-      },
-      {
-        id: 7,
-        name: 'magazine',
-        url: '/about-us/magazine'
       }
     ]
   }

@@ -343,7 +343,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .breadcrumb {
   display: flex;
   @media screen and (max-width: 760px) {
@@ -364,6 +364,8 @@ export default {
     }
   }
 }
+</style>
+<style lang="scss">
 
 .small-slider .small-slider-container .slide {
   margin-bottom: 12px;
@@ -552,7 +554,7 @@ export default {
           width: 244px;
           background: white;
           display: flex;
-          border: 1px solid rgba(0, 0, 0, 0.5);
+          border: 1px solid #dcdcdc;
           @media screen and (max-width: 760px) {
             width: 145px;
             height: 145px;
@@ -700,7 +702,7 @@ export default {
           margin-top: 21px;
 
           ul {
-            width: 90%;
+            width: calc(100% - 122px);
             max-width: 1050px;
             padding: 21px 0 17px;
             border-top: solid 1px #dcdcdc;

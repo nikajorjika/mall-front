@@ -36,6 +36,13 @@ const navigation =
           }
         },
         {
+          url: '/magazine',
+          name: {
+            en: 'magazine',
+            ka: 'ჟურნალი'
+          }
+        },
+        {
           url: '/marketing',
           name: {
             en: 'marketing',
@@ -47,13 +54,6 @@ const navigation =
           name: {
             en: 'leasing',
             ka: 'ლიზინგი'
-          }
-        },
-        {
-          url: '/magazine',
-          name: {
-            en: 'magazine',
-            ka: 'ჟურნალი'
           }
         }
       ]

@@ -64,7 +64,7 @@ export default {
 .static-page-container {
   margin: 47px auto 300px;
   @media screen and (max-width: 760px) {
-    margin: 96px auto 100px;
+    margin: 40px auto 60px;
   }
   &.noMargin{
     margin-bottom:0;

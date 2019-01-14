@@ -74,7 +74,6 @@ export default {
     padding-right: 0;
   }
 }
-
 .about-page {
   .breadcrumb {
     @media screen and (max-width: 550px) {

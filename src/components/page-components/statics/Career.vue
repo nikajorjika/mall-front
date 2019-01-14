@@ -70,6 +70,16 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.about-company-container{
+  @media screen and (max-width: 1400px){
+    margin: 0 15px;
+  }
+  @media screen and (max-width: 550px){
+    margin: 0;
+  }
+}
+</style>
 <style lang="scss">
 .service-list {
   padding-left: 8px;
@@ -78,6 +88,9 @@ export default {
 
 <style lang="scss" scoped>
 .list-title {
+  @media screen and (max-width: 550px){
+    margin: 0 36px;
+  }
   h3 {
     font-size: 1.6rem;
     font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
