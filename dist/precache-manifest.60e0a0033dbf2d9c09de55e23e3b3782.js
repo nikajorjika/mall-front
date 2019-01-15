@@ -12,16 +12,8 @@ self.__precacheManifest = [
     "url": "/js/chunk-vendors.824b2e62.js"
   },
   {
-    "revision": "a95c53f9a0f621163e56",
-    "url": "/css/chunk-02f95622.34da72c1.css"
-  },
-  {
     "revision": "b21b058369293814b1a0",
     "url": "/css/chunk-06629b26.3eb7b35f.css"
-  },
-  {
-    "revision": "b21b058369293814b1a0",
-    "url": "/js/chunk-06629b26.4c37fa29.js"
   },
   {
     "revision": "2b997d8ecf3f0c2e3373",
@@ -56,6 +48,14 @@ self.__precacheManifest = [
     "url": "/js/chunk-22526f08.62c8181d.js"
   },
   {
+    "revision": "3077779a60ed91e9b787",
+    "url": "/css/chunk-2751fa34.5b16d209.css"
+  },
+  {
+    "revision": "3077779a60ed91e9b787",
+    "url": "/js/chunk-2751fa34.f48a2b7e.js"
+  },
+  {
     "revision": "6980efedafdeb3896057",
     "url": "/css/chunk-28acdaf0.04853b63.css"
   },
@@ -64,12 +64,12 @@ self.__precacheManifest = [
     "url": "/js/chunk-28acdaf0.5c85c150.js"
   },
   {
-    "revision": "ec3e3d99750808591872",
-    "url": "/css/chunk-2ea56ff6.75ad1e33.css"
+    "revision": "7b253aa68d050e64e522",
+    "url": "/css/chunk-2fef21ca.8175cc28.css"
   },
   {
-    "revision": "ec3e3d99750808591872",
-    "url": "/js/chunk-2ea56ff6.69ebbbca.js"
+    "revision": "7b253aa68d050e64e522",
+    "url": "/js/chunk-2fef21ca.e9fa06e6.js"
   },
   {
     "revision": "d613e7b422f9dd540957",
@@ -102,14 +102,6 @@ self.__precacheManifest = [
   {
     "revision": "2f8dc0e7d23e3c9dfd13",
     "url": "/js/chunk-3b238253.0d4e2f10.js"
-  },
-  {
-    "revision": "d4bc87d7154846fd4e72",
-    "url": "/css/chunk-455a4f69.bcf9279c.css"
-  },
-  {
-    "revision": "d4bc87d7154846fd4e72",
-    "url": "/js/chunk-455a4f69.f77ca1c2.js"
   },
   {
     "revision": "5b115fdb2c0dace4ca14",
@@ -168,12 +160,20 @@ self.__precacheManifest = [
     "url": "/js/chunk-64a2b074.96b55f58.js"
   },
   {
-    "revision": "760eae5cd0384abbfec8",
-    "url": "/css/chunk-64f10d8a.4bd9fbcb.css"
+    "revision": "5780fb760f53a2c110a1",
+    "url": "/css/chunk-64f10d8a.611e8b6c.css"
   },
   {
-    "revision": "760eae5cd0384abbfec8",
-    "url": "/js/chunk-64f10d8a.7d639691.js"
+    "revision": "5780fb760f53a2c110a1",
+    "url": "/js/chunk-64f10d8a.42eed2de.js"
+  },
+  {
+    "revision": "f600c969d707e86b0869",
+    "url": "/css/chunk-677da29c.aaf6add2.css"
+  },
+  {
+    "revision": "f600c969d707e86b0869",
+    "url": "/js/chunk-677da29c.1e20b5cc.js"
   },
   {
     "revision": "6a71576d0a9bde5dc1be",
@@ -184,20 +184,28 @@ self.__precacheManifest = [
     "url": "/js/chunk-71a4b11b.c3b7695f.js"
   },
   {
-    "revision": "58cf01c85f037e3fe77c",
-    "url": "/css/chunk-7878f1a2.ced05e82.css"
+    "revision": "b1145b91063092198873",
+    "url": "/css/chunk-77d418b8.1e4914af.css"
   },
   {
-    "revision": "58cf01c85f037e3fe77c",
-    "url": "/js/chunk-7878f1a2.1209df4d.js"
+    "revision": "b1145b91063092198873",
+    "url": "/js/chunk-77d418b8.2cbf6a6a.js"
   },
   {
-    "revision": "0b255aa76a280edbeb7a",
-    "url": "/css/chunk-7c4ef394.a10bbe19.css"
+    "revision": "24d5d0843e9ec9386f32",
+    "url": "/css/chunk-7fb5a96c.2c5eb831.css"
   },
   {
-    "revision": "0b255aa76a280edbeb7a",
-    "url": "/js/chunk-7c4ef394.7e984152.js"
+    "revision": "24d5d0843e9ec9386f32",
+    "url": "/js/chunk-7fb5a96c.5cfec5ba.js"
+  },
+  {
+    "revision": "aa34035e74f309bb1856",
+    "url": "/css/chunk-98847930.47b8bb84.css"
+  },
+  {
+    "revision": "aa34035e74f309bb1856",
+    "url": "/js/chunk-98847930.c13bca56.js"
   },
   {
     "revision": "e8a39dd4c404cc45fa91",
@@ -216,20 +224,20 @@ self.__precacheManifest = [
     "url": "/js/chunk-ba377db8.3b989ec3.js"
   },
   {
-    "revision": "e206007e144c6b15a9ba",
-    "url": "/css/chunk-c93b3994.b18d49f7.css"
-  },
-  {
-    "revision": "e206007e144c6b15a9ba",
-    "url": "/js/chunk-c93b3994.c29bc2cf.js"
-  },
-  {
     "revision": "98a531bd4d0d0ee05006",
     "url": "/css/chunk-cf89c312.200e0d10.css"
   },
   {
     "revision": "98a531bd4d0d0ee05006",
     "url": "/js/chunk-cf89c312.438bb7e5.js"
+  },
+  {
+    "revision": "0ed9106e2c98cae376d7",
+    "url": "/css/chunk-d50783de.4c917aaf.css"
+  },
+  {
+    "revision": "0ed9106e2c98cae376d7",
+    "url": "/js/chunk-d50783de.0c0acce9.js"
   },
   {
     "revision": "da2b6ef17788b727c35c",
@@ -248,28 +256,20 @@ self.__precacheManifest = [
     "url": "/js/chunk-dbff1266.c68766b0.js"
   },
   {
-    "revision": "87b98927665098ad90ad",
-    "url": "/css/chunk-dced15dc.0f276d65.css"
+    "revision": "fd65a722f89cbc20508a",
+    "url": "/css/chunk-ee192180.e440b8b0.css"
   },
   {
-    "revision": "87b98927665098ad90ad",
-    "url": "/js/chunk-dced15dc.bfaf0c8e.js"
+    "revision": "fd65a722f89cbc20508a",
+    "url": "/js/chunk-ee192180.2fabf074.js"
   },
   {
-    "revision": "f9a9414fcbe996e8e3b6",
-    "url": "/css/chunk-ff4afb54.28c9f7f4.css"
+    "revision": "bd58603f20143f294e12",
+    "url": "/js/app.e9c7b79b.js"
   },
   {
-    "revision": "f9a9414fcbe996e8e3b6",
-    "url": "/js/chunk-ff4afb54.416f976a.js"
-  },
-  {
-    "revision": "44b03572c16c457545c2",
-    "url": "/js/app.c2aee1b2.js"
-  },
-  {
-    "revision": "a95c53f9a0f621163e56",
-    "url": "/js/chunk-02f95622.87f6da07.js"
+    "revision": "b21b058369293814b1a0",
+    "url": "/js/chunk-06629b26.4c37fa29.js"
   },
   {
     "revision": "03ef14fc3f33a671eb2e34bf9e3d1369",
@@ -288,20 +288,20 @@ self.__precacheManifest = [
     "url": "/img/Candy.c5249276.png"
   },
   {
-    "revision": "64dcd1afc1aa2561b55cdd7492bb4607",
-    "url": "/img/Snow-5.64dcd1af.png"
-  },
-  {
-    "revision": "d37ceadfab05492fefa49938394c2f9c",
-    "url": "/img/Footer_bg.d37ceadf.svg"
-  },
-  {
     "revision": "ab1744690f5f1da6e53207429d595003",
     "url": "/img/15X6-Santa-vs-babu-OOH_0009_Group-3.ab174469.png"
   },
   {
+    "revision": "64dcd1afc1aa2561b55cdd7492bb4607",
+    "url": "/img/Snow-5.64dcd1af.png"
+  },
+  {
     "revision": "c4827b8fb3d5fa51f8d6234750b50d69",
     "url": "/img/15X6-Santa-vs-babu-OOH_0010_Group-2.c4827b8f.png"
+  },
+  {
+    "revision": "d37ceadfab05492fefa49938394c2f9c",
+    "url": "/img/Footer_bg.d37ceadf.svg"
   },
   {
     "revision": "ee6e2db834dda657126ed592cf28b7f6",
@@ -320,24 +320,24 @@ self.__precacheManifest = [
     "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
   },
   {
-    "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
-    "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
-  },
-  {
     "revision": "b1f3060866fb51a93362187f405b4537",
     "url": "/img/dejavu-sans-bold-webfont.b1f30608.svg"
   },
   {
-    "revision": "46c81231570d7d80bd9f068d09cf5bfe",
-    "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
+    "revision": "ea21e39e6fa33639f0bff8cae9c7e481",
+    "url": "/fonts/bpg-mrgvlovani-webfont.ea21e39e.ttf"
+  },
+  {
+    "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
+    "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
   },
   {
     "revision": "43da48aa6dc57965423388f2210bf30d",
     "url": "/fonts/bpg-mrgvlovani-webfont.43da48aa.woff"
   },
   {
-    "revision": "ea21e39e6fa33639f0bff8cae9c7e481",
-    "url": "/fonts/bpg-mrgvlovani-webfont.ea21e39e.ttf"
+    "revision": "46c81231570d7d80bd9f068d09cf5bfe",
+    "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
   },
   {
     "revision": "0616ae663c60044fd17f5a421adfa1f0",
@@ -364,24 +364,24 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-Light.9ff12f69.ttf"
   },
   {
-    "revision": "49f89e34d03233b1f27788f75df7a40a",
-    "url": "/fonts/OpenSans-ExtraBold.49f89e34.ttf"
-  },
-  {
     "revision": "e1c83f9474e0cc1d84a13c6d1ddf3ca5",
     "url": "/fonts/OpenSans-SemiBold.e1c83f94.ttf"
+  },
+  {
+    "revision": "49f89e34d03233b1f27788f75df7a40a",
+    "url": "/fonts/OpenSans-ExtraBold.49f89e34.ttf"
   },
   {
     "revision": "f5331cb6372b6c0d8baf2dd7e200498c",
     "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
   },
   {
-    "revision": "6e5b1494e933ba58cdb6e80876634552",
-    "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
-  },
-  {
     "revision": "a8b935b9fab81016cc4b241faf9a2260",
     "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
+  },
+  {
+    "revision": "6e5b1494e933ba58cdb6e80876634552",
+    "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
   },
   {
     "revision": "e1412bac33d65a665ecb4a78c4588cbd",
@@ -392,6 +392,10 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
   },
   {
+    "revision": "9c57740b6f314b7db24f8cddde741770",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.9c57740b.woff"
+  },
+  {
     "revision": "26ec7406f51c5efb79ecc2885a5b887c",
     "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
   },
@@ -400,8 +404,8 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
   },
   {
-    "revision": "9c57740b6f314b7db24f8cddde741770",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.9c57740b.woff"
+    "revision": "88a37bc21733e2fef7deba65d7271bed",
+    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
   },
   {
     "revision": "afcdb491132664da5cc93fae552e72be",
@@ -410,10 +414,6 @@ self.__precacheManifest = [
   {
     "revision": "97a80250cdafef79da7329c445faeaa6",
     "url": "/img/bpg-nino-mtavruli-webfont.97a80250.svg"
-  },
-  {
-    "revision": "88a37bc21733e2fef7deba65d7271bed",
-    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
   },
   {
     "revision": "61f91995f99c69f2edba28f7d609383b",
@@ -508,23 +508,23 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "52d01e48fa362420dde2b3a9faf5b7e0",
+    "revision": "6dc2a70697975dc3fd866a41011ace4f",
     "url": "/index.html"
-  },
-  {
-    "revision": "56426d215548bb0ba4d07804d95ca026",
-    "url": "/img/logo.png"
   },
   {
     "revision": "97b2b1f258f047fa27a7f8c2131192f9",
     "url": "/img/logo.svg"
   },
   {
+    "revision": "56426d215548bb0ba4d07804d95ca026",
+    "url": "/img/logo.png"
+  },
+  {
     "revision": "4c91026884f697732fd6b96aa71a9349",
     "url": "/img/meta-logo.png"
   },
   {
-    "revision": "44b03572c16c457545c2",
+    "revision": "bd58603f20143f294e12",
     "url": "/css/app.4f95d2f0.css"
   }
 ];

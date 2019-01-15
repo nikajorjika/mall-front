@@ -2,7 +2,7 @@
   <div class="page-block">
     <about-title :title="pageTitle"/>
     <about-content :content="pageDescription"/>
-    <service-list :list="list"/>
+    <service-list :list="list" :single="false"/>
   </div>
 </template>
 <script>

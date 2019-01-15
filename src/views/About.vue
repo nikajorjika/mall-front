@@ -128,6 +128,9 @@ export default {
     &.mallMap{
       .menu-container{
         display: none;
+        @media screen and (max-width: 760px) {
+          display: block;
+        }
       }
     }
     .menu-container {
