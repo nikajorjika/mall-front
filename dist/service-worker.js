@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.60e0a0033dbf2d9c09de55e23e3b3782.js"
+  "/precache-manifest.58535d49b93e7bfd4157586f4809f685.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "mallweb"});

@@ -31,18 +31,18 @@
           <div class="content-wrapper">
             <div class="content">
               <div class="content-main">
-                <div class="breadcrumb">
-                  <div class="breadcrumb-item">
-                    <router-link :to="{name: 'home', params:{locale: locale}}">{{t('home')}}
-                    </router-link>
-                  </div>
-                  <div class="breadcrumb-item">
-                    <router-link :to="{name: 'stores'}">{{t('stores')}}</router-link>
-                  </div>
-                  <div class="breadcrumb-item">
-                    <router-link to=""> {{store.name[locale]}}</router-link>
-                  </div>
-                </div>
+                <!--<div class="breadcrumb">-->
+                  <!--<div class="breadcrumb-item">-->
+                    <!--<router-link :to="{name: 'home', params:{locale: locale}}">{{t('home')}}-->
+                    <!--</router-link>-->
+                  <!--</div>-->
+                  <!--<div class="breadcrumb-item">-->
+                    <!--<router-link :to="{name: 'stores'}">{{t('stores')}}</router-link>-->
+                  <!--</div>-->
+                  <!--<div class="breadcrumb-item">-->
+                    <!--<router-link to=""> {{store.name[locale]}}</router-link>-->
+                  <!--</div>-->
+                <!--</div>-->
                 <div class="title-container">
                   <h1 class="title">{{store.name[locale]}}</h1>
                 </div>

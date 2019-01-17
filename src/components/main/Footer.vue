@@ -121,8 +121,8 @@ export default {
       menuOpen: null,
       hours: [ {
         name: {
-          en: 'Everyday: from - 10:00 to 22:00',
-          ka: 'ყოველ დღე: 10:00-დან 22:00-მდე'
+          en: 'Every Day from 10:00 to 22:00',
+          ka: 'ყოველ დღე 10:00-დან 22:00-მდე'
         },
         url: '#'
       } ],
