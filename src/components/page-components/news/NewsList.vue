@@ -14,8 +14,6 @@
         <div class="news-list">
           <div class="news-list-item" v-for="(item,index) in [1,1,1,1,1,1]" :key="index">
             <div class="news-inner">
-              <news-item :loading="true" v-if="$mq !== 'mobile'"/>
-              <event-item :loading="true" v-else/>
             </div>
           </div>
         </div>

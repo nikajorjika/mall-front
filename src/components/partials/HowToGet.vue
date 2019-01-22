@@ -1,6 +1,6 @@
 <template>
   <div class="how-to-get">
-    <block-header-standard :title="this.title"/>
+    <block-header-standard :title="t('HowToGet')"/>
     <map-with-directions/>
   </div>
 </template>
@@ -10,11 +10,6 @@ import MapWithDirections from './MapDirections'
 
 export default {
   name: 'how-to-get',
-  data: function () {
-    return {
-      title: 'HOW TO GET'
-    }
-  },
   components: {
     MapWithDirections,
     BlockHeaderStandard

@@ -16,7 +16,7 @@
           </div>
         </div>
         <store-filters class="filter-mobile-class" :categories="categories" :filteredCats="filteredCategories"
-                       v-if="activeFilters || $mq !== 'mobile'" @filtered="filterItems"
+                       v-show="activeFilters || $mq !== 'mobile'" @filtered="filterItems"
                        @changeView="changeView"/>
       </div>
     </div>

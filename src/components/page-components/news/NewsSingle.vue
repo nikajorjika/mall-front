@@ -18,8 +18,14 @@
         <div class="bookmark">
           <div @click="bookmark(item._id)">
             <!--<font-awesome-icon icon="bookmark"/>-->
-            <img src="../../../assets/images/icons/bookmark.svg" alt="Bookmark" v-show="!bookmarked.length">
-            <img src="../../../assets/images/icons/bookmarked.svg" alt="Bookmark" v-show="bookmarked.length">
+            <div class="do_bookmark">
+              <img src="../../../assets/images/icons/bookmark.svg" alt="Bookmark">
+              <span>+</span>
+            </div>
+            <div class="un_bookmark" :class="{bookmarked: bookmarked.length}">
+              <img src="../../../assets/images/icons/bookmarked.svg" alt="Bookmark">
+              <span>-</span>
+            </div>
           </div>
         </div>
         <div class="title-container">
@@ -227,6 +233,48 @@ export default {
           margin: 14px 0;
           font-size: 25px;
           cursor: pointer;
+          > div {
+            max-height: 28.89px;
+            position: relative;
+          }
+          .un_bookmark,
+          .do_bookmark {
+            position: relative;
+            display: inline-block;
+            &:hover span {
+              opacity: 1;
+            }
+            span {
+              position: absolute;
+              opacity: 0;
+              transition: opacity 0.05s;
+              top: 36%;
+              left: 50%;
+              font-size: 19px;
+              font-weight: 800;
+              transform: translate(-50%, -50%);
+            }
+          }
+          .do_bookmark {
+            span {
+              color: #3a3838;
+            }
+          }
+          .un_bookmark {
+            overflow: hidden;
+            height: 0;
+            transition: height 0.1s;
+            transition-timing-function:  cubic-bezier(0.98, 1.75, 0.91, 0.83);
+            position: absolute;
+            left: 0;
+            top: 0;
+            &.bookmarked {
+              height: 100%;
+            }
+            span {
+              color: #f9f9f9;
+            }
+          }
           img {
             width: 18.4px;
             height: 25.9px;

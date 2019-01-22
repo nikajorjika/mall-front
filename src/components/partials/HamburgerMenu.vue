@@ -118,7 +118,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="hamburger-info-block">
+              <div class="hamburger-info-block" v-if="!currentItem">
                 <div class="additional-info-item">
                   <h4>{{t('working_hours')}}:</h4>
                   <p v-html="t('working_hours_content')"></p>
@@ -424,7 +424,7 @@ export default {
                     display: block;
                     padding: 27px 54px;
                     @media screen and (max-width: 760px) {
-                      padding: 36px 10px 36px 36px;
+                      padding: 36px 35px 36px 36px;
                       font-size: 1.1rem;
                     }
                   }

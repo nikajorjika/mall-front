@@ -26,7 +26,7 @@ const metaTags = {
       ]
     },
     en: {
-      title: 'Shopping center - tbilisi mall | TbilisiMall.com',
+      title: 'თბილისი მოლი | Tbilisi Mall',
       titleTemplate: '%s',
       metaTags: [
         {
