@@ -45,7 +45,7 @@ export default {
         input {
             height: 100%;
             width: 100%;
-            border: solid 0.5px #dcdcdc;
+            border: 1px solid rgba(220, 220, 220, 0.51);
             background-color: #ffffff;
             font-size: 1.3rem;
             padding-left: 13px;

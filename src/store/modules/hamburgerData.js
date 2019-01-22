@@ -67,7 +67,7 @@ const hamburgerData = [
       {
         url: '/promotions',
         name: {
-          ka: 'პრომოუშენები',
+          ka: 'შეთავაზებები',
           en: 'promotions'
         }
       },
@@ -81,7 +81,7 @@ const hamburgerData = [
       {
         url: '/events',
         name: {
-          ka: 'ივენთები',
+          ka: 'ღონისძიებები',
           en: 'events'
         }
       },

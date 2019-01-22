@@ -1,12 +1,12 @@
 const metaTags = {
   defaultMetas: {
     ka: {
-      title: 'სავაჭრო ცენტრი - თბილისი მოლი | TbilisiMall.com',
+      title: 'თბილისი მოლი | Tbilisi Mall',
       titleTemplate: '%s',
       meta: [
         {
           name: 'og:title',
-          content: 'სავაჭრო ცენტრი - თბილისი მოლი | TbilisiMall.com',
+          content: 'თბილისი მოლი | Tbilisi Mall',
           vid: 'og:title'
         }, {
           name: 'description',

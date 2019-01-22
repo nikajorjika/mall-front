@@ -13,7 +13,7 @@
         </div>
         <div class="download-button">
           <a :href="item.fileUrl" target="_blank">
-            <button><span class="download-text">{{t('download')}}</span>
+            <button><span class="download-text">{{t('open')}}</span>
               <img src="../../../assets/images/icons/download-black.svg" class="download-icon black"
                    alt="Download Icon">
               <img src="../../../assets/images/icons/download-white.svg" class="download-icon white"
@@ -140,7 +140,7 @@ export default {
         .name-wrapper {
           h4 {
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             line-height: 1.25;
             margin: 0 0 0 9px;
           }

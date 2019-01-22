@@ -168,12 +168,14 @@ export default {
   data: function () {
     return {
       showMenu: false,
+      savedY: 0,
       currentItem: null
     }
   },
   methods: {
     toggleHamburgerMenu: function () {
       this.showMenu = !this.showMenu
+      this.savedY = window.scrollY
       this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
       this.currentItem = null
     },
@@ -187,6 +189,10 @@ export default {
       this.showMenu = false
       this.currentItem = null
       this.$store.commit('SET_NO_SCROLL', false)
+      window.setTimeout(() => {
+        window.scroll(0, this.savedY)
+        this.savedY = 0
+      }, 100)
     },
     getSocials: function () {
       this.$store.dispatch('getSocials').catch(function (error) {
@@ -268,7 +274,7 @@ export default {
       height: 100%;
       @media screen and (max-width: 887px) {
         width: 100%;
-        min-width:100%;
+        min-width: 100%;
       }
       @media screen and (max-width: 760px) {
         flex-direction: column;
@@ -281,7 +287,7 @@ export default {
         height: 100%;
         overflow: hidden;
         position: relative;
-        .right-inner-container{
+        .right-inner-container {
           overflow-y: auto;
           height: 100%;
           position: absolute;
@@ -422,12 +428,12 @@ export default {
                       font-size: 1.1rem;
                     }
                   }
-                  &.view-all{
-                    a{
+                  &.view-all {
+                    a {
                       display: flex;
-                      span:last-of-type{
+                      span:last-of-type {
                         margin-left: auto;
-                        img{
+                        img {
                           width: 20.2px;
                           height: 9.7px;
                         }

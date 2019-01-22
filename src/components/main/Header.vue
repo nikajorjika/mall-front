@@ -21,14 +21,16 @@
                       </router-link>
                     </li>
                   </ul>
-                  <ul :class="{twoCol: item.children.length > 10 }" v-else-if="item.url === '/entertainment'">
+                  <ul class="reorder" :class="{twoCol: item.children.length > 10 }"
+                      v-else-if="item.url === '/entertainment'">
                     <li v-for="(child, i) in getFilteredCategories('entertainment')" v-bind:key="i">
                       <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
                         {{child.translates[locale]}}
                       </router-link>
                     </li>
                   </ul>
-                  <ul :class="{twoCol: item.children.length > 10 }" v-else-if="item.url === '/services'">
+                  <ul class="reorder" :class="{twoCol: item.children.length > 10 }"
+                      v-else-if="item.url === '/services'">
                     <li v-for="(child, i) in getFilteredCategories('services')" v-bind:key="i">
                       <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
                         {{child.translates[locale]}}
@@ -156,6 +158,7 @@ export default {
       showActions: false,
       showChild: null,
       scrollY: 0,
+      savedY: 0,
       showSearch: false,
       sticky: false,
       stores: [ '5b9d3c1f62973c001fd2c698', '5b9d3c6062973c001fd2c699' ],
@@ -205,8 +208,20 @@ export default {
   },
   methods: {
     toggleSearch: function () {
-      this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
-      this.showSearch = !this.showSearch
+      if (!this.showSearch) {
+        this.savedY = this.scrollY
+        this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
+        this.showSearch = !this.showSearch
+        console.log('Saved Y location: ' + this.savedY)
+      } else {
+        this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
+        this.showSearch = !this.showSearch
+        console.log('Used Y location: ' + this.savedY)
+        window.setTimeout(() => {
+          window.scroll(0, this.savedY)
+          this.savedY = 0
+        }, 100)
+      }
     },
     closeSearch: function () {
       this.$store.commit('SET_NO_SCROLL', false)
@@ -321,6 +336,10 @@ export default {
                 width: 260px;
                 margin-right: 0;
               }
+            }
+            &.reorder {
+              flex-direction: column-reverse;
+              display: flex;
             }
 
             li {

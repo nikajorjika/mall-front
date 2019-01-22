@@ -12,8 +12,8 @@ self.__precacheManifest = [
     "url": "/js/chunk-vendors.824b2e62.js"
   },
   {
-    "revision": "b21b058369293814b1a0",
-    "url": "/css/chunk-06629b26.3eb7b35f.css"
+    "revision": "26a233a73bc9eab1de4e",
+    "url": "/css/chunk-06629b26.6674759d.css"
   },
   {
     "revision": "2b997d8ecf3f0c2e3373",
@@ -102,6 +102,14 @@ self.__precacheManifest = [
   {
     "revision": "290526c53450336da139",
     "url": "/js/chunk-3e0fbaf7.3148b14c.js"
+  },
+  {
+    "revision": "9413659adbb8030cf822",
+    "url": "/css/chunk-44376220.7e8a0d35.css"
+  },
+  {
+    "revision": "9413659adbb8030cf822",
+    "url": "/js/chunk-44376220.f3766494.js"
   },
   {
     "revision": "5b115fdb2c0dace4ca14",
@@ -200,14 +208,6 @@ self.__precacheManifest = [
     "url": "/js/chunk-7fb5a96c.5cfec5ba.js"
   },
   {
-    "revision": "aa34035e74f309bb1856",
-    "url": "/css/chunk-98847930.47b8bb84.css"
-  },
-  {
-    "revision": "aa34035e74f309bb1856",
-    "url": "/js/chunk-98847930.c13bca56.js"
-  },
-  {
     "revision": "e8a39dd4c404cc45fa91",
     "url": "/css/chunk-b6c717aa.d720e7d3.css"
   },
@@ -264,12 +264,12 @@ self.__precacheManifest = [
     "url": "/js/chunk-ee192180.2fabf074.js"
   },
   {
-    "revision": "c18ec33dd52e32762b22",
-    "url": "/js/app.e2b695b7.js"
+    "revision": "b066672bf4ce30063e41",
+    "url": "/js/app.133b7eba.js"
   },
   {
-    "revision": "b21b058369293814b1a0",
-    "url": "/js/chunk-06629b26.4c37fa29.js"
+    "revision": "26a233a73bc9eab1de4e",
+    "url": "/js/chunk-06629b26.e51ca8b5.js"
   },
   {
     "revision": "03ef14fc3f33a671eb2e34bf9e3d1369",
@@ -292,10 +292,6 @@ self.__precacheManifest = [
     "url": "/img/15X6-Santa-vs-babu-OOH_0009_Group-3.ab174469.png"
   },
   {
-    "revision": "c4827b8fb3d5fa51f8d6234750b50d69",
-    "url": "/img/15X6-Santa-vs-babu-OOH_0010_Group-2.c4827b8f.png"
-  },
-  {
     "revision": "64dcd1afc1aa2561b55cdd7492bb4607",
     "url": "/img/Snow-5.64dcd1af.png"
   },
@@ -304,36 +300,36 @@ self.__precacheManifest = [
     "url": "/img/Footer_bg.d37ceadf.svg"
   },
   {
-    "revision": "ee6e2db834dda657126ed592cf28b7f6",
-    "url": "/fonts/dejavu-sans-bold-webfont.ee6e2db8.eot"
+    "revision": "c4827b8fb3d5fa51f8d6234750b50d69",
+    "url": "/img/15X6-Santa-vs-babu-OOH_0010_Group-2.c4827b8f.png"
   },
   {
     "revision": "ebfdf1b00a4788026b3a2734fbd51653",
     "url": "/fonts/dejavu-sans-bold-webfont.ebfdf1b0.woff2"
   },
   {
+    "revision": "ee6e2db834dda657126ed592cf28b7f6",
+    "url": "/fonts/dejavu-sans-bold-webfont.ee6e2db8.eot"
+  },
+  {
     "revision": "7108cda0993d9ddaffdc934c5de66fd1",
     "url": "/fonts/dejavu-sans-bold-webfont.7108cda0.woff"
-  },
-  {
-    "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
-    "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
-  },
-  {
-    "revision": "43da48aa6dc57965423388f2210bf30d",
-    "url": "/fonts/bpg-mrgvlovani-webfont.43da48aa.woff"
-  },
-  {
-    "revision": "46c81231570d7d80bd9f068d09cf5bfe",
-    "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
   },
   {
     "revision": "384116da039ef8abea5018168066cc65",
     "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
   },
   {
-    "revision": "0616ae663c60044fd17f5a421adfa1f0",
-    "url": "/img/bpg-mrgvlovani-webfont.0616ae66.svg"
+    "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
+    "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
+  },
+  {
+    "revision": "46c81231570d7d80bd9f068d09cf5bfe",
+    "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
+  },
+  {
+    "revision": "43da48aa6dc57965423388f2210bf30d",
+    "url": "/fonts/bpg-mrgvlovani-webfont.43da48aa.woff"
   },
   {
     "revision": "ea21e39e6fa33639f0bff8cae9c7e481",
@@ -342,6 +338,10 @@ self.__precacheManifest = [
   {
     "revision": "b1f3060866fb51a93362187f405b4537",
     "url": "/img/dejavu-sans-bold-webfont.b1f30608.svg"
+  },
+  {
+    "revision": "0616ae663c60044fd17f5a421adfa1f0",
+    "url": "/img/bpg-mrgvlovani-webfont.0616ae66.svg"
   },
   {
     "revision": "dbb36c52cc61bbc49d93cb29b5e2a617",
@@ -376,28 +376,16 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
   },
   {
-    "revision": "a8b935b9fab81016cc4b241faf9a2260",
-    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
-  },
-  {
     "revision": "6e5b1494e933ba58cdb6e80876634552",
     "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
   },
   {
+    "revision": "a8b935b9fab81016cc4b241faf9a2260",
+    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
+  },
+  {
     "revision": "e1412bac33d65a665ecb4a78c4588cbd",
     "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
-  },
-  {
-    "revision": "88a37bc21733e2fef7deba65d7271bed",
-    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
-  },
-  {
-    "revision": "6530709ce0aadf3283db6512a8fcabec",
-    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
-  },
-  {
-    "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
-    "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
   },
   {
     "revision": "26ec7406f51c5efb79ecc2885a5b887c",
@@ -412,8 +400,20 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-nino-mtavruli-webfont.afcdb491.ttf"
   },
   {
+    "revision": "6530709ce0aadf3283db6512a8fcabec",
+    "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
+  },
+  {
     "revision": "97a80250cdafef79da7329c445faeaa6",
     "url": "/img/bpg-nino-mtavruli-webfont.97a80250.svg"
+  },
+  {
+    "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
+    "url": "/fonts/bpg-nino-mtavruli-webfont.e03e2b7b.woff2"
+  },
+  {
+    "revision": "88a37bc21733e2fef7deba65d7271bed",
+    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
   },
   {
     "revision": "61f91995f99c69f2edba28f7d609383b",
@@ -508,7 +508,7 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "5a1068d10a872257bdd97f2c1f231c6c",
+    "revision": "3f38c902ef8f190f168e56c8d86d87e6",
     "url": "/index.html"
   },
   {
@@ -516,15 +516,15 @@ self.__precacheManifest = [
     "url": "/img/logo.png"
   },
   {
-    "revision": "97b2b1f258f047fa27a7f8c2131192f9",
-    "url": "/img/logo.svg"
-  },
-  {
     "revision": "4c91026884f697732fd6b96aa71a9349",
     "url": "/img/meta-logo.png"
   },
   {
-    "revision": "c18ec33dd52e32762b22",
-    "url": "/css/app.4f95d2f0.css"
+    "revision": "97b2b1f258f047fa27a7f8c2131192f9",
+    "url": "/img/logo.svg"
+  },
+  {
+    "revision": "b066672bf4ce30063e41",
+    "url": "/css/app.e3525967.css"
   }
 ];
