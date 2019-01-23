@@ -51,7 +51,7 @@ export default {
             padding-left: 13px;
             font-family: 'Muli SemiBold', 'BPG Nino Mtavruli', 'sans-serif';
             @media screen and (max-width: 1650px) {
-                font-size: 0.7rem;
+                font-size: 0.9rem;
                 padding-left: 9px;
             }
         }
