@@ -41,6 +41,13 @@ Vue.mixin({
         services: [ '5b9d3c8c62973c001fd2c69b' ]
       }
       if (this.$store.getters.categories.hasOwnProperty('subcategories')) {
+        if (model !== 'stores') {
+          return this.$store.getters.categories.subcategories.filter(item => {
+            if (models[ model ].indexOf(item.categoryId) !== -1) {
+              return true
+            }
+          }).reverse()
+        }
         return this.$store.getters.categories.subcategories.filter(item => {
           if (models[ model ].indexOf(item.categoryId) !== -1) {
             return true

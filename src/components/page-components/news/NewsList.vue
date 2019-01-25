@@ -5,7 +5,7 @@
         <h2>{{t('filter')}}</h2> <span class="filter-icon" :class="{open: activeFilters}"><font-awesome-icon
         icon="caret-down"/></span>
       </div>
-      <div class="container filters-inner" v-show="activeFilters || $mq !== 'mobile'">
+      <div class="container filters-inner" v-show="$route.params.cat || activeFilters || $mq !== 'mobile'">
         <news-filters :categories="categories" @loaded="loading = false"/>
       </div>
     </div>

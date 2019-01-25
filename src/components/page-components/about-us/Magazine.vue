@@ -14,10 +14,10 @@
         <div class="download-button">
           <a :href="item.fileUrl" target="_blank">
             <button><span class="download-text">{{t('open')}}</span>
-              <img src="../../../assets/images/icons/download-black.svg" class="download-icon black"
-                   alt="Download Icon">
-              <img src="../../../assets/images/icons/download-white.svg" class="download-icon white"
-                   alt="Download Icon">
+              <!--<img src="../../../assets/images/icons/download-black.svg" class="download-icon black"-->
+                   <!--alt="Download Icon">-->
+              <!--<img src="../../../assets/images/icons/download-white.svg" class="download-icon white"-->
+                   <!--alt="Download Icon">-->
             </button>
           </a>
         </div>
