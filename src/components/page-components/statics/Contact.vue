@@ -160,7 +160,7 @@ export default {
     .list-item {
       width: calc(50% - 8px);
       background-color: #f9f9f9;
-      margin: 13px 16px 37px 0;
+      margin: 8px 16px 8px 0;
       padding: 16px 19px;
       display: flex;
       flex-direction: column;

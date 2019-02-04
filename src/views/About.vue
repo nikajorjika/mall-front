@@ -2,18 +2,18 @@
   <div class="about-page container">
     <section class="about-us about-outer-container" :class="$route.name">
       <div class="page-block-container" :class="{loading: $store.getters.loading.page}">
-        <div class="breadcrumb">
-          <ul>
-            <li v-for="(item, index) in breadcrumb" :key="index">
-              <router-link :to="item.url">{{t(item.index)}}</router-link>
-            </li>
-          </ul>
-        </div>
+        <!--<div class="breadcrumb">-->
+          <!--<ul>-->
+            <!--<li v-for="(item, index) in breadcrumb" :key="index">-->
+              <!--<router-link :to="item.url">{{t(item.index)}}</router-link>-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
         <router-view></router-view>
       </div>
-      <div class="menu-container">
-        <about-us-menu :items="$store.state.pageData.aboutUs.aboutUsMenu" active=''/>
-      </div>
+      <!--<div class="menu-container">-->
+        <!--<about-us-menu :items="$store.state.pageData.aboutUs.aboutUsMenu" active=''/>-->
+      <!--</div>-->
       <div class="our-team" v-if="$route.name === 'about'">
         <div class="horizontal-line gray"></div>
         <staff-carousel :title="t('our_team')"/>

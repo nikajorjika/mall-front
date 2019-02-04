@@ -43,6 +43,12 @@ export default {
             en: 'COMMERCIAL',
             ka: 'რეკლამა'
           }
+        }, {
+          value: 'Gallery',
+          name: {
+            en: 'GALLERY',
+            ka: 'გალერეა'
+          }
         }
       ],
       activeFilter: 'all',
@@ -86,7 +92,7 @@ export default {
       padding: 21px 0;
       width: 95%;
       margin: 0 auto;
-      max-width: 1090px;
+      max-width: 1366px;
       justify-content: space-between;
       @media screen and (max-width: 760px) {
         flex-direction: column;

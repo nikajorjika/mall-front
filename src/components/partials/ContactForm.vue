@@ -30,7 +30,7 @@
       </div>
       <div class="field-container">
         <textarea id="contact-message" :placeholder="`${t('your_message')}*`" v-validate="'required'" autocomplete="off"
-                  name="message" v-model="contact.message" cols="12" rows="12"></textarea>
+                  name="message" v-model="contact.message" cols="12" rows="8"></textarea>
       </div>
       <div class="field-container">
         <input id="subscribe" autocomplete="off" type="checkbox"
