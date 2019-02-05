@@ -6,7 +6,7 @@
     </div>
     <div class="form-container">
       <div class="field-container">
-        <custom-select :selectedDefault="dropDown.data[0]" :items="dropDown.data" @change="changeDropdown"/>
+        <custom-select :items="dropDown.data" @change="changeDropdown"/>
       </div>
       <div class="field-container">
         <input type="text" id="contact-name" v-validate="'required'" name="name" autocomplete="off"

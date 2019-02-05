@@ -25,7 +25,7 @@ export default {
     return {
       title: {
         en: 'social media',
-        ka: 'სოციალური ბმულები'
+        ka: 'სოციალური ქსელი'
       }
     }
   }

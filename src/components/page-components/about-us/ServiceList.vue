@@ -1,41 +1,38 @@
 <template>
-  <div class="service-list-container">
+  <div class="service-list-container" v-if="list">
     <div class="service-list" v-if="single">
-      <div class="list-item" v-for="(item, index) in list" :key="index" @click="toggle(item)">
+      <div class="list-item" v-for="(item, index) in list" :key="index" @click="toggle(index)">
         <div class="parent-container">
           <span class="icon-container"><img src="../../../assets/images/icons/carret-down.svg" alt=""></span><span
           class="name-wrapper">{{item.title}}</span>
         </div>
-        <div class="content" :class="{open: openItem.indexOf(item) !== -1}">
-          <p>
-            {{item.content}}
+        <div class="content" :class="{open: openItem.indexOf(index) !== -1}">
+          <p v-html="item.content">
           </p>
         </div>
       </div>
     </div>
     <div class="double" v-else>
       <div class="service-list">
-        <div class="list-item" v-for="(item, index) in list" :key="index" @click="toggle(item)" v-if="index < 7">
+        <div class="list-item" v-for="(item, index) in list" :key="index" @click="toggle(index)" v-if="index < 7">
           <div class="parent-container">
             <span class="icon-container"><img src="../../../assets/images/icons/carret-down.svg" alt=""></span><span
             class="name-wrapper">{{item.title}}</span>
           </div>
-          <div class="content" :class="{open: openItem.indexOf(item) !== -1}">
-            <p>
-              {{item.content}}
+          <div class="content" :class="{open: openItem.indexOf(index) !== -1}">
+            <p v-html="item.content">
             </p>
           </div>
         </div>
       </div>
       <div class="service-list">
-        <div class="list-item" v-for="(item, index) in list" :key="index" @click="toggle(item)" v-if="index >= 7">
+        <div class="list-item" v-for="(item, index) in list" :key="index" @click="toggle(index)" v-if="index >= 7">
           <div class="parent-container">
             <span class="icon-container"><img src="../../../assets/images/icons/carret-down.svg" alt=""></span><span
             class="name-wrapper">{{item.title}}</span>
           </div>
-          <div class="content" :class="{open: openItem.indexOf(item) !== -1}">
-            <p>
-              {{item.content}}
+          <div class="content" :class="{open: openItem.indexOf(index) !== -1}">
+            <p v-html="item.content">
             </p>
           </div>
         </div>
@@ -55,9 +52,16 @@ export default {
       default: true
     }
   },
-  data: () => {
+  data: function () {
     return {
       openItem: []
+    }
+  },
+  watch: {
+    list: function (list) {
+      list.forEach((item, index) => {
+        this.openItem.push(index)
+      })
     }
   },
   methods: {
@@ -68,11 +72,19 @@ export default {
       } else {
         this.openItem.push(item)
       }
+      console.log(this.openItem)
     }
   }
 }
 </script>
 
+<style lang="scss">
+.content {
+  a {
+    color: #2533ff;
+  }
+}
+</style>
 <style lang="scss" scoped>
 .service-list-container {
   .double {
@@ -83,7 +95,7 @@ export default {
     .service-list {
       flex: 1;
       @media screen and (max-width: 500px) {
-        width:100%;
+        width: 100%;
         margin-top: 0;
       }
     }
@@ -129,7 +141,6 @@ export default {
         opacity: 0;
         height: 0;
         transition: all 0.3s;
-
         &.open {
           height: auto;
           opacity: 1;

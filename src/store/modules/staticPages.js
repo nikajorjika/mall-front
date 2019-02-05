@@ -15,6 +15,13 @@ const staticPages =
       }
     },
     {
+      url: '/about-us/mall-map',
+      name: {
+        en: 'Mall Map',
+        ka: 'მოლის რუქა'
+      }
+    },
+    {
       url: '/page/career',
       name: {
         en: 'Career',

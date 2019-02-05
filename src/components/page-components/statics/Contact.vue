@@ -136,7 +136,7 @@ export default {
       }
 
       .contact-form-container {
-        margin-top: 135px;
+        margin-top: 122px;
         @media screen and (max-width: 760px) {
           margin-top: 0;
           padding: 45px 15px 0;

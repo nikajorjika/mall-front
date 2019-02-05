@@ -2,13 +2,6 @@
   <div class="static-page-container" :class="{noMargin: $route.name === 'HowToGet'}">
     <section class="static-container-inner">
       <div class="page-block-container" :class="{loading: $store.getters.loading.page}">
-        <div class="breadcrumb container">
-          <ul>
-            <li v-for="(item, index) in breadcrumb" :key="index">
-              <router-link :to="item.url">{{t(item.index)}}</router-link>
-            </li>
-          </ul>
-        </div>
         <router-view></router-view>
       </div>
     </section>

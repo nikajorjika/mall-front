@@ -71,7 +71,6 @@ export default {
   },
   computed: {
     pageDataContent: function () {
-      console.log(this.$store.getters[ this.model ] ? this.parsePageData(this.$store.getters[ this.model ][ 0 ].data) : '')
       return this.$store.getters[ this.model ] ? this.parsePageData(this.$store.getters[ this.model ][ 0 ].data) : ''
     },
     pageTitle: function () {

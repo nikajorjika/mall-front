@@ -338,7 +338,7 @@ export default {
               }
             }
             &.reorder {
-              flex-direction: column-reverse;
+              flex-direction: column;
               display: flex;
             }
 

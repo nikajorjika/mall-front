@@ -85,7 +85,8 @@
                     </li>
                     <li v-if="store.socials.twitter.length">
                       <a :href="store.socials.twitter" target="_blank">
-                        <img src="../../../assets/images/icons/twitter.svg" height="12">
+                        <!--<img src="../../../assets/images/icons/twitter.svg">-->
+                        <font-awesome-icon style="font-size: 15px;"  :icon="{ prefix: 'fab', iconName: getIconName('Instagram') }"/>
                       </a>
                     </li>
                     <li v-if="store.socials.youtube.length">
@@ -137,7 +138,7 @@
                   </li>
                   <li>
                     <a :href="store.socials.twitter" target="_blank">
-                      <img src="../../../assets/images/icons/twitter.svg" height="12">
+                      <font-awesome-icon style="font-size: 15px;"  :icon="{ prefix: 'fab', iconName: getIconName('Instagram') }"/>
                     </a>
                   </li>
                   <li>
@@ -801,6 +802,7 @@ export default {
             font-weight: 300;
             text-transform: uppercase;
             line-height: 1.29;
+            text-align: center;
             margin: 0;
           }
         }
