@@ -78,23 +78,29 @@
                     <h4>{{t('social')}}</h4>
                   </div>
                   <ul>
-                    <li v-if="store.socials.facebook.length">
+                    <li v-if="store.socials.hasOwnProperty('facebook') && store.socials.facebook.length">
                       <a :href="store.socials.facebook" target="_blank">
                         <img src="../../../assets/images/icons/facebook.svg" height="15">
                       </a>
                     </li>
-                    <li v-if="store.socials.twitter.length">
+                    <li v-if="store.socials.hasOwnProperty('twitter') && store.socials.twitter.length">
                       <a :href="store.socials.twitter" target="_blank">
                         <!--<img src="../../../assets/images/icons/twitter.svg">-->
                         <font-awesome-icon style="font-size: 15px;"  :icon="{ prefix: 'fab', iconName: getIconName('Instagram') }"/>
                       </a>
                     </li>
-                    <li v-if="store.socials.youtube.length">
+                    <li v-if="store.socials.hasOwnProperty('instagram') && store.socials.instagram.length">
+                      <a :href="store.socials.twitter" target="_blank">
+                        <!--<img src="../../../assets/images/icons/twitter.svg">-->
+                        <font-awesome-icon style="font-size: 15px;"  :icon="{ prefix: 'fab', iconName: getIconName('Instagram') }"/>
+                      </a>
+                    </li>
+                    <li v-if="store.socials.hasOwnProperty('youtube') && store.socials.youtube.length">
                       <a :href="store.socials.youtube" target="_blank">
                         <img src="../../../assets/images/icons/youtube.svg" height="10">
                       </a>
                     </li>
-                    <li v-if="store.socials.pinterest.length">
+                    <li v-if="store.socials.hasOwnProperty('pinterest') && store.socials.pinterest.length">
                       <a :href="store.socials.pinterest" target="_blank">
                         <img src="../../../assets/images/icons/pinterest.svg" height="15">
                       </a>
