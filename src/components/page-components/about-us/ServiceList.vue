@@ -1,8 +1,8 @@
 <template>
   <div class="service-list-container" v-if="list">
     <div class="service-list" v-if="single">
-      <div class="list-item" v-for="(item, index) in list" :key="index" @click="toggle(index)">
-        <div class="parent-container">
+      <div class="list-item" v-for="(item, index) in list" :key="index">
+        <div class="parent-container" @click="toggle(index)">
           <span class="icon-container"><img src="../../../assets/images/icons/carret-down.svg" alt=""></span><span
           class="name-wrapper">{{item.title}}</span>
         </div>
@@ -14,8 +14,8 @@
     </div>
     <div class="double" v-else>
       <div class="service-list">
-        <div class="list-item" v-for="(item, index) in list" :key="index" @click="toggle(index)" v-if="index < 7">
-          <div class="parent-container">
+        <div class="list-item" v-for="(item, index) in list" :key="index" v-if="index < 7">
+          <div class="parent-container" @click="toggle(index)">
             <span class="icon-container"><img src="../../../assets/images/icons/carret-down.svg" alt=""></span><span
             class="name-wrapper">{{item.title}}</span>
           </div>
@@ -26,8 +26,8 @@
         </div>
       </div>
       <div class="service-list">
-        <div class="list-item" v-for="(item, index) in list" :key="index" @click="toggle(index)" v-if="index >= 7">
-          <div class="parent-container">
+        <div class="list-item" v-for="(item, index) in list" :key="index" v-if="index >= 7">
+          <div class="parent-container" @click="toggle(index)">
             <span class="icon-container"><img src="../../../assets/images/icons/carret-down.svg" alt=""></span><span
             class="name-wrapper">{{item.title}}</span>
           </div>
