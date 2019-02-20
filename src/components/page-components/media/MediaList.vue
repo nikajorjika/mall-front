@@ -4,7 +4,7 @@
       <div class="list-item" v-for="(media, index) in this.$store.getters.media" :key="index"
            v-if="filterBy === media.category || filterBy === 'all'">
         <media-print v-if="media.category === 'Online/Print'" :item="media"/>
-        <media-print v-else-if="media.category === 'Gallery'" :item="media"/>
+        <!--<media-print v-else-if="media.category === 'Gallery'" :item="media"/>-->
         <media-video :item="media" v-else/>
       </div>
     </div>
