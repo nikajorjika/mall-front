@@ -53,7 +53,8 @@
       <div class="header-center">
         <div class="mall-logo">
           <router-link :to="{name: 'home', params: {locale: locale }}">
-            <img class="logo" src="../../assets/images/icons/TM_LOGO.svg" alt="Tbilisi Mall Logo">
+            <img :src="getLogoImage()" />
+            <!--<object :data="getLogoImage()" type="image/svg+xml" @click="goHome()"></object>-->
           </router-link>
         </div>
       </div>
@@ -245,6 +246,9 @@ export default {
     },
     documentClick: function () {
       this.showActions = false
+    },
+    getLogoImage: function () {
+      return require('../../assets/images/icons/tm_header_logo.svg')
     }
   }
 }

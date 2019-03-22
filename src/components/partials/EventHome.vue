@@ -2,7 +2,7 @@
   <div class="event-home" :class="this.type">
     <router-link :to="`${locale}/whats-new/single/${createSlug(item.name[locale])}/${item._id}`">
       <div class="image-background">
-        <img :src="image" :alt="item.name[locale]">
+        <img :src="image" :alt="item.name[locale]" @load="loaded">
         <div class="event-item-content">
           <div class="event-type">
             <span>{{t(item.itemType)}}</span>
@@ -45,6 +45,9 @@ export default {
   methods: {
     emitClick: function () {
       this.$emit('click')
+    },
+    loaded: function () {
+      this.$emit('loaded')
     }
   },
   data: function () {

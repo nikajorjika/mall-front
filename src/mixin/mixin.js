@@ -1,11 +1,16 @@
 import Vue from 'vue'
 import messages from '../lang/lang'
 import store from '../store'
+import router from 'vue-router'
 
 Vue.mixin({
   methods: {
     t: function (index) {
       return messages[ store.getters.locale.locale ][ 'statics' ][ index ] ? messages[ store.getters.locale.locale ][ 'statics' ][ index ] : index
+    },
+    goHome: function () {
+      console.log(123)
+      return router.push({ name: 'home', params: { locale: this.locale } })
     },
     parseYoutube: function (url) {
       // eslint-disable-next-line

@@ -208,11 +208,15 @@ const router = new Router({
     }
   ]
 })
+
+/**
+ * Function is fired every time route is changed
+ */
 router.beforeEach((to, from, next) => {
   let language = to.params.locale
   if (language) {
     const languages = store.getters.languages
-    languages.forEach(function (object, index) {
+    languages.forEach(function (object) {
       if (object.locale === language) {
         store.commit('SET_LOCALE', object.locale)
       }

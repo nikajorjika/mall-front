@@ -3,7 +3,7 @@
     <div class="subscribe-container">
       <div class="logo-part">
         <router-link :to="`/${locale}`">
-          <img src="../../assets/images/icons/tb_mall_logo_black.svg" alt="st">
+          <img src="../../assets/images/icons/tm_footer_symbol.svg" alt="st">
         </router-link>
       </div>
       <div class="subscribe-part" :class="{open: showForm}">
