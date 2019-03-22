@@ -405,8 +405,11 @@ export default {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 156px;
+      width: 185px;
       transform: translate(-50%, -50%);
+      @media screen and (max-width: 910px) {
+        width: 129px;
+      }
       @media screen and (max-width: 760px) {
         width: 100px;
       }
@@ -416,7 +419,9 @@ export default {
 
       .mall-logo {
         font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
-
+        img{
+          width: 100%;
+        }
         .logo {
           font-size: 2.3rem;
           letter-spacing: 0.1rem;
