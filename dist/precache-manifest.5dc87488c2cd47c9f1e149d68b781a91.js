@@ -284,44 +284,24 @@ self.__precacheManifest = [
     "url": "/img/Web.7a34e88f.svg"
   },
   {
-    "revision": "ab1744690f5f1da6e53207429d595003",
-    "url": "/img/15X6-Santa-vs-babu-OOH_0009_Group-3.ab174469.png"
-  },
-  {
     "revision": "c52492763a1b376377271fe3330f4c77",
     "url": "/img/Candy.c5249276.png"
-  },
-  {
-    "revision": "c4827b8fb3d5fa51f8d6234750b50d69",
-    "url": "/img/15X6-Santa-vs-babu-OOH_0010_Group-2.c4827b8f.png"
-  },
-  {
-    "revision": "d37ceadfab05492fefa49938394c2f9c",
-    "url": "/img/Footer_bg.d37ceadf.svg"
   },
   {
     "revision": "64dcd1afc1aa2561b55cdd7492bb4607",
     "url": "/img/Snow-5.64dcd1af.png"
   },
   {
-    "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
-    "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
+    "revision": "d37ceadfab05492fefa49938394c2f9c",
+    "url": "/img/Footer_bg.d37ceadf.svg"
   },
   {
-    "revision": "46c81231570d7d80bd9f068d09cf5bfe",
-    "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
+    "revision": "ab1744690f5f1da6e53207429d595003",
+    "url": "/img/15X6-Santa-vs-babu-OOH_0009_Group-3.ab174469.png"
   },
   {
-    "revision": "43da48aa6dc57965423388f2210bf30d",
-    "url": "/fonts/bpg-mrgvlovani-webfont.43da48aa.woff"
-  },
-  {
-    "revision": "ea21e39e6fa33639f0bff8cae9c7e481",
-    "url": "/fonts/bpg-mrgvlovani-webfont.ea21e39e.ttf"
-  },
-  {
-    "revision": "0616ae663c60044fd17f5a421adfa1f0",
-    "url": "/img/bpg-mrgvlovani-webfont.0616ae66.svg"
+    "revision": "c4827b8fb3d5fa51f8d6234750b50d69",
+    "url": "/img/15X6-Santa-vs-babu-OOH_0010_Group-2.c4827b8f.png"
   },
   {
     "revision": "ee6e2db834dda657126ed592cf28b7f6",
@@ -338,6 +318,26 @@ self.__precacheManifest = [
   {
     "revision": "384116da039ef8abea5018168066cc65",
     "url": "/fonts/dejavu-sans-bold-webfont.384116da.ttf"
+  },
+  {
+    "revision": "46c81231570d7d80bd9f068d09cf5bfe",
+    "url": "/fonts/bpg-mrgvlovani-webfont.46c81231.woff2"
+  },
+  {
+    "revision": "0025ddc8ea33b3af9fc7cddcf81f84ce",
+    "url": "/fonts/bpg-mrgvlovani-webfont.0025ddc8.eot"
+  },
+  {
+    "revision": "ea21e39e6fa33639f0bff8cae9c7e481",
+    "url": "/fonts/bpg-mrgvlovani-webfont.ea21e39e.ttf"
+  },
+  {
+    "revision": "0616ae663c60044fd17f5a421adfa1f0",
+    "url": "/img/bpg-mrgvlovani-webfont.0616ae66.svg"
+  },
+  {
+    "revision": "43da48aa6dc57965423388f2210bf30d",
+    "url": "/fonts/bpg-mrgvlovani-webfont.43da48aa.woff"
   },
   {
     "revision": "b1f3060866fb51a93362187f405b4537",
@@ -368,12 +368,12 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-Regular.d7d5d458.ttf"
   },
   {
-    "revision": "9ff12f694e5951a6f51a9d63b05062e7",
-    "url": "/fonts/OpenSans-Light.9ff12f69.ttf"
-  },
-  {
     "revision": "e1c83f9474e0cc1d84a13c6d1ddf3ca5",
     "url": "/fonts/OpenSans-SemiBold.e1c83f94.ttf"
+  },
+  {
+    "revision": "9ff12f694e5951a6f51a9d63b05062e7",
+    "url": "/fonts/OpenSans-Light.9ff12f69.ttf"
   },
   {
     "revision": "49f89e34d03233b1f27788f75df7a40a",
@@ -384,6 +384,10 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
   },
   {
+    "revision": "e1412bac33d65a665ecb4a78c4588cbd",
+    "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
+  },
+  {
     "revision": "a8b935b9fab81016cc4b241faf9a2260",
     "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
   },
@@ -392,20 +396,16 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-arial-webfont.6e5b1494.woff2"
   },
   {
-    "revision": "e1412bac33d65a665ecb4a78c4588cbd",
-    "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
-  },
-  {
     "revision": "6530709ce0aadf3283db6512a8fcabec",
     "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
   },
   {
-    "revision": "88a37bc21733e2fef7deba65d7271bed",
-    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
-  },
-  {
     "revision": "26ec7406f51c5efb79ecc2885a5b887c",
     "url": "/fonts/bpg-nino-mtavruli-webfont.26ec7406.eot"
+  },
+  {
+    "revision": "88a37bc21733e2fef7deba65d7271bed",
+    "url": "/img/bpg-arial-webfont.88a37bc2.svg"
   },
   {
     "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
