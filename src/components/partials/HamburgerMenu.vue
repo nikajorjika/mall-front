@@ -14,7 +14,7 @@
             <div class="right-inner-container">
               <div class="ham-logo-container" :class="{hideSmall: currentItem !== null}">
                 <router-link to="/">
-                  <img class="logo" src="../../assets/images/icons/TM_LOGO.svg">
+                  <img class="logo" src="../../assets/images/icons/tm_header_logo.svg">
                 </router-link>
               </div>
               <div class="menu-container" :class="{hideSmall: currentItem !== null}">

@@ -5,7 +5,7 @@
         <div class="image-loader">
           <div class="loader">
           </div>
-          <img src="../../assets/images/icons/loading.png" alt="Tbilisi Mall">
+          <img src="../../assets/images/icons/mall-loading-whatermark.svg" alt="Tbilisi Mall">
         </div>
       </div>
     </transition>
@@ -41,6 +41,7 @@ export default {
         position: absolute;
         top: 50%;
         left: 50%;
+        width: 79%;
         transform: translate(-50%, -50%);
       }
       .loader {
