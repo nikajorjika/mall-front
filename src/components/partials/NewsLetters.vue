@@ -105,6 +105,11 @@ export default {
       border-right: 1px solid #dcdcdc;
       border-left: 1px solid #dcdcdc;
       box-sizing: content-box;
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
       @media screen and (max-width: 1650px) {
         height: 37px;
         width: 37px;

@@ -45,6 +45,7 @@ export default {
         }
       }
       .content-container{
+        margin-top: 30px;
         .content-ul{
           .content-li{
             .item-wrapper{
