@@ -40,6 +40,9 @@ export default {
       repeatPassword: ''
     }
   },
+  mounted: function () {
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+  },
   methods: {
     sendRecovery: function () {
       this.$validator.validateAll().then((status) => {

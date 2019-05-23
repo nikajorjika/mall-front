@@ -1,13 +1,19 @@
 import Vue from 'vue'
 import messages from '../lang/lang'
 import store from '../store'
+import router from 'vue-router'
 
 Vue.mixin({
   methods: {
     t: function (index) {
       return messages[ store.getters.locale.locale ][ 'statics' ][ index ] ? messages[ store.getters.locale.locale ][ 'statics' ][ index ] : index
     },
+    goHome: function () {
+      console.log(123)
+      return router.push({ name: 'home', params: { locale: this.locale } })
+    },
     parseYoutube: function (url) {
+      // eslint-disable-next-line
       const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
       const match = url.match(regExp)
       return (match && match[ 7 ].length === 11) ? match[ 7 ] : false
@@ -33,6 +39,29 @@ Vue.mixin({
       }
       return user
     },
+    getFilteredCategories: function (model) {
+      const models = {
+        stores: [ '5b9d3c1f62973c001fd2c698', '5b9d3c6062973c001fd2c699' ],
+        entertainment: [ '5b9d3c7762973c001fd2c69a' ],
+        services: [ '5b9d3c8c62973c001fd2c69b' ]
+      }
+      if (this.$store.getters.categories.hasOwnProperty('subcategories')) {
+        if (model !== 'stores') {
+          return this.$store.getters.categories.subcategories.filter(item => {
+            if (models[ model ].indexOf(item.categoryId) !== -1) {
+              return true
+            }
+          }).reverse()
+        }
+        return this.$store.getters.categories.subcategories.filter(item => {
+          if (models[ model ].indexOf(item.categoryId) !== -1) {
+            return true
+          }
+        })
+      } else {
+        return []
+      }
+    },
     copyUrl: function (id) {
       this.$refs.CurrentUrl.select()
       let copyInput = document.querySelector(`#${id}`)
@@ -53,11 +82,15 @@ Vue.mixin({
     createSlug: function (str) {
       let slug = ''
       let strLower = str.toLowerCase()
-      slug = strLower.replace(/e|é|è|ẽ|ẻ|ẹ|ê|ế|ề|ễ|ể|ệ/gi, 'e')
-      slug = slug.replace(/a|á|à|ã|ả|ạ|ă|ắ|ằ|ẵ|ẳ|ặ|â|ấ|ầ|ẫ|ẩ|ậ/gi, 'a')
-      slug = slug.replace(/o|ó|ò|õ|ỏ|ọ|ô|ố|ồ|ỗ|ổ|ộ|ơ|ớ|ờ|ỡ|ở|ợ/gi, 'o')
-      slug = slug.replace(/u|ú|ù|ũ|ủ|ụ|ư|ứ|ừ|ữ|ử|ự/gi, 'u')
+      slug = strLower.replace(/[eéèẽẻẹêếềễểệ]/gi, 'e')
+      slug = slug.replace(/[aáàãảạăắằẵẳặâấầẫẩậ]/gi, 'a')
+      slug = slug.replace(/[oóòõỏọôốồỗổộơớờỡởợ]/gi, 'o')
+      slug = slug.replace(/[uúùũủụưứừữửự]/gi, 'u')
+      slug = slug.replace(/\//gi, '-')
+      slug = slug.replace(/,/gi, '')
       slug = slug.replace(/%/gi, '-percent')
+      slug = slug.replace(/&/gi, 'and')
+      slug = slug.replace(/[.,`'"~]/gi, '')
       slug = slug.replace(/đ/gi, 'd')
       slug = slug.replace(/\s*$/g, '')
       slug = slug.replace(/\s+/g, '-')
@@ -70,9 +103,14 @@ Vue.mixin({
     formatUrl: function (url) {
       return url.replace(/^(?:http(s)?:\/\/)?([\S.-])/, 'https://$2')
     },
+    parsePageData: function (text) {
+      text = text.replace(/&amp;/gi, '&')
+      return JSON.parse(text)
+    },
     getIconName: (index) => {
       const icons = {
         'Twitter': 'twitter',
+        'Instagram': 'instagram',
         'Facebook': 'facebook-f',
         'Pinterest': 'pinterest',
         'LinkedIn': 'linkedin-in',
@@ -82,11 +120,62 @@ Vue.mixin({
     },
     formatP: function (content) {
       return `<p>${content.replace(/\n/g, '<br />')}</p>`
+    },
+    initFacebook: function () {
+      return new Promise((resolve) => {
+        window.fbAsyncInit = () => {
+          // eslint-disable-next-line
+          FB.init({
+            appId: '917084738680946',
+            autoLogAppEvents: true,
+            xfbml: true,
+            version: 'v2.10'
+          })
+          this.$store.commit('SET_FB_STATUS', true)
+          // eslint-disable-next-line
+          FB.AppEvents.logPageView()
+          resolve(true)
+        };
+
+        (function (d, s, id) {
+          let js
+          let fjs = d.getElementsByTagName(s)[ 0 ]
+          if (d.getElementById(id)) {
+            return
+          }
+          js = d.createElement(s)
+          js.id = id
+          js.src = '//connect.facebook.net/en_US/sdk.js'
+          fjs.parentNode.insertBefore(js, fjs)
+        }(document, 'script', 'facebook-jssdk'))
+      })
+    },
+    shareOverrideOGMeta: function (overrideLink, overrideTitle, overrideDescription, overrideImage) {
+      // eslint-disable-next-line
+      FB.ui(
+        {
+          method: 'share_open_graph',
+          action_type: 'og.likes',
+          action_properties: JSON.stringify({
+            object: {
+              'og:url': overrideLink,
+              'og:title': overrideTitle,
+              'og:description': overrideDescription,
+              'og:image': overrideImage
+            }
+          })
+        },
+        (response) => {
+          // Action after response
+        })
     }
   },
   computed: {
     locale: function () {
       return this.$store.getters.locale.locale
+    },
+    currentUrl: function () {
+      return window.location.href
     },
     currentFullUrl: function () {
       return window.location.href

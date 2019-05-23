@@ -21,18 +21,25 @@ const navigation =
             ka: 'მოლის რუქა'
           }
         },
-        {
-          url: '/tbilisi-mall-taxi',
-          name: {
-            en: 'tbilisi mall taxi',
-            ka: 'თბილისი მოლის ტაქსი'
-          }
-        },
+        // {
+        //   url: '/tbilisi-mall-taxi',
+        //   name: {
+        //     en: 'tbilisi mall taxi',
+        //     ka: 'თბილისი მოლის ტაქსი'
+        //   }
+        // },
         {
           url: '/gift-card',
           name: {
             en: 'gift card',
             ka: 'სასაჩუქრე ბარათი'
+          }
+        },
+        {
+          url: '/magazine',
+          name: {
+            en: 'magazine',
+            ka: 'ჟურნალი'
           }
         },
         {
@@ -47,13 +54,6 @@ const navigation =
           name: {
             en: 'leasing',
             ka: 'ლიზინგი'
-          }
-        },
-        {
-          url: '/magazine',
-          name: {
-            en: 'magazine',
-            ka: 'ჟურნალი'
           }
         }
       ]
@@ -200,14 +200,16 @@ const navigation =
       name: {
         en: 'entertainment',
         ka: 'გართობა'
-      }
+      },
+      children: true
     },
     {
       url: '/services',
       name: {
         en: 'services',
         ka: 'სერვისები'
-      }
+      },
+      children: true
     }
   ]
 export default navigation

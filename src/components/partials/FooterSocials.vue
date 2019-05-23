@@ -8,6 +8,7 @@
         <li v-for="(item, index) in $store.getters.socials" :key="index" class="content-li">
           <a :href="item.link" target="_blank">
             <div class="item-wrapper">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: getIconName(item.name) }"/></span>
               {{item.name}}
             </div>
           </a>
@@ -46,6 +47,13 @@ export default {
   .content-container{
     .content-ul{
       .content-li{
+        a{
+          .item-wrapper{
+            &:hover{
+              color: #999;
+            }
+          }
+        }
         .item-wrapper{
           font-family: 'Muli Light','BPG Arial', 'sans-serif';
           font-size: 1.4rem;
@@ -53,6 +61,10 @@ export default {
           line-height: 1.29;
           color: #3a3838;
           margin: 28px 0;
+          .icon{
+            display: inline-block;
+            width: 17px;
+          }
           @media screen and (max-width: 1650px) {
             font-size: 1.2rem;
             margin: 17px 0;

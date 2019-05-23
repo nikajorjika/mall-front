@@ -1,7 +1,7 @@
 <template>
   <div class="news-single-mobile" :id="item._id">
-    <div class="single-wrapper">
-      <div class="close-button"  @click="closeEvent">
+    <div class="single-wrapper" v-if="item">
+      <div class="close-button" @click="closeEvent">
         <router-link :to="closeUrl()" class="close-button-a" v-if="redirect">
           <default-icon class="hamburger-close-button" :icon="`close`"/>
         </router-link>
@@ -16,7 +16,7 @@
       </div>
       <div class="full-col">
         <div class="bookmarks-promotions">
-          <div class="bookmark">
+          <div class="bookmark" @click="bookmark(item._id)">
             <img src="../../../assets/images/icons/bookmark.svg" alt="Bookmark" v-show="!bookmarked.length">
             <img src="../../../assets/images/icons/bookmarked.svg" alt="Bookmark" v-show="bookmarked.length">
           </div>
@@ -30,8 +30,10 @@
       <div class="full-col">
         <div class="title-container">
           <h2 class="title">{{item.name[locale]}}</h2>
-          <h4 class="sub-title">
-            SUPER
+          <h4 class="sub-title" v-if="store.length">
+            <router-link :to="`/${locale}/store/${createSlug(store[0].name['en'])}/${store[0]._id}`">
+              {{store[0].name[locale]}}
+            </router-link>
           </h4>
         </div>
         <div class="description-container">
@@ -39,37 +41,28 @@
           </p>
         </div>
         <div class="socials-container">
-          <social-sharing :url="currentFullUrl"
-                          class="share-inner"
-                          :title="item.name[locale]"
-                          :description="item.description[locale]"
-                          inline-template>
-            <div class="socials-inner-container">
-              <network network="facebook">
-                <div class="social-item">
-                  <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/></span>
-                  <span class="label">share</span>
-                </div>
-              </network>
-              <network network="twitter">
-                <div class="social-item">
-                  <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/></span>
-                  <span class="label">tweet</span>
-                </div>
-              </network>
-              <network network="linkedin">
-                <div class="social-item">
-                  <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/></span>
-                  <span class="label">share</span>
-                </div>
-              </network>
-              <div class="social-item" @click="copyUrl('news-item-current-url')">
-                <input id="news-item-current-url" :value="currentFullUrl" type="hidden">
-                <span class="icon"><font-awesome-icon icon="link"/></span>
-                <span class="label">{{t('copyLink')}}</span>
-              </div>
+          <div class="socials-inner-container">
+            <div class="social-item" @click="shareOnFacebook(item)">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/></span>
+              <span class="label">share</span>
             </div>
-          </social-sharing>
+            <a class="social-item" :href="`https://twitter.com/intent/tweet?text=${item.name[locale]}&url=${url}`"
+               target="_blank">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/></span>
+              <span class="label">tweet</span>
+            </a>
+            <a class="social-item"
+               :href="`https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${item.name[locale]}e&summary=${item.description[locale]}`"
+               target="_blank">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/></span>
+              <span class="label">share</span>
+            </a>
+            <div class="social-item" @click="copyUrl('news-item-current-url')">
+              <input id="news-item-current-url" :value="currentFullUrl" type="hidden">
+              <span class="icon"><font-awesome-icon icon="link"/></span>
+              <span class="label">{{t('copyLink')}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -94,6 +87,17 @@ export default {
       default: true
     }
   },
+  mounted: function () {
+    if (!this.$store.getters.storesList.length) {
+      this.$store.dispatch('fetchItems', {
+        model: `storesList`,
+        api: this.$store.state.apiUrls[ `storesList` ],
+        setter: 'SET_STORE_LIST'
+      }).catch((error) => {
+        console.error(error)
+      })
+    }
+  },
   computed: {
     bookmarked: function () {
       return this.$store.getters.bookmarked.filter(object => {
@@ -101,9 +105,19 @@ export default {
           return object._id === this.item._id
         }
       })
+    },
+    store: function () {
+      return this.$store.getters.storesList.filter(store => {
+        if (store._id === this.item.entityId) {
+          return true
+        }
+      })
     }
   },
   methods: {
+    shareOnFacebook: function (item) {
+      this.shareOverrideOGMeta(window.location.href, item.name[this.locale], item.description[this.locale], item.photoUrl)
+    },
     closeEvent: function () {
       this.$emit('close')
     },
@@ -114,7 +128,7 @@ export default {
     bookmark: function (id) {
       const user = this.$store.getters.user
       if (!user) {
-        this.$router.push({ name: 'login' })
+        this.$router.push({ name: 'login', params: { locale: this.locale }, query: { redirect: this.$route.fullPath } })
       } else {
         this.$http.post(this.$store.state.apiUrls.bookmark, {
           userToken: user.token,
@@ -264,7 +278,7 @@ export default {
         display: flex;
         padding-top: 25px;
         border-top: solid 1px #dcdcdc;
-        margin:0 36px;
+        margin: 0 36px;
         .socials-inner-container {
           display: grid;
           width: 100%;

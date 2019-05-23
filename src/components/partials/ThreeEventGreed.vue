@@ -1,5 +1,5 @@
 <template>
-  <div class="three-event-greed" data-aos="fade-up">
+  <div class="three-event-greed" data-aos="fade-up" v-if="this.events">
     <block-header-standard :title="this.title"/>
     <div class="flex-col-3">
       <div class="event-item-outer" v-for="(event, index) in this.events" :key="index">

@@ -6,18 +6,30 @@
         <div class="error"><span>{{returnedError}}</span></div>
       </div>
       <div class="field-container">
-        <input type="text" id="login-username" v-validate="'required|email'" name="email" v-model="user.email">
+        <input type="text" id="login-username" v-validate="'required|email'" name="email" v-model="user.email"
+               tabindex="1">
         <label for="login-username" :class="{focus: focusedUsername }">{{t('username_placeholder')}}</label>
         <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
       </div>
-      <div class="field-container">
-        <input type="password" id="login-password" v-validate="'required'" name="password" v-model="user.password">
+      <div class="field-container margin-bottom-small">
+        <input type="password" id="login-password" v-validate="'required'" name="password" v-model="user.password"
+               tabindex="2">
         <label for="login-password" :class="{focus: focusedPassword }">{{t('password_placeholder')}}</label>
         <span v-show="errors.first('password')" class="error">{{ errors.first('password') }}</span>
       </div>
+      <div class="forgot-password">
+        <router-link :to="`/${locale}/password/recovery`">
+          <p>{{t('forgot_password')}}</p>
+        </router-link>
+        <div class="remember-me">
+          <input type="checkbox" v-model="user.remember" id="remember-me" tabindex="3">
+          <label for="remember-me">{{t('remember_me')}}</label>
+        </div>
+      </div>
       <div class="login-buttons">
         <div class="login-button">
-          <button-standard type="submit" @click="login" :text="t('next')"/>
+          <input type="submit" class="submit">
+          <button-standard type="submit" @click="login" :text="t('next')" tabindex="4"/>
         </div>
         <div class="login-button" @click.stop>
           <form @submit.prevent="facebookLogin">
@@ -25,15 +37,6 @@
                              iconWidth="7.5"
                              iconHeight="15"/>
           </form>
-        </div>
-      </div>
-      <div class="forgot-password">
-        <router-link :to="`/${locale}/password/recovery`">
-          <p>{{t('forgot_password')}}</p>
-        </router-link>
-        <div class="remember-me">
-          <input type="checkbox" v-model="user.remember" id="remember-me">
-          <label for="remember-me">{{t('remember_me')}}</label>
         </div>
       </div>
     </form>
@@ -86,6 +89,7 @@ export default {
       return require('../../../assets/images/icons/facebook.svg')
     },
     facebookLogin: function () {
+      this.$emit('facebook')
     },
     login: function () {
       this.$validator.validateAll().then((status) => {
@@ -95,7 +99,11 @@ export default {
           this.returnedError = ''
           this.$store.dispatch('login', this.user).then(() => {
             this.loading = false
-            this.$router.push({ name: 'home', params: { locale: this.locale } })
+            if (this.$route.query && this.$route.query.hasOwnProperty('redirect')) {
+              this.$router.push({ path: this.$route.query.redirect })
+            } else {
+              this.$router.push({ name: 'home', params: { locale: this.locale } })
+            }
           }).catch((error) => {
             if (error.response && error.response.data) {
               this.returnedError = error.response.data.status
@@ -122,6 +130,9 @@ export default {
   .field-container {
     position: relative;
     margin-bottom: 42px;
+    &.margin-bottom-small {
+      margin-bottom: 10px;
+    }
     label {
       font-family: 'Muli Light', 'BPG Arial', sans-serif;
       font-size: 1.2rem;
@@ -157,9 +168,19 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-bottom: 12.6px;
+    .submit {
+      display: none;
+    }
+    @media screen and (max-width: 579px) {
+      flex-direction: column;
+      margin: 0 12px auto;
+    }
+    .login-button {
+      margin-bottom: 12.6px;
+    }
   }
   .forgot-password {
+    margin-bottom: 20px;
     p {
       font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
       font-size: 1.4rem;

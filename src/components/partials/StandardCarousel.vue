@@ -14,8 +14,7 @@
       </carousel>
     </div>
     <div class="carousel-small" v-else>
-
-      <small-slider :items="$store.getters.stores" logoOption="logoUrl"/>
+      <small-slider :items="$store.getters.stores" logoOption="logoUrl" v-if="$store.getters.stores.length"/>
     </div>
   </div>
 </template>

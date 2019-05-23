@@ -14,7 +14,7 @@
             <div class="right-inner-container">
               <div class="ham-logo-container" :class="{hideSmall: currentItem !== null}">
                 <router-link to="/">
-                  <img class="logo" src="../../assets/images/icons/TM_LOGO.svg">
+                  <img class="logo" src="../../assets/images/icons/tm_header_logo.svg">
                 </router-link>
               </div>
               <div class="menu-container" :class="{hideSmall: currentItem !== null}">
@@ -22,10 +22,10 @@
                   <div class="list-wrapper" v-if="currentItem === null">
                     <div class="list-container" v-for="(data, i) in $store.state.hamburgerData" v-bind:key="i">
                       <h3 class="parent-title">
-                        <router-link class="title" :to="`/${locale}${data.url}`">
+                        <a class="title" @click="openChildren(data)">
                           {{data.name[locale]}}
-                        </router-link>
-                        <span v-if="data.children !== undefined && data.children !== null && data.children.length"
+                        </a>
+                        <span v-if="data.children"
                               class="open-children" @click="openChildren(data)"><span class="icon-container"><font-awesome-icon
                           icon="caret-right"/></span></span>
                       </h3>
@@ -43,12 +43,64 @@
                       <h4>{{currentItem.name[locale]}}</h4>
                     </div>
                     <div class="children-list">
-                      <ul>
-                        <li v-for="(child, index) in currentItem.children" :key="index"
+                      <ul v-if="currentItem.url === '/stores'">
+                        <li v-for="(child, index) in getFilteredCategories('stores')" :key="index * 1">
+                          <router-link :to="`/${locale}${currentItem.url}/${createSlug(child.translates.en)}`"
+                                       class="child-menu-name">
+                            {{child.translates[locale]}}
+                          </router-link>
+                        </li>
+                        <li class="view-all">
+                          <router-link :to="`/${locale}${currentItem.url}`"
+                                       class="child-menu-name">
+                            <span>{{t('viewAll')}}</span>
+                            <span><img src="../../assets/images/icons/left-arrow-subscribe.svg" alt="arrow left"></span>
+                          </router-link>
+                        </li>
+                      </ul>
+                      <ul v-else-if="currentItem.url === '/entertainment'">
+                        <li v-for="(child, index) in getFilteredCategories('entertainment')" :key="index * 10">
+                          <router-link :to="`/${locale}${currentItem.url}/${createSlug(child.translates.en)}`"
+                                       class="child-menu-name">
+                            {{child.translates[locale]}}
+                          </router-link>
+                        </li>
+                        <li class="view-all">
+                          <router-link :to="`/${locale}${currentItem.url}`"
+                                       class="child-menu-name">
+                            <span>{{t('viewAll')}}</span>
+                            <span><img src="../../assets/images/icons/left-arrow-subscribe.svg" alt="arrow left"></span>
+                          </router-link>
+                        </li>
+                      </ul>
+                      <ul v-else-if="currentItem.url === '/services'">
+                        <li v-for="(child, index) in getFilteredCategories('services')" :key="index * 100">
+                          <router-link :to="`/${locale}${currentItem.url}/${createSlug(child.translates.en)}`"
+                                       class="child-menu-name">
+                            {{child.translates[locale]}}
+                          </router-link>
+                        </li>
+                        <li class="view-all">
+                          <router-link :to="`/${locale}${currentItem.url}`"
+                                       class="child-menu-name">
+                            <span>{{t('viewAll')}}</span>
+                            <span><img src="../../assets/images/icons/left-arrow-subscribe.svg" alt="arrow left"></span>
+                          </router-link>
+                        </li>
+                      </ul>
+                      <ul v-else>
+                        <li v-for="(child, index) in currentItem.children" :key="index * 1000"
                             :class="{rightBorder: index % 2 === 0 }">
                           <router-link :to="`/${locale}${currentItem.url}${child.url}`"
                                        class="child-menu-name">
                             {{child.name[locale]}}
+                          </router-link>
+                        </li>
+                        <li class="view-all">
+                          <router-link :to="`/${locale}${currentItem.url}`"
+                                       class="child-menu-name">
+                            <span>{{t('viewAll')}}</span>
+                            <span><img src="../../assets/images/icons/left-arrow-subscribe.svg" alt="arrow left"></span>
                           </router-link>
                         </li>
                       </ul>
@@ -66,7 +118,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="hamburger-info-block">
+              <div class="hamburger-info-block" v-if="!currentItem">
                 <div class="additional-info-item">
                   <h4>{{t('working_hours')}}:</h4>
                   <p v-html="t('working_hours_content')"></p>
@@ -116,12 +168,14 @@ export default {
   data: function () {
     return {
       showMenu: false,
+      savedY: 0,
       currentItem: null
     }
   },
   methods: {
     toggleHamburgerMenu: function () {
       this.showMenu = !this.showMenu
+      this.savedY = window.scrollY
       this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
       this.currentItem = null
     },
@@ -135,11 +189,13 @@ export default {
       this.showMenu = false
       this.currentItem = null
       this.$store.commit('SET_NO_SCROLL', false)
+      window.setTimeout(() => {
+        window.scroll(0, this.savedY)
+        this.savedY = 0
+      }, 100)
     },
     getSocials: function () {
-      this.$store.dispatch('getSocials').then(function (response) {
-        // console.log(response.data)
-      }).catch(function (error) {
+      this.$store.dispatch('getSocials').catch(function (error) {
         console.error(error.message)
       })
     }
@@ -218,7 +274,7 @@ export default {
       height: 100%;
       @media screen and (max-width: 887px) {
         width: 100%;
-        min-width:100%;
+        min-width: 100%;
       }
       @media screen and (max-width: 760px) {
         flex-direction: column;
@@ -231,7 +287,7 @@ export default {
         height: 100%;
         overflow: hidden;
         position: relative;
-        .right-inner-container{
+        .right-inner-container {
           overflow-y: auto;
           height: 100%;
           position: absolute;
@@ -368,8 +424,20 @@ export default {
                     display: block;
                     padding: 27px 54px;
                     @media screen and (max-width: 760px) {
-                      padding: 36px 10px 36px 36px;
+                      padding: 36px 35px 36px 36px;
                       font-size: 1.1rem;
+                    }
+                  }
+                  &.view-all {
+                    a {
+                      display: flex;
+                      span:last-of-type {
+                        margin-left: auto;
+                        img {
+                          width: 20.2px;
+                          height: 9.7px;
+                        }
+                      }
                     }
                   }
                   &:nth-child(1) {
@@ -479,6 +547,7 @@ export default {
       margin: 0 auto;
     }
     .mobile-socials {
+      padding-right: 17px;
       ul {
         display: flex;
         li {

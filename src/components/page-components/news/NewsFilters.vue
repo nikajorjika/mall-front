@@ -30,7 +30,9 @@ export default {
   },
   watch: {
     '$route.params.cat': function (val) {
-      this.category = val
+      if (val && val !== 'single') {
+        this.category = this.categoryInUrl[ val ]
+      }
     }
   },
   props: {
@@ -44,15 +46,27 @@ export default {
         console.error(error)
       })
     }
+    if (!this.$store.getters.events.length) {
+      this.fetchItems()
+    } else {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    }
+
     if (!this.$store.getters[ `storesList` ].length) {
       this.getStoreList()
     }
-    if (this.$route.params.cat) {
-      this.category = this.$route.params.cat
+    if (this.$route.params.cat && this.categoryInUrl.hasOwnProperty(this.$route.params.cat)) {
+      this.category = this.categoryInUrl[ this.$route.params.cat ]
     }
   },
   data: () => {
     return {
+      categoryInUrl: {
+        promotions: 'includeOffer',
+        events: 'includeEvent',
+        news: 'includeNews',
+        'new-collections': 'includeNewCol'
+      },
       filters: {
         includeEvent: true,
         includeNewCol: true,
@@ -78,7 +92,7 @@ export default {
   },
   methods: {
     updateElement: function (selected) {
-      if (selected.selected.length || selected.selected !== null) {
+      if (selected.selected) {
         if (selected.name === 'category') {
           this.filters.includeEvent = this.filters.includeNewCol = this.filters.includeNews = this.filters.includeOffer = false
           selected.selected.forEach(item => {
@@ -103,8 +117,11 @@ export default {
         }
         if (selected.name === 'sort') {
           this.filters.isOngoing = this.filters.isArchive = this.filters.isUpcoming = false
-          this.filters[ selected.selected.value ] = true
+          this.filters[ selected.value ] = true
         }
+      }
+      if (this.filters.includeEvent === false && this.filters.includeNewCol === false && this.filters.includeNews === false && this.filters.includeOffer === false) {
+        this.filters.includeEvent = this.filters.includeNewCol = this.filters.includeNews = this.filters.includeOffer = true
       }
       this.loadFilteredNews()
     },
@@ -115,17 +132,30 @@ export default {
         setter: 'SET_STORE_LIST'
       }).then(() => {
         this.listLoaded = true
+        this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
       }).catch((error) => {
         console.error(error)
       })
     },
     loadFilteredNews: function () {
+      this.sendRequest('INITIAL_LOAD')
+    },
+    fetchItems: function () {
+      this.sendRequest('INITIAL_LOAD')
+    },
+    loadMore: function () {
+      this.filters.page++
+      this.loading = true
+      this.sendRequest('LOAD_MORE')
+    },
+    sendRequest: function (setter) {
       this.$store.dispatch('loadFiltered', {
         model: 'events',
         api: this.$store.state.apiUrls.newsFilters,
-        setter: 'INITIAL_LOAD'
-      }).then((response) => {
-        console.log(response)
+        setter: setter,
+        filters: this.filters
+      }).then(() => {
+        this.$emit('loaded')
       }).catch((error) => {
         console.error(error)
       })

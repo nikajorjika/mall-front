@@ -1,7 +1,7 @@
 <template>
   <div id="settings-form">
     <white-spinner v-if="loading"/>
-    <form @submit.prevent="register" v-if="user">
+    <form @submit.prevent="updateSettings" v-if="user" data-vv-scope="settings">
       <div v-if="returnedError.length" class="registration-error">
         <div class="error"><span>{{returnedError}}</span></div>
       </div>
@@ -9,73 +9,59 @@
         <div class="field-wrapper">
           <label for="registration-name">{{t('first_name_placeholder')}}*</label>
           <input type="text" id="registration-name" v-validate="'required'" name="name" placeholder=""
-                 v-model="user.name">
-          <span v-show="errors.first('name')" class="error">{{ errors.first('name') }}</span>
+                 v-model="updateObject.name">
+          <span v-show="errors.first('settings.name')" class="error">{{ errors.first('settings.name') }}</span>
         </div>
         <div class="field-wrapper">
           <label for="registration-last-name">{{t('last_name_placeholder')}}*</label>
           <input type="text" id="registration-last-name" v-validate="'required'" name="lastName" placeholder=""
-                 v-model="user.surname">
-          <span v-show="errors.first('lastName')" class="error">{{ errors.first('lastName') }}</span>
+                 v-model="updateObject.surname">
+          <span v-show="errors.first('settings.lastName')" class="error">{{ errors.first('settings.lastName') }}</span>
         </div>
       </div>
       <div class="field-container">
         <div class="field-wrapper">
           <label for="registration-email">{{t('email_placeholder')}}*</label>
-          <input type="text" v-validate="'required|email'" name="email" id="registration-email" placeholder=""
-                 v-model="user.email">
-          <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
+          <input type="text" v-validate="'required|email'" name="email" id="registration-email" placeholder="" disabled
+                 v-model="updateObject.email">
+          <span v-show="errors.first('settings.email')" class="error">{{ errors.first('settings.email') }}</span>
         </div>
       </div>
       <div class="field-container">
         <div class="field-wrapper">
           <label for="registration-phone">{{t('mobile_placeholder')}}*</label>
           <input type="text" id="registration-phone" v-validate="'required'" name="phone" placeholder=""
-                 v-model="user.mobile">
-          <div v-show="errors.first('phone')" class="error">{{ errors.first('phone') }}</div>
+                 v-model="updateObject.mobile">
+          <div v-show="errors.first('settings.phone')" class="error">{{ errors.first('settings.phone') }}</div>
         </div>
       </div>
       <div class="field-container">
         <div class="field-wrapper">
           <label>{{t('birth_date_placeholder')}}*</label>
           <div class="combo-fields">
-            <input type="hidden" name="day" v-validate="'required'" v-model="selectData.day.val">
-            <custom-select class="b-date-field" :items="selectData.day.options"
-                           :selectedDefault="day"
-                           :placeholder="selectData.day.placeholder"
+            <custom-select class="b-date-field" :items="updateObject.day.options"
+                           :value="birthDate.day"
+                           :placeholder="updateObject.day.placeholder"
                            name="day"
                            @change="onSelectAction"/>
-            <input type="hidden" name="month" v-validate="'required'" v-model="selectData.month.val">
-            <custom-select class="b-date-field" :items="selectData.month.options"
-                           :selectedDefault="month"
-                           :placeholder="selectData.month.placeholder"
+            <custom-select class="b-date-field" :items="updateObject.month.options"
+                           :value="birthDate.month"
+                           :placeholder="updateObject.month.placeholder"
                            name="month"
                            @change="onSelectAction"/>
-            <input type="hidden" name="year" v-validate="'required'" v-model="selectData.year.val">
-            <custom-select class="b-date-field" :items="selectData.year.options"
-                           :selectedDefault="year"
-                           :placeholder="selectData.year.placeholder"
+            <custom-select class="b-date-field" :items="updateObject.year.options"
+                           :value="birthDate.year"
+                           :placeholder="updateObject.year.placeholder"
                            name="year"
                            @change="onSelectAction"/>
-          </div>
-          <div v-if="errors.first('day')">
-            <div v-show="errors.first('day')" class="error">{{ errors.first('day') }}</div>
-          </div>
-          <div v-else-if="errors.first('month')">
-            <div v-show="errors.first('month')" class="error">{{ errors.first('month') }}</div>
-          </div>
-          <div v-else-if="errors.first('year')">
-            <div v-show="errors.first('year')" class="error">{{ errors.first('year') }}</div>
           </div>
         </div>
         <div class="field-wrapper">
           <label>{{t('gender_placeholder')}}*</label>
           <div class="combo-fields columns">
-            <input type="hidden" name="gender" v-validate="'required'" v-model="user.sex">
-            <custom-select class="gender-field" :items="selectData.gender.options" name="gender"
-                           :selectedDefault="gender"
-                           :placeholder="selectData.gender.placeholder" @change="onSelectAction"/>
-            <div v-show="errors.first('gender')" class="error">{{ errors.first('gender') }}</div>
+            <custom-select class="gender-field" :items="updateObject.gender.options" name="gender"
+                           :value="birthDate.gender"
+                           :placeholder="updateObject.gender.placeholder" @change="onSelectAction"/>
           </div>
         </div>
       </div>
@@ -83,49 +69,61 @@
         <div class="field-wrapper">
           <label>{{t('country_placeholder')}}*</label>
           <div class="combo-fields columns">
-            <input type="hidden" name="country" v-validate="'required'" v-model="selectData.country.val">
-            <custom-select class="country-field" name="country" :items="selectData.country.options"
-                           :selectedDefault="selectData.country.options[0]"
-                           :placeholder="selectData.country.placeholder" @change="onSelectAction"/>
-            <div v-show="errors.first('country')" class="error">{{ errors.first('country') }}</div>
+            <custom-select class="country-field" name="country" :items="updateObject.country.options"
+                           :value="birthDate.country"
+                           :placeholder="updateObject.country.placeholder" @change="onSelectAction"/>
           </div>
         </div>
         <div class="field-wrapper">
           <label>{{t('city_placeholder')}}*</label>
           <div class="combo-fields columns">
-            <input type="hidden" name="city" v-validate="'required'" v-model="selectData.city.val">
-            <custom-select class="city-field" name="city" :items="selectData.city.options"
-                           :selectedDefault="selectData.city.options[0]"
-                           :placeholder="selectData.city.placeholder" @change="onSelectAction"/>
-            <div v-show="errors.first('city')" class="error">{{ errors.first('city') }}</div>
+            <custom-select class="city-field" name="city" :items="updateObject.city.options"
+                           :value="birthDate.city"
+                           :placeholder="updateObject.city.placeholder" @change="onSelectAction"/>
           </div>
         </div>
       </div>
-      <div class="field-container">
-        <div class="field-wrapper">
-          <label for="registration-password">{{t('reg_password_placeholder')}}*</label>
-          <input type="password" id="registration-password" v-validate="'required'" name="password"
-                 ref="password"
-                 v-model="user.password">
-          <span v-show="errors.first('password')" class="error">{{ errors.first('password') }}</span>
-        </div>
-        <div class="field-wrapper">
-          <label for="registration-repeat-password">{{t('repeat_password_placeholder')}}*</label>
-          <input v-validate="'confirmed:password'" name="password_confirmation" type="password"
-                 id="registration-repeat-password" v-model="user.repeatPassword">
-          <span v-show="errors.first('password_confirmation')"
-                class="error">{{ errors.first('password_confirmation') }}</span>
-        </div>
-      </div>
-
       <div class="field-container columns">
         <div v-show="errors.first('terms')"
-             class="error">{{ errors.first('terms') }}
+             class="error">{{ errors.first('settings.terms') }}
         </div>
       </div>
       <div class="field-container centered-content">
         <div class="register-button-container">
-          <button-standard :text="t('save')" @click="register"/>
+          <button-standard :text="t('save')" @click="updateSettings"/>
+        </div>
+      </div>
+    </form>
+    <form @submit.prevent="updatePassword" v-if="user" class="change-password-form" data-vv-scope="changePassword">
+      <block-header-standard :title="t('changePassword')" class="small-margins"/>
+      <div class="field-container">
+        <div class="field-wrapper">
+          <label for="current-password">{{t('reg_password_placeholder')}}*</label>
+          <input type="password" id="current-password" v-validate="'required'" name="password"
+                 ref="password"
+                 v-model="password.oldPassword">
+          <span v-show="errors.first('changePassword.password')" class="error">{{ errors.first('changePassword.password') }}</span>
+        </div>
+      </div>
+      <div class="field-container">
+        <div class="field-wrapper">
+          <label for="registration-password">{{t('newPassword')}}*</label>
+          <input type="password" id="registration-password" v-validate="'required'" name="newPassword"
+                 ref="newPassword"
+                 v-model="password.newPassword">
+          <span v-show="errors.first('changePassword.newPassword')" class="error">{{ errors.first('changePassword.newPassword') }}</span>
+        </div>
+        <div class="field-wrapper">
+          <label for="registration-repeat-password">{{t('repeatNewPassword')}}*</label>
+          <input v-validate="'confirmed:newPassword'" name="password_confirmation" type="password"
+                 id="registration-repeat-password" v-model="password.confirmPassword">
+          <span v-show="errors.first('changePassword.password_confirmation')"
+                class="error">{{ errors.first('changePassword.password_confirmation') }}</span>
+        </div>
+      </div>
+      <div class="field-container centered-content">
+        <div class="register-button-container">
+          <button-standard :text="t('change')" @click="updatePassword"/>
         </div>
       </div>
     </form>
@@ -135,16 +133,38 @@
 import CustomSelect from '../../partials/Select'
 import ButtonStandard from '../../partials/StandardButton'
 import WhiteSpinner from '../../partials/LoadingSpinner'
+import BlockHeaderStandard from '../../partials/BlockHeader'
 
 export default {
   name: 'settings-form',
-  components: { WhiteSpinner, ButtonStandard, CustomSelect },
+  components: { BlockHeaderStandard, WhiteSpinner, ButtonStandard, CustomSelect },
+  mounted: function () {
+    if (this.$store.getters.user) {
+      const date = this.user.birthDate.split('/')
+      this.birthDate.day = date[ 2 ]
+      this.birthDate.month = date[ 1 ]
+      this.birthDate.year = date[ 0 ]
+      this.birthDate.gender = this.user.sex
+      this.birthDate.city = this.user.city
+      this.birthDate.country = this.user.country
+    }
+  },
   data: function () {
     return {
       user: this.$store.getters.user,
-      selectData: {
+      password: {
+        newPassword: '',
+        confirmPassword: '',
+        oldPassword: ''
+      },
+      updateObject: {
+        name: this.$store.getters.user.name,
+        surname: this.$store.getters.user.surname,
+        email: this.$store.getters.user.email,
+        mobile: this.$store.getters.user.mobile,
         city: {
-          val: 'tbilisi',
+          val: this.$store.getters.user.city,
+          errors: [],
           options: [
             {
               name: {
@@ -166,7 +186,8 @@ export default {
           }
         },
         country: {
-          val: 'georgia',
+          val: this.$store.getters.user.country,
+          errors: [],
           options: [
             {
               name: {
@@ -187,34 +208,9 @@ export default {
             ka: 'ქვეყანა'
           }
         },
-        day: {
-          val: '1',
-          options: this.$store.state.dateOptions.day.options,
-          placeholder: {
-            en: 'Day',
-            ka: 'დღე'
-          }
-        },
-        month: {
-          val: '1',
-          errors: [],
-          options: this.$store.state.dateOptions.month.options,
-          placeholder: {
-            en: 'Month',
-            ka: 'თვე'
-          }
-        },
-        year: {
-          val: '1955',
-          errors: [],
-          options: this.$store.state.dateOptions.year.options(),
-          placeholder: {
-            en: 'Year',
-            ka: 'წელი'
-          }
-        },
         gender: {
-          val: 'male',
+          val: this.$store.getters.user.sex,
+          errors: [],
           options: [
             {
               name: {
@@ -234,32 +230,107 @@ export default {
             en: 'Gender',
             ka: 'სქესი'
           }
+        },
+        day: {
+          val: '',
+          errors: [],
+          options: this.$store.state.dateOptions.day.options,
+          placeholder: {
+            en: 'Day',
+            ka: 'დღე'
+          }
+        },
+        month: {
+          val: '',
+          errors: [],
+          options: this.$store.state.dateOptions.month.options,
+          placeholder: {
+            en: 'Month',
+            ka: 'თვე'
+          }
+        },
+        year: {
+          val: '',
+          errors: [],
+          options: this.$store.state.dateOptions.year.options(),
+          placeholder: {
+            en: 'Year',
+            ka: 'წელი'
+          }
         }
       },
       loading: false,
-      returnedError: ''
+      returnedError: '',
+      birthDate: {
+        day: '',
+        month: '',
+        year: '',
+        country: '',
+        gender: '',
+        city: ''
+      }
     }
   },
   methods: {
-    register: function () {
+    updateSettings: function () {
       if (this.validateForm()) {
-        const _this = this
-        this.$validator.validateAll().then((result) => {
+        this.$validator.validateAll('settings').then((result) => {
           if (result) {
             // here we submit form
-            _this.loading = true
-            _this.$store.dispatch('register', _this.user).then(function () {
-              _this.loading = false
-              this.$router.push({ name: 'home', params: { locale: this.locale } })
+            this.loading = true
+            this.$http.post(this.$store.state.apiUrls.updateUser, {
+              name: this.updateObject.name,
+              surname: this.updateObject.surname,
+              mobile: this.updateObject.mobile,
+              birthDate: [ this.birthDate.year, this.birthDate.month, this.birthDate.day ].join('/'),
+              city: this.updateObject.city.val,
+              country: this.updateObject.country.val,
+              sex: this.updateObject.gender.val,
+              token: this.user.token
+            }).then((response) => {
+              this.$store.dispatch('getUser', { token: this.user.token, email: this.user.email })
+                .catch((error) => {
+                  console.error(error)
+                })
+              this.$store.dispatch('showPopup', {
+                message: this.t('updated_successfully'),
+                icon: 'success'
+              })
+              this.loading = false
             }).catch((error) => {
-              if (error.response.data) {
-                _this.returnedError = error.response.data.status
-              }
-              _this.loading = false
+              this.loading = false
+              console.error(error)
             })
           }
         }).catch((error) => {
-          console.log(error)
+          console.error(error)
+        })
+      }
+      // this.$refs.RegistrationForm.submit()
+    },
+    updatePassword: function () {
+      if (this.validateForm()) {
+        this.$validator.validateAll('changePassword').then((result) => {
+          if (result) {
+            this.loading = true
+            this.$http.post(this.$store.state.apiUrls.changePassword, {
+              token: this.user.token,
+              newPassword: this.password.newPassword,
+              oldPassword: this.password.oldPassword
+            }).then((response) => {
+              this.$store.dispatch('showPopup', {
+                message: this.t('password_updated'),
+                icon: 'success'
+              })
+              this.loading = false
+              this.password.oldPassword = this.password.confirmPassword = this.password.newPassword = ''
+            }).then(error => {
+              this.loading = false
+              console.error(error)
+            })
+          }
+        }).catch((error) => {
+          console.error(error)
         })
       }
       // this.$refs.RegistrationForm.submit()
@@ -267,73 +338,16 @@ export default {
     validateForm: function () {
       return true
     },
-    onSelectAction: function (value, index) {
+    onSelectAction: function (value) {
       if (value.selected) {
-        if (this.user.hasOwnProperty(value.name) && this.user[ value.name ].hasOwnProperty('val')) {
-          this.user[ value.name ].val = value.selected.value
+        if (this.birthDate.hasOwnProperty(value.name)) {
+          this.birthDate[ value.name ] = value.selected.value.toString()
         }
       } else {
-        if (this.user.hasOwnProperty(value.name) && this.user[ value.name ].hasOwnProperty('val')) {
-          this.user[ value.name ].val = ''
+        if (this.birthDate.hasOwnProperty(value.name)) {
+          this.birthDate[ value.name ].val = ''
         }
       }
-    }
-  },
-  computed: {
-    day: function () {
-      console.log(this.$store.getters.user)
-      const tmp = this.user.birthDate.split('/')[ 0 ]
-      const result = this.selectData.day.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[0] : ''
-    },
-    month: function () {
-      const tmp = this.user.birthDate.split('/')[ 1 ]
-      const result = this.selectData.month.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[0] : ''
-    },
-    year: function () {
-      const tmp = this.user.birthDate.split('/')[ 2 ]
-      const result = this.selectData.year.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[0] : ''
-    },
-    gender: function () {
-      const tmp = this.user.sex
-      const result = this.selectData.gender.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[0] : ''
-    },
-    city: function () {
-      const tmp = this.user.sex
-      const result = this.selectData.city.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[0] : ''
-    },
-    country: function () {
-      const tmp = this.user.sex
-      const result = this.selectData.country.options.filter(object => {
-        if (object && object.value === tmp) {
-          return object
-        }
-      })
-      return result.length ? result[0] : ''
     }
   }
 }
@@ -342,10 +356,18 @@ export default {
 <style lang="scss">
 #settings-form {
   position: relative;
+  .change-password-form {
+    margin-bottom: 100px;
+  }
+  .block-header-standard.small-margins {
+    h2 {
+      margin: 20px;
+    }
+  }
   .field-container {
     display: flex;
     width: 100%;
-    @media screen and (max-width: 550px){
+    @media screen and (max-width: 550px) {
       flex-direction: column;
     }
     &.columns {
@@ -359,8 +381,8 @@ export default {
       margin-right: 16px;
       display: flex;
       flex-direction: column;
-      @media screen and (max-width: 550px){
-        width:100%;
+      @media screen and (max-width: 550px) {
+        width: 100%;
       }
       label {
         margin: 15px 0 6px;
@@ -424,11 +446,11 @@ export default {
       }
     }
     .register-button-container {
-      margin: 41px 0 107px 0;
+      margin: 41px;
       text-align: center;
-      .standard-button{
-        @media screen and (max-width: 550px){
-          width:100%;
+      .standard-button {
+        @media screen and (max-width: 550px) {
+          width: 100%;
         }
       }
     }

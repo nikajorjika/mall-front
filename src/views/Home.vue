@@ -48,6 +48,7 @@ import HowToGet from '../components/partials/HowToGet'
 import SocialListBig from '../components/partials/SocialsListBig'
 import HomeSlider from '../components/page-components/home/HomeSlider'
 import HomeAds from '../components/page-components/home/Ads'
+import PromoPointer from '../components/partials/PromoPointer'
 
 export default {
   name: 'home',
@@ -58,8 +59,10 @@ export default {
   },
   beforeMount: function () {
     if (!this.$store.getters.stores.length) this.sendRequest('INITIAL_LOAD')
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: true })
   },
   components: {
+    PromoPointer,
     HomeAds,
     HomeSlider,
     SocialListBig,
@@ -77,7 +80,6 @@ export default {
         api: this.$store.state.apiUrls.storesAPI(0, 12),
         setter: setter
       }).then((response) => {
-        console.log(response.message)
         this.storeCarousel = true
       }).catch((error) => {
         console.error(error)

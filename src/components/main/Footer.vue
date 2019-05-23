@@ -16,7 +16,7 @@
             <footer-menu-item :title="t('information')" :items="$store.state.staticPages"/>
           </div>
           <div class="menu-item">
-            <footer-socials-item :title="t('socials')" :items="$store.state.socials"/>
+            <footer-socials-item :title="t('social')" :items="$store.state.socials"/>
           </div>
           <div class="menu-item">
             <footer-menu-item :title="t('working_hours')" :items="hours"/>
@@ -121,8 +121,8 @@ export default {
       menuOpen: null,
       hours: [ {
         name: {
-          en: 'Everyday: from - 10:00 to 22:00',
-          ka: 'ყოველ დღე: 10:00-დან 22:00-მდე'
+          en: 'Every Day from 10:00 to 22:00',
+          ka: 'ყოველ დღე 10:00-დან 22:00-მდე'
         },
         url: '#'
       } ],
@@ -136,8 +136,8 @@ export default {
         },
         {
           name: {
-            en: 'info@tbilisimall.com',
-            ka: 'info@tbilisimall.com'
+            en: '<span class="no-capitalize">info@tbilisimall.com</span>',
+            ka: '<span class="no-capitalize">info@tbilisimall.com</span>'
           },
           url: ''
         },
@@ -168,7 +168,19 @@ export default {
       padding: 0;
     }
   }
-
+  @media screen and (max-width: 760px) {
+    .item-wrapper {
+      font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 1.29;
+      color: #3a3838;
+      text-transform: capitalize;
+      &:hover {
+        color: #999;
+      }
+    }
+  }
   .menus-wrapper {
     display: flex;
     width: 85%;

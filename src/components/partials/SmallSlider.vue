@@ -6,7 +6,7 @@
           <div class="small-slide-container">
             <img :src="item[logoOption]" :alt="item.name[locale]">
           </div>
-          <div class="content-container">
+          <div class="content-container" v-if="nameOption || descriptionOption">
             <div class="title-container" v-if="nameOption">
                 <h3>{{item[nameOption][locale]}}</h3>
             </div>

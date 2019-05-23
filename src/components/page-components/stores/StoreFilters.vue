@@ -1,14 +1,15 @@
 <template>
   <div class="store-filters">
     <div class="filter-item">
-      <custom-select :items="filteredCats" nameField="translates" valueField="_id"
+      <custom-select :items="filteredCats" nameField="translates" valueField="_id" :value="selectedCat" :multiple="true"
+                     value-field="_id"
                      :placeholder="categories.categories.placeholder" @change="invokeFilters" name="category"/>
     </div>
     <div class="filter-item search-item">
       <filter-search @searched="invokeFilters"/>
     </div>
     <div class="filter-item">
-      <custom-select :items="categories.floors.data"
+      <custom-select :items="categories.floors.data" :multiple="true"
                      :placeholder="categories.floors.placeholder" name="floors" @change="invokeFilters"/>
     </div>
     <div class="filter-item">
@@ -47,6 +48,24 @@ export default {
       type: Array
     }
   },
+  watch: {
+    '$route.params.cat': function (val) {
+      let result = this.filteredCats.filter(obj => this.createSlug(obj.translates.en) === val)
+      this.selectedCat = result.length ? result[ 0 ]._id : ''
+    }
+  },
+  mounted: function () {
+    if (!this.$store.getters.categories.length) {
+      this.$store.dispatch('getCategories').then((response) => {
+        if (this.$route.params.cat) {
+          let result = this.filteredCats.filter(obj => this.createSlug(obj.translates.en) === this.$route.params.cat)
+          this.selectedCat = result.length ? result[ 0 ]._id : ''
+        }
+      }).catch((error) => {
+        console.error(error)
+      })
+    }
+  },
   data: function () {
     return {
       categoriesPlaceholder: {
@@ -70,12 +89,19 @@ export default {
         }
       ],
       grid: true,
+      selectedCat: '',
       filterData: {
         category: [],
-        search: '',
+        search: this.$store.getters.storeSearch,
         floors: [],
         sort: ''
       }
+    }
+  },
+  computed: {
+    cateValue: function () {
+      let result = this.filteredCats.filter(obj => this.createSlug(obj.translates.en) === this.$route.params.cat)
+      return result.length ? result[ 0 ] : ''
     }
   },
   methods: {
@@ -84,9 +110,15 @@ export default {
       this.$emit('changeView', view)
     },
     invokeFilters: function (data) {
+      console.log(data)
       if (Array.isArray(this.filterData[ data.name ])) {
         if (data.value) {
-          this.filterData[ data.name ].push(data.value)
+          this.filterData[ data.name ] = []
+          data.selected.forEach((item) => {
+            if (this.filterData[ data.name ].indexOf(item[ data.value ]) === -1) {
+              this.filterData[ data.name ].push(item[ data.value ])
+            }
+          })
         } else {
           this.filterData[ data.name ] = []
         }
@@ -97,6 +129,7 @@ export default {
           this.filterData[ data.name ] = ''
         }
       }
+      console.log(this.filterData)
       this.$emit('filtered', this.filterData)
     }
   }

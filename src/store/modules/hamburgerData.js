@@ -3,7 +3,7 @@ const hamburgerData = [
     url: '/about-us',
     name: {
       en: 'about us',
-      ka: 'ჩვენს შესახებ'
+      ka: 'ჩვენ შესახებ'
     },
     children: [
       {
@@ -20,25 +20,25 @@ const hamburgerData = [
           ka: 'მოლის რუქა'
         }
       },
-      {
-        url: '/mall-taxi',
-        name: {
-          en: 'tbilisi mall taxi',
-          ka: 'თბილისი მოლის ტაქსი'
-        }
-      },
-      {
-        url: '/gift-card',
-        name: {
-          en: 'gift card',
-          ka: 'მომსახურება'
-        }
-      },
+      // {
+      //   url: '/mall-taxi',
+      //   name: {
+      //     en: 'tbilisi mall taxi',
+      //     ka: 'თბილისი მოლის ტაქსი'
+      //   }
+      // },
       {
         url: '/marketing',
         name: {
           en: 'marketing',
           ka: 'მარკეტინგი'
+        }
+      },
+      {
+        url: '/gift-card',
+        name: {
+          en: 'Gift Card',
+          ka: 'სასაჩუქრე ბარათი'
         }
       },
       {
@@ -67,7 +67,7 @@ const hamburgerData = [
       {
         url: '/promotions',
         name: {
-          ka: 'პრომოუშენები',
+          ka: 'შეთავაზებები',
           en: 'promotions'
         }
       },
@@ -81,7 +81,7 @@ const hamburgerData = [
       {
         url: '/events',
         name: {
-          ka: 'ივენთები',
+          ka: 'ღონისძიებები',
           en: 'events'
         }
       },
@@ -199,14 +199,16 @@ const hamburgerData = [
     name: {
       en: 'entertainment',
       ka: 'გართობა'
-    }
+    },
+    children: true
   },
   {
     url: '/services',
     name: {
       en: 'services',
       ka: 'სერვისები'
-    }
+    },
+    children: true
   }
 ]
 

@@ -3,40 +3,16 @@
     <section class="section-item">
       <div class="container parts-wrapper">
         <div class="part part-left">
-          <about-title :title="t('Contact')"/>
-          <about-content :content="content"/>
+          <about-title :title="pageTitle"/>
+          <about-content :content="pageDescription"/>
           <div class="contact-page-list">
-            <div class="list-item">
-              <h3>CUSTOMER SERVICE</h3>
-              <p>For customer service and all general or specific issues</p>
-              <div>+995 322 505 556</div>
-              <a href="mailto:info@tbilisimall.com">info@tbilisimall.com</a>
-              <div class="address">16 km Agmashenebeli Alley, <br>0131 Tbilisi, Georgia</div>
-              <div class="stick-bottom">10:00-22:00 Daily</div>
-            </div>
-            <div class="list-item">
-              <h3>CUSTOMER SERVICE</h3>
-              <p>For customer service and all general or specific issues</p>
-              <div>+995 322 505 556</div>
-              <a href="mailto:info@tbilisimall.com">info@tbilisimall.com</a>
-              <div class="address">16 km Agmashenebeli Alley, <br>0131 Tbilisi, Georgia</div>
-              <div class="stick-bottom">10:00-22:00 Daily</div>
-            </div>
-            <div class="list-item">
-              <h3>CUSTOMER SERVICE</h3>
-              <p>For customer service and all general or specific issues</p>
-              <div>+995 322 505 556</div>
-              <a href="mailto:info@tbilisimall.com">info@tbilisimall.com</a>
-              <div class="address">16 km Agmashenebeli Alley, <br>0131 Tbilisi, Georgia</div>
-              <div class="stick-bottom">10:00-22:00 Daily</div>
-            </div>
-            <div class="list-item">
-              <h3>CUSTOMER SERVICE</h3>
-              <p>For customer service and all general or specific issues</p>
-              <div>+995 322 505 556</div>
-              <a href="mailto:info@tbilisimall.com">info@tbilisimall.com</a>
-              <div class="address">16 km Agmashenebeli Alley, <br>0131 Tbilisi, Georgia</div>
-              <div class="stick-bottom">10:00-22:00 Daily</div>
+            <div class="list-item" v-for="(item, index) in boxes" :key="index">
+              <h3>{{item[0] ? item[0] : ''}}</h3>
+              <p>{{item[1] ? item[1] : ''}}</p>
+              <div>{{item[2] ? item[2] : ''}}</div>
+              <a :href="`mailto:${item[3] ? item[3] : ''}`">{{item[3] ? item[3] : ''}}</a>
+              <div class="address">{{item[4] ? item[4] : ''}}</div>
+              <div class="stick-bottom">{{item[5] ? item[5] : ''}}</div>
             </div>
           </div>
         </div>
@@ -56,9 +32,53 @@ import ContactForm from '../../partials/ContactForm'
 
 export default {
   components: { ContactForm, AboutContent, AboutTitle },
+  mounted: function () {
+    if (!this.$store.getters.contact) {
+      this.fetchData()
+    }
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+  },
   data: function () {
     return {
-      content: 'We highly appreciate and welcome your feedback on Tbilisi Mall and we would like to hear about your experiences while being here with us.<br>You can reach us via the contact information given below or leave your comments, concerns and any type of enquiry using our online Message Box.  We will review carefully all the information received and get back to you as quickly as we can.'
+      model: 'contactPage'
+    }
+  },
+  methods: {
+    fetchData: function () {
+      this.$store.dispatch('getAboutPage', {
+        url: this.$store.state.apiUrls.contactPage,
+        model: this.model
+      }).then((response) => {
+      }).catch((error) => console.error(error))
+    }
+  },
+  computed: {
+    pageDataContent: function () {
+      return this.$store.getters[ this.model ] ? this.parsePageData(this.$store.getters[ this.model ][ 0 ].data) : ''
+    },
+    pageTitle: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
+    },
+    pageDescription: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'Description' ] : ''
+    },
+    boxes: function () {
+      const result = []
+      if (this.pageDataContent) {
+        if (this.pageDataContent[ `${this.locale}Box1` ] && this.pageDataContent[ `${this.locale}Box1` ].length) {
+          result.push(this.pageDataContent[ `${this.locale}Box1` ])
+        }
+        if (this.pageDataContent[ `${this.locale}Box2` ] && this.pageDataContent[ `${this.locale}Box2` ].length) {
+          result.push(this.pageDataContent[ `${this.locale}Box2` ])
+        }
+        if (this.pageDataContent[ `${this.locale}Box3` ] && this.pageDataContent[ `${this.locale}Box3` ].length) {
+          result.push(this.pageDataContent[ `${this.locale}Box3` ])
+        }
+        if (this.pageDataContent[ `${this.locale}Box4` ] && this.pageDataContent[ `${this.locale}Box4` ].length) {
+          result.push(this.pageDataContent[ `${this.locale}Box4` ])
+        }
+      }
+      return result
     }
   }
 }
@@ -73,6 +93,7 @@ export default {
     @media screen and (max-width: 760px) {
       padding: 0;
     }
+
     .parts-wrapper {
       display: flex;
       @media screen and (max-width: 760px) {
@@ -87,6 +108,7 @@ export default {
       width: 100%;
       border-right: none;
     }
+
     &.part-left {
       padding-right: 154px;
       flex: 1;
@@ -100,6 +122,7 @@ export default {
         padding: 0;
       }
     }
+
     &.part-right {
       width: 398px;
       padding: 0 30px;
@@ -111,15 +134,16 @@ export default {
         padding: 0;
         border-top: 1px solid #dcdcdc;
       }
+
       .contact-form-container {
-        margin-top: 135px;
+        margin-top: 122px;
         @media screen and (max-width: 760px) {
           margin-top: 0;
-          padding:  45px 15px 0;
+          padding: 45px 15px 0;
         }
         @media screen and (max-width: 550px) {
           margin-top: 0;
-          padding:  45px 36px 0;
+          padding: 45px 36px 0;
         }
       }
     }
@@ -132,10 +156,11 @@ export default {
     @media screen and (max-width: 550px) {
       padding: 0 36px;
     }
+
     .list-item {
       width: calc(50% - 8px);
       background-color: #f9f9f9;
-      margin: 13px 16px 37px 0;
+      margin: 8px 16px 8px 0;
       padding: 16px 19px;
       display: flex;
       flex-direction: column;
@@ -148,6 +173,7 @@ export default {
         width: 100%;
         margin: 0;
       }
+
       &:nth-child(2n + 2) {
         margin-right: 0;
       }

@@ -2,6 +2,7 @@
   <div class="page-block">
     <about-title :title="pageTitle"/>
     <about-content :content="pageDescription"/>
+    <h3 class="working-hours-title">{{t('working_hours')}}:</h3>
     <div class="additional-info">
       <div class="additional-info-item">
         <h4>{{workingHoursTitle}}</h4>
@@ -10,6 +11,10 @@
       <div class="additional-info-item">
         <h4>{{carrefourTitle}}</h4>
         <p v-html="carrefourWorkingHours"></p>
+      </div>
+      <div class="additional-info-item">
+        <h4>{{caveaTitle}}</h4>
+        <p v-html="caveaWorkingHours"></p>
       </div>
     </div>
   </div>
@@ -55,7 +60,7 @@ export default {
   },
   computed: {
     pageDataContent: function () {
-      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][ 0 ].data) : ''
+      return this.$store.getters[ this.model ] ? this.parsePageData(this.$store.getters[ this.model ][ 0 ].data) : ''
     },
     pageTitle: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
@@ -74,6 +79,12 @@ export default {
     },
     carrefourWorkingHours: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'CarrefourWorkingHours' ] : ''
+    },
+    caveaTitle: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'CaveaTitle' ] : ''
+    },
+    caveaWorkingHours: function () {
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'CaveaWorkingHours' ] : ''
     }
   },
   methods: {
@@ -90,8 +101,12 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page-block {
-  .additional-info {
+  .working-hours-title{
     margin-top: 85px;
+    text-transform: uppercase;
+    font-size: 2.6rem;
+  }
+  .additional-info {
     margin-bottom: 74.5px;
     display: flex;
     @media screen and (max-width: 550px) {
@@ -102,10 +117,11 @@ export default {
       padding: 40px 36px;
     }
     .additional-info-item {
-      width: 320px;
+      max-width: 320px;
+      width: 100%;
       margin-right: 12px;
       h4 {
-        font-size: 2.4rem;
+        font-size: 2.1rem;
         margin: 21px 0;
       }
       p {

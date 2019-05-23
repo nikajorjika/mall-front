@@ -1,11 +1,11 @@
 <template>
-  <div class="staff-carousel">
+  <div class="staff-carousel" v-if="$store.getters.team.length">
     <div class="title-container">
       <h3>{{this.title}}</h3>
     </div>
     <div class="staff-container">
       <carousel class="staff-wrapper" :perPage="this.perPage" :scrollPerPage="false" :navigationEnabled="true"
-                :paginationEnabled="false"
+                :paginationEnabled="false" :perPageCustom="[[320, 1], [480, 2], [760, 3]]"
                 :navigationPrevLabel="this.printPrevIcon()" :navigationNextLabel="this.printNextIcon()">
         <slide v-for="(item, index) in $store.getters.team" :key="index">
           <div class="staff-item">
@@ -43,12 +43,6 @@ export default {
     title: {
       type: String,
       default: 'OUR TEAM'
-    },
-    staff: {
-      type: Array,
-      default: function () {
-        return []
-      }
     },
     perPage: {
       type: Number,
@@ -96,8 +90,12 @@ export default {
     }
   }
   .staff-wrapper {
-    width: 812px;
+    max-width: 812px;
+    width:95%;
     margin: 54px auto 111px;
+    @media screen and (max-width: 760px){
+      width: 68%;
+    }
     .staff-item {
       .img-container {
         overflow: hidden;

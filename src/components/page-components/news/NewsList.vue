@@ -5,11 +5,20 @@
         <h2>{{t('filter')}}</h2> <span class="filter-icon" :class="{open: activeFilters}"><font-awesome-icon
         icon="caret-down"/></span>
       </div>
-      <div class="container filters-inner" v-if="activeFilters || $mq !== 'mobile'">
-        <news-filters :categories="categories"/>
+      <div class="container filters-inner" v-show="$route.params.cat || activeFilters || $mq !== 'mobile'">
+        <news-filters :categories="categories" @loaded="loading = false"/>
       </div>
     </div>
-    <loading-big v-show="loadingNews"/>
+    <div v-if="loading">
+      <div class="new-list-outer">
+        <div class="news-list">
+          <div class="news-list-item" v-for="(item,index) in [1,1,1,1,1,1]" :key="index">
+            <div class="news-inner">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="new-list-outer">
       <transition name="fadeIn">
         <div class="single-news-container news-loaded" v-if="loadedItem">
@@ -40,10 +49,6 @@
         </div>
       </div>
     </div>
-    <div class="grid-footer-container" v-if="hasMore">
-      <button v-show="loading" class="loading">{{t('loading')}}</button>
-      <button v-show="!loading" @click="loadMore">{{t('load_more')}}</button>
-    </div>
   </div>
 </template>
 <script>
@@ -53,13 +58,49 @@ import NewsSingle from './NewsSingle'
 import LoadingBig from '../../partials/LoadingBig'
 import EventItem from '../../partials/EventView'
 import NewsSingleMobile from './NewsSingleMobile'
+import metas from '../../../lang/meta/metas'
 
 export default {
   name: 'news-list',
   mounted: function () {
-    if (!this.$store.getters.events.length) this.fetchItems()
     if (this.$route.params.id && !this.openItem) {
       this.loadSingle()
+    }
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+    if (this.$store.getters.events.length) {
+      this.loading = false
+    }
+  },
+  metaInfo: function () {
+    if (this.loadedItem || this.openItem) {
+      return {
+        title: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading',
+        titleTemplate: '%s  | TbilisiMall.com',
+        meta: [
+          {
+            name: 'description',
+            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading',
+            vid: 'description'
+          },
+          {
+            property: 'og:title',
+            content: `${this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading'} | TbilisiMall.com`,
+            vid: 'og:title'
+          },
+          {
+            property: 'og:description',
+            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading',
+            vid: 'og:description'
+          },
+          {
+            property: 'og:image',
+            content: this.loadedItem ? this.loadedItem.name[ this.locale ] : this.openItem ? this.openItem.name[ this.locale ] : 'loading',
+            vid: 'og:image'
+          }
+        ]
+      }
+    } else {
+      return metas.defaultMetas
     }
   },
   props: {
@@ -82,11 +123,26 @@ export default {
       model: 'events',
       loadedItem: null,
       loadingNews: false,
-      loading: false,
+      loading: true,
       hasMore: true,
       activeFilters: false,
       openItem: null
     }
+  },
+  metaData: function () {
+    let name = 'loading...'
+    let description = 'loading...'
+    let logoUrl = 'loading...'
+    if (this.loadedItem) {
+      name = this.loadedItem.name[ this.locale ]
+      description = this.loadedItem.description[ this.locale ]
+      logoUrl = this.loadedItem.photoUrl
+    } else if (this.openItem) {
+      name = this.openItem.name[ this.locale ]
+      description = this.openItem.description[ this.locale ]
+      logoUrl = this.openItem.photoUrl
+    }
+    return metas.customPageMeta(name, description, logoUrl)
   },
   watch: {
     '$route.params.id': function (to, fr) {
@@ -97,6 +153,7 @@ export default {
       this.loadedItem = null
       if (existing) {
         this.openItem = existing
+        this.loading = false
       } else {
         this.loadSingle()
       }
@@ -130,6 +187,7 @@ export default {
           .then((response) => {
             if (response.status === 'success') {
               this.loadedItem = response.data
+              this.loading = false
             } else {
               console.error('Something went wrong')
             }
@@ -155,28 +213,6 @@ export default {
     close: function () {
       this.loadedItem = null
       this.openItem = null
-    },
-    fetchItems: function () {
-      this.loadingNews = true
-      this.sendRequest('INITIAL_LOAD')
-    },
-    loadMore: function () {
-      this.page++
-      this.loading = true
-      this.sendRequest('LOAD_MORE')
-    },
-    sendRequest: function (setter) {
-      this.$store.dispatch('fetchItems', {
-        model: 'events',
-        api: this.$store.state.apiUrls.eventsAPI(this.page, this.offset),
-        setter: setter
-      }).then((response) => {
-        if (response.data.data.length < this.offset) this.hasMore = false
-        this.loading = false
-        this.loadingNews = false
-      }).catch((error) => {
-        console.error(error)
-      })
     }
   }
 }
@@ -219,8 +255,8 @@ export default {
     width: 33.33%;
     padding: 32px 30px;
     box-sizing: border-box;
-    border-right: 1px solid #dcdcdc;
-    border-top: 1px solid #dcdcdc;
+    /*border-right: 1px solid #dcdcdc;*/
+    /*border-top: 1px solid #dcdcdc;*/
     @media screen and (max-width: 1650px) {
       padding: 21px;
     }

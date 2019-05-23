@@ -1,5 +1,6 @@
 <template>
   <div id="app" :class="$store.getters.noScroll? 'open': ''">
+    <page-loading/>
     <div class="app-wrapper" ref="app" v-if="hasAuth">
       <nav-bar/>
       <router-view/>
@@ -13,12 +14,18 @@
 import FooterComponent from './components/main/Footer'
 import NavBar from './components/main/Header'
 import CustomPopup from './components/partials/Popup'
+import PageLoading from './components/partials/PageLoading'
+import metas from './lang/meta/metas'
 
 export default {
   components: {
+    PageLoading,
     CustomPopup,
     FooterComponent,
     NavBar
+  },
+  metaInfo: function () {
+    return metas.defaultMetas[this.locale]
   },
   data: () => {
     return {
@@ -36,7 +43,7 @@ export default {
         this.$http.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + response.data.token
         this.hasAuth = true
       }).catch((error) => {
-        console.log(error)
+        console.error(error)
       })
     } else {
       this.$http.defaults.headers.common[ 'Authorization' ] = 'Bearer ' + sessionToken
@@ -57,6 +64,7 @@ export default {
   &.open {
     overflow-y: hidden;
     height: 100vh;
+    padding-right: 17px;
   }
 }
 

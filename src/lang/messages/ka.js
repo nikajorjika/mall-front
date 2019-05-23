@@ -13,7 +13,8 @@ const dictionary = {
     year: 'წლის',
     city: 'ქალაქის',
     gender: 'სქესის',
-    password_confirmation: 'განმეორებითი პაროლი'
+    password_confirmation: 'განმეორებითი პაროლის',
+    newPassword: 'ახალი პაროლი'
   },
   messages: {
     email: (email) => `${email} ფორმატი არასწორია`,

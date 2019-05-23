@@ -45,6 +45,7 @@ export default {
         }
       }
       .content-container{
+        margin-top: 30px;
         .content-ul{
           .content-li{
             .item-wrapper{
@@ -72,6 +73,13 @@ export default {
     .content-container{
       .content-ul{
         .content-li{
+          a{
+            .item-wrapper{
+              &:hover{
+                color: #999;
+              }
+            }
+          }
           .item-wrapper{
             font-family: 'Muli Light','BPG Arial', 'sans-serif';
             font-size: 1.4rem;
@@ -79,8 +87,9 @@ export default {
             line-height: 1.29;
             color: #3a3838;
             margin: 28px 0;
-            &:hover{
-              color: #999;
+            text-transform: capitalize;
+            .no-capitalize{
+              text-transform: none;
             }
             @media screen and (max-width: 1650px) {
               font-size: 1.2rem;

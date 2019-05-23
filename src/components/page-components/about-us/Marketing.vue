@@ -5,14 +5,25 @@
     <service-list :list="list"/>
     <about-content :content="secondaryDescription"/>
     <div class="additional-info">
-      <div class="additional-info-item">
-        <h4>{{contactInfoTitle}}</h4>
-        <p>
-          <span class="color-grey">{{contactInfoFirst}}</span>
-          <br>
-          <br>
-          <span class="color-grey">{{contactInfoSecond}}</span>
-        </p>
+      <div class="contact-info">
+        <div class="contact-info-inner" v-for="(item, index) in contactInfoFirst" :key="index">
+          <p :class="{bold: index === 1}" v-if="index !== 2">
+            {{item}}
+          </p>
+          <a :href="`mailto:${item}`" v-else>
+            {{item}}
+          </a>
+        </div>
+      </div>
+      <div class="contact-info">
+        <div class="contact-info-inner" v-for="(item, index) in contactInfoSecond" :key="index">
+          <p :class="{bold: index === 1}" v-if="index !== 2">
+            {{item}}
+          </p>
+          <a :href="`mailto:${item}`" v-else>
+            {{item}}
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -60,7 +71,7 @@ export default {
   },
   computed: {
     pageDataContent: function () {
-      return this.$store.getters[ this.model ] ? JSON.parse(this.$store.getters[ this.model ][ 0 ].data) : ''
+      return this.$store.getters[ this.model ] ? this.parsePageData(this.$store.getters[ this.model ][ 0 ].data) : ''
     },
     pageTitle: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'Title' ] : ''
@@ -72,10 +83,10 @@ export default {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoTitle' ] : ''
     },
     contactInfoFirst: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoFirst' ] : ''
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'FirstContact' ] : ''
     },
     contactInfoSecond: function () {
-      return this.pageDataContent ? this.pageDataContent[ this.locale + 'ContactInfoSecond' ] : ''
+      return this.pageDataContent ? this.pageDataContent[ this.locale + 'SecondContact' ] : ''
     },
     secondaryDescription: function () {
       return this.pageDataContent ? this.pageDataContent[ this.locale + 'SecondaryDescription' ] : ''
@@ -109,41 +120,66 @@ export default {
 </script>
 <style lang="scss" scoped>
 .page-block {
+  .additional-info {
+    display: flex;
+    margin-top: 28px;
+    @media screen and (max-width: 1000px){
+      flex-direction: column;
+    }
+    @media screen and (max-width: 550px){
+      padding: 0 36px;
+    }
+    .contact-info {
+      background: #f9f9f9;
+      padding: 14px 33px;
+      margin-right: 16px;
+      min-width: 398px;
+      @media screen and (max-width: 1366px){
+        min-width: 302px;
+      }
+      @media screen and (max-width: 1000px){
+        margin-bottom: 12px;
+      }
+      @media screen and (max-width: 550px){
+        min-width: 0;
+      }
+      .contact-info-inner {
+        p {
+          font-size: 1.8rem;
+          margin: 0;
+          line-height: 1.28;
+          @media screen and (max-width: 550px){
+            font-size: 1.3rem;
+          }
+          &.bold {
+            font-weight: 900;
+            margin-bottom: 21px;
+          }
+        }
+        a {
+          color: #2d83e6;
+          font-size: 1.6rem;
+          margin: 0;
+          line-height: 1.88;
+          @media screen and (max-width: 550px){
+            font-size: 1.3rem;
+          }
+        }
+
+        &:nth-child(4) {
+          p {
+            font-size: 1.6rem;
+            @media screen and (max-width: 550px){
+              font-size: 1.3rem;
+            }
+          }
+        }
+      }
+    }
+  }
   p {
     color: #000;
     opacity: 1;
-  }
-  .additional-info {
-    margin-top: 85px;
-    margin-bottom: 74.5px;
-    display: flex;
-    @media screen and (max-width: 550px) {
-      padding: 0 36px;
-    }
-    .additional-info-item {
-      width: 376px;
-      margin-right: 12px;
-      h4 {
-        font-size: 2.4rem;
-        margin: 21px 0;
-        line-height: 1.25;
-        font-weight: bold;
-        font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
-        @media screen and (max-width: 550px) {
-          font-size: 1.7rem;
-
-        }
-      }
-      p {
-        max-width: 246px;
-        @media screen and (max-width: 550px) {
-          font-size: 1.2rem;
-        }
-        .color-grey {
-          color: #848484;
-        }
-      }
-    }
   }
 }
 </style>

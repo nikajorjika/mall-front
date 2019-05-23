@@ -6,18 +6,18 @@
     </div>
     <div class="form-container">
       <div class="field-container">
-        <custom-select/>
+        <custom-select :items="dropDown.data" @change="changeDropdown"/>
       </div>
       <div class="field-container">
         <input type="text" id="contact-name" v-validate="'required'" name="name" autocomplete="off"
                v-model="contact.name">
-        <label for="contact-name" :class="{focus: contact.name}">{{t('name')}}</label>
+        <label for="contact-name" :class="{focus: contact.name}">{{t('name')}}*</label>
         <span v-show="errors.first('name')" class="error">{{ errors.first('name') }}</span>
       </div>
       <div class="field-container">
         <input type="text" id="contact-email" v-validate="'required|email'" autocomplete="off" name="email"
-               v-model="contact.email">
-        <label for="contact-email" :class="{focus: contact.email}">{{t('email')}}</label>
+               v-model="contact.from">
+        <label for="contact-email" :class="{focus: contact.from}">{{t('email')}}*</label>
         <span v-show="errors.first('email')" class="error">{{ errors.first('email') }}</span>
       </div>
       <div class="field-container">
@@ -29,15 +29,16 @@
         <label for="contact-phone" :class="{focus: contact.phone}">{{t('telephone')}}</label>
       </div>
       <div class="field-container">
-        <textarea id="contact-message" :placeholder="t('your_message')" v-validate="'required'" autocomplete="off"
-                  name="message" v-model="contact.message" cols="12" rows="12"></textarea>
+        <textarea id="contact-message" :placeholder="`${t('your_message')}*`" v-validate="'required'" autocomplete="off"
+                  name="message" v-model="contact.message" cols="12" rows="8"></textarea>
       </div>
       <div class="field-container">
         <input id="subscribe" autocomplete="off" type="checkbox"
-                  name="subscribe" v-model="contact.subscribe">
+               name="subscribe" v-model="contact.subscribe">
         <label class="checkbox-label" for="subscribe">{{t('contact_form_subscribe_text')}}</label>
       </div>
-      <button class="contact-send-button"><span>{{t('send')}}</span><img src="../../assets/images/icons/left-arrow-subscribe.svg" alt="Arrow"></button>
+      <button class="contact-send-button" @click="sendMail"><span>{{t('send')}}</span><img
+        src="../../assets/images/icons/left-arrow-subscribe.svg" alt="Arrow"></button>
     </div>
   </div>
 </template>
@@ -56,8 +57,69 @@ export default {
         phone: '',
         message: '',
         subscribe: false,
-        email: ''
+        from: '',
+        to: 'info@tbilisimall.com'
+      },
+      dropDown: {
+        placeholder: {
+          en: 'categories',
+          ka: 'კატეგორიები'
+        },
+        data: [
+          {
+            name: {
+              en: 'general',
+              ka: 'ზოგადი'
+            },
+            value: 'info@tbilisimall.com'
+          },
+          {
+            name: {
+              en: 'client service',
+              ka: 'კლიენტთა მომსახურება'
+            },
+            value: 'info@tbilisimall.com'
+          },
+          {
+            name: {
+              en: 'marketing',
+              ka: 'მარკეტინგი'
+            },
+            value: 'marketing@tbilisimall.com'
+          },
+          {
+            name: {
+              en: 'leasing',
+              ka: 'ლიზინგი'
+            },
+            value: 'leasing@tbilisimall.com'
+          },
+          {
+            name: {
+              en: 'public relations',
+              ka: 'საზოგადოებასთან ურთიერთობა'
+            },
+            value: 'marketing@tbilisimall.com'
+          }
+        ]
       }
+    }
+  },
+  methods: {
+    sendMail: function () {
+      this.$validator.validateAll().then((result) => {
+        if (result) {
+          this.$http.post(this.$store.state.apiUrls.contactSend, this.contact).then((response) => {
+            this.$store.dispatch('showPopup', {
+              icon: 'success',
+              message: this.t('sent')
+            })
+          }).catch(error => console.error(error))
+        }
+      })
+    },
+    changeDropdown: function (selected) {
+      this.contact.to = selected.value
     }
   }
 }
@@ -80,6 +142,10 @@ export default {
       font-size: 1.6rem;
       opacity: 1;
     }
+  }
+
+  .error {
+    color: red;
   }
 
   .form-container {
@@ -132,14 +198,17 @@ export default {
 
         &:focus {
           outline: none;
+
           + label {
             transform: translateY(-130%);
           }
         }
       }
-      .checkbox-label{
+
+      .checkbox-label {
         padding-left: 22px;
       }
+
       textarea {
         padding: 8px 10px;
         width: 100%;
@@ -149,17 +218,19 @@ export default {
         text-transform: capitalize;
       }
     }
-    .contact-send-button{
+
+    .contact-send-button {
       border: 1px solid rgba(0, 0, 0, 0.66);
       font-family: 'Muli', 'BPG Nino Mtavruli', sans-serif;
       font-size: 2.1rem;
       text-align: center;
-      padding:12px;
+      padding: 12px;
       display: flex;
       background: #f9f9f9;
       position: relative;
       cursor: pointer;
-      &:before{
+
+      &:before {
         content: '';
         height: 0;
         width: 100%;
@@ -170,25 +241,30 @@ export default {
         background: #000;
         transition: height 0.3s;
       }
-      &:hover{
-        &:before{
+
+      &:hover {
+        &:before {
           height: 100%;
           transition: height 0.3s;
         }
-        span{
+
+        span {
           color: #ffffff;
         }
-        img{
+
+        img {
           filter: invert(1);
         }
       }
-      img{
+
+      img {
         width: 17.5px;
         height: 12.3px;
         margin: auto auto auto 16px;
         z-index: 2;
       }
-      span{
+
+      span {
         margin-left: auto;
         text-transform: capitalize;
         z-index: 2;

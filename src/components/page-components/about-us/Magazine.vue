@@ -7,20 +7,17 @@
           <img :src="item.photoUrl" :alt="item.photoUrl[locale]">
         </div>
         <div class="magazine-date">
-          <div class="date-wrapper">
-            <span>{{formatData(item.date)}}</span>
-          </div>
           <div class="name-wrapper">
             <h4>{{item[`name${locale.toUpperCase()}`]}}</h4>
           </div>
         </div>
         <div class="download-button">
           <a :href="item.fileUrl" target="_blank">
-            <button><span class="download-text">{{t('download')}}</span>
-              <img src="../../../assets/images/icons/download-black.svg" class="download-icon black"
-                   alt="Download Icon">
-              <img src="../../../assets/images/icons/download-white.svg" class="download-icon white"
-                   alt="Download Icon">
+            <button><span class="download-text">{{t('open')}}</span>
+              <!--<img src="../../../assets/images/icons/download-black.svg" class="download-icon black"-->
+                   <!--alt="Download Icon">-->
+              <!--<img src="../../../assets/images/icons/download-white.svg" class="download-icon white"-->
+                   <!--alt="Download Icon">-->
             </button>
           </a>
         </div>
@@ -101,19 +98,23 @@ export default {
 .page-block {
   padding-right: 2px;
   .magazines-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     flex-wrap: wrap;
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    margin-right: 12px;
+    @media screen and (max-width: 1020px){
+      grid-template-columns: repeat(2, 1fr);
+    }
     @media screen and (max-width: 550px){
-      flex-direction: column;
+      grid-template-columns: 1fr;
       padding: 0 36px;
     }
     .magazine-item {
-      width: calc(50% - 15.5px);
-      margin-right: 15.5px;
+      /*width: calc(50% - 15.5px);*/
+      /*margin-right: 15.5px;*/
       border: 1px solid #dcdcdc;
-      &:nth-child(n + 3){
-        margin-top:15px;
-      }
       @media screen and (max-width: 550px){
         width: 100%;
         margin-bottom: 15px;
@@ -135,24 +136,11 @@ export default {
       }
 
       .magazine-date {
-        display: flex;
         padding: 15px;
-
-        .date-wrapper {
-          color: #848484;
-          margin-left: auto;
-
-          span {
-            font-size: 1.2rem;
-            line-height: 1.25;
-          }
-        }
-
         .name-wrapper {
-          margin-right: auto;
-
           h4 {
-            font-size: 1.2rem;
+            text-align: center;
+            font-size: 1.4rem;
             line-height: 1.25;
             margin: 0 0 0 9px;
           }
@@ -165,10 +153,10 @@ export default {
           border-radius: 0;
           border: none;
           border-top: 1px solid #dcdcdc;
-          padding: 57px 0 70px 0;
+          padding: 7px 0;
           background-color: transparent;
           font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
-          font-size: 2.4rem;
+          font-size: 1.8rem;
           text-transform: uppercase;
           display: flex;
           justify-content: center;

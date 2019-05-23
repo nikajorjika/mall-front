@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import store from './store'
-import Axios from 'axios/index'
 
 Vue.use(Router)
 
@@ -10,10 +9,10 @@ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   scrollBehavior: function (to, from, savedPosition) {
-    const exception = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine' ]
-    if ((exception.indexOf(to.name) === -1 && exception.indexOf(from.name) === -1) && to.name !== from.name) {
-      return { x: 0, y: 0 }
-    }
+    // const exception = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine' ]
+    // if ((exception.indexOf(to.name) === -1 && exception.indexOf(from.name) === -1) && to.name !== from.name) {
+    // }
+    return { x: 0, y: 0 }
   },
   routes: [
     {
@@ -47,6 +46,12 @@ const router = new Router({
           name: 'marketing',
           props: true,
           component: () => import('./components/page-components/about-us/Marketing.vue')
+        },
+        {
+          path: 'mall-map',
+          name: 'mallMap',
+          props: true,
+          component: () => import('./components/page-components/about-us/TbilisiMallMap.vue')
         },
         {
           path: 'leasing',
@@ -118,6 +123,12 @@ const router = new Router({
       component: () => import('./views/Stores.vue')
     },
     {
+      path: '/choose/santa',
+      name: 'promoPage',
+      props: true,
+      component: () => import('./views/PromoPage.vue')
+    },
+    {
       path: '/:locale/media',
       name: 'Media',
       props: true,
@@ -136,10 +147,16 @@ const router = new Router({
       component: () => import('./views/News.vue')
     },
     {
-      path: '/:locale/entertainment',
+      path: '/:locale/entertainment/:cat?',
       name: 'entertainment',
       props: true,
       component: () => import('./views/Entertainment.vue')
+    },
+    {
+      path: '/:locale/services/:cat?',
+      name: 'services',
+      props: true,
+      component: () => import('./views/Services.vue')
     },
     {
       path: '/:locale/user/notifications',
@@ -191,18 +208,22 @@ const router = new Router({
     }
   ]
 })
+
+/**
+ * Function is fired every time route is changed
+ */
 router.beforeEach((to, from, next) => {
   let language = to.params.locale
   if (language) {
     const languages = store.getters.languages
-    languages.forEach(function (object, index) {
+    languages.forEach(function (object) {
       if (object.locale === language) {
         store.commit('SET_LOCALE', object.locale)
       }
     })
   }
   const aboutPages = [ 'guest_service', 'about', 'mallTaxi', 'gift_card', 'marketing', 'leasing', 'magazine' ]
-  if (aboutPages.indexOf(to.name) !== -1) {
+  if (aboutPages.indexOf(to.name) !== -1 && to.name !== from.name) {
     store.commit('SET_LOADING_STATE', { model: 'page', value: true })
   }
   next()

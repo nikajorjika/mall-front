@@ -16,6 +16,7 @@ export default {
   name: 'registration-page',
   components: { RegistrationForm, BlockHeaderStandard },
   mounted: function () {
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
     if (this.$store.getters.user) {
       this.$router.back()
     }
@@ -25,9 +26,9 @@ export default {
 <style lang="scss">
 #registration {
   .registration-page-container {
-    margin-top: 153px;
+    margin-top: 80px;
     .registration-form-container {
-      width:100%;
+      width: 100%;
       max-width: 616px;
       margin: 0 auto;
     }

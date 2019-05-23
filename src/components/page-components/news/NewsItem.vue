@@ -1,7 +1,11 @@
 <template>
   <div class="news-item">
-    <div class="news-wrapper" v-if="!isOpen">
-      <img :src="item.photoUrl" :alt="item.name">
+    <div class="news-wrapper" :class="{loading: loading}" v-if="!isOpen">
+      <v-lazy-image
+        :src="item.photoUrl"
+        v-if="!loading"
+        :alt="item.name[locale]"
+      ></v-lazy-image>
     </div>
   </div>
 </template>
@@ -21,6 +25,10 @@ export default {
           name: ''
         }
       }
+    },
+    loading: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => {
@@ -40,16 +48,19 @@ export default {
     position: relative;
     padding-top: 113.2%;
     overflow: hidden;
+    &.loading{
+      background: #f9f9f9;
+    }
     &:hover{
       img{
-        transform: scale(1);
+        transform: scale(1.1);
       }
     }
     img {
       transition: all 0.3s;
       width: 100%;
       height: 100%;
-      transform: scale(1.1);
+      transform: scale(1);
       position: absolute;
       top: 0;
       left: 0;

@@ -2,7 +2,9 @@
   <div class="newsletter-subscribe">
     <div class="subscribe-container">
       <div class="logo-part">
-        <img src="../../assets/images/icons/tb_mall_logo_black.svg" alt="st">
+        <router-link :to="`/${locale}`">
+          <img src="../../assets/images/icons/tm_footer_symbol.svg" alt="st">
+        </router-link>
       </div>
       <div class="subscribe-part" :class="{open: showForm}">
         <div class="inner-container form-closed" @click.stop="showForm = !showForm">
@@ -52,7 +54,7 @@ export default {
     subscribe: function () {
       this.$validator.validateAll().then((result) => {
         if (result) {
-          this.$store.dispatch('subscribeNewsletter', {email: this.email}).then((response) => {
+          this.$store.dispatch('subscribeNewsletter', { email: this.email }).then((response) => {
             this.$notify({
               group: 'notify',
               type: 'success',
@@ -63,7 +65,6 @@ export default {
             console.error(error)
           })
         } else {
-          console.log('notify')
           this.$notify({
             group: 'notify',
             type: 'error',
@@ -72,7 +73,7 @@ export default {
           })
         }
       }).catch((error) => {
-        console.log(error)
+        console.error(error)
       })
     },
     documentClick: function () {
@@ -85,6 +86,7 @@ export default {
 <style scoped lang="scss">
 .newsletter-subscribe {
   border-top: 1px solid #dcdcdc;
+
   .subscribe-container {
     display: flex;
     width: 85%;
@@ -93,6 +95,9 @@ export default {
     @media screen and (max-width: 925px) {
       width: 100%;
     }
+    .form-closed{
+      cursor: pointer;
+    }
     .logo-part {
       padding: 16px 26px;
       height: 52px;
@@ -100,6 +105,11 @@ export default {
       border-right: 1px solid #dcdcdc;
       border-left: 1px solid #dcdcdc;
       box-sizing: content-box;
+      img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
       @media screen and (max-width: 1650px) {
         height: 37px;
         width: 37px;
@@ -109,19 +119,23 @@ export default {
         border-left: none;
       }
     }
-    .subscribe-part{
-      width:100%;
+
+    .subscribe-part {
+      width: 100%;
       display: flex;
       overflow: hidden;
       position: relative;
-      &.open{
+
+      &.open {
         .form-open {
           transition: transform .2s;
           transform: translateY(0);
         }
       }
+
       .text-part {
         margin: auto auto auto 32px;
+
         p {
           font-family: "Muli Light", 'BPG Arial', "sans-serif";
           font-size: 1.6rem;
@@ -137,6 +151,7 @@ export default {
           }
         }
       }
+
       .btn-part {
         button {
           height: 100%;
@@ -154,29 +169,34 @@ export default {
             font-size: 1.1rem;
             padding: 0 24px;
           }
+
           &:hover {
             background: #eaeaea;
           }
         }
       }
     }
+
     .inner-container {
       display: flex;
       width: 100%;
     }
+
     .form-open {
       position: absolute;
       height: 100%;
-      width:100%;
-      top:0;
+      width: 100%;
+      top: 0;
       left: 0;
       transition: transform .2s;
       transform: translateY(102%);
+
       .text-part {
         margin: 0;
         background-color: #000000;
         height: 100%;
         width: 100%;
+
         .input {
           height: 100%;
           width: 100%;
@@ -190,12 +210,14 @@ export default {
           }
         }
       }
+
       .btn-part {
         button {
           background: #000000;
           color: #ffffff;
           white-space: nowrap;
           border-left: 1px solid #848484;
+
           &:hover {
             background: rgb(44, 44, 44);
           }

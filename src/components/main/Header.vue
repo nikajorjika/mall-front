@@ -14,16 +14,36 @@
               </router-link>
               <transition name="slideUp">
                 <div v-if="item.children !== undefined && showChild === item" class="drop">
-                  <ul :class="{twoCol: item.children.length > 10 }">
+                  <ul :class="{twoCol: item.children.length > 10 }" v-if="item.url === '/stores'">
+                    <li v-for="(child, i) in getFilteredCategories('stores')" v-bind:key="i">
+                      <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
+                        {{child.translates[locale]}}
+                      </router-link>
+                    </li>
+                  </ul>
+                  <ul class="reorder" :class="{twoCol: item.children.length > 10 }"
+                      v-else-if="item.url === '/entertainment'">
+                    <li v-for="(child, i) in getFilteredCategories('entertainment')" v-bind:key="i">
+                      <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
+                        {{child.translates[locale]}}
+                      </router-link>
+                    </li>
+                  </ul>
+                  <ul class="reorder" :class="{twoCol: item.children.length > 10 }"
+                      v-else-if="item.url === '/services'">
+                    <li v-for="(child, i) in getFilteredCategories('services')" v-bind:key="i">
+                      <router-link :to="`/${locale}${item.url}/${createSlug(child.translates.en)}`">
+                        {{child.translates[locale]}}
+                      </router-link>
+                    </li>
+                  </ul>
+                  <ul :class="{twoCol: item.children.length > 10 }" v-else>
                     <li v-for="(child, i) in item.children" v-bind:key="i">
                       <router-link :to="`/${locale}${item.url}${child.url}`">
                         {{child.name[locale]}}
                       </router-link>
                     </li>
                   </ul>
-                  <div class="drop-image">
-                    <img src="../../assets/images/statics/tbm.jpg" alt="Tbilisi mall">
-                  </div>
                 </div>
               </transition>
             </div>
@@ -32,8 +52,9 @@
       </div>
       <div class="header-center">
         <div class="mall-logo">
-          <router-link to="/">
-            <img class="logo" src="../../assets/images/icons/TM_LOGO.svg" alt="Tbilisi Mall Logo">
+          <router-link :to="{name: 'home', params: {locale: locale }}">
+            <img :src="getLogoImage()" />
+            <!--<object :data="getLogoImage()" type="image/svg+xml" @click="goHome()"></object>-->
           </router-link>
         </div>
       </div>
@@ -81,9 +102,9 @@
         <ul v-else>
           <li>
             <div @click.prevent="toggleSearch()">
-              <router-link to="#" class="text-center">
+              <a class="text-center">
                 <img src="../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
-              </router-link>
+              </a>
             </div>
           </li>
           <li>
@@ -138,17 +159,26 @@ export default {
       showActions: false,
       showChild: null,
       scrollY: 0,
+      savedY: 0,
       showSearch: false,
-      sticky: false
+      sticky: false,
+      stores: [ '5b9d3c1f62973c001fd2c698', '5b9d3c6062973c001fd2c699' ],
+      entertainment: [ '5b9d3c7762973c001fd2c69a' ],
+      services: [ '5b9d3c8c62973c001fd2c69b' ]
     }
   },
   created: function () {
     document.addEventListener('click', this.documentClick)
   },
   mounted: function () {
+    if (!this.$store.getters.categories.length) {
+      this.$store.dispatch('getCategories').catch((error) => {
+        console.error(error)
+      })
+    }
     window.addEventListener('scroll', (event) => {
-      this.scrollY = Math.round(window.scrollY);
-    });
+      this.scrollY = Math.round(window.scrollY)
+    })
   },
   components: {
     SearchContainer,
@@ -173,14 +203,26 @@ export default {
         this.closeSearch()
       }
     },
-    scrollY: function (newValue){
+    scrollY: function (newValue) {
       this.sticky = newValue > 85
     }
   },
   methods: {
     toggleSearch: function () {
-      this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
-      this.showSearch = !this.showSearch
+      if (!this.showSearch) {
+        this.savedY = this.scrollY
+        this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
+        this.showSearch = !this.showSearch
+        console.log('Saved Y location: ' + this.savedY)
+      } else {
+        this.$store.commit('SET_NO_SCROLL', !this.$store.getters.noScroll)
+        this.showSearch = !this.showSearch
+        console.log('Used Y location: ' + this.savedY)
+        window.setTimeout(() => {
+          window.scroll(0, this.savedY)
+          this.savedY = 0
+        }, 100)
+      }
     },
     closeSearch: function () {
       this.$store.commit('SET_NO_SCROLL', false)
@@ -204,6 +246,9 @@ export default {
     },
     documentClick: function () {
       this.showActions = false
+    },
+    getLogoImage: function () {
+      return require('../../assets/images/icons/tm_header_logo.svg')
     }
   }
 }
@@ -212,18 +257,21 @@ export default {
 <style lang="scss">
 #nav {
   border-top: solid 1px #f1f1f1;
-  &.fixed{
+
+  &.fixed {
     padding-top: 84px;
-    .header-wrapper{
+
+    .header-wrapper {
       position: fixed;
       animation: slideDown 0.3s;
       top: 0;
-      left:0;
-      width:100%;
+      left: 0;
+      width: 100%;
       z-index: 4;
       background-color: #ffffff;
     }
   }
+
   .header-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -270,7 +318,6 @@ export default {
           top: calc(100% - 11px);
           box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
           display: flex;
-          padding-right: 182px;
 
           &.slideUp-enter-active {
             animation: subMenuEnter .4s;
@@ -285,14 +332,18 @@ export default {
             padding: 24px 0;
 
             &.twoCol {
-              width: 472px;
+              width: 520px;
               display: flex;
               flex-wrap: wrap;
 
               li {
-                width: 236px;
+                width: 260px;
                 margin-right: 0;
               }
+            }
+            &.reorder {
+              flex-direction: column;
+              display: flex;
             }
 
             li {
@@ -354,8 +405,11 @@ export default {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 156px;
+      width: 185px;
       transform: translate(-50%, -50%);
+      @media screen and (max-width: 910px) {
+        width: 129px;
+      }
       @media screen and (max-width: 760px) {
         width: 100px;
       }
@@ -365,7 +419,9 @@ export default {
 
       .mall-logo {
         font-family: 'Muli Bold', 'BPG Nino Mtavruli', 'sans-serif';
-
+        img{
+          width: 100%;
+        }
         .logo {
           font-size: 2.3rem;
           letter-spacing: 0.1rem;
@@ -392,6 +448,7 @@ export default {
         > li {
           border-left: solid 1px #f1f1f1;
           position: relative;
+
           &:before {
             content: '';
             height: 0;
@@ -403,30 +460,36 @@ export default {
             background: #000;
             transition: height 0.3s;
           }
+
           &:hover {
-            >div>a,
+            > div > a,
             > a {
               color: #fff;
+
               img {
                 filter: invert(1);
               }
             }
+
             .language-switcher {
               .lang-wrapper {
                 > a {
                   color: #fff;
+
                   img {
                     filter: invert(1);
                   }
                 }
               }
             }
+
             &:before {
               height: 100%;
               top: auto;
               bottom: 0;
             }
           }
+
           a {
             padding: 35.5px 29px;
             min-width: 85px;
@@ -444,6 +507,7 @@ export default {
               padding: 23px;
               min-width: 0;
             }
+
             &.text-center {
               display: flex;
               text-align: center;
@@ -470,11 +534,13 @@ export default {
             left: -42px;
             padding: 32px;
             box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.13);
+
             &.mobile-version {
               right: 2px;
               top: calc(100% - 5px);
               left: auto;
             }
+
             &.slideUp-enter-active {
               animation: subMenuEnter .4s;
             }
@@ -482,6 +548,7 @@ export default {
             &.slideUp-leave-active {
               animation: subMenuLeave .2s;
             }
+
             ul {
               li {
                 margin-bottom: 14px;
@@ -522,6 +589,7 @@ export default {
       }
     }
   }
+
   .search-wrapper {
     position: fixed;
     top: 0;
@@ -531,6 +599,7 @@ export default {
     background: #fff;
     z-index: 999;
     overflow-y: auto;
+
     &.fade-leave-active {
       animation: fadeOut .2s;
     }
@@ -546,15 +615,20 @@ export default {
 
   .navigation-menu {
     border-left: solid 1px #f1f1f1;
-    border-right: solid 1px #f1f1f1;
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
-    @media screen and (max-width: 1520px) {
+    @media screen and (max-width: 1350px) {
       display: none;
     }
 
     > li {
+      @media screen and (max-width: 1550px) {
+        &:last-child {
+          display: none;
+        }
+      }
+
       a {
         padding: 35.5px 18px;
         display: inline-block;

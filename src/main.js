@@ -20,7 +20,7 @@ import {
   faLink,
   faBookmark
 } from '@fortawesome/free-solid-svg-icons'
-import { faFacebookF, faTwitter, faYoutube, faPinterest, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookF, faInstagram, faTwitter, faYoutube, faPinterest, faLinkedinIn } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import Axios from 'axios'
 import * as VueGoogleMaps from 'vue2-google-maps'
@@ -32,8 +32,15 @@ import VueYouTubeEmbed from 'vue-youtube-embed'
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { VLazyImagePlugin } from 'v-lazy-image'
-const SocialSharing = require('vue-social-sharing')
+import Meta from 'vue-meta'
 
+const SocialSharing = require('vue-social-sharing')
+const VueScrollTo = require('vue-scrollto')
+
+Vue.use(VueScrollTo)
+Vue.use(Meta, {
+  tagIDKeyName: 'vmid'
+})
 Vue.use(VLazyImagePlugin)
 Vue.use(VueYouTubeEmbed)
 Vue.use(SocialSharing)
@@ -44,7 +51,7 @@ Vue.use(Notifications)
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyAcuJoeoWXCUeGGDIW8EWcunpDmjqWeZ9g',
-    libraries: 'places'
+    libraries: 'places,drawing'
   }
 })
 Vue.use(VeeValidate, {
@@ -71,6 +78,7 @@ library.add(faAngleLeft)
 library.add(faBookmark)
 library.add(faAngleRight)
 library.add(faFacebookF)
+library.add(faInstagram)
 library.add(faTwitter)
 library.add(faLink)
 library.add(faYoutube)
@@ -87,5 +95,6 @@ new Vue({
   render: h => h(App),
   created: function () {
     AOS.init()
+    this.initFacebook()
   }
 }).$mount('#app')

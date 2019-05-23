@@ -1,10 +1,21 @@
 <template>
   <div class="custom-select" ref="dropdownMenu">
     <div class="selected-item" @click="toggleBody" :class="{open: open}">
+      <div v-if="multiple">
+      <span class="selected multiple" v-if="openItems.length"><span class="non-breakable "
+                                                                    v-for="(selected, index) in openItems" :key="index">
+        {{selected[nameField][locale]}} {{index !== openItems.length - 1 ? ',' : ''}}
+      </span> <font-awesome-icon
+        icon="caret-down"/></span>
+        <span class="placeholder" v-if="!openItems.length"><span class="non-breakable">{{placeholder[locale]}}</span> <font-awesome-icon
+          icon="caret-down"/></span>
+      </div>
+      <div v-else>
       <span class="selected" v-if="selectedItem"><span class="non-breakable">{{selectedItem[nameField][locale]}}</span> <font-awesome-icon
         icon="caret-down"/></span>
-      <span class="placeholder" v-if="!selectedItem"><span class="non-breakable">{{placeholder[locale]}}</span> <font-awesome-icon
-        icon="caret-down"/></span>
+        <span class="placeholder" v-if="!selectedItem"><span class="non-breakable">{{placeholder[locale]}}</span> <font-awesome-icon
+          icon="caret-down"/></span>
+      </div>
     </div>
     <div class="selectable-items" v-if="open">
       <ul>
@@ -12,7 +23,10 @@
           <div class="item" v-if="selectedItem" @click="fireSelect(null)">{{placeholder[locale]}}</div>
         </li>
         <li v-for="(item, index) in items" v-bind:key="index">
-          <div class="item" @click="fireSelect(item)" :class="{currentItem: item === selectedItem || openItems.indexOf(item) !== -1}">{{item[nameField][locale]}}</div>
+          <div class="item" @click="fireSelect(item)"
+               :class="{currentItem: item === selectedItem || openItems.indexOf(item) !== -1}">
+            {{item[nameField][locale]}}
+          </div>
         </li>
       </ul>
     </div>
@@ -27,8 +41,8 @@ export default {
         this.fireSelect(null)
       } else {
         for (let i = 0; i < this.items.length; i++) {
-          if (this.items[ i ].value === this.value) {
-            this.fireSelect(this.items[ i ])
+          if (this.items[ i ][this.valueField].toString() === this.value.toString()) {
+            this.fireSelect(this.items[ i ], true)
           }
         }
       }
@@ -87,11 +101,14 @@ export default {
     }
   },
   methods: {
-    fireSelect: function (selected) {
-      if(this.multiple){
-        if(this.openItems.indexOf(selected) === -1){
+    fireSelect: function (selected, initial) {
+      if (this.multiple) {
+        if (initial) {
+          this.openItems = []
+        }
+        if (this.openItems.indexOf(selected) === -1) {
           this.openItems.push(selected)
-        }else{
+        } else {
           this.openItems.splice(this.openItems.indexOf(selected), 1)
         }
         if (selected) {
@@ -99,11 +116,15 @@ export default {
         } else {
           this.$emit('change', { selected: null, name: this.name, value: null })
         }
-      }else{
+      } else {
         this.selectedItem = selected
         this.open = false
         if (this.selectedItem) {
-          this.$emit('change', { selected: this.selectedItem, name: this.name, value: this.selectedItem[this.valueField] })
+          this.$emit('change', {
+            selected: this.selectedItem,
+            name: this.name,
+            value: this.selectedItem[ this.valueField ]
+          })
         } else {
           this.$emit('change', { selected: null, name: this.name, value: null })
         }
@@ -131,17 +152,17 @@ export default {
     border: 1px solid rgba(220, 220, 220, 0.51);
     background-color: #ffffff;
     cursor: pointer;
-    &.open{
+    &.open {
       border: 1px solid #000000;
       border-bottom: none;
       position: relative;
-      &:before{
+      &:before {
         content: '';
         width: 88%;
         height: 1px;
         background: #dcdcdc;
         position: absolute;
-        bottom:0;
+        bottom: 0;
         left: 50%;
         transform: translateX(-50%);
       }
@@ -162,6 +183,17 @@ export default {
       color: #000;
       display: flex;
       justify-content: space-between;
+      &.multiple {
+        overflow: hidden;
+        white-space: nowrap;
+        justify-content: left;
+        .non-breakable {
+          margin-right: 6px;
+        }
+        .fa-caret-down {
+          margin-left: auto;
+        }
+      }
       @media screen and (max-width: 1650px) {
         font-size: 0.9rem;
       }
@@ -187,7 +219,7 @@ export default {
     top: 100%;
     left: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 3;
     max-height: 200px;
     overflow: hidden;
     ul {
@@ -213,7 +245,7 @@ export default {
             background: #f9f9f9;
             color: #000;
           }
-          &.currentItem{
+          &.currentItem {
             color: #ffffff;
             background: #000;
             border-top: 1px solid rgba(220, 220, 220, 0.51);

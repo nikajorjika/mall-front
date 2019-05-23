@@ -4,7 +4,6 @@ import Axios from 'axios/index'
 import messages from './lang/lang'
 import navigation from './store/modules/navigation'
 import hamburgerData from './store/modules/hamburgerData'
-import events from './store/modules/events'
 import googleMap from './store/modules/map'
 import pageData from './store/modules/pageData'
 import footerData from './store/modules/footerData'
@@ -33,21 +32,25 @@ export default new Vuex.Store({
     loading: {
       stores: false,
       events: false,
-      page: false
+      page: true
     },
     locale: localStorage.getItem('locale') ? localStorage.getItem('locale') : 'en',
     navigation: navigation,
     hamburgerData: hamburgerData,
     events: [],
+    showPromo: true,
     frontPromotions: [],
     frontEvents: [],
+    fbLoaded: false,
     frontNewCollections: [],
     frontNews: [],
+    contactPage: null,
     stores: [],
     storesList: [],
+    servicesList: [],
+    entertainmentList: [],
     giftStoresList: [],
     entertainment: [],
-    entertainmentList: [],
     messages: messages,
     apiUrls: apiUrls,
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : (sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')) : null),
@@ -70,6 +73,7 @@ export default new Vuex.Store({
     notifications: [],
     socials: [],
     media: [],
+    storeSearch: '',
     pageData: pageData,
     footer: footerData,
     staticPages: staticPages,
@@ -93,6 +97,9 @@ export default new Vuex.Store({
     alphabet: (state) => {
       return state.alphabet
     },
+    showPromo: (state) => {
+      return state.showPromo
+    },
     searchResult: (state) => {
       return state.searchResult
     },
@@ -101,6 +108,9 @@ export default new Vuex.Store({
     },
     popup: (state) => {
       return state.popup
+    },
+    contactPage: (state) => {
+      return state.contactPage
     },
     navigation: (state) => {
       return state.navigation
@@ -155,6 +165,9 @@ export default new Vuex.Store({
     },
     entertainmentList: (state) => {
       return state.entertainmentList
+    },
+    servicesList: (state) => {
+      return state.servicesList
     },
     googleMap: (state) => {
       return state.googleMap
@@ -215,6 +228,12 @@ export default new Vuex.Store({
     },
     loading: (state) => {
       return state.loading
+    },
+    storeSearch: (state) => {
+      return state.storeSearch
+    },
+    fbLoaded: (state) => {
+      return state.storeSearch
     }
   },
   mutations: {
@@ -222,8 +241,14 @@ export default new Vuex.Store({
       state.locale = locale
       localStorage.setItem('locale', locale)
     },
+    SET_FB_STATUS: (state, value) => {
+      state.fbLoaded = value
+    },
     SET_NO_SCROLL: (state, newValue) => {
       state.noScroll = newValue
+    },
+    SET_PROMO_STATUS: (state, newValue) => {
+      state.showPromo = newValue
     },
     SET_CATEGORIES: (state, newValue) => {
       state.categories = newValue
@@ -398,7 +423,9 @@ export default new Vuex.Store({
             resolve('RECORD NOT FOUND')
           } else {
             resolve(response)
-            context.commit(request.setter, { data: response.data.data, model: request.model })
+            if (request.hasOwnProperty('model')) {
+              context.commit(request.setter, { data: response.data.data, model: request.model })
+            }
           }
         }).catch(function (error) {
           reject(error)
@@ -407,7 +434,7 @@ export default new Vuex.Store({
     },
     loadFiltered: function (context, request) {
       return new Promise((resolve, reject) => {
-        Axios.post(request.api).then(function (response) {
+        Axios.post(request.api, request.filters).then(function (response) {
           if (response.data.length) {
             resolve('RECORD NOT FOUND')
           } else {
@@ -469,16 +496,21 @@ export default new Vuex.Store({
     register: function (context, payload) {
       return new Promise((resolve, reject) => {
         const url = context.state.apiUrls.registerAPI
-        const user = {
-          name: payload.name,
-          surname: payload.lastName,
-          email: payload.email,
-          mobile: `${payload.mobileIndex.val}${payload.mobile}`,
-          birthDate: `${payload.day.val}/${payload.month.val}/${payload.year.val}`,
-          sex: payload.gender.val,
-          country: payload.country.val,
-          city: payload.city.val,
-          password: payload.password
+        let user
+        if (payload.facebookId) {
+          user = payload
+        } else {
+          user = {
+            name: payload.name,
+            surname: payload.lastName,
+            email: payload.email,
+            mobile: `${payload.mobileIndex.val}${payload.mobile}`,
+            birthDate: `${payload.year.val}/${payload.month.val}/${payload.day.val}`,
+            sex: payload.gender.val,
+            country: payload.country.val,
+            city: payload.city.val,
+            password: payload.password
+          }
         }
         Axios.post(`${url}`, user).then(function (response) {
           if (!response) {
@@ -506,11 +538,24 @@ export default new Vuex.Store({
           email: email,
           token: token
         }
-        Axios.get(`${url}/${credentials.email}`, credentials).then(function (response) {
+        Axios.get(`${url}/${credentials.email}`, {
+          data: credentials
+        }).then(function (response) {
           if (!response) {
             resolve('RECORD NOT FOUND')
           } else {
             resolve(response)
+            response.data.token = token
+            let remember = false
+            if (localStorage.getItem('user')) {
+              remember = true
+            }
+            response.data.user.token = token
+            context.commit('SET_USER', {
+              token: token,
+              user: response.data.user,
+              remember: remember
+            })
           }
         }).catch(function (error) {
           reject(error)
@@ -526,7 +571,6 @@ export default new Vuex.Store({
     search: function (context, keyword) {
       return new Promise((resolve) => {
         Axios.post(context.state.apiUrls.search, { name: keyword }).then((response) => {
-          console.log(response.data)
           context.commit('SET_SEARCH_RESULT', response.data.data)
           resolve(response.data)
         }).catch(error => {
@@ -648,7 +692,12 @@ export default new Vuex.Store({
           if (!response.data.bookmarkedItems.length) {
             resolve('RECORD NOT FOUND')
           } else {
-            context.commit('SET_USER_BOOKMARKS', response.data.bookmarkedItems)
+            if (response.data.hasOwnProperty('bookmarkedItems')) {
+              let bookmarks = response.data.bookmarkedItems.filter((item) => {
+                return item
+              })
+              context.commit('SET_USER_BOOKMARKS', bookmarks)
+            }
             resolve(response.data)
           }
         }).catch(function (error) {
@@ -660,12 +709,25 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         Axios.post(context.state.apiUrls.notifications, { userToken: context.getters.user.token }).then(function (response) {
           console.log(response)
-          if (!response.data.bookmarkedItems.length) {
+          if (!response.data.data.length) {
             resolve('RECORD NOT FOUND')
           } else {
-            context.commit('SET_USER_NOTIFICATIONS', response.data.bookmarkedItems)
+            context.commit('SET_USER_NOTIFICATIONS', response.data.data)
             resolve(response.data)
           }
+        }).catch(function (error) {
+          reject(error)
+        })
+      })
+    },
+    clearNotifications: function (context) {
+      return new Promise((resolve, reject) => {
+        Axios.post(context.state.apiUrls.clearNotifications, { userToken: context.getters.user.token }).then(function (response) {
+          context.dispatch('getUser', {
+            token: context.getters.user.token,
+            email: context.getters.user.email
+          }).catch(error => console.error(error))
+          resolve(response.data)
         }).catch(function (error) {
           reject(error)
         })
@@ -677,7 +739,12 @@ export default new Vuex.Store({
           if (!response.data.subscribedStores.length) {
             resolve('RECORD NOT FOUND')
           } else {
-            context.commit('SET_USER_SUBSCRIPTIONS', response.data.subscribedStores)
+            if (response.data.hasOwnProperty('subscribedStores')) {
+              let subscribed = response.data.subscribedStores.filter((item) => {
+                return item
+              })
+              context.commit('SET_USER_SUBSCRIPTIONS', subscribed)
+            }
             resolve(response.data)
           }
         }).catch(function (error) {

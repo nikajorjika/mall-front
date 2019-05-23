@@ -2,7 +2,7 @@
   <div class="event-home" :class="this.type">
     <router-link :to="`${locale}/whats-new/single/${createSlug(item.name[locale])}/${item._id}`">
       <div class="image-background">
-        <img :src="image" :alt="item.name[locale]">
+        <img :src="image" :alt="item.name[locale]" @load="loaded">
         <div class="event-item-content">
           <div class="event-type">
             <span>{{t(item.itemType)}}</span>
@@ -45,12 +45,15 @@ export default {
   methods: {
     emitClick: function () {
       this.$emit('click')
+    },
+    loaded: function () {
+      this.$emit('loaded')
     }
   },
   data: function () {
     return {
       sliderUrl: 'photoForSliderUrl',
-      sliderMobileUrl: 'photoForSliderUrl',
+      sliderMobileUrl: 'photoForMobileSliderUrl',
       adsUrl: 'photoForAdsUrl'
     }
   },
@@ -61,12 +64,14 @@ export default {
     image: function () {
       if (this.place === 'ads') {
         return this.item[ `${this.adsUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.adsUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
-      } else {
+      } else if (this.place === 'slider') {
         if (this.$mq === 'mobile') {
           return this.item[ `${this.sliderMobileUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.sliderMobileUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
         } else {
           return this.item[ `${this.sliderUrl}${this.locale.toUpperCase()}` ] ? this.item[ `${this.sliderUrl}${this.locale.toUpperCase()}` ] : this.item.photoUrl
         }
+      } else {
+        return this.item[ `photoUrl` ] ? this.item[ `photoUrl` ] : this.item.photoUrl
       }
     }
   }
@@ -76,37 +81,28 @@ export default {
 <style lang="scss" scoped>
 .event-home {
   width: 100%;
+
   &.mini {
     .image-background {
       width: 100%;
       position: relative;
       overflow: hidden;
-      padding-top: 71.7%;
       img {
-        height: 100%;
-        left: 50%;
-        top: 50%;
-        display: block;
-        position: absolute;
-        transform: translate(-50%, -50%);
+        width: 100%;
+        height: auto;
       }
     }
   }
+
   .image-background {
     width: 100%;
-    position: relative;
-    height: 859px;
-    @media screen and (max-width: 1650px) {
-      height: 546px;
-    }
+    height: auto;
+
     img {
       width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      position: absolute;
-      object-fit: cover;
+      height: auto;
     }
+
     &:before {
       content: '';
       position: absolute;
@@ -118,6 +114,7 @@ export default {
       background-image: linear-gradient(to bottom right, transparent, #111211);
       opacity: .6;
     }
+
     .event-item-content {
       position: absolute;
       bottom: 77px;
@@ -134,6 +131,7 @@ export default {
         left: 36px;
         width: calc(100% - 36px);
       }
+
       .event-type {
         font-size: 1.8rem;
         font-weight: 300;
@@ -151,6 +149,7 @@ export default {
           font-size: 1rem;
         }
       }
+
       .event-name {
         h3 {
           position: relative;
@@ -168,6 +167,7 @@ export default {
             font-size: 2.4rem;
             padding: 6.1px 0 6.4px;
           }
+
           &:after {
             content: '';
             position: absolute;
@@ -180,6 +180,7 @@ export default {
           }
         }
       }
+
       .event-description {
         p {
           font-size: 2.4rem;

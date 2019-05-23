@@ -1,5 +1,5 @@
 <template>
-  <div class="news-single" :id="item._id">
+  <div class="news-single" :id="`event_${item._id}`" ref="singleEvent">
     <div class="single-wrapper">
       <div class="half-col single-left">
         <div class="image-container">
@@ -18,14 +18,22 @@
         <div class="bookmark">
           <div @click="bookmark(item._id)">
             <!--<font-awesome-icon icon="bookmark"/>-->
-            <img src="../../../assets/images/icons/bookmark.svg" alt="Bookmark" v-show="!bookmarked.length">
-            <img src="../../../assets/images/icons/bookmarked.svg" alt="Bookmark" v-show="bookmarked.length">
+            <div class="do_bookmark">
+              <img src="../../../assets/images/icons/bookmark.svg" alt="Bookmark">
+              <span>+</span>
+            </div>
+            <div class="un_bookmark" :class="{bookmarked: bookmarked.length}">
+              <img src="../../../assets/images/icons/bookmarked.svg" alt="Bookmark">
+              <span>-</span>
+            </div>
           </div>
         </div>
         <div class="title-container">
           <h2 class="title">{{item.name[locale]}}</h2>
           <h4 class="sub-title" v-if="store.length">
-            {{store[0].name[locale]}}
+            <router-link :to="`/${locale}/store/${createSlug(store[0].name['en'])}/${store[0]._id}`">
+              {{store[0].name[locale]}}
+            </router-link>
           </h4>
         </div>
         <div class="description-container">
@@ -33,37 +41,29 @@
           </p>
         </div>
         <div class="socials-container">
-          <social-sharing :url="currentFullUrl"
-                          class="share-inner"
-                          :title="item.name[locale]"
-                          :description="item.description[locale]"
-                          inline-template>
-            <div class="socials-inner-container">
-              <network network="facebook">
-                <div class="social-item">
-                  <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/></span>
-                  <span class="label">share</span>
-                </div>
-              </network>
-              <network network="twitter">
-                <div class="social-item">
-                  <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/></span>
-                  <span class="label">tweet</span>
-                </div>
-              </network>
-              <network network="linkedin">
-                <div class="social-item">
-                  <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/></span>
-                  <span class="label">share</span>
-                </div>
-              </network>
-              <div class="social-item" @click="copyUrl('news-item-current-url')">
-                <input id="news-item-current-url" :value="currentFullUrl" type="hidden">
-                <span class="icon"><font-awesome-icon icon="link"/></span>
-                <span class="label">{{t('copyLink')}}</span>
-              </div>
+          <div class="socials-inner-container">
+            <div class="social-item" @click="shareOnFacebook(item)">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook-f' }"/></span>
+              <span class="label">share</span>
             </div>
-          </social-sharing>
+            <a class="social-item"
+               :href="`https://twitter.com/intent/tweet?text=${item.name[locale]}&url=${currentUrl}`"
+               target="_blank">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'twitter' }"/></span>
+              <span class="label">tweet</span>
+            </a>
+            <a class="social-item"
+               :href="`https://www.linkedin.com/shareArticle?mini=true&url=${currentUrl}&title=${item.name[locale]}e&summary=${item.description[locale]}`"
+               target="_blank">
+              <span class="icon"><font-awesome-icon :icon="{ prefix: 'fab', iconName: 'linkedin-in' }"/></span>
+              <span class="label">share</span>
+            </a>
+            <div class="social-item" @click="copyUrl('news-item-current-url')">
+              <input id="news-item-current-url" :value="currentFullUrl" type="hidden">
+              <span class="icon"><font-awesome-icon icon="link"/></span>
+              <span class="label">{{t('copyLink')}}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -89,6 +89,21 @@ export default {
     }
   },
   mounted: function () {
+    const VueScrollTo = require('vue-scrollto')
+
+    const options = {
+      easing: 'ease-in',
+      force: true,
+      offset: -100,
+      cancelable: true,
+      x: false,
+      y: true
+    }
+    if (this.redirect) {
+      window.setTimeout(() => {
+        VueScrollTo.scrollTo(`#event_${this.item._id}`, 500, options)
+      }, 300)
+    }
     if (!this.$store.getters.storesList.length) {
       this.$store.dispatch('fetchItems', {
         model: `storesList`,
@@ -116,6 +131,9 @@ export default {
     }
   },
   methods: {
+    shareOnFacebook: function (item) {
+      this.shareOverrideOGMeta(this.currentUrl, item.name[ this.locale ], item.description[ this.locale ], item.photoUrl)
+    },
     closeEvent: function () {
       this.$emit('close')
     },
@@ -126,7 +144,7 @@ export default {
     bookmark: function (id) {
       const user = this.$store.getters.user
       if (!user) {
-        this.$router.push({ name: 'login' })
+        this.$router.push({ name: 'login', params: { locale: this.locale }, query: { redirect: this.$route.fullPath } })
       } else {
         this.$http.post(this.$store.state.apiUrls.bookmark, {
           userToken: user.token,
@@ -161,22 +179,25 @@ export default {
     overflow: hidden;
     display: flex;
     padding-bottom: 32px;
+    .share-inner {
+      display: flex;
+    }
     .half-col {
       width: calc(50% - 52px);
-      @media screen and (max-width: 1025px){
+      @media screen and (max-width: 1025px) {
         width: calc(50% - 20px);
       }
       &.single-left {
         margin: 0 22px 0 30px;
         overflow: hidden;
-        @media screen and (max-width: 1025px){
+        @media screen and (max-width: 1025px) {
           margin: 0 10px;
         }
       }
       &.single-right {
         margin: 0 30px 0 22px;
         display: flex;
-        @media screen and (max-width: 1025px){
+        @media screen and (max-width: 1025px) {
           margin: 0 10px;
         }
         flex-direction: column;
@@ -212,6 +233,48 @@ export default {
           margin: 14px 0;
           font-size: 25px;
           cursor: pointer;
+          > div {
+            max-height: 28.89px;
+            position: relative;
+          }
+          .un_bookmark,
+          .do_bookmark {
+            position: relative;
+            display: inline-block;
+            &:hover span {
+              opacity: 1;
+            }
+            span {
+              position: absolute;
+              opacity: 0;
+              transition: opacity 0.05s;
+              top: 36%;
+              left: 50%;
+              font-size: 19px;
+              font-weight: 800;
+              transform: translate(-50%, -50%);
+            }
+          }
+          .do_bookmark {
+            span {
+              color: #3a3838;
+            }
+          }
+          .un_bookmark {
+            overflow: hidden;
+            height: 0;
+            transition: height 0.1s;
+            transition-timing-function:  cubic-bezier(0.98, 1.75, 0.91, 0.83);
+            position: absolute;
+            left: 0;
+            top: 0;
+            &.bookmarked {
+              height: 100%;
+            }
+            span {
+              color: #f9f9f9;
+            }
+          }
           img {
             width: 18.4px;
             height: 25.9px;
@@ -242,9 +305,13 @@ export default {
             margin: 0 80px 0 0;
             position: absolute;
             top: 0;
+            text-align: justify;
             left: 0;
             color: #848484;
             font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
+            @media screen and (max-width: 1250px) {
+              margin-right: 5px;
+            }
           }
         }
       }
@@ -256,9 +323,6 @@ export default {
         img {
           height: 100%;
           width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
           object-fit: cover;
         }
       }
@@ -294,34 +358,34 @@ export default {
             display: flex;
             cursor: pointer;
             position: relative;
-            @media screen and (max-width: 940px){
-                width: 38px;
+            @media screen and (max-width: 940px) {
+              width: 38px;
             }
-            .icon{
-              @media screen and (max-width: 940px){
-                width:100%;
+            .icon {
+              @media screen and (max-width: 940px) {
+                width: 100%;
               }
             }
-            &:before{
+            &:before {
               content: '';
-              height:0;
+              height: 0;
               position: absolute;
-              bottom:0;
-              left:0;
+              bottom: 0;
+              left: 0;
               width: 100%;
               background: #000;
               z-index: 0;
               transition: height 0.3s;
             }
-            &:hover{
-              &:before{
-                height:100%;
+            &:hover {
+              &:before {
+                height: 100%;
               }
-              .icon{
+              .icon {
                 filter: invert(1);
                 position: relative;
               }
-              .label{
+              .label {
                 color: #ffffff;
                 position: relative;
               }
@@ -331,9 +395,9 @@ export default {
               font-size: 1.4rem;
               display: flex;
               z-index: 1;
-                @media screen and (max-width: 940px){
-                    width: 100%;
-                }
+              @media screen and (max-width: 940px) {
+                width: 100%;
+              }
               svg {
                 margin: auto;
               }
@@ -341,9 +405,9 @@ export default {
             .label {
               margin: auto 0;
 
-                @media screen and (max-width: 940px){
-                    display: none;
-                }
+              @media screen and (max-width: 940px) {
+                display: none;
+              }
             }
           }
         }

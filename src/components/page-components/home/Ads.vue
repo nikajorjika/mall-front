@@ -12,8 +12,8 @@ export default {
   name: 'home-ads',
   components: { EventHome },
   mounted: function () {
-    this.$store.dispatch('getAdsItems').then((response) => {
-      console.log(response)
+    this.$store.dispatch('getAdsItems').catch((error) => {
+      console.error(error)
     })
   }
 }

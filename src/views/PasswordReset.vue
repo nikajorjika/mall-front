@@ -21,6 +21,9 @@ import ButtonStandard from '../components/partials/StandardButton'
 
 export default {
   components: { ButtonStandard, BlockHeaderStandard },
+  mounted: function () {
+    this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
+  },
   data: function () {
     return {
       email: ''
@@ -32,7 +35,6 @@ export default {
         if (status) {
           this.$http.post(this.$store.state.apiUrls.sendToken, { email: this.email })
             .then((response) => {
-              console.log(response)
               this.$store.dispatch('showPopup', {
                 message: this.t('sent'),
                 icon: 'success'

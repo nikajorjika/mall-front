@@ -4,10 +4,13 @@
       <agile :options="options" v-if="showSlider" :prevArrow="printPrevIcon()" :nextArrow="printNextIcon()">
         <div class="slide" v-for="(item, index) in this.$store.getters.sliderItems" :key="index">
           <div class="slide-container">
-            <event-home place="slider" :item="item" :txtLimit="40"/>
+            <event-home place="slider" :item="item" :txtLimit="40" @loaded="loadedItem"/>
           </div>
         </div>
       </agile>
+    </div>
+    <div class="slider-placeholder" v-if="!loaded">
+      <loading-big class="slider-loading-outer" :loadingTheme="2"/>
     </div>
   </div>
 </template>
@@ -17,10 +20,12 @@ import {
   Carousel,
   Slide
 } from 'vue-carousel'
+import LoadingBig from '../../partials/LoadingBig'
 
 export default {
   name: 'home-slider',
   components: {
+    LoadingBig,
     EventHome,
     Carousel,
     Slide
@@ -29,6 +34,7 @@ export default {
     return {
       perPage: 1,
       showSlider: false,
+      loaded: false,
       options: {
         arrows: true,
         dots: true,
@@ -51,6 +57,10 @@ export default {
     },
     printNextIcon: function () {
       return `<span class="arrow arrow-right"><img width="33" height="81" src="${this.rightArrow}"></span>`
+    },
+    loadedItem: function () {
+      this.loaded = true
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
     }
   },
   computed: {
@@ -68,9 +78,17 @@ export default {
 </script>
 <style lang="scss">
 #home-slider {
+  .slider-placeholder{
+    min-height: 400px;
+    background: #f9f9f9;
+    display: flex;
+    .slider-loading-outer{
+      min-height: 100%;
+      min-width: 100%;
+    }
+  }
   .slider-wrapper {
     position: relative;
-
     .agile__dots {
       display: none;
       position: absolute;

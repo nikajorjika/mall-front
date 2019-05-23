@@ -7,7 +7,8 @@
             <div class="search-icon">
               <img src="../../../assets/images/icons/search.svg" height="12.2px" width="11.8px">
             </div>
-            <input type="text" class="search-input" :placeholder="t('store_mobile_search')">
+            <input type="text" class="search-input" @input="filterSearch" v-model="$store.state.storeSearch"
+                   :placeholder="t('store_mobile_search')">
           </div>
           <div class="filter-toggle-part" @click="activeFilters = !activeFilters">
             <h2>{{t('filter')}}</h2> <span class="filter-icon" :class="{open: activeFilters}"><font-awesome-icon
@@ -15,14 +16,24 @@
           </div>
         </div>
         <store-filters class="filter-mobile-class" :categories="categories" :filteredCats="filteredCategories"
-                       v-if="activeFilters || $mq !== 'mobile'" @filtered="filterItems"
+                       v-show="$route.params.cat || activeFilters || $mq !== 'mobile'" @filtered="filterItems"
                        @changeView="changeView"/>
       </div>
     </div>
-    <loading-big v-show="loadingStores"/>
+    <div v-if="loading && (viewGrid || $mq === 'mobile')">
+      <div class="container">
+        <div class="store-list">
+          <div class="store-list-item" v-for="(item,index) in [1,1,1,1,1,1,1,1]" :key="index">
+            <div class="store-inner">
+              <store-item :loading="true"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container" v-if="viewGrid ||  $mq === 'mobile'">
       <div class="store-list">
-        <div class="store-list-item" v-for="(item, index) in filteredItems" :key="index">
+        <div class="store-list-item" v-for="(item, index) in filteredItems" :key="index" v-if="item.name.en.toLowerCase() !== 'tbilisi mall'">
           <div class="store-inner">
             <router-link :to="`/${locale}/store/${createSlug(item.name['en'])}/${item._id}`">
               <store-item :item="item"/>
@@ -63,9 +74,11 @@
                        :key="index">
                     <div v-if="value !== undefined" class="item-wrapper">
                       <div class="item-column name">
+                        <router-link :to="`/${locale}/store/${createSlug(value.name['en'])}/${value._id}`">
                         <span class="name-inner">
                           {{value.name[locale]}}
                         </span>
+                        </router-link>
                       </div>
                       <div class="item-column tags">
                                                 <span class="tag" v-for="(tag, index) in value.tags" :key="index"><span
@@ -112,12 +125,10 @@ export default {
   },
   mounted: function () {
     if (!this.$store.getters[ `${this.model}List` ].length) {
+      this.loading = true
       this.getStoreList()
-    }
-    if (!this.$store.getters.categories.length) {
-      this.$store.dispatch('getCategories').catch((error) => {
-        console.error(error)
-      })
+    } else {
+      this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
     }
   },
   props: {
@@ -263,6 +274,7 @@ export default {
         if (response.data.data.length < this.offset) this.hasMore = false
         this.loading = false
         this.loadingStores = false
+        this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
         if (response.data.data.length) {
           this.requestSent = false
         }
@@ -277,9 +289,23 @@ export default {
         setter: 'SET_STORE_LIST'
       }).then(() => {
         this.listLoaded = true
+        this.loading = false
+        this.$store.commit('SET_LOADING_STATE', { model: 'page', value: false })
       }).catch((error) => {
         console.error(error)
       })
+    },
+    filterSearch: function () {
+      if (this.filters) {
+        this.filters.search = this.$store.getters.storeSearch
+      } else {
+        this.filters = {
+          category: [],
+          search: this.$store.getters.storeSearch,
+          floors: [],
+          sort: ''
+        }
+      }
     }
   },
   computed: {
@@ -299,8 +325,13 @@ export default {
           if (this.filters.search.length && item.name.en.toLowerCase().indexOf(this.filters.search.toLowerCase()) === -1 && item.name.ka.toLowerCase().indexOf(this.filters.search.toLowerCase()) === -1) {
             filterIndex = 0
           }
-          if (this.filters.floors.length) {
-            filterIndex = 0
+          if (this.filters.floors.length && item.name.en.toLowerCase().indexOf(this.filters.floors)) {
+            let intersection = item.floors.filter(floor => {
+              return this.filters.floors.indexOf(floor) !== -1
+            })
+            if (!intersection.length) {
+              filterIndex = 0
+            }
           }
           return filterIndex
         })
@@ -340,6 +371,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .store-list-grid {
+  .store-list-view {
+    @media screen and (max-width: 1683px) {
+      padding: 0 36px;
+    }
+  }
   .filters-outer {
     @media screen and (max-width: 760px) {
       padding: 0;
@@ -527,12 +563,19 @@ export default {
         font-family: 'Muli Light', 'BPG Nino Mtavruli', 'sans-serif';
         text-transform: uppercase;
         padding: 48px 0 48px 36px;
+        @media screen and (max-width: 1060px) {
+          padding-left: 0;
+          width: 9%;
+        }
       }
 
       .items-container {
         width: 83%;
         position: relative;
 
+        @media screen and (max-width: 1060px) {
+          width: 92%;
+        }
         &:after {
           content: '';
           position: absolute;
@@ -573,7 +616,6 @@ export default {
               margin-top: 14px;
               width: 21.3%;
               padding-right: 12px;
-
               .tag {
                 font-family: 'Muli', 'BPG Arial', 'sans-serif';
                 text-transform: capitalize;

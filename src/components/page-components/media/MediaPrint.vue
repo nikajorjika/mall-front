@@ -100,6 +100,7 @@ export default {
       span{
         font-size: 2.4rem;
         line-height: 1.25;
+        font-family: 'Muli', 'BPG Nino Mtavruli','sans-serif';
         text-transform: uppercase;
         margin: auto 28px auto 0;
       }

@@ -3,6 +3,7 @@
     <span v-if="this.icon === 'bars'" class="icon-bars" @click="emitClick">
       <span></span>
       <span></span>
+      <span></span>
     </span>
     <span class="icon-close-container" v-else-if="this.icon === 'close'" @click="emitClick" >
       <span class="icon-close">
@@ -43,7 +44,7 @@ export default {
       width: 25.8px;
       height: 1.7px;
       background-color: #000000;
-      margin: 2.4px 0;
+      margin: 2px 0;
     }
   }
   .icon-close-container{

@@ -164,12 +164,6 @@ export default {
                 en: 'GEO +995'
               },
               value: '+995'
-            }, {
-              name: {
-                ka: 'რუს +007',
-                en: 'RUS +007'
-              },
-              value: '+007'
             }
           ],
           placeholder: {
@@ -194,6 +188,30 @@ export default {
                 en: 'Batumi'
               },
               value: 'batumi'
+            }, {
+              name: {
+                ka: 'ქუთაისი',
+                en: 'Kutaisi'
+              },
+              value: 'kutaisi'
+            }, {
+              name: {
+                ka: 'ზუგდიდი',
+                en: 'Zugdidi'
+              },
+              value: 'zugdidi'
+            }, {
+              name: {
+                ka: 'ბათუმი',
+                en: 'Telavi'
+              },
+              value: 'telavi'
+            }, {
+              name: {
+                ka: 'მესტია',
+                en: 'Mestia'
+              },
+              value: 'mestia'
             }
           ],
           placeholder: {
@@ -211,12 +229,6 @@ export default {
                 en: 'Georgia'
               },
               value: 'georgia'
-            }, {
-              name: {
-                ka: 'რუსეთი',
-                en: 'Russia'
-              },
-              value: 'russia'
             }
           ],
           placeholder: {
@@ -285,23 +297,22 @@ export default {
   methods: {
     register: function () {
       if (this.validateForm()) {
-        const _this = this
         this.$validator.validateAll().then((result) => {
           if (result) {
             // here we submit form
-            _this.loading = true
-            _this.$store.dispatch('register', _this.user).then(function () {
-              _this.loading = false
+            this.loading = true
+            this.$store.dispatch('register', this.user).then(() => {
+              this.loading = false
               this.$router.push({ name: 'home', params: { locale: this.locale } })
             }).catch((error) => {
               if (error.response.data) {
-                _this.returnedError = error.response.data.status
+                this.returnedError = error.response.data.status
               }
-              _this.loading = false
+              this.loading = false
             })
           }
         }).catch((error) => {
-          console.log(error)
+          console.error(error)
         })
       }
       // this.$refs.RegistrationForm.submit()
@@ -327,9 +338,16 @@ export default {
 <style lang="scss">
 #registration-form {
   position: relative;
+  @media screen and (max-width: 650px){
+    width: calc(100% - 24px);
+    margin: 0 auto;
+  }
   .field-container {
     display: flex;
     width: 100%;
+    @media screen and (max-width: 515px){
+      flex-direction: column;
+    }
     &.columns {
       flex-direction: column;
     }
@@ -341,6 +359,10 @@ export default {
       margin-right: 16px;
       display: flex;
       flex-direction: column;
+      @media screen and (max-width: 515px){
+        width: calc(100% - 32px);
+        margin:0 auto;
+      }
       label {
         margin: 15px 0 6px;
         font-family: 'Muli Light', 'BPG Arial', 'sans-serif';
@@ -380,15 +402,22 @@ export default {
         }
         input {
           flex: 3;
+          width: 100%;
         }
       }
       &:last-child {
         margin-right: 0;
+        @media screen and (max-width: 515px){
+          margin:0 auto;
+        }
       }
     }
     .terms-set {
       display: flex;
       margin: 6px 0;
+      @media screen and (max-width: 515px){
+        margin-left: 16px;
+      }
       input {
         margin-left: 0;
       }
@@ -405,6 +434,9 @@ export default {
     .register-button-container {
       margin: 41px 0 107px 0;
       text-align: center;
+      @media screen and (max-width: 515px){
+        margin: 41px auto 107px auto;
+      }
     }
   }
   .error {
