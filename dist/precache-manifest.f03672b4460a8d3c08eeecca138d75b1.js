@@ -376,12 +376,12 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-SemiBold.e1c83f94.ttf"
   },
   {
-    "revision": "f5331cb6372b6c0d8baf2dd7e200498c",
-    "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
-  },
-  {
     "revision": "9ff12f694e5951a6f51a9d63b05062e7",
     "url": "/fonts/OpenSans-Light.9ff12f69.ttf"
+  },
+  {
+    "revision": "f5331cb6372b6c0d8baf2dd7e200498c",
+    "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
   },
   {
     "revision": "49f89e34d03233b1f27788f75df7a40a",
@@ -500,7 +500,7 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "dc7617dd65b332c3740f812c469218eb",
+    "revision": "b67389b2c46cb041c72b5f6d19104ffb",
     "url": "/index.html"
   },
   {
