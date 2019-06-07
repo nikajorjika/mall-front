@@ -380,12 +380,12 @@ self.__precacheManifest = [
     "url": "/fonts/OpenSans-Light.9ff12f69.ttf"
   },
   {
-    "revision": "f5331cb6372b6c0d8baf2dd7e200498c",
-    "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
-  },
-  {
     "revision": "49f89e34d03233b1f27788f75df7a40a",
     "url": "/fonts/OpenSans-ExtraBold.49f89e34.ttf"
+  },
+  {
+    "revision": "f5331cb6372b6c0d8baf2dd7e200498c",
+    "url": "/fonts/OpenSans-Bold.f5331cb6.ttf"
   },
   {
     "revision": "e03e2b7b3b76e334d11caf2b1639e6a9",
@@ -416,12 +416,12 @@ self.__precacheManifest = [
     "url": "/fonts/bpg-arial-webfont.e1412bac.woff"
   },
   {
-    "revision": "a8b935b9fab81016cc4b241faf9a2260",
-    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
-  },
-  {
     "revision": "6530709ce0aadf3283db6512a8fcabec",
     "url": "/fonts/bpg-arial-webfont.6530709c.ttf"
+  },
+  {
+    "revision": "a8b935b9fab81016cc4b241faf9a2260",
+    "url": "/fonts/bpg-arial-webfont.a8b935b9.eot"
   },
   {
     "revision": "88a37bc21733e2fef7deba65d7271bed",
@@ -500,7 +500,7 @@ self.__precacheManifest = [
     "url": "/img/search.e1981335.svg"
   },
   {
-    "revision": "b67389b2c46cb041c72b5f6d19104ffb",
+    "revision": "75bbaa7ecb7bae69fd67c8fce5a57021",
     "url": "/index.html"
   },
   {
@@ -512,11 +512,11 @@ self.__precacheManifest = [
     "url": "/img/logo.svg"
   },
   {
-    "revision": "5274f0a26e730098569038df234088a2",
-    "url": "/img/meta-logo.png"
-  },
-  {
     "revision": "735ab4f94fbcd57074377afca324c813",
     "url": "/robots.txt"
+  },
+  {
+    "revision": "5274f0a26e730098569038df234088a2",
+    "url": "/img/meta-logo-new.png"
   }
 ];
