@@ -248,7 +248,6 @@ export default {
   async mounted () {
     const response = await fetch('https://restcountries.eu/rest/v2/all');
     const myJson = await response.json();
-    console.log(myJson)
     this.countriesData = myJson.map(({name, callingCodes, alpha2Code}) => {
       this.user.mobileIndex.options.push({
         name: {
