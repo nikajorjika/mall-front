@@ -98,13 +98,10 @@
           </div>
         </div>
         <div class="field-wrapper">
-          <label>{{t('city_placeholder')}}*</label>
-          <div class="combo-fields columns">
-            <input type="hidden" name="city" v-validate="'required'" v-model="user.city.val">
-            <custom-select class="city-field" name="city" :items="user.city.options"
-                           :placeholder="user.city.placeholder" @change="onSelectAction"/>
-            <div v-show="errors.first('city')" class="error">{{ errors.first('city') }}</div>
-          </div>
+          <label for="registration-name">{{t('city_placeholder')}}*</label>
+          <input type="text" id="registration-name" v-validate="'required'" name="city" :placeholder="t('city_placeholder')"
+                v-model="user.city.val">
+          <div v-show="errors.first('city')" class="error">{{ errors.first('city') }}</div>
         </div>
       </div>
       <div class="field-container">
@@ -145,27 +142,19 @@
 import CustomSelect from '../../partials/Select'
 import ButtonStandard from '../../partials/StandardButton'
 import WhiteSpinner from '../../partials/LoadingSpinner'
-
+import Axios from 'axios'
 export default {
   name: 'registration-form',
   components: { WhiteSpinner, ButtonStandard, CustomSelect },
-  data: function () {
+  data() {
     return {
       user: {
         name: '',
         lastName: '',
         email: '',
         mobileIndex: {
-          val: '+995',
-          options: [
-            {
-              name: {
-                ka: 'საქ +995',
-                en: 'GEO +995'
-              },
-              value: '+995'
-            }
-          ],
+          val: '',
+          options: [],
           placeholder: {
             en: 'Index',
             ka: 'ინდექსი'
@@ -173,47 +162,8 @@ export default {
         },
         mobile: '',
         city: {
-          val: 'tbilisi',
+          val: '',
           errors: [],
-          options: [
-            {
-              name: {
-                ka: 'თბილისი',
-                en: 'Tbilisi'
-              },
-              value: 'tbilisi'
-            }, {
-              name: {
-                ka: 'ბათუმი',
-                en: 'Batumi'
-              },
-              value: 'batumi'
-            }, {
-              name: {
-                ka: 'ქუთაისი',
-                en: 'Kutaisi'
-              },
-              value: 'kutaisi'
-            }, {
-              name: {
-                ka: 'ზუგდიდი',
-                en: 'Zugdidi'
-              },
-              value: 'zugdidi'
-            }, {
-              name: {
-                ka: 'ბათუმი',
-                en: 'Telavi'
-              },
-              value: 'telavi'
-            }, {
-              name: {
-                ka: 'მესტია',
-                en: 'Mestia'
-              },
-              value: 'mestia'
-            }
-          ],
           placeholder: {
             en: 'City',
             ka: 'ქალაქი'
@@ -291,8 +241,32 @@ export default {
         terms: false
       },
       loading: false,
-      returnedError: ''
+      returnedError: '',
+      countriesData: []
     }
+  },
+  async mounted () {
+    const response = await fetch('https://restcountries.eu/rest/v2/all');
+    const myJson = await response.json();
+    console.log(myJson)
+    this.countriesData = myJson.map(({name, callingCodes, alpha2Code}) => {
+      this.user.mobileIndex.options.push({
+        name: {
+          ka: `${alpha2Code} +${callingCodes[0]}`,
+          en: `${alpha2Code} +${callingCodes[0]}`
+        },
+        value: callingCodes[0]
+      })
+      return {
+        name: {
+          ka: name,
+          en: name
+        },
+        value: name
+      }
+    })
+    this.user.country.options = this.countriesData
+    
   },
   methods: {
     register: function () {
