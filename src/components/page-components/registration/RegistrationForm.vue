@@ -98,8 +98,8 @@
           </div>
         </div>
         <div class="field-wrapper">
-          <label for="registration-name">{{t('city_placeholder')}}*</label>
-          <input type="text" id="registration-name" v-validate="'required'" name="city" :placeholder="t('city_placeholder')"
+          <label for="registration-city">{{t('city_placeholder')}}*</label>
+          <input type="text" id="registration-city" v-validate="'required'" name="city" :placeholder="t('city_placeholder')"
                 v-model="user.city.val">
           <div v-show="errors.first('city')" class="error">{{ errors.first('city') }}</div>
         </div>
